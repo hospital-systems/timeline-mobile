@@ -4,33 +4,15 @@
 body, html {
   padding: 20px 0; }
 
+.container {
+  padding: 0px;
+}
+
 .activityView {
   list-style: none;
   padding: 0;
   margin: 0;
   overflow: auto; }
-  .activityView .activtyLeft {
-    text-align: right;
-    padding-top: 15px;
-    font-size: 12px; }
-    .activityView .activtyLeft:before {
-      content: "";
-      position: absolute;
-      right: -4px;
-      width: 10px;
-      top: 18px;
-      background: grey;
-      z-index: 2;
-      height: 10px; }
-    .activityView .activtyLeft .pull-right:after {
-      display: block;
-      content: "";
-      position: absolute;
-      right: -40px;
-      top: 22px;
-      width: 40px;
-      height: 2px;
-      background: grey; }
   .activityView .activtyRight .activity {
     border-bottom: 1px solid #999;
     padding: 15px;
@@ -88,16 +70,6 @@ body, html {
     list-style: none;
     padding: 0;
     margin: 0; }
-    .activityView .activtyLeft {
-      text-align: right;
-      padding-top: 15px;
-      text-align: left; }
-      .activityView .activtyLeft:before {
-        display: none; }
-      .activityView .activtyLeft .pull-right {
-        display: inline-block; }
-        .activityView .activtyLeft .pull-right:after {
-          display: none; }
     .activityView .activtyRight .activity {
       border-bottom: 1px solid #999;
       padding: 15px;
