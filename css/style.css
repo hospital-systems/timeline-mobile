@@ -62,7 +62,6 @@ body, html {
     z-index: 2;
     height: 100%; }
   .activityView .milestone span {
-    position: absolute;
     padding: 4px;
     display: block;
     right: -70px;
