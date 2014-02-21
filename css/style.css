@@ -19,7 +19,7 @@ body, html {
       right: -4px;
       width: 10px;
       top: 18px;
-      background: pink;
+      background: grey;
       z-index: 2;
       height: 10px; }
     .activityView .activtyLeft .pull-right:after {
@@ -30,14 +30,13 @@ body, html {
       top: 22px;
       width: 40px;
       height: 2px;
-      background: pink; }
+      background: grey; }
   .activityView .activtyRight .activity {
-    border: 1px solid #EEE;
+    border-bottom: 1px solid #999;
     padding: 15px;
     margin-bottom: 30px;
-    background: #FFF;
     margin-left: 20px;
-    background: #f5f5f5; }
+  }
     .activityView .activtyRight .activity .meta {
       overflow: auto;
       margin-bottom: 10px; }
@@ -59,7 +58,7 @@ body, html {
     position: absolute;
     left: -2px;
     width: 2px;
-    background: pink;
+    background: grey;
     z-index: 2;
     height: 100%; }
   .activityView .milestone span {
@@ -101,11 +100,10 @@ body, html {
         .activityView .activtyLeft .pull-right:after {
           display: none; }
     .activityView .activtyRight .activity {
-      border: 1px solid #EEE;
+      border-bottom: 1px solid #999;
       padding: 15px;
       margin: 0;
       margin-bottom: 30px;
-      background: #f5f5f5;
       margin-top: 10px; }
     .activityView .activtyRight:before {
       display: none; }
