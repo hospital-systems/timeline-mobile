@@ -1,0 +1,134 @@
+/*
+* Aesome
+*/
+body, html {
+  padding: 20px 0; }
+
+.activityView {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: auto; }
+  .activityView .activtyLeft {
+    text-align: right;
+    padding-top: 15px;
+    font-size: 12px; }
+    .activityView .activtyLeft:before {
+      content: "";
+      position: absolute;
+      right: -4px;
+      width: 10px;
+      top: 18px;
+      background: pink;
+      z-index: 2;
+      height: 10px; }
+    .activityView .activtyLeft .pull-right:after {
+      display: block;
+      content: "";
+      position: absolute;
+      right: -40px;
+      top: 22px;
+      width: 40px;
+      height: 2px;
+      background: pink; }
+  .activityView .activtyRight .activity {
+    border: 1px solid #EEE;
+    padding: 15px;
+    margin-bottom: 30px;
+    background: #FFF;
+    margin-left: 20px;
+    background: #f5f5f5; }
+    .activityView .activtyRight .activity .meta {
+      overflow: auto;
+      margin-bottom: 10px; }
+      .activityView .activtyRight .activity .meta .profile {
+        float: left;
+        margin-right: 10px; }
+      .activityView .activtyRight .activity .meta .details {
+        float: left;
+        font-size: 14px;
+        line-height: 16px; }
+    .activityView .activtyRight .activity .profilePic {
+      border-radius: 10px;
+      border: 2px solid white; }
+    .activityView .activtyRight .activity .actions {
+      overflow: auto;
+      margin-top: 10px; }
+  .activityView .activtyRight:before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    width: 2px;
+    background: pink;
+    z-index: 2;
+    height: 100%; }
+  .activityView .milestone span {
+    position: absolute;
+    padding: 4px;
+    display: block;
+    right: -70px;
+    width: 140px;
+    text-align: center;
+    z-index: 3;
+    font-size: 13px;
+    line-height: 14px;
+    color: #999;
+    border: 1px solid #999;
+    background: #FFF; }
+  .activityView .milestone .activity {
+    border: none;
+    background: none; }
+  .activityView .milestone.showMore .activtyRight:before {
+    display: none; }
+  .activityView .milestone.showMore span {
+    padding: 0;
+    margin: 0;
+    border: none; }
+
+@media (max-width: 768px) {
+  .activityView {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    .activityView .activtyLeft {
+      text-align: right;
+      padding-top: 15px;
+      text-align: left; }
+      .activityView .activtyLeft:before {
+        display: none; }
+      .activityView .activtyLeft .pull-right {
+        display: inline-block; }
+        .activityView .activtyLeft .pull-right:after {
+          display: none; }
+    .activityView .activtyRight .activity {
+      border: 1px solid #EEE;
+      padding: 15px;
+      margin: 0;
+      margin-bottom: 30px;
+      background: #f5f5f5;
+      margin-top: 10px; }
+    .activityView .activtyRight:before {
+      display: none; }
+    .activityView .milestone span {
+      position: relative;
+      padding: 8px;
+      display: inline-block;
+      right: 0;
+      width: auto;
+      text-align: left;
+      color: #999;
+      border: 1px solid #999;
+      background: #FFF;
+      font-size: 20px; }
+    .activityView .milestone:before {
+      content: "";
+      height: 1px;
+      background: #EEE;
+      width: 100%;
+      margin-bottom: 20px; }
+    .activityView .milestone.showMore:before {
+      display: none; }
+    .activityView .milestone span {
+      padding: 0;
+      margin: 0;
+      border: none; } }

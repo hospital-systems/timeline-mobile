@@ -1,0 +1,37 @@
+@font-face {
+  font-family: "Font Fancy";
+  src: local("Font Fancy"),
+  url("../fonts/icons.ttf")
+}
+
+.icon {
+  color:inherit;
+  font-family: "Font Fancy";
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  line-height: 0
+}
+
+a.icon:hover{
+  color:inherit
+}
+
+.medapp-icon-for_notes:after {
+  content: 'N';
+}
+
+.medapp-icon-notes:after {
+  content: '\e5';
+}
+
+.medapp-icon-vital_timeline_item:after {
+  content: 'V';
+}
+
+.medapp-icon-intake_output_timeline_item:after {
+  content: 'j';
+}
+
+.medapp-icon-treatment_record_timeline_item:after {
+  content: 'r';
+}
