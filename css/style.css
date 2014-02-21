@@ -94,7 +94,7 @@ nav .container {
       text-align: left;
       color: #333;
       border: none;
-      background: #999;
+      background: #f8f8f8 ;
       font-size: 20px;
     }
     .activityView .milestone:before {
