@@ -8,6 +8,10 @@ body, html {
   padding: 0px;
 }
 
+nav .container {
+  padding: 15px;
+}
+
 .activityView {
   list-style: none;
   padding: 0;
@@ -69,35 +73,41 @@ body, html {
   .activityView {
     list-style: none;
     padding: 0;
-    margin: 0; }
+    margin: 0;
+  }
     .activityView .activtyRight .activity {
       border-bottom: 1px solid #999;
       padding: 15px;
       margin: 0;
       margin-bottom: 30px;
-      margin-top: 10px; }
+      margin-top: 10px;
+    }
     .activityView .activtyRight:before {
-      display: none; }
+      display: none;
+    }
     .activityView .milestone span {
       position: relative;
       padding: 8px;
       display: inline-block;
       right: 0;
-      width: auto;
+      width: 100%;
       text-align: left;
-      color: #999;
-      border: 1px solid #999;
-      background: #FFF;
-      font-size: 20px; }
+      color: #333;
+      border: none;
+      background: #999;
+      font-size: 20px;
+    }
     .activityView .milestone:before {
       content: "";
       height: 1px;
       background: #EEE;
       width: 100%;
-      margin-bottom: 20px; }
+      margin-bottom: 20px;
+    }
     .activityView .milestone.showMore:before {
-      display: none; }
-    .activityView .milestone span {
-      padding: 0;
-      margin: 0;
-      border: none; } }
+      display: none;
+    }
+    .showMore {
+      padding: 8px;
+    }
+ }
