@@ -5,10 +5,12 @@
       <li class="timeline-item" ng-repeat="item in day.records">
         <div class="row">
           <div class="col-xs-2 col-md-1">
-            <span class="icon medapp-icon-{{item.type}}"></span>
+            <span class="icon" ng-class="'medapp-icon-' + item.type"></span>
           </div>
-          <div class="col-xs-10 col-md-11">
+          <div class="col-xs-8 col-md-10">
             <span>{{item.name}}</span>
+          </div>
+          <div class="col-xs-2 col-md-1">
             <span class="text-muted">5:30</span>
           </div>
         </div>
