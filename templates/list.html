@@ -3,9 +3,15 @@
     <h1>{{day.day}}</h1>
     <ul class="list-unstyled">
       <li class="timeline-item" ng-repeat="item in day.records">
-        <!-- {{item.type}} -->
-        <span class="name">{{item.name}}</span>
-        <span class="date">{{day.day | date : date : format}}</span>
+        <div class="row">
+          <div class="col-xs-2 col-md-1">
+            <span class="icon medapp-icon-{{item.type}}"></span>
+          </div>
+          <div class="col-xs-10 col-md-11">
+            <span>{{item.name}}</span>
+            <span class="text-muted">5:30</span>
+          </div>
+        </div>
       </li>
     </ul>
   </div>

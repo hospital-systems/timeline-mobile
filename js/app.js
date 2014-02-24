@@ -63,7 +63,7 @@ angular.module('angular-timeline-demo')
         ]
       },
       {
-        day: '2014-02-24',
+        day: '2014-01-13',
         records: [
           {
             type: 'intake_output_timeline_item',
