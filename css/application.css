@@ -1,0 +1,6 @@
+.timeline-container .timeline-item {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.timeline-container .timeline-item .name { color: red; }
+.timeline-container .timeline-item .date { color: green; }

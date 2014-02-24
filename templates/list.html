@@ -1,11 +1,11 @@
 <div class="container" ng-controller="ListCtrl">
-  <div ng-repeat="day in collectionOfDays">
+  <div class="timeline-container" ng-repeat="day in collectionOfDays">
     <h1>{{day.day}}</h1>
     <ul class="list-unstyled">
-      <li ng-repeat="item in day.records">
+      <li class="timeline-item" ng-repeat="item in day.records">
         <!-- {{item.type}} -->
-        {{item.name}}
-        {{day.day | date : date : format}}
+        <span class="name">{{item.name}}</span>
+        <span class="date">{{day.day | date : date : format}}</span>
       </li>
     </ul>
   </div>
