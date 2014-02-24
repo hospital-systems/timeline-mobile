@@ -1,3 +1,12 @@
-<div class="container">
-  AngularJS is loaded and working.
+<div class="container" ng-controller="ListCtrl">
+  <div ng-repeat="day in collectionOfDays">
+    <h1>{{day.day}}</h1>
+    <ul class="list-unstyled">
+      <li ng-repeat="item in day.records">
+        <!-- {{item.type}} -->
+        {{item.name}}
+        {{day.day | date : date : format}}
+      </li>
+    </ul>
+  </div>
 </div>
