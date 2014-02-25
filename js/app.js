@@ -16,7 +16,7 @@ timeline_app.controller('RootController', function($scope) {
 timeline_app.controller('ListCtrl', function($scope) {
   $scope.collectionOfDays = [
     {
-      day: '2014-02-24',
+      day: 'Feb 24, 2014',
       records: [
         {
           type: 'notes',
@@ -64,7 +64,7 @@ timeline_app.controller('ListCtrl', function($scope) {
       ]
     },
     {
-      day: '2014-01-13',
+      day: 'Jan 13, 2014',
       records: [
         {
           type: 'intake_output_timeline_item',
