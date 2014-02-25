@@ -2,7 +2,7 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
   'use strict';
 
   $templateCache.put('/templates/list.html',
-    "<div class=\"container timeline-frame\" ng-controller=\"ListCtrl\">\n" +
+    "<div class=\"container-fluid timeline-frame\" ng-controller=\"ListCtrl\">\n" +
     "  <div class=\"timeline-container\" ng-repeat=\"day in collectionOfDays\">\n" +
     "    <h2>{{day.day}}</h2>\n" +
     "    <ul class=\"list-unstyled\">\n" +
