@@ -8,8 +8,6 @@ timeline_app.config(['$routeProvider', '$locationProvider',
       templateUrl: '/templates/list.html',
       controller: 'RootController'
     });
-
-    $locationProvider.html5Mode(true);
   }]);
 
 timeline_app.controller('RootController', function($scope) {
