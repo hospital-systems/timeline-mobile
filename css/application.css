@@ -1,15 +1,28 @@
-.container-fluid.timeline-frame {
+.timeline-frame {
   padding: 0;
 }
+.timeline-container .timeline-item:first-child {
+  border-top: 1px solid gray;
+}
 .timeline-container .timeline-item {
-  padding: 20px 0 20px 0;
   border-bottom: 1px solid gray;
 }
-
 .timeline-container .timeline-item .timeline-item-link {
   display: block;
+  padding: 20px 0 20px 0;
 }
-
-.timeline-container .timeline-item .icon:after {
-  font-size: 20px;
+.timeline-container .timeline-item-icon-container {
+  min-height: 37px;
+}
+.timeline-container .timeline-item-icon-container .icon {
+  margin-left: 10px;
+  min-height: 37px;
+  line-height: 37px;
+}
+.timeline-container .timeline-item .timeline-item-icon-container .icon:after {
+  font-size: 38px;
+}
+.timeline-container .timeline-item .timeline-item-title {
+  margin: 0;
+  font-size: 16px;
 }
