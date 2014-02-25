@@ -3,7 +3,7 @@
 </div>
 <div class="container timeline-frame" ng-controller="ListCtrl">
   <div class="timeline-container" ng-repeat="(day, items) in days">
-    <h2>{{getDayFromKey(day) | date:'MMM d, yyyy'}}</h2>
+    <h2 class="timeline-item-day">{{getDayFromKey(day) | date:'MMM d, yyyy'}}</h2>
     <ul class="list-unstyled">
       <li class="timeline-item" ng-repeat="item in items">
         <a class="timeline-item-link" href="#/item/{{ item.id }}">
@@ -15,8 +15,8 @@
               <h3 class="timeline-item-title">{{item.type}}</h3>
               <span class="text-muted">{{item.name}}</span>
             </div>
-            <div class="col-xs-3 col-md-1">
-              <span class="text-muted">
+            <div class="timeline-item-time-container col-xs-3 col-md-1">
+              <span class="timeline-item-time text-muted">
                 {{item.createdAt | date:'HH:mm'}}
               </span>
             </div>
