@@ -22,7 +22,7 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
   $templateCache.put('/templates/item.html',
     "<div class=\"timeline-item-frame container\" ng-controller=\"ItemsCtrl\">\n" +
     "  <div ng-include=\"'/templates/_item.html'\"></div>\n" +
-    "  <div><a class=\"btn btn-primary btn-lg\" href=\"/\">Back</a></div>\n" +
+    "  <div><a class=\"btn btn-primary btn-lg\" href=\"#/\">Back</a></div>\n" +
     "</div>\n"
   );
 
