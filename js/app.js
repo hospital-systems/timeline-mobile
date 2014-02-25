@@ -1,15 +1,13 @@
 timeline_app = angular.module('angular-timeline-demo', ['ngRoute']);
 
-timeline_app.config(['$routeProvider', '$locationProvider',
-  function($routeProvider, $locationProvider, $templateCache) {
+timeline_app.config(['$routeProvider',
+  function($routeProvider) {
     'use strict';
 
-    $routeProvider.when('/timeline_demo', {
+    $routeProvider.when('/', {
       templateUrl: '/templates/list.html',
       controller: 'RootController'
     });
-
-    $locationProvider.html5Mode(true);
   }]);
 
 timeline_app.controller('RootController', function($scope) {
