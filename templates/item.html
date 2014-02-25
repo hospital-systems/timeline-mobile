@@ -1,8 +1,10 @@
-<div ng-controller="ItemsCtrl">
+<div class="container" ng-controller="ItemsCtrl">
   <div>
-    foo
+    <span>{{item.type}}</span>
+    <span class="text-muted">{{item.name}}</span>
+    <span class="text-muted">
+      {{item.createdAt | date:'HH:mm'}}
+    </span>
   </div>
-  <div>
-    {{timelineItem}}
-  </div>
+  <div><a href="/">Back</a></div>
 </div>
