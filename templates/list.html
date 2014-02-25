@@ -1,20 +1,22 @@
 <div class="container-fluid timeline-frame" ng-controller="ListCtrl">
-  <div class="timeline-container" ng-repeat="day in collectionOfDays">
+  <div class="timeline-container" ng-repeat="day in days">
     <h2>{{day.day}}</h2>
     <ul class="list-unstyled">
       <li class="timeline-item" ng-repeat="item in day.records">
-        <div class="row">
-          <div class="col-xs-2 col-md-1">
-            <span class="icon" ng-class="'medapp-icon-' + item.type"></span>
+        <a class="timeline-item-link" href="#/item/{{ $index }}">
+          <div class="row">
+            <div class="col-xs-2 col-md-1">
+              <span class="icon" ng-class="'medapp-icon-' + item.type"></span>
+            </div>
+            <div class="col-xs-8 col-md-10">
+              <span>{{item.type}}</span>
+              <span class="text-muted">{{item.name}}</span>
+            </div>
+            <div class="col-xs-2 col-md-1">
+              <span class="text-muted">5:30</span>
+            </div>
           </div>
-          <div class="col-xs-8 col-md-10">
-            <span>{{item.type}}</span>
-            <span class="text-muted">{{item.name}}</span>
-          </div>
-          <div class="col-xs-2 col-md-1">
-            <span class="text-muted">5:30</span>
-          </div>
-        </div>
+        </a>
       </li>
     </ul>
   </div>

@@ -5,6 +5,11 @@
   padding: 20px 0 20px 0;
   border-bottom: 1px solid gray;
 }
+
+.timeline-container .timeline-item .timeline-item-link {
+  display: block;
+}
+
 .timeline-container .timeline-item .icon:after {
   font-size: 20px;
 }
