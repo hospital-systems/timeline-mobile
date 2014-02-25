@@ -1,6 +1,7 @@
 <div class="container" ng-controller="ListCtrl">
+  <h1>Timeline</h1>
   <div class="timeline-container" ng-repeat="day in collectionOfDays">
-    <h1>{{day.day}}</h1>
+    <h2>{{day.day}}</h2>
     <ul class="list-unstyled">
       <li class="timeline-item" ng-repeat="item in day.records">
         <div class="row">
@@ -8,7 +9,8 @@
             <span class="icon" ng-class="'medapp-icon-' + item.type"></span>
           </div>
           <div class="col-xs-8 col-md-10">
-            <span>{{item.name}}</span>
+            <span>{{item.type}}</span>
+            <span class="text-muted">{{item.name}}</span>
           </div>
           <div class="col-xs-2 col-md-1">
             <span class="text-muted">5:30</span>
