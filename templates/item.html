@@ -1,10 +1,4 @@
-<div class="container timeline-frame" ng-controller="ItemsCtrl">
-  <div>
-    <span>{{item.type}}</span>
-    <span class="text-muted">{{item.name}}</span>
-    <span class="text-muted">
-      {{item.createdAt | date:'HH:mm'}}
-    </span>
-  </div>
+<div class="timeline-item-frame container" ng-controller="ItemsCtrl">
+  <div ng-include="'/templates/_item.html'"></div>
   <div><a class="btn btn-primary btn-lg" href="/">Back</a></div>
 </div>

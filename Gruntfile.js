@@ -2,6 +2,9 @@
 
 module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.initConfig({
@@ -15,12 +18,30 @@ module.exports = function (grunt) {
         }
       }
     },
+    less: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'styles',
+          src: ['*.less', '!.*#.less'],
+          dest: 'build',
+          ext: '.css'
+        }]
+      }
+    },
+    clean: ['build/**/*'],
+    concat: {
+      css: {
+        src: ['build/*.css'],
+        dest: 'build/timeline.css'
+      }
+    },
     watch: {
       options: {
         nospawn: true
       },
       sources: {
-        files: ['templates/**/*.html'],
+        files: ['templates/**/*.html', 'styles/**/*.less'],
         tasks: ['build'],
         options: {
           events: ['changed', 'added'],
@@ -29,5 +50,5 @@ module.exports = function (grunt) {
       }
     }
   })
-  grunt.registerTask('build', ['ngtemplates']);
+  grunt.registerTask('build', ['clean', 'less', 'ngtemplates', 'concat:css']);
 };

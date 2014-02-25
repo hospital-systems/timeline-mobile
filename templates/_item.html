@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="timeline-item-icon-container col-xs-2 col-md-1">
+    <span class="icon" ng-class="'medapp-icon-' + item.type"></span>
+  </div>
+  <div class="col-xs-7 col-md-9">
+    <h3 class="timeline-item-title">{{item.type}}</h3>
+    <span class="text-muted">{{item.name}}</span>
+  </div>
+  <div class="timeline-item-time-container col-xs-3 col-md-2">
+    <span class="timeline-item-datetime text-muted">
+      {{item.createdAt | date:dateFilter}}
+    </span>
+  </div>
+</div>

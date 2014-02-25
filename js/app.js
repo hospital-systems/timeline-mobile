@@ -92,9 +92,8 @@ timeline_app.config([
 timeline_app.controller('RootController', function($scope) {});
 
 timeline_app.controller('ListCtrl', function($scope) {
-  $scope.getDayFromKey = function(key) {
-    return new Date(key);
-  };
+  $scope.getDayFromKey = function(key) { return new Date(key); };
+  $scope.dateFilter = 'HH:mm';
 
   $scope.days = _.groupBy(timelineItems, function(item) {
     var date = item.createdAt;
@@ -103,6 +102,8 @@ timeline_app.controller('ListCtrl', function($scope) {
 });
 
 timeline_app.controller('ItemsCtrl', function($scope, $route, $routeParams) {
+  $scope.dateFilter = 'HH:mm MMM d, yyyy';
+
   $scope.item = jQuery.grep(timelineItems, function(item) {
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];
