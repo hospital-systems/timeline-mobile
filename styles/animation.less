@@ -1,22 +1,37 @@
-.view-animate-container { position: relative; }
-.view-animate {
-  &.ng-enter,
-  &.ng-leave {
-    -webkit-transition: all cubic-bezier(0.190, 1.000, 0.220, 1.000) 775ms;
-    transition: all cubic-bezier(0.190, 1.000, 0.220, 1.000) 775ms;
+.view-animate-container {
+  position: relative;
+  .view-animate {
+    &.ng-enter,
+    &.ng-leave {
+      -webkit-transition: all cubic-bezier(0.190, 1.000, 0.220, 1.000) 775ms;
+      transition: all cubic-bezier(0.190, 1.000, 0.220, 1.000) 775ms;
 
-    display: block;
-    width: 100%;
+      display: block;
+      width: 100%;
 
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
   }
-  &.ng-enter {
-    left: 100%;
-    &.ng-enter-active { left: 0; }
+  &.move-to-left {
+    .view-animate {
+      &.ng-enter {
+        left: 100%;
+        &.ng-enter-active { left: 0; }
+      }
+      &.ng-leave.ng-leave-active { left: -100%; }
+    }
   }
-  &.ng-leave.ng-leave-active { left: -100%; }
+  &.move-to-right {
+    .view-animate {
+      &.ng-enter {
+        left: -100%;
+        &.ng-enter-active { left: 0; }
+      }
+      &.ng-leave.ng-leave-active { left: 100%; }
+    }
+  }
 }
