@@ -2,7 +2,7 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
   'use strict';
 
   $templateCache.put('/templates/_item.html',
-    "<div class=\"row\">\n" +
+    "<div class=\"row timeline-item-row\">\n" +
     "  <div class=\"timeline-item-icon-container col-xs-2 col-md-1\">\n" +
     "    <span class=\"icon\" ng-class=\"'medapp-icon-' + item.type\"></span>\n" +
     "  </div>\n" +
@@ -12,7 +12,8 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
     "  </div>\n" +
     "  <div class=\"timeline-item-time-container col-xs-3 col-md-2\">\n" +
     "    <span class=\"timeline-item-datetime text-muted\">\n" +
-    "      {{item.createdAt | date: 'HH:mm MMM d, yyyy'}}\n" +
+    "      {{item.createdAt | date: 'MM/dd/yyyy'}}\n" +
+    "      {{item.createdAt | date: 'HH:mm'}}\n" +
     "    </span>\n" +
     "  </div>\n" +
     "</div>\n"

@@ -33,9 +33,9 @@ h1 {
 .timeline-item-frame .timeline-item-time-container {
   text-align: right;
 }
-.timeline-list-frame .timeline-item-datetime,
-.timeline-item-frame .timeline-item-datetime {
-  margin-right: 10px;
+.timeline-list-frame .timeline-item-row,
+.timeline-item-frame .timeline-item-row {
+  margin-right: 0;
 }
 .timeline-list-frame .timeline-item-day {
   margin-left: 16px;
@@ -45,4 +45,8 @@ h1 {
 }
 .timeline-list-frame .timeline-item {
   border-bottom: 1px solid LightGray;
+}
+a,
+a:hover {
+  color: inherit;
 }
