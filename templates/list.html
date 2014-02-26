@@ -1,20 +1,14 @@
-<div class="container-fluid timeline-frame" ng-controller="ListCtrl">
-  <div class="timeline-container" ng-repeat="day in collectionOfDays">
-    <h2>{{day.day}}</h2>
+<div class="container">
+  <h1>Timeline</h1>
+</div>
+<div class="timeline-list-frame container" ng-controller="ListCtrl">
+  <div class="timeline-list" ng-repeat="(day, items) in days">
+    <h2 class="timeline-item-day">{{getDayFromKey(day) | date:'MMM d, yyyy'}}</h2>
     <ul class="list-unstyled">
-      <li class="timeline-item" ng-repeat="item in day.records">
-        <div class="row">
-          <div class="col-xs-2 col-md-1">
-            <span class="icon" ng-class="'medapp-icon-' + item.type"></span>
-          </div>
-          <div class="col-xs-8 col-md-10">
-            <span>{{item.type}}</span>
-            <span class="text-muted">{{item.name}}</span>
-          </div>
-          <div class="col-xs-2 col-md-1">
-            <span class="text-muted">5:30</span>
-          </div>
-        </div>
+      <li class="timeline-item" ng-repeat="item in items">
+        <a class="timeline-item-link" href="#/item/{{ item.id }}">
+          <div ng-include="'/templates/_item.html'"></div>
+        </a>
       </li>
     </ul>
   </div>
