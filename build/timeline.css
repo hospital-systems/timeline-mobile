@@ -1,6 +1,33 @@
-h1 {
-  margin-bottom: 20px;
+.view-animate-container {
+  height: 100px!important;
+  position: relative;
 }
+.view-animate {
+  padding: 10px;
+}
+.view-animate.ng-enter,
+.view-animate.ng-leave {
+  -webkit-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s;
+  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s;
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+}
+.view-animate.ng-enter {
+  left: 100%;
+}
+.view-animate.ng-enter.ng-enter-active {
+  left: 0;
+}
+.view-animate.ng-leave.ng-leave-active {
+  left: -100%;
+}
+
 .timeline-list-frame,
 .timeline-item-frame {
   padding: 0;
@@ -40,11 +67,8 @@ h1 {
 .timeline-list-frame .timeline-item-day {
   margin-left: 16px;
 }
-.timeline-list-frame .timeline-item:first-child {
+.timeline-list-frame .timeline-item:not(:first-child) {
   border-top: 1px solid LightGray;
-}
-.timeline-list-frame .timeline-item {
-  border-bottom: 1px solid LightGray;
 }
 a,
 a:hover {

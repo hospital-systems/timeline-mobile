@@ -22,18 +22,14 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
 
   $templateCache.put('/templates/item.html',
     "<div class=\"timeline-item-frame container\" ng-controller=\"ItemsCtrl\">\n" +
-    "  <div ng-include=\"'/templates/_item.html'\"></div>\n" +
-    "  <div class=\"timeline-item-data-container col-xs-12\" ng-bind-html='item.data'>\n" +
-    "  </div>\n" +
     "  <div><a class=\"btn btn-primary btn-lg\" href=\"#/\">Back</a></div>\n" +
+    "  <div ng-include=\"'/templates/_item.html'\"></div>\n" +
+    "  <div class=\"timeline-item-data-container col-xs-12\" ng-bind-html='item.data'></div>\n" +
     "</div>\n"
   );
 
 
   $templateCache.put('/templates/list.html',
-    "<div class=\"container\">\n" +
-    "  <h1>Timeline</h1>\n" +
-    "</div>\n" +
     "<div class=\"timeline-list-frame container\" ng-controller=\"ListCtrl\">\n" +
     "  <ul class=\"list-unstyled\">\n" +
     "    <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +

@@ -1,6 +1,3 @@
-h1 {
-  margin-bottom: 20px;
-}
 .timeline-list-frame,
 .timeline-item-frame {
   padding: 0;
@@ -40,11 +37,8 @@ h1 {
 .timeline-list-frame .timeline-item-day {
   margin-left: 16px;
 }
-.timeline-list-frame .timeline-item:first-child {
+.timeline-list-frame .timeline-item:not(:first-child) {
   border-top: 1px solid LightGray;
-}
-.timeline-list-frame .timeline-item {
-  border-bottom: 1px solid LightGray;
 }
 a,
 a:hover {

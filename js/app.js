@@ -446,7 +446,9 @@ var timelineItems = [
   }
 ];
 
-timeline_app = angular.module('angular-timeline-demo', ['ngRoute', 'ngSanitize']);
+timeline_app = angular.module(
+  'angular-timeline-demo', ['ngRoute', 'ngSanitize', 'ngAnimate']
+);
 
 timeline_app.config([
   '$routeProvider',
