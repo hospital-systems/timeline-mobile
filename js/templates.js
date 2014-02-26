@@ -7,12 +7,12 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
     "    <span class=\"icon\" ng-class=\"'medapp-icon-' + item.type\"></span>\n" +
     "  </div>\n" +
     "  <div class=\"col-xs-7 col-md-9\">\n" +
-    "    <h3 class=\"timeline-item-title\">{{item.type}}</h3>\n" +
-    "    <span class=\"text-muted\">{{item.name}}</span>\n" +
+    "    <h3 class=\"timeline-item-title\">{{item.name}}</h3>\n" +
+    "    <span class=\"text-muted\">{{item.doctor_name}}</span>\n" +
     "  </div>\n" +
     "  <div class=\"timeline-item-time-container col-xs-3 col-md-2\">\n" +
     "    <span class=\"timeline-item-datetime text-muted\">\n" +
-    "      {{item.createdAt | date:dateFilter}}\n" +
+    "      {{item.createdAt | date: 'HH:mm MMM d, yyyy'}}\n" +
     "    </span>\n" +
     "  </div>\n" +
     "</div>\n"
@@ -32,16 +32,13 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
     "  <h1>Timeline</h1>\n" +
     "</div>\n" +
     "<div class=\"timeline-list-frame container\" ng-controller=\"ListCtrl\">\n" +
-    "  <div class=\"timeline-list\" ng-repeat=\"(day, items) in days\">\n" +
-    "    <h2 class=\"timeline-item-day\">{{getDayFromKey(day) | date:'MMM d, yyyy'}}</h2>\n" +
-    "    <ul class=\"list-unstyled\">\n" +
-    "      <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +
-    "        <a class=\"timeline-item-link\" href=\"#/item/{{ item.id }}\">\n" +
-    "          <div ng-include=\"'/templates/_item.html'\"></div>\n" +
-    "        </a>\n" +
-    "      </li>\n" +
-    "    </ul>\n" +
-    "  </div>\n" +
+    "  <ul class=\"list-unstyled\">\n" +
+    "    <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +
+    "      <a class=\"timeline-item-link\" href=\"#/item/{{ item.id }}\">\n" +
+    "        <div ng-include=\"'/templates/_item.html'\"></div>\n" +
+    "      </a>\n" +
+    "    </li>\n" +
+    "  </ul>\n" +
     "</div>\n"
   );
 

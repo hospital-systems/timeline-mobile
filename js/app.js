@@ -1,7 +1,7 @@
 var timelineItems = [
   {
     id: 1,
-    createdAt: new Date(2013, 5, 13, 17, 6),
+    createdAt: new Date(2013, 4, 13, 17, 6),
     type: 'doc',
     name: 'Discharge Summary Note',
     doctor_name: 'Smith, John, MD',
@@ -94,7 +94,7 @@ var timelineItems = [
   },
   {
     id: 2,
-    createdAt: new Date(2013, 4, 28, 12, 33),
+    createdAt: new Date(2013, 3, 28, 12, 33),
     type: 'rad',
     name: 'NM MPI SPEC MULT RST STRS',
     doctor_name: 'Bloggs, Joe, MD',
@@ -145,7 +145,7 @@ var timelineItems = [
   },
   {
     id: 3,
-    createdAt: new Date(2013, 4, 28, 6, 40),
+    createdAt: new Date(2013, 3, 28, 6, 40),
     type: 'lab',
     name: 'Immunochemical fecal occult blood test (iFOBT) A:1',
     doctor_name: 'Doe, John, MD',
@@ -158,7 +158,7 @@ var timelineItems = [
   },
   {
     id: 4,
-    createdAt: new Date(2013, 4, 28, 6),
+    createdAt: new Date(2013, 3, 28, 6),
     type: 'lab',
     name: 'Complete Blood Count (CBC) A:7',
     doctor_name: 'Kumar, Ashok, MD',
@@ -231,7 +231,7 @@ var timelineItems = [
   },
   {
     id: 5,
-    createdAt: new Date(2013, 4, 28, 6),
+    createdAt: new Date(2013, 3, 28, 6),
     type: 'lab',
     name: 'PROTHROMBIN TIME A:2',
     doctor_name: 'Kumar, Ashok , MD',
@@ -248,7 +248,7 @@ var timelineItems = [
   },
   {
     id: 6,
-    createdAt: new Date(2013, 4, 27, 10, 20),
+    createdAt: new Date(2013, 3, 27, 10, 20),
     type: 'rad',
     name: 'ECHOCARDIOGRAPHY COMPLETE',
     doctor_name: 'Bloggs, Joe, MD',
@@ -303,7 +303,7 @@ var timelineItems = [
   },
   {
     id: 7,
-    createdAt: new Date(2013, 4, 25, 12, 57),
+    createdAt: new Date(2013, 3, 25, 12, 57),
     type: 'doc',
     name: 'Consultation Note',
     doctor_name: 'Doe, John, MD',
@@ -467,18 +467,12 @@ timeline_app.config([
 timeline_app.controller('RootController', function($scope) {});
 
 timeline_app.controller('ListCtrl', function($scope) {
-  $scope.getDayFromKey = function(key) { return new Date(key); };
-  $scope.dateFilter = 'HH:mm';
-
-  $scope.days = _.groupBy(timelineItems, function(item) {
-    var date = item.createdAt;
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  $scope.items = timelineItems.sort(function(a,b){
+    return b.createdAt - a.createdAt;
   });
 });
 
 timeline_app.controller('ItemsCtrl', function($scope, $route, $routeParams) {
-  $scope.dateFilter = 'HH:mm MMM d, yyyy';
-
   $scope.item = jQuery.grep(timelineItems, function(item) {
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];
