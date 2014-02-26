@@ -13,21 +13,21 @@
   right: 0;
   bottom: 0;
 }
-.view-animate-container.move-to-left .view-animate.ng-enter {
+.view-animate-container .view-animate.move-to-left.ng-enter {
   left: 100%;
 }
-.view-animate-container.move-to-left .view-animate.ng-enter.ng-enter-active {
+.view-animate-container .view-animate.move-to-left.ng-enter.ng-enter-active {
   left: 0;
 }
-.view-animate-container.move-to-left .view-animate.ng-leave.ng-leave-active {
+.view-animate-container .view-animate.move-to-left.ng-leave.ng-leave-active {
   left: -100%;
 }
-.view-animate-container.move-to-right .view-animate.ng-enter {
+.view-animate-container .view-animate.move-to-right.ng-enter {
   left: -100%;
 }
-.view-animate-container.move-to-right .view-animate.ng-enter.ng-enter-active {
+.view-animate-container .view-animate.move-to-right.ng-enter.ng-enter-active {
   left: 0;
 }
-.view-animate-container.move-to-right .view-animate.ng-leave.ng-leave-active {
+.view-animate-container .view-animate.move-to-right.ng-leave.ng-leave-active {
   left: 100%;
 }
