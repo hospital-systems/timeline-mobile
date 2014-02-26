@@ -466,6 +466,18 @@ timeline_app.config([
     });
   }]);
 
+timeline_app.controller(
+  'AnimateFlavorCtrl',
+  function($scope, $rootScope) {
+  $rootScope.$on('$locationChangeStart', function(event, next, current) {
+    if (current.search(/\/#\/$/) !== -1) {
+      $scope.animateFlavor = 'move-to-left';
+    } else {
+      $scope.animateFlavor = 'move-to-right';
+    }
+  });
+});
+
 timeline_app.controller('RootController', function($scope) {});
 
 timeline_app.controller('ListCtrl', function($scope) {
