@@ -1,14 +1,10 @@
 .view-animate-container {
-  height: 100px!important;
   position: relative;
-}
-.view-animate {
-  padding: 10px;
 }
 .view-animate.ng-enter,
 .view-animate.ng-leave {
-  -webkit-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s;
-  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s;
+  -webkit-transition: all cubic-bezier(0.19, 1, 0.22, 1) 775ms;
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 775ms;
   display: block;
   width: 100%;
   position: absolute;
@@ -16,7 +12,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 10px;
 }
 .view-animate.ng-enter {
   left: 100%;
