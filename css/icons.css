@@ -20,15 +20,15 @@ a.icon:hover{
   content: 'N';
 }
 
-.medapp-icon-notes:after {
+.medapp-icon-doc:after {
   content: '\e5';
 }
 
-.medapp-icon-vital_timeline_item:after {
+.medapp-icon-rad:after {
   content: 'V';
 }
 
-.medapp-icon-intake_output_timeline_item:after {
+.medapp-icon-lab:after {
   content: 'j';
 }
 
