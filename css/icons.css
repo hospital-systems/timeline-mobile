@@ -22,14 +22,17 @@ a.icon:hover{
 
 .medapp-icon-doc:after {
   content: '\e5';
+  color: #318498;
 }
 
 .medapp-icon-rad:after {
-  content: 'V';
+  content: 'R';
+  color: #F59F4A;
 }
 
 .medapp-icon-lab:after {
-  content: 'j';
+  content: 'L';
+  color: #32A57A;
 }
 
 .medapp-icon-treatment_record_timeline_item:after {

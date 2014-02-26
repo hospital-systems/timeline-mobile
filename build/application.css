@@ -1,3 +1,6 @@
+.navbar {
+  margin-bottom: 0px;
+}
 h1 {
   margin-bottom: 20px;
 }
@@ -8,7 +11,6 @@ h1 {
 .timeline-list-frame .timeline-item-link,
 .timeline-item-frame .timeline-item-link {
   display: block;
-  padding: 20px 0 20px 0;
 }
 .timeline-list-frame .timeline-item-icon-container,
 .timeline-item-frame .timeline-item-icon-container {
@@ -22,31 +24,32 @@ h1 {
 }
 .timeline-list-frame .timeline-item-icon-container .icon:after,
 .timeline-item-frame .timeline-item-icon-container .icon:after {
-  font-size: 38px;
+  font-size: 32px;
 }
 .timeline-list-frame .timeline-item-title,
 .timeline-item-frame .timeline-item-title {
   margin: 0;
-  font-size: 16px;
-}
-.timeline-list-frame .timeline-item-time-container,
-.timeline-item-frame .timeline-item-time-container {
-  text-align: right;
 }
 .timeline-list-frame .timeline-item-row,
 .timeline-item-frame .timeline-item-row {
   margin-right: 0;
 }
-.timeline-list-frame .timeline-item-day {
-  margin-left: 16px;
+.timeline-item {
+  border-bottom: 1px solid #EEEEEE;
+  margin: 0 0px;
+  padding: 10px 0;
 }
-.timeline-list-frame .timeline-item:first-child {
-  border-top: 1px solid LightGray;
+.timeline-item-frame .timeline-item {
+  margin-bottom: 10px;
 }
-.timeline-list-frame .timeline-item {
-  border-bottom: 1px solid LightGray;
+.timeline-list-frame .timeline-item:last-child {
+  border-bottom: none;
 }
 a,
 a:hover {
   color: inherit;
+}
+.timeline-item-datetime,
+.timeline-item-main {
+  padding-left: 0px;
 }

@@ -96,7 +96,7 @@ var timelineItems = [
     id: 2,
     createdAt: new Date(2013, 3, 28, 12, 33),
     type: 'rad',
-    name: 'NM MPI SPEC MULT RST STRS',
+    name: 'Nm mpi spec mult rst strs',
     doctor_name: 'Bloggs, Joe, MD',
     clinic_name: '',
     data:
@@ -147,7 +147,7 @@ var timelineItems = [
     id: 3,
     createdAt: new Date(2013, 3, 28, 6, 40),
     type: 'lab',
-    name: 'Immunochemical fecal occult blood test (iFOBT) A:1',
+    name: 'Immunochemical fecal occult blood test',
     doctor_name: 'Doe, John, MD',
     clinic_name: '',
     data:
@@ -160,7 +160,7 @@ var timelineItems = [
     id: 4,
     createdAt: new Date(2013, 3, 28, 6),
     type: 'lab',
-    name: 'Complete Blood Count (CBC) A:7',
+    name: 'Complete Blood Count',
     doctor_name: 'Kumar, Ashok, MD',
     clinic_name: '',
     data:
@@ -233,7 +233,7 @@ var timelineItems = [
     id: 5,
     createdAt: new Date(2013, 3, 28, 6),
     type: 'lab',
-    name: 'PROTHROMBIN TIME A:2',
+    name: 'Prothrombin time',
     doctor_name: 'Kumar, Ashok , MD',
     clinic_name: '',
     data:
@@ -250,7 +250,7 @@ var timelineItems = [
     id: 6,
     createdAt: new Date(2013, 3, 27, 10, 20),
     type: 'rad',
-    name: 'ECHOCARDIOGRAPHY COMPLETE',
+    name: 'Echocardiography complete',
     doctor_name: 'Bloggs, Joe, MD',
     clinic_name: '',
     data:
