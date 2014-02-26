@@ -469,7 +469,7 @@ timeline_app.config([
 timeline_app.controller(
   'AnimateFlavorCtrl',
   function($scope, $rootScope) {
-  $rootScope.$on('$locationChangeStart', function(event, next, current) {
+  $rootScope.$on('$locationChangeStart', function(_, _, current) {
     if (current.search(/\/#\/$/) !== -1) {
       $scope.animateFlavor = 'move-to-left';
     } else {
