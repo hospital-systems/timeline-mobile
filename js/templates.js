@@ -22,6 +22,20 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
   );
 
 
+  $templateCache.put('/templates/_navbar_nav.html',
+    "<ul class=\"nav navbar-nav\">\n" +
+    "  <li class=\"active\"><a href=\"index.html\">With animation</a></li>\n" +
+    "  <li><a href=\"index2.html\">Without animation</a></li>\n" +
+    "  <li><a href=\"#\">Profile</a></li>\n" +
+    "  <li><a href=\"#\">Problem list</a></li>\n" +
+    "  <li><a href=\"#\">Allergy list</a></li>\n" +
+    "  <li><a href=\"#\">Observations</a></li>\n" +
+    "  <li><a href=\"#\">Clinical Documents</a></li>\n" +
+    "  <li><a href=\"#\">Encounters</a></li>\n" +
+    "</ul>\n"
+  );
+
+
   $templateCache.put('/templates/item.html',
     "<div class=\"timeline-item-frame container\" ng-controller=\"ItemsCtrl\">\n" +
     "  <div ng-include=\"'/templates/_item.html'\" class=\"timeline-item\"></div>\n" +

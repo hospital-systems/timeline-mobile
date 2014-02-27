@@ -3,7 +3,7 @@
 }
 #sp-nav,
 #sp-nav.wide {
-  width: 80%;
+  width: 40%;
   overflow: hidden;
   position: absolute;
   left: 0;
@@ -48,8 +48,8 @@
 #sp-nav.show + #sp-page,
 #sp-nav.show.wide + #sp-page {
   position: absolute;
-  -webkit-transform: translateX(80%);
-  transform: translateX(80%);
+  -webkit-transform: translateX(40%);
+  transform: translateX(40%);
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
   overflow-x: hidden;

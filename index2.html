@@ -27,20 +27,12 @@
           TakeCare
         </a>
       </div>
+      <div class="collapse navbar-collapse"  ng-include="'/templates/_navbar_nav.html'">
+      </div><!--/.nav-collapse -->
     </div>
   </div>
 
-  <div class="navbar navbar-inverse" id="sp-nav">
-    <ul class="nav navbar-nav">
-      <li><a href="index.html">With animation</a></li>
-      <li class="active"><a href="index2.html">Without animation</a></li>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Problem list</a></li>
-      <li><a href="#">Allergy list</a></li>
-      <li><a href="#">Observations</a></li>
-      <li><a href="#">Clinical Documents</a></li>
-      <li><a href="#">Encounters</a></li>
-    </ul>
+  <div class="navbar navbar-inverse" id="sp-nav" style="display: none"  ng-include="'/templates/_navbar_nav.html'">
   </div><!--/.nav-collapse -->
 
   <div id="sp-page">
