@@ -15,14 +15,18 @@
       right: 0;
       bottom: 0;
     }
-    &.move-to-left {
+  }
+  &.move-to-left {
+    .view-animate {
       &.ng-enter {
         left: 100%;
         &.ng-enter-active { left: 0; }
       }
       &.ng-leave.ng-leave-active { left: -100%; }
     }
-    &.move-to-right {
+  }
+  &.move-to-right {
+    .view-animate {
       &.ng-enter {
         left: -100%;
         &.ng-enter-active { left: 0; }

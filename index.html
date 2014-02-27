@@ -33,8 +33,10 @@
       </div>
     </div>
 
-    <div class="view-animate-container">
-      <div ng-view class="view-animate move-to-left"></div>
+    <div ng-controller="AnimateFlavorCtrl"
+         class="view-animate-container"
+         ng-class="animateFlavor">
+      <div ng-view class="view-animate"></div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
