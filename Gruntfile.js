@@ -45,7 +45,7 @@ module.exports = function (grunt) {
         nospawn: true
       },
       sources: {
-        files: ['templates/**/*.html', 'styles/**/*.less'],
+        files: ['templates/**/*.html', 'styles/**/*.less', 'js/**/*.js'],
         tasks: ['build'],
         options: {
           events: ['changed', 'added'],
