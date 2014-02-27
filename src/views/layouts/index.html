@@ -27,15 +27,17 @@
             TakeCare
           </a>
         </div>
-        <div class="collapse navbar-collapse"  ng-include="'/ng_templates/_navbar_nav.html'">
+        <div class="collapse navbar-collapse">
+          {{> navbar_nav  }}
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
-    <div class="navbar navbar-inverse" id="sp-nav" style="display: none"  ng-include="'/ng_templates/_navbar_nav.html'">
+    <div class="navbar navbar-inverse" id="sp-nav" style="display: none">
+      <%= navbar_nav %>
     </div><!--/.nav-collapse -->
 
-{{> body  }}
+    <%=> "./body" %>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.min.js"></script>

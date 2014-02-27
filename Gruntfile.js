@@ -7,6 +7,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('assemble');
+  grunt.loadNpmTasks('assemble-swig');
 
   grunt.initConfig({
     watch: {
@@ -27,7 +28,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    clean: ['*.html', 'build/**/*'],
+    clean: ['*.html', 'ng_templates', 'build/**/*'],
     concat: {
       css: {
         src: ['build/*.css'],
@@ -36,16 +37,6 @@ module.exports = function (grunt) {
       js: {
         src: ['js/timeline_items.js', 'js/*.js'],
         dest: 'build/timeline.js'
-      }
-    },
-    ngtemplates: {
-      app: {
-        src: 'ng_templates/*.html',
-        dest: 'js/templates.js',
-        options: {
-          module: 'angular-timeline-demo',
-          prefix: '/'
-        }
       }
     },
     less: {
@@ -59,23 +50,45 @@ module.exports = function (grunt) {
         }]
       }
     },
-
     assemble: {
       options: {
-        layout: ['views/layouts/index.html'],
+        engine: 'swig',
+        swig: {
+          varControls: ["<%=", "%>"]
+        },
+        layoutdir: 'src/views/layouts',
         flatten: true
       },
-      pages: {
-        src: ['views/*.html'],
+      // ngTemplates: {
+      //   options: { partials: ['src/ng_templates/shared/*.html'] },
+      //   src: ['src/ng_templates/*.html'],
+      //   dest: 'ng_templates/'
+      // },
+      views: {
+        options: {
+          layout: 'index.html',
+          partials: ['src/views/shared/*.html']
+        },
+        src: ['src/views/*.html'],
         dest: './'
+      }
+    },
+    ngtemplates: {
+      app: {
+        src: ['ng_templates/*.html'],
+        dest: 'js/templates.js',
+        options: {
+          module: 'angular-timeline-demo',
+          prefix: '/'
+        }
       }
     }
   })
   grunt.registerTask('build', [
     'clean',
     'less',
-    'ngtemplates',
     'assemble',
+    'ngtemplates',
     'concat:css',
     'concat:js'
   ]);
