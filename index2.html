@@ -10,45 +10,50 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/icons.css" rel="stylesheet">
     <link rel="stylesheet" href="build/timeline.css"/>
+    <link rel="stylesheet" href="css/ng-mobile-menu.css"/>
   </head>
   <body ng-controller='RootController'>
-    <div class="navbar navbar-inverse" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">
-            <span class="glyphicon glyphicon-plus emerald"></span>
-            TakeCare
-          </a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="index.html">With animation</a></li>
-            <li class="active"><a href="index2.html">Without animation</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Problem list</a></li>
-            <li><a href="#">Allergy list</a></li>
-            <li><a href="#">Observations</a></li>
-            <li><a href="#">Clinical Documents</a></li>
-            <li><a href="#">Encounters</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+  <div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle pull-left" ng-click="$spMenu.toggle()">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <span class="glyphicon glyphicon-plus emerald"></span>
+          TakeCare
+        </a>
       </div>
     </div>
+  </div>
 
+  <div class="navbar navbar-inverse" id="sp-nav">
+    <ul class="nav navbar-nav">
+      <li><a href="index.html">With animation</a></li>
+      <li class="active"><a href="index2.html">Without animation</a></li>
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Problem list</a></li>
+      <li><a href="#">Allergy list</a></li>
+      <li><a href="#">Observations</a></li>
+      <li><a href="#">Clinical Documents</a></li>
+      <li><a href="#">Encounters</a></li>
+    </ul>
+  </div><!--/.nav-collapse -->
+
+  <div id="sp-page">
     <div>
       <div ng-view></div>
     </div>
+  </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-sanitize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-animate.min.js"></script>
+    <script src="js/ng-mobile-menu.js"></script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

@@ -46,6 +46,7 @@ h1 {
 }
 .timeline-list-frame,
 .timeline-item-frame {
+  background-color: white;
   padding: 0;
 }
 .timeline-list-frame .timeline-item-link,

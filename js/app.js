@@ -447,11 +447,11 @@ var timelineItems = [
 ];
 
 var timeline_app = angular.module(
-  'angular-timeline-demo', ['ngRoute', 'ngSanitize', 'ngAnimate']
+  'angular-timeline-demo', ['ngRoute', 'ngSanitize', 'ngAnimate', 'shoppinpal.mobile-menu']
 );
 
 var timeline_app2 = angular.module(
-  'angular-timeline-demo2', ['ngRoute', 'ngSanitize']
+  'angular-timeline-demo2', ['ngRoute', 'ngSanitize', 'shoppinpal.mobile-menu']
 );
 
 [timeline_app, timeline_app2].forEach(function(app) {
