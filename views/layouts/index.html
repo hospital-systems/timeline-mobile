@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="timeline-with-animation">
+<html lang="en" ng-app="{{angularApplicationName}}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,15 +35,7 @@
     <div class="navbar navbar-inverse" id="sp-nav" style="display: none"  ng-include="'/ng_templates/_navbar_nav.html'">
     </div><!--/.nav-collapse -->
 
-
-<div id="sp-page">
-  <div ng-controller="AnimateFlavorCtrl"
-       class="view-animate-container"
-       ng-class="animateFlavor">
-    <div ng-view class="view-animate"></div>
-  </div>
-</div>
-
+{{> body  }}
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.min.js"></script>

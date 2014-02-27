@@ -1,168 +1,3 @@
-var timeline_app = angular.module(
-  'angular-timeline-demo', ['ngRoute', 'ngSanitize', 'ngAnimate', 'shoppinpal.mobile-menu']
-);
-
-var timeline_app2 = angular.module(
-  'angular-timeline-demo2', ['ngRoute', 'ngSanitize', 'shoppinpal.mobile-menu']
-);
-
-[timeline_app, timeline_app2].forEach(function(app) {
-  app.config([
-    '$routeProvider',
-    function($routeProvider) {
-      'use strict';
-
-      $routeProvider.when('/', {
-        templateUrl: '/templates/list.html',
-        controller: 'RootCtrl'
-      });
-
-      $routeProvider.when('/item/:itemId', {
-        templateUrl: '/templates/item.html',
-        controller: 'RootCtrl'
-      });
-
-      $routeProvider.when('/menu', {
-        templateUrl: '/templates/menu.html',
-        controller: 'RootCtrl'
-      });
-    }]);
-
-  app.controller('ListCtrl', function($scope) {
-    $scope.items = timelineItems.sort(function(a,b){
-      return b.createdAt - a.createdAt;
-    });
-  });
-
-  app.controller('ItemsCtrl', function($scope, $route, $routeParams) {
-    $scope.item = jQuery.grep(timelineItems, function(item) {
-      return item.id.toString() === $routeParams.itemId.toString();
-    })[0];
-  });
-});
-
-timeline_app.controller('RootCtrl', function($scope) {
-  $scope.animationEnabled = true;
-});
-
-timeline_app2.controller('RootCtrl', function($scope) {
-  $scope.animationEnabled = false;
-});
-
-timeline_app.controller('AnimateFlavorCtrl', function($scope, $rootScope) {
-  $rootScope.$on('$locationChangeStart', function(_, _, current) {
-    if (current.search(/#\/$/) !== -1) {
-      $scope.animateFlavor = 'move-to-left';
-    } else if (null) {
-      $scope.animateFlavor = 'animation-disabled';
-    } else {
-      $scope.animateFlavor = 'move-to-right';
-    }
-  });
-});
-
-angular.module('shoppinpal.mobile-menu', [])
-    .run(['$rootScope', '$spMenu', function($rootScope, $spMenu){
-        $rootScope.$spMenu = $spMenu;
-    }])
-    .provider("$spMenu", function(){
-        this.$get = [function(){
-           var menu = {};
-
-           menu.show = function show(){
-               var menu = angular.element(document.querySelector('#sp-nav'));
-               console.log(menu);
-               menu.addClass('show');
-           };
-
-           menu.hide = function hide(){
-               var menu = angular.element(document.querySelector('#sp-nav'));
-               menu.removeClass('show');
-           };
-
-           menu.toggle = function toggle() {
-               var menu = angular.element(document.querySelector('#sp-nav'));
-               menu.toggleClass('show');
-           };
-
-           return menu;
-        }];
-    });
-angular.module('angular-timeline-demo').run(['$templateCache', function($templateCache) {
-  'use strict';
-
-  $templateCache.put('/templates/_item.html',
-    "<div class=\"row timeline-item-row\">\n" +
-    "  <div class=\"timeline-item-icon-container col-xs-2 col-md-1 text-center\">\n" +
-    "    <div class=\"icon\" ng-class=\"'medapp-icon-' + item.type\"></div>\n" +
-    "  </div>\n" +
-    "  <div class=\"col-xs-7 col-md-9 timeline-item-main\">\n" +
-    "    <div class=\"timeline-item-title\"><strong>{{item.name}}</strong></div>\n" +
-    "    <div class=\"text-muted\">{{item.doctor_name}}</div>\n" +
-    "  </div>\n" +
-    "  <div class=\"col-xs-3 col-md-2 text-center timeline-item-datetime\">\n" +
-    "    <span>\n" +
-    "      {{item.createdAt | date: 'MMM, dd'}}\n" +
-    "    </span>\n" +
-    "    <span class=\"text-muted\">\n" +
-    "      {{item.createdAt | date: 'yyyy'}}\n" +
-    "    </span>\n" +
-    "  </div>\n" +
-    "</div>\n"
-  );
-
-
-  $templateCache.put('/templates/_navbar_nav.html',
-    "<ul class=\"nav navbar-nav\">\n" +
-    "  <li ng-class=\"{active: animationEnabled}\"><a href=\"index.html\">With animation</a></li>\n" +
-    "  <li ng-class=\"{active: !animationEnabled}\"><a href=\"index2.html\">Without animation</a></li>\n" +
-    "  <li><a href=\"#\">Profile</a></li>\n" +
-    "  <li><a href=\"#\">Problem list</a></li>\n" +
-    "  <li><a href=\"#\">Allergy list</a></li>\n" +
-    "  <li><a href=\"#\">Observations</a></li>\n" +
-    "  <li><a href=\"#\">Clinical Documents</a></li>\n" +
-    "  <li><a href=\"#\">Encounters</a></li>\n" +
-    "</ul>\n"
-  );
-
-
-  $templateCache.put('/templates/item.html',
-    "<div class=\"timeline-item-frame container\" ng-controller=\"ItemsCtrl\">\n" +
-    "  <div ng-include=\"'/templates/_item.html'\" class=\"timeline-item\"></div>\n" +
-    "  <div class=\"timeline-item-data-container col-xs-12\" ng-bind-html='item.data'></div>\n" +
-    "  <div><a class=\"btn btn-primary btn-lg\" href=\"#/\">Back</a></div>\n" +
-    "</div>\n"
-  );
-
-
-  $templateCache.put('/templates/list.html',
-    "<div class=\"timeline-list-frame container\" ng-controller=\"ListCtrl\">\n" +
-    "  <ul class=\"list-unstyled\">\n" +
-    "    <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +
-    "      <a class=\"timeline-item-link\" href=\"#/item/{{ item.id }}\">\n" +
-    "        <div ng-include=\"'/templates/_item.html'\"></div>\n" +
-    "      </a>\n" +
-    "    </li>\n" +
-    "  </ul>\n" +
-    "</div>\n"
-  );
-
-
-  $templateCache.put('/templates/menu.html',
-    "<ul class=\"nav navbar-nav\">\n" +
-    "  <li class=\"active\"><a href=\"index.html\">With animation</a></li>\n" +
-    "  <li><a href=\"index2.html\">Without animation</a></li>\n" +
-    "  <li><a href=\"#\">Profile</a></li>\n" +
-    "  <li><a href=\"#\">Problem list</a></li>\n" +
-    "  <li><a href=\"#\">Allergy list</a></li>\n" +
-    "  <li><a href=\"#\">Observations</a></li>\n" +
-    "  <li><a href=\"#\">Clinical Documents</a></li>\n" +
-    "  <li><a href=\"#\">Encounters</a></li>\n" +
-    "</ul>\n"
-  );
-
-}]);
-
 var timelineItems = [
   {
     id: 1,
@@ -610,3 +445,177 @@ var timelineItems = [
             'JOHN DOE, M.D.'
   }
 ];
+
+var timelineWithAnimation = angular.module(
+  'timeline-with-animation', [
+    'ngRoute',
+    'ngSanitize',
+    'ngAnimate',
+    'shoppinpal.mobile-menu'
+  ]
+);
+
+var timelineWithoutAnimation = angular.module(
+  'timeline-without-animation', [
+    'ngRoute',
+    'ngSanitize',
+    'shoppinpal.mobile-menu'
+  ]
+);
+
+[timelineWithAnimation, timelineWithoutAnimation].forEach(function(app) {
+  app.config([
+    '$routeProvider',
+    function($routeProvider) {
+      'use strict';
+
+      $routeProvider.when('/', {
+        templateUrl: '/ng_templates/list.html',
+        controller: 'RootCtrl'
+      });
+
+      $routeProvider.when('/item/:itemId', {
+        templateUrl: '/ng_templates/item.html',
+        controller: 'RootCtrl'
+      });
+
+      $routeProvider.when('/menu', {
+        templateUrl: '/ng_templates/menu.html',
+        controller: 'RootCtrl'
+      });
+    }]);
+
+  app.controller('ListCtrl', function($scope) {
+    $scope.items = timelineItems.sort(function(a,b){
+      return b.createdAt - a.createdAt;
+    });
+  });
+
+  app.controller('ItemsCtrl', function($scope, $route, $routeParams) {
+    $scope.item = jQuery.grep(timelineItems, function(item) {
+      return item.id.toString() === $routeParams.itemId.toString();
+    })[0];
+  });
+});
+
+timelineWithAnimation.controller('RootCtrl', function($scope) {
+  $scope.animationEnabled = true;
+});
+
+timelineWithoutAnimation.controller('RootCtrl', function($scope) {
+  $scope.animationEnabled = false;
+});
+
+timelineWithAnimation.controller('AnimateFlavorCtrl', function($scope, $rootScope) {
+  $rootScope.$on('$locationChangeStart', function(_, _, current) {
+    if (current.search(/#\/$/) !== -1) {
+      $scope.animateFlavor = 'move-to-left';
+    } else if (null) {
+      $scope.animateFlavor = 'animation-disabled';
+    } else {
+      $scope.animateFlavor = 'move-to-right';
+    }
+  });
+});
+
+angular.module('shoppinpal.mobile-menu', [])
+    .run(['$rootScope', '$spMenu', function($rootScope, $spMenu){
+        $rootScope.$spMenu = $spMenu;
+    }])
+    .provider("$spMenu", function(){
+        this.$get = [function(){
+           var menu = {};
+
+           menu.show = function show(){
+               var menu = angular.element(document.querySelector('#sp-nav'));
+               console.log(menu);
+               menu.addClass('show');
+           };
+
+           menu.hide = function hide(){
+               var menu = angular.element(document.querySelector('#sp-nav'));
+               menu.removeClass('show');
+           };
+
+           menu.toggle = function toggle() {
+               var menu = angular.element(document.querySelector('#sp-nav'));
+               menu.toggleClass('show');
+           };
+
+           return menu;
+        }];
+    });
+angular.module('angular-timeline-demo').run(['$templateCache', function($templateCache) {
+  'use strict';
+
+  $templateCache.put('/ng_templates/_item.html',
+    "<div class=\"row timeline-item-row\">\n" +
+    "  <div class=\"timeline-item-icon-container col-xs-2 col-md-1 text-center\">\n" +
+    "    <div class=\"icon\" ng-class=\"'medapp-icon-' + item.type\"></div>\n" +
+    "  </div>\n" +
+    "  <div class=\"col-xs-7 col-md-9 timeline-item-main\">\n" +
+    "    <div class=\"timeline-item-title\"><strong>{{item.name}}</strong></div>\n" +
+    "    <div class=\"text-muted\">{{item.doctor_name}}</div>\n" +
+    "  </div>\n" +
+    "  <div class=\"col-xs-3 col-md-2 text-center timeline-item-datetime\">\n" +
+    "    <span>\n" +
+    "      {{item.createdAt | date: 'MMM, dd'}}\n" +
+    "    </span>\n" +
+    "    <span class=\"text-muted\">\n" +
+    "      {{item.createdAt | date: 'yyyy'}}\n" +
+    "    </span>\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/_navbar_nav.html',
+    "<ul class=\"nav navbar-nav\">\n" +
+    "  <li ng-class=\"{active: animationEnabled}\"><a href=\"index2.html\">With animation</a></li>\n" +
+    "  <li ng-class=\"{active: !animationEnabled}\"><a href=\"index.html\">Without animation</a></li>\n" +
+    "  <li><a href=\"#\">Profile</a></li>\n" +
+    "  <li><a href=\"#\">Problem list</a></li>\n" +
+    "  <li><a href=\"#\">Allergy list</a></li>\n" +
+    "  <li><a href=\"#\">Observations</a></li>\n" +
+    "  <li><a href=\"#\">Clinical Documents</a></li>\n" +
+    "  <li><a href=\"#\">Encounters</a></li>\n" +
+    "</ul>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/item.html',
+    "<div class=\"timeline-item-frame container\" ng-controller=\"ItemsCtrl\">\n" +
+    "  <div ng-include=\"'/ng_templates/_item.html'\" class=\"timeline-item\"></div>\n" +
+    "  <div class=\"timeline-item-data-container col-xs-12\" ng-bind-html='item.data'></div>\n" +
+    "  <div><a class=\"btn btn-primary btn-lg\" href=\"#/\">Back</a></div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/list.html',
+    "<div class=\"timeline-list-frame container\" ng-controller=\"ListCtrl\">\n" +
+    "  <ul class=\"list-unstyled\">\n" +
+    "    <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +
+    "      <a class=\"timeline-item-link\" href=\"#/item/{{ item.id }}\">\n" +
+    "        <div ng-include=\"'/ng_templates/_item.html'\"></div>\n" +
+    "      </a>\n" +
+    "    </li>\n" +
+    "  </ul>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/menu.html',
+    "<ul class=\"nav navbar-nav\">\n" +
+    "  <li class=\"active\"><a href=\"index.html\">With animation</a></li>\n" +
+    "  <li><a href=\"index2.html\">Without animation</a></li>\n" +
+    "  <li><a href=\"#\">Profile</a></li>\n" +
+    "  <li><a href=\"#\">Problem list</a></li>\n" +
+    "  <li><a href=\"#\">Allergy list</a></li>\n" +
+    "  <li><a href=\"#\">Observations</a></li>\n" +
+    "  <li><a href=\"#\">Clinical Documents</a></li>\n" +
+    "  <li><a href=\"#\">Encounters</a></li>\n" +
+    "</ul>\n"
+  );
+
+}]);

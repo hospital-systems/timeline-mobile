@@ -1,29 +1,38 @@
-var timeline_app = angular.module(
-  'angular-timeline-demo', ['ngRoute', 'ngSanitize', 'ngAnimate', 'shoppinpal.mobile-menu']
+var timelineWithAnimation = angular.module(
+  'timeline-with-animation', [
+    'ngRoute',
+    'ngSanitize',
+    'ngAnimate',
+    'shoppinpal.mobile-menu'
+  ]
 );
 
-var timeline_app2 = angular.module(
-  'angular-timeline-demo2', ['ngRoute', 'ngSanitize', 'shoppinpal.mobile-menu']
+var timelineWithoutAnimation = angular.module(
+  'timeline-without-animation', [
+    'ngRoute',
+    'ngSanitize',
+    'shoppinpal.mobile-menu'
+  ]
 );
 
-[timeline_app, timeline_app2].forEach(function(app) {
+[timelineWithAnimation, timelineWithoutAnimation].forEach(function(app) {
   app.config([
     '$routeProvider',
     function($routeProvider) {
       'use strict';
 
       $routeProvider.when('/', {
-        templateUrl: '/templates/list.html',
+        templateUrl: '/ng_templates/list.html',
         controller: 'RootCtrl'
       });
 
       $routeProvider.when('/item/:itemId', {
-        templateUrl: '/templates/item.html',
+        templateUrl: '/ng_templates/item.html',
         controller: 'RootCtrl'
       });
 
       $routeProvider.when('/menu', {
-        templateUrl: '/templates/menu.html',
+        templateUrl: '/ng_templates/menu.html',
         controller: 'RootCtrl'
       });
     }]);
@@ -41,15 +50,15 @@ var timeline_app2 = angular.module(
   });
 });
 
-timeline_app.controller('RootCtrl', function($scope) {
+timelineWithAnimation.controller('RootCtrl', function($scope) {
   $scope.animationEnabled = true;
 });
 
-timeline_app2.controller('RootCtrl', function($scope) {
+timelineWithoutAnimation.controller('RootCtrl', function($scope) {
   $scope.animationEnabled = false;
 });
 
-timeline_app.controller('AnimateFlavorCtrl', function($scope, $rootScope) {
+timelineWithAnimation.controller('AnimateFlavorCtrl', function($scope, $rootScope) {
   $rootScope.$on('$locationChangeStart', function(_, _, current) {
     if (current.search(/#\/$/) !== -1) {
       $scope.animateFlavor = 'move-to-left';

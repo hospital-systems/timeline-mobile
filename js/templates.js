@@ -1,7 +1,7 @@
 angular.module('angular-timeline-demo').run(['$templateCache', function($templateCache) {
   'use strict';
 
-  $templateCache.put('/templates/_item.html',
+  $templateCache.put('/ng_templates/_item.html',
     "<div class=\"row timeline-item-row\">\n" +
     "  <div class=\"timeline-item-icon-container col-xs-2 col-md-1 text-center\">\n" +
     "    <div class=\"icon\" ng-class=\"'medapp-icon-' + item.type\"></div>\n" +
@@ -22,10 +22,10 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
   );
 
 
-  $templateCache.put('/templates/_navbar_nav.html',
+  $templateCache.put('/ng_templates/_navbar_nav.html',
     "<ul class=\"nav navbar-nav\">\n" +
-    "  <li ng-class=\"{active: animationEnabled}\"><a href=\"index.html\">With animation</a></li>\n" +
-    "  <li ng-class=\"{active: !animationEnabled}\"><a href=\"index2.html\">Without animation</a></li>\n" +
+    "  <li ng-class=\"{active: animationEnabled}\"><a href=\"index2.html\">With animation</a></li>\n" +
+    "  <li ng-class=\"{active: !animationEnabled}\"><a href=\"index.html\">Without animation</a></li>\n" +
     "  <li><a href=\"#\">Profile</a></li>\n" +
     "  <li><a href=\"#\">Problem list</a></li>\n" +
     "  <li><a href=\"#\">Allergy list</a></li>\n" +
@@ -36,21 +36,21 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
   );
 
 
-  $templateCache.put('/templates/item.html',
+  $templateCache.put('/ng_templates/item.html',
     "<div class=\"timeline-item-frame container\" ng-controller=\"ItemsCtrl\">\n" +
-    "  <div ng-include=\"'/templates/_item.html'\" class=\"timeline-item\"></div>\n" +
+    "  <div ng-include=\"'/ng_templates/_item.html'\" class=\"timeline-item\"></div>\n" +
     "  <div class=\"timeline-item-data-container col-xs-12\" ng-bind-html='item.data'></div>\n" +
     "  <div><a class=\"btn btn-primary btn-lg\" href=\"#/\">Back</a></div>\n" +
     "</div>\n"
   );
 
 
-  $templateCache.put('/templates/list.html',
+  $templateCache.put('/ng_templates/list.html',
     "<div class=\"timeline-list-frame container\" ng-controller=\"ListCtrl\">\n" +
     "  <ul class=\"list-unstyled\">\n" +
     "    <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +
     "      <a class=\"timeline-item-link\" href=\"#/item/{{ item.id }}\">\n" +
-    "        <div ng-include=\"'/templates/_item.html'\"></div>\n" +
+    "        <div ng-include=\"'/ng_templates/_item.html'\"></div>\n" +
     "      </a>\n" +
     "    </li>\n" +
     "  </ul>\n" +
@@ -58,7 +58,7 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
   );
 
 
-  $templateCache.put('/templates/menu.html',
+  $templateCache.put('/ng_templates/menu.html',
     "<ul class=\"nav navbar-nav\">\n" +
     "  <li class=\"active\"><a href=\"index.html\">With animation</a></li>\n" +
     "  <li><a href=\"index2.html\">Without animation</a></li>\n" +

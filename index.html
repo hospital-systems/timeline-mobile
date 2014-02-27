@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="angular-timeline-demo">
+<html lang="en" ng-app="timeline-without-animation">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,41 +13,40 @@
     <link rel="stylesheet" href="css/ng-mobile-menu.css"/>
   </head>
   <body ng-controller='RootCtrl'>
-  <div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle pull-left" ng-click="$spMenu.toggle()">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-          <span class="glyphicon glyphicon-plus emerald"></span>
-          TakeCare
-        </a>
+    <div class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle pull-left" ng-click="$spMenu.toggle()">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <span class="glyphicon glyphicon-plus emerald"></span>
+            TakeCare
+          </a>
+        </div>
+        <div class="collapse navbar-collapse"  ng-include="'/ng_templates/_navbar_nav.html'">
+        </div><!--/.nav-collapse -->
       </div>
-      <div class="collapse navbar-collapse"  ng-include="'/templates/_navbar_nav.html'">
-      </div><!--/.nav-collapse -->
     </div>
-  </div>
 
-  <div class="navbar navbar-inverse" id="sp-nav" style="display: none"  ng-include="'/templates/_navbar_nav.html'">
-  </div><!--/.nav-collapse -->
+    <div class="navbar navbar-inverse" id="sp-nav" style="display: none"  ng-include="'/ng_templates/_navbar_nav.html'">
+    </div><!--/.nav-collapse -->
 
-  <div id="sp-page">
-    <div ng-controller="AnimateFlavorCtrl"
-         class="view-animate-container"
-         ng-class="animateFlavor">
-      <div ng-view class="view-animate"></div>
-    </div>
+
+<div id="sp-page">
+  <div>
+    <div ng-view></div>
   </div>
+</div>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-sanitize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-animate.min.js"></script>
-    <script src="js/ng-mobile-menu.js"></script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

@@ -1,16 +1,46 @@
 'use strict';
 
 module.exports = function (grunt) {
-  grunt.loadNpmTasks('grunt-angular-templates');
-  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('assemble');
 
   grunt.initConfig({
+    watch: {
+      options: {
+        nospawn: true
+      },
+      sources: {
+        files: [
+          'ng_templates/**/*.html',
+          'styles/**/*.less',
+          'js/**/*.js',
+          'views/**/*.html'
+        ],
+        tasks: ['build'],
+        options: {
+          events: ['changed', 'added'],
+          nospawn: true
+        }
+      }
+    },
+    clean: ['*.html', 'build/**/*'],
+    concat: {
+      css: {
+        src: ['build/*.css'],
+        dest: 'build/timeline.css'
+      },
+      js: {
+        src: ['js/timeline_items.js', 'js/*.js'],
+        dest: 'build/timeline.js'
+      }
+    },
     ngtemplates: {
       app: {
-        src: 'templates/*.html',
+        src: 'ng_templates/*.html',
         dest: 'js/templates.js',
         options: {
           module: 'angular-timeline-demo',
@@ -29,28 +59,15 @@ module.exports = function (grunt) {
         }]
       }
     },
-    clean: ['build/**/*'],
-    concat: {
-      css: {
-        src: ['build/*.css'],
-        dest: 'build/timeline.css'
-      },
-      js: {
-        src: ['js/*.js'],
-        dest: 'build/timeline.js'
-      }
-    },
-    watch: {
+
+    assemble: {
       options: {
-        nospawn: true
+        layout: ['views/layouts/index.html'],
+        flatten: true
       },
-      sources: {
-        files: ['templates/**/*.html', 'styles/**/*.less', 'js/**/*.js'],
-        tasks: ['build'],
-        options: {
-          events: ['changed', 'added'],
-          nospawn: true
-        }
+      pages: {
+        src: ['views/*.html'],
+        dest: './'
       }
     }
   })
@@ -58,6 +75,7 @@ module.exports = function (grunt) {
     'clean',
     'less',
     'ngtemplates',
+    'assemble',
     'concat:css',
     'concat:js'
   ]);
