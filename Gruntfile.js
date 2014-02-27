@@ -34,7 +34,11 @@ module.exports = function (grunt) {
       css: {
         src: ['build/*.css'],
         dest: 'build/timeline.css'
-      }
+      },
+      js: {
+        src: ['js/*.js'],
+        dest: 'build/timeline.js'
+      },
     },
     watch: {
       options: {
@@ -50,5 +54,11 @@ module.exports = function (grunt) {
       }
     }
   })
-  grunt.registerTask('build', ['clean', 'less', 'ngtemplates', 'concat:css']);
+  grunt.registerTask('build', [
+    'clean',
+    'less',
+    'ngtemplates',
+    'concat:css',
+    'concat:js'
+  ]);
 };
