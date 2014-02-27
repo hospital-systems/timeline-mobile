@@ -34,6 +34,10 @@ module.exports = function (grunt) {
       css: {
         src: ['build/*.css'],
         dest: 'build/timeline.css'
+      },
+      js: {
+        src: ['js/*.js'],
+        dest: 'build/timeline.js'
       }
     },
     watch: {
@@ -41,7 +45,7 @@ module.exports = function (grunt) {
         nospawn: true
       },
       sources: {
-        files: ['templates/**/*.html', 'styles/**/*.less'],
+        files: ['templates/**/*.html', 'styles/**/*.less', 'js/**/*.js'],
         tasks: ['build'],
         options: {
           events: ['changed', 'added'],
@@ -50,5 +54,11 @@ module.exports = function (grunt) {
       }
     }
   })
-  grunt.registerTask('build', ['clean', 'less', 'ngtemplates', 'concat:css']);
+  grunt.registerTask('build', [
+    'clean',
+    'less',
+    'ngtemplates',
+    'concat:css',
+    'concat:js'
+  ]);
 };
