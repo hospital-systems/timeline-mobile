@@ -28,9 +28,6 @@ var timeline_app2 = angular.module(
       });
     }]);
 
-
-  app.controller('RootCtrl', function($scope) {});
-
   app.controller('ListCtrl', function($scope) {
     $scope.items = timelineItems.sort(function(a,b){
       return b.createdAt - a.createdAt;
@@ -44,9 +41,17 @@ var timeline_app2 = angular.module(
   });
 });
 
+timeline_app.controller('RootCtrl', function($scope) {
+  $scope.animationEnabled = true;
+});
+
+timeline_app2.controller('RootCtrl', function($scope) {
+  $scope.animationEnabled = false;
+});
+
 timeline_app.controller('AnimateFlavorCtrl', function($scope, $rootScope) {
   $rootScope.$on('$locationChangeStart', function(_, _, current) {
-    if (current.search(/\/#\/$/) !== -1) {
+    if (current.search(/#\/$/) !== -1) {
       $scope.animateFlavor = 'move-to-left';
     } else if (null) {
       $scope.animateFlavor = 'animation-disabled';

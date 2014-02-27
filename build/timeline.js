@@ -28,9 +28,6 @@ var timeline_app2 = angular.module(
       });
     }]);
 
-
-  app.controller('RootCtrl', function($scope) {});
-
   app.controller('ListCtrl', function($scope) {
     $scope.items = timelineItems.sort(function(a,b){
       return b.createdAt - a.createdAt;
@@ -44,9 +41,17 @@ var timeline_app2 = angular.module(
   });
 });
 
+timeline_app.controller('RootCtrl', function($scope) {
+  $scope.animationEnabled = true;
+});
+
+timeline_app2.controller('RootCtrl', function($scope) {
+  $scope.animationEnabled = false;
+});
+
 timeline_app.controller('AnimateFlavorCtrl', function($scope, $rootScope) {
   $rootScope.$on('$locationChangeStart', function(_, _, current) {
-    if (current.search(/\/#\/$/) !== -1) {
+    if (current.search(/#\/$/) !== -1) {
       $scope.animateFlavor = 'move-to-left';
     } else if (null) {
       $scope.animateFlavor = 'animation-disabled';
@@ -109,8 +114,8 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
 
   $templateCache.put('/templates/_navbar_nav.html',
     "<ul class=\"nav navbar-nav\">\n" +
-    "  <li class=\"active\"><a href=\"index.html\">With animation</a></li>\n" +
-    "  <li><a href=\"index2.html\">Without animation</a></li>\n" +
+    "  <li ng-class=\"{active: animationEnabled}\"><a href=\"index.html\">With animation</a></li>\n" +
+    "  <li ng-class=\"{active: !animationEnabled}\"><a href=\"index2.html\">Without animation</a></li>\n" +
     "  <li><a href=\"#\">Profile</a></li>\n" +
     "  <li><a href=\"#\">Problem list</a></li>\n" +
     "  <li><a href=\"#\">Allergy list</a></li>\n" +
