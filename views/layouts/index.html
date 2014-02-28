@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="version" content="0.4.2.1">
     <title>Timeline demo</title>
 
     <!-- Bootstrap -->
@@ -27,12 +28,14 @@
             TakeCare
           </a>
         </div>
-        <div class="collapse navbar-collapse"  ng-include="'/ng_templates/_navbar_nav.html'">
+        <div class="collapse navbar-collapse">
+{{> _navbar_nav  }}
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
-    <div class="navbar navbar-inverse" id="sp-nav" style="display: none"  ng-include="'/ng_templates/_navbar_nav.html'">
+    <div class="navbar navbar-inverse" id="sp-nav" style="display: none">
+{{> _navbar_nav  }}
     </div><!--/.nav-collapse -->
 
 {{> body  }}

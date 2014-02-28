@@ -22,19 +22,6 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   );
 
 
-  $templateCache.put('/ng_templates/_navbar_nav.html',
-    "<ul class=\"nav navbar-nav\">\n" +
-    "  <li class=\"animationEnabled\"><a href=\"#/\">Home</a></li>\n" +
-    "  <li><a href=\"#\">Profile</a></li>\n" +
-    "  <li><a href=\"#\">Problem list</a></li>\n" +
-    "  <li><a href=\"#\">Allergy list</a></li>\n" +
-    "  <li><a href=\"#\">Observations</a></li>\n" +
-    "  <li><a href=\"#\">Clinical Documents</a></li>\n" +
-    "  <li><a href=\"#\">Encounters</a></li>\n" +
-    "</ul>\n"
-  );
-
-
   $templateCache.put('/ng_templates/item.html',
     "<div class=\"timeline-item-frame container\" ng-controller=\"ItemsCtrl\">\n" +
     "  <div ng-include=\"'/ng_templates/_item.html'\" class=\"timeline-item\"></div>\n" +
