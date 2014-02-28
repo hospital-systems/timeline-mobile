@@ -29,7 +29,9 @@
             <span ng-switch-default>
               <button type="button" class="navbar-toggle pull-left"
                       ng-click="gotoUrlFor('/')" style="width: 44px; height: 34px; padding: 0;">
-                <span class="glyphicon glyphicon-arrow-left back-button"></span>
+                <span class="glyphicon back-button"
+                      ng-class="{'glyphicon-arrow-left':  currentPage === 'item',
+                                 'glyphicon-arrow-right': currentPage !== 'item'}"></span>
               </button>
             </span>
           </span>

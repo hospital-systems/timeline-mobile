@@ -29,7 +29,9 @@
             <span ng-switch-default>
               <button type="button" class="navbar-toggle pull-left"
                       ng-click="gotoUrlFor('/')" style="width: 44px; height: 34px; padding: 0;">
-                <span class="glyphicon glyphicon-arrow-left back-button"></span>
+                <span class="glyphicon back-button"
+                      ng-class="{'glyphicon-arrow-left':  currentPage === 'item',
+                                 'glyphicon-arrow-right': currentPage !== 'item'}"></span>
               </button>
             </span>
           </span>
@@ -41,7 +43,7 @@
         <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav" style="padding-left: 25px;">
   <li class="animationEnabled"
-      ng-class="currentPage === 'home' && 'active'">
+      ng-class="{active: currentPage === 'home'}">
     <a href="#/">Home</a>
   </li>
   <li><a href="#/profile">Profile</a></li>
@@ -59,7 +61,7 @@
     <div class="navbar navbar-inverse" id="sp-nav">
 <ul class="nav navbar-nav" style="padding-left: 25px;">
   <li class="animationEnabled"
-      ng-class="currentPage === 'home' && 'active'">
+      ng-class="{active: currentPage === 'home'}">
     <a href="#/">Home</a>
   </li>
   <li><a href="#/profile">Profile</a></li>
