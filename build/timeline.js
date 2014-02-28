@@ -130,48 +130,71 @@ var timelineItems = [
     doctor_name: 'Bloggs, Joe, MD',
     clinic_name: '',
     data:
-        'EXAMINATION:<br/>'+
-            '<br/>'+
-            '78452 - NM MPI SPEC MULT RST STRS<br/>'+
-            '<br/>'+
-            'CLINICAL HISTORY<br/>'+
-            'Chest pain.<br/>'+
-            '<br/>'+
-            'COMPARISON<br/>'+
-            'No comparison available.<br/>'+
-            '<br/>'+
-            'TECHNIQUE<br/>'+
-            'Following the uneventful intravenous administration of technetium 99m'+
-            'Cardiolite, a nuclear cardiac stress test was performed. Following'+
-            'the uneventful intravenous administration of Thallium 201, a nuclear'+
-            'resting scan was performed. Lexiscan was the stressing agent.<br/>'+
-            '<br/>'+
-            'Radiopharmaceuticals TC CARDIO DOSE 26.6 MCI 04/28/2013 INTRAVENOUS<br/>'+
-            'Radiopharmaceuticals TL 201 1 MCI 3.7 MCI 04/27/2013 INTRAVENOUS<br/>'+
-            '<br/>'+
-            'FINDINGS<br/>'+
-            'No reversible defects are seen on stress imaging to suggest'+
-            'stress-induced ischemia. There are no fixed defects or transient'+
-            'ventricular dilatation. Wall motion analysis reveals mild septal'+
-            'wall motion abnormality, possibly artifactual. The left ventricular'+
-            'ejection fraction measures 56%. Evaluation of the polar maps'+
-            'reconfirms no reversible defects.<br/>'+
-            '<br/>'+
-            'IMPRESSION<br/>'+
+        '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Examination:</div>'+
+            '<div class=\'col-xs-12\'>78452 - NM MPI SPEC MULT RST STRS</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Clinical history:</div>'+
+            '<div class=\'col-xs-12\'>Chest pain.</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Comparison:</div>'+
+            '<div class=\'col-xs-12\'>No comparison available.</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Technique:</div>'+
+            '<div class=\'col-xs-12\'>' +
+            'Following the uneventful intravenous administration of technetium 99m '+
+            'Cardiolite, a nuclear cardiac stress test was performed. Following '+
+            'the uneventful intravenous administration of Thallium 201, a nuclear '+
+            'resting scan was performed. Lexiscan was the stressing agent.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Radiopharmaceuticals TC CARDIO DOSE 26.6 MCI 04/28/2013 INTRAVENOUS</div>'+
+            '<div class=\'col-xs-12\'>Radiopharmaceuticals TL 201 1 MCI 3.7 MCI 04/27/2013 INTRAVENOUS</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Findings:</div>'+
+            '<div class=\'col-xs-12\'>' +
+            'No reversible defects are seen on stress imaging to suggest '+
+            'stress-induced ischemia. There are no fixed defects or transient '+
+            'ventricular dilatation. Wall motion analysis reveals mild septal '+
+            'wall motion abnormality, possibly artifactual. The left ventricular '+
+            'ejection fraction measures 56%. Evaluation of the polar maps '+
+            'reconfirms no reversible defects.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Impression:</div>'+
+            '<div class=\'col-xs-12\'>' +
             '<ol>'+
             '<li>No stress-induced ischemia.</li>'+
-            '<li>Questionable mild septal wall motion abnormality, possibly'+
-            'artifactual, with an EF of 56%. These findings can be correlated'+
+            '<li>Questionable mild septal wall motion abnormality, possibly '+
+            'artifactual, with an EF of 56%. These findings can be correlated '+
             'with echocardiography as needed.</li>'+
             '</ol>'+
-            'These findings were faxed to the patient\'s floor at 1300 hours on<br/>'+
-            '04/28/2013.<br/>'+
-            '<br/>'+
-            'Dictated datetime<br/>'+
-            '04/28/13 13:01<br/>'+
-            '<br/>'+
-            'Principal interpreter<br/>'+
-            'Doe, John, MD'
+            'These findings were faxed to the patient\'s floor at 1300 hours on '+
+            '04/28/2013.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Dictated datetime:</div>'+
+            '<div class=\'col-xs-12\'>04/28/13 13:01</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Principal interpreter:</div>'+
+            '<div class=\'col-xs-12\'>Doe, John, MD</div>'+
+            '</div>'
   },
   {
     id: 3,
