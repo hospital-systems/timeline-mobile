@@ -49,7 +49,7 @@ body {
   overflow-x: hidden;
 }
 @media (min-width: 900px) {
-  #sp-page {
+  #sp-nav {
     width: 80%;
     left: -80%;
   }
