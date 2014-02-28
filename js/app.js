@@ -48,25 +48,30 @@ function getMoveTo(nextUrl) {
   return null;
 }
 
-timelineWithAnimation.controller('RootCtrl', function($scope, $rootScope) {
-  $rootScope.$on('$locationChangeStart', function(_, next, current) {
-    var navigationState = [
-      'from', getMoveFrom(current),
-      'to',   getMoveTo(next)
-    ]
-    switch (navigationState.join(' ')) {
-    case 'from home to item':
-      $scope.animateFlavor = 'move-to-left';
-      break;
-    case 'from item to home':
-      $scope.animateFlavor = 'move-to-right';
-      break;
-    default:
-      $scope.animateFlavor = 'move-to-left';
-      break;
-    }
+timelineWithAnimation.controller(
+  'RootCtrl',
+  function($scope, $rootScope, $location) {
+    $scope.go = function (path) {
+      $location.path(path);
+    };
+
+    $rootScope.$on('$locationChangeStart', function(_, next, current) {
+      var userMoveFrom = getMoveFrom(current);
+      var userMoveTo   = getMoveTo(next);
+      var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
+
+      switch (navigationState.join(' ')) {
+      case 'from home to item':
+        $scope.animateFlavor = 'move-to-left';
+        break;
+      case 'from item to home':
+        $scope.animateFlavor = 'move-to-right';
+        break;
+      }
+
+      $scope.currentPage = userMoveTo;
+    });
   });
-});
 
 timelineWithAnimation.controller('ListCtrl', function($scope) {
   $scope.items = timelineItems.sort(function(a,b){

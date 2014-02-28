@@ -496,25 +496,30 @@ function getMoveTo(nextUrl) {
   return null;
 }
 
-timelineWithAnimation.controller('RootCtrl', function($scope, $rootScope) {
-  $rootScope.$on('$locationChangeStart', function(_, next, current) {
-    var navigationState = [
-      'from', getMoveFrom(current),
-      'to',   getMoveTo(next)
-    ]
-    switch (navigationState.join(' ')) {
-    case 'from home to item':
-      $scope.animateFlavor = 'move-to-left';
-      break;
-    case 'from item to home':
-      $scope.animateFlavor = 'move-to-right';
-      break;
-    default:
-      $scope.animateFlavor = 'move-to-left';
-      break;
-    }
+timelineWithAnimation.controller(
+  'RootCtrl',
+  function($scope, $rootScope, $location) {
+    $scope.go = function (path) {
+      $location.path(path);
+    };
+
+    $rootScope.$on('$locationChangeStart', function(_, next, current) {
+      var userMoveFrom = getMoveFrom(current);
+      var userMoveTo   = getMoveTo(next);
+      var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
+
+      switch (navigationState.join(' ')) {
+      case 'from home to item':
+        $scope.animateFlavor = 'move-to-left';
+        break;
+      case 'from item to home':
+        $scope.animateFlavor = 'move-to-right';
+        break;
+      }
+
+      $scope.currentPage = userMoveTo;
+    });
   });
-});
 
 timelineWithAnimation.controller('ListCtrl', function($scope) {
   $scope.items = timelineItems.sort(function(a,b){
@@ -583,7 +588,6 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"timeline-item-frame container\" ng-controller=\"ItemsCtrl\">\n" +
     "  <div ng-include=\"'/ng_templates/_item.html'\" class=\"timeline-item\"></div>\n" +
     "  <div class=\"timeline-item-data-container col-xs-12\" ng-bind-html='item.data'></div>\n" +
-    "  <div><a class=\"btn btn-primary btn-lg\" href=\"#/\">Back</a></div>\n" +
     "</div>\n"
   );
 

@@ -26,7 +26,6 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"timeline-item-frame container\" ng-controller=\"ItemsCtrl\">\n" +
     "  <div ng-include=\"'/ng_templates/_item.html'\" class=\"timeline-item\"></div>\n" +
     "  <div class=\"timeline-item-data-container col-xs-12\" ng-bind-html='item.data'></div>\n" +
-    "  <div><a class=\"btn btn-primary btn-lg\" href=\"#/\">Back</a></div>\n" +
     "</div>\n"
   );
 
