@@ -476,6 +476,46 @@ timelineWithAnimation.config([
     });
   }]);
 
+function getMoveFrom(currentUrl) {
+  if (/\/#\/$/.test(currentUrl)) {
+    return 'home';
+  }
+  if (/\/#\/item\/[0-9]+$/.test(currentUrl)) {
+    return 'item';
+  }
+  return null;
+}
+
+function getMoveTo(nextUrl) {
+  if (/\/#\/$/.test(nextUrl)) {
+    return 'home';
+  }
+  if (/\/#\/item\/[0-9]+$/.test(nextUrl)) {
+    return 'item';
+  }
+  return null;
+}
+
+timelineWithAnimation.controller('RootCtrl', function($scope, $rootScope) {
+  $rootScope.$on('$locationChangeStart', function(_, next, current) {
+    var navigationState = [
+      'from', getMoveFrom(current),
+      'to',   getMoveTo(next)
+    ]
+    switch (navigationState.join(' ')) {
+    case 'from home to item':
+      $scope.animateFlavor = 'move-to-left';
+      break;
+    case 'from item to home':
+      $scope.animateFlavor = 'move-to-right';
+      break;
+    default:
+      $scope.animateFlavor = 'move-to-left';
+      break;
+    }
+  });
+});
+
 timelineWithAnimation.controller('ListCtrl', function($scope) {
   $scope.items = timelineItems.sort(function(a,b){
     return b.createdAt - a.createdAt;
@@ -486,18 +526,6 @@ timelineWithAnimation.controller('ItemsCtrl', function($scope, $route, $routePar
   $scope.item = jQuery.grep(timelineItems, function(item) {
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];
-});
-
-timelineWithAnimation.controller('RootCtrl', function() {});
-
-timelineWithAnimation.controller('AnimateFlavorCtrl', function($scope, $rootScope) {
-  $rootScope.$on('$locationChangeStart', function(_, _, current) {
-    if (current.search(/\/#\/$/) !== -1) {
-      $scope.animateFlavor = 'move-to-left';
-    } else {
-      $scope.animateFlavor = 'move-to-right';
-    }
-  });
 });
 
 angular.module('shoppinpal.mobile-menu', [])
