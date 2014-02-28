@@ -7,21 +7,29 @@ var timelineItems = [
     doctor_name: 'Smith, John, MD',
     clinic_name: '',
     data:
-        'ADMITTED:<br/>'+
-            '04/24/2013    JOHN SMITH, M.D.<br/>'+
-            '<br/>'+
-            'DISCHARGED:<br/>'+
-            '04/28/2013<br/>'+
-            '<br/>'+
-            'REASON FOR ADMISSION:<br/>'+
-            'Acute bilateral pulmonary emboli.<br/>'+
-            '<br/>'+
-            'CONSULTANTS:<br/>'+
-            'Dr. John  Doe,  heme/oncology;<br/>'+
-            'Dr. Joe Bloggs,cardiology;<br/>'+
-            'Dr. Ashok Kumar, pulmonary.<br/>'+
-            '<br/>'+
-            'DIAGNOSES AT TIME OF DISCHARGE:<br/>'+
+        '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Admitted:</div>'+
+            '<div class=\'col-xs-12\'><p>04/24/2013</p></div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Discharged:</div>'+
+            '<div class=\'col-xs-12\'>04/28/2013</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Reason for admission:</div>'+
+            '<div class=\'col-xs-12\'>Acute bilateral pulmonary emboli.</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Consultants:</div>'+
+            '<div class=\'col-xs-12\'><ul><li>Dr. John  Doe,  heme/oncology</li><li>Dr. Joe Bloggs,cardiology</li><li>Dr. Ashok Kumar, pulmonary.</li></ul></div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Diagnoses at time of discharge:</div>'+
+            '<div class=\'col-xs-12\'>'+
             '<ol>'+
             '<li>Trousseau syndrome.</li>'+
             '<li>Acute bilateral pulmonary emboli, Coumadin failure, with right '+
@@ -32,7 +40,12 @@ var timelineItems = [
             '<li>Diabetes, type 2.</li>'+
             '<li>Hypertension.</li>'+
             '</ol>'+
-            'HISTORY  OF  PRESENT ILLNESS:<br/>'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>History  of  present illness:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'This patient is a  78-year-old  male '+
             'with  a history of left lower extremity DVT 2 years prior.  He  had '+
             'been   treated  successfully  with  Coumadin  3  mg   p.o.   daily. '+
@@ -44,9 +57,13 @@ var timelineItems = [
             'edema,  swelling, and venous Doppler positive for  DVT,  V/Q  study '+
             'positive  for bilateral PE.  He is admitted to the telemetry  unit, '+
             'Coumadin  failure.   He  is  started on Lovenox.   Dr.  Doe  is '+
-            'consulted.<br/>'+
-            '<br/>'+
-            'HOSPITAL COURSE:<br/>'+
+            'consulted.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Hospital course:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'The patient is dyspneic.  He has tense right  leg '+
             'edema.   Coumadin is discontinued due to Trousseau syndrome due  to '+
             'adenocarcinoma  of  the lung.  Coumadin failure.   The  patient  is '+
@@ -60,37 +77,50 @@ var timelineItems = [
             'Lexiscan  infusion.   No chest pain.  There  are  premature  atrial '+
             'contractions noted.  No stress-induced ischemia.  Questionable mild '+
             'septal  wall  motion  abnormality,  possibly  artifactual  ejection '+
-            'fraction of 56%.  The patient is cleared for discharge home.<br/>'+
-            '<br/>'+
-            'CONDITION ON DISCHARGE:<br/>'+
-            'Stable.<br/>'+
-            '<br/>'+
-            'The patient will pick up Lovenox confirmed in stock through his CVS '+
+            'fraction of 56%.  The patient is cleared for discharge home.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Condition on discharge:</div>'+
+            '<div class=\'col-xs-12\'>' +
+            'Stable. The patient will pick up Lovenox confirmed in stock through his CVS '+
             'Pharmacy.  The patient is warned about heme-positive stools,  black '+
             'stools,  blood  in  stool,  blood  in  the  urine,  nosebleeds  and '+
-            'bleeding, bruising.<br/>'+
-            '<br/>'+
-            'MEDICATIONS ON DISCHARGE HOME:<br/>'+
+            'bleeding, bruising.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Medications on discharge home:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'Quinapril 40 mg daily, glipizide  5 '+
             'mg daily, Lipitor 20 mg at bedtime, TriCor 145 mg daily.  Metformin '+
             'is  on  hold  for  3 days post Lexiscan.  Warfarin is  discontinued '+
             'because  with  his  Trousseau syndrome,  Coumadin  is  ineffective. '+
             'Lovenox  110  mg  subcutaneous b.i.d. for a 1  month  supply,  iron '+
-            'sulfate 325 mg daily.<br/>'+
-            '<br/>'+
-            'Next  blood  draw  04/30/2013 with results to Dr. Smith  and  Dr.<br/>'+
-            'Doe.<br/>'+
-            '<br/>'+
-            'FOLLOWUP:<br/>'+
-            'Dr. Roe, cardiothoracic surgery, on 05/06/2013,  Dr.<br/>'+
-            'John Doe, gastroenterology, 04/30/2013.<br/>'+
-            '<br/>'+
-            '<br/>'+
-            '<br/>'+
-            '<br/>'+
-            'DICTATED BY Jane Roe, P.A.'+
-            '<hr/>'+
-            'JOHN SMITH, M.D.'
+            'sulfate 325 mg daily.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Next  blood  draw:</div>'+
+            '<div class=\'col-xs-12\'>04/30/2013 with results to Dr. Smith  and  Dr. Doe. </div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Followup:</div>'+
+            '<div class=\'col-xs-12\'>Dr. Roe, cardiothoracic surgery, on 05/06/2013, Dr. John Doe, gastroenterology, 04/30/2013.</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Dictated by:</div>'+
+            '<div class=\'col-xs-12\'>Jane Roe, P.A.</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12 text-right\'>John Smith, M.D.</div>'+
+            '</div>'
   },
   {
     id: 2,
@@ -151,7 +181,7 @@ var timelineItems = [
     doctor_name: 'Doe, John, MD',
     clinic_name: '',
     data:
-        '<div class=\'row\'>'+
+        '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>iFOB</div>' +
             '<div class=\'col-xs-6 text-right\'><p>POSITIVE</p><p>NEGATIVE</p></div>' +
             '</div>'
@@ -164,67 +194,67 @@ var timelineItems = [
     doctor_name: 'Kumar, Ashok, MD',
     clinic_name: '',
     data:
-        '<div class=\'row\'>'+
+        '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>WHITE BLOOD COUNT</div>'+
             '<div class=\'col-xs-6 text-right\'><p>10.1</p><p>4.8-10.8 10^3/uL</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>RED BLOOD COUNT</div>'+
             '<div class=\'col-xs-6 text-right\'><p>3.35</p><p>4.30-5.90 10^6/uL</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>HEMOGLOBIN</div>'+
             '<div class=\'col-xs-6 text-right\'><p>9.3</p><p>13.9-16.3 g/dL</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>HEMATOCRIT</div>'+
             '<div class=\'col-xs-6 text-right\'><p>27.6</p><p>39.0-55.0 %</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>MEAN CORPUSCULAR VOLUME</div>'+
             '<div class=\'col-xs-6 text-right\'><p>82.4</p><p>80.0-94.0 fl</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>MEAN CORPUSCULAR HEMGLOB</div>'+
             '<div class=\'col-xs-6 text-right\'><p>27.9</p><p>29.0-33.0 pg</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>MEAN CORPUSCULAR HGB CONC</div>'+
             '<div class=\'col-xs-6 text-right\'><p>33.9</p><p>32.0-36.0 g/dL</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>RED CELL DISTRIB WIDTH</div>'+
             '<div class=\'col-xs-6 text-right\'><p>14.1</p><p>11.5-14.5 %</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>PLATELET COUNT</div>'+
             '<div class=\'col-xs-6 text-right\'><p>288</p><p>130-450 10^3/uL</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>MEAN PLATELET VOLUME</div>'+
             '<div class=\'col-xs-6 text-right\'><p>8.1</p><p>7.4-10.4 fl</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>NEUTROPHIL PERCENT</div>'+
             '<div class=\'col-xs-6 text-right\'><p>75.0</p><p>50.0-70.0 %</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>NEUTROPHILS</div>'+
             '<div class=\'col-xs-6 text-right\'><p>ABSOLUTE</p><p>H 7.6</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>LYMPHOCYTE PERCENT</div>'+
             '<div class=\'col-xs-6 text-right\'><p>15.3</p><p>20.0-40.0 %</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>MONOCYTE PERCENT</div>'+
             '<div class=\'col-xs-6 text-right\'><p>7.1</p><p>0.0-14.0 %</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>EOSINOPHIL PERCENT</div>'+
             '<div class=\'col-xs-6 text-right\'><p>2.1</p><p>0.0-3.0 %</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>BASOPHIL PERCENT</div>'+
             '<div class=\'col-xs-6 text-right\'><p>0.5</p><p>0.0-1.5 %</p></div>'+
             '</div>'
@@ -237,11 +267,11 @@ var timelineItems = [
     doctor_name: 'Kumar, Ashok , MD',
     clinic_name: '',
     data:
-        '<div class=\'row\'>'+
+        '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>PRO TIME PATIENT</div>'+
             '<div class=\'col-xs-6 text-right\'><p>16.0</p><p>9.8-12.4 SEC</p></div>'+
             '</div>'+
-            '<div class=\'row\'>'+
+            '<div class=\'row item-row\'>'+
             '<div class=\'col-xs-6\'>PRO TIME INR</div>'+
             '<div class=\'col-xs-6 text-right\'><p>1.5</p><p>0.9-1.2</p></div>'+
             '</div>'

@@ -10,6 +10,10 @@
 .emerald {
   color: #2ecc71;
 }
+.item-row + .item-row {
+  border-top: 1px solid #EEEEEE;
+  padding: 5px 0;
+}
 h1 {
   margin-bottom: 20px;
 }
