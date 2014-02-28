@@ -476,21 +476,24 @@ timelineWithAnimation.config([
     });
   }]);
 
+var homeRegexp = /\/(index.html)?#\/$/;
+var itemRegexp = /\/(index.html)?#\/item\/[0-9]+$/;
+
 function getMoveFrom(currentUrl) {
-  if (/\/#\/$/.test(currentUrl)) {
+  if (homeRegexp.test(currentUrl)) {
     return 'home';
   }
-  if (/\/#\/item\/[0-9]+$/.test(currentUrl)) {
+  if (itemRegexp.test(currentUrl)) {
     return 'item';
   }
   return null;
 }
 
 function getMoveTo(nextUrl) {
-  if (/\/#\/$/.test(nextUrl)) {
+  if (homeRegexp.test(nextUrl)) {
     return 'home';
   }
-  if (/\/#\/item\/[0-9]+$/.test(nextUrl)) {
+  if (itemRegexp.test(nextUrl)) {
     return 'item';
   }
   return null;
