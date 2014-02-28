@@ -1,5 +1,5 @@
-var timelineJson = timelineJson || {};
-timelineJson["TimelineItems"] = [
+var timelineItems = timelineItems || {};
+timelineItems["MrBrown"] = [
   {
     id: 1,
     createdAt: new Date(2013, 4, 13, 17, 6),
@@ -538,19 +538,19 @@ timelineWithAnimation.controller(
   });
 
 timelineWithAnimation.controller('ListCtrl', function($scope) {
-  $scope.items = timelineJson['TimelineItems'].sort(function(a,b){
+  $scope.items = timelineItems['MrBrown'].sort(function(a,b){
     return b.createdAt - a.createdAt;
   });
 });
 
 timelineWithAnimation.controller('ItemsCtrl', function($scope, $route, $routeParams) {
-  $scope.item = jQuery.grep(timelineJson['TimelineItems'], function(item) {
+  $scope.item = jQuery.grep(timelineItems['MrBrown'], function(item) {
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];
 });
 
 timelineWithAnimation.controller('UnderConstructionCtrl', function() {
-  $scope.item = jQuery.grep(timelineJson['TimelineItems'], function(item) {
+  $scope.item = jQuery.grep(timelineItems['MrBrown'], function(item) {
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];
 });

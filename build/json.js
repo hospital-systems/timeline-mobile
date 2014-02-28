@@ -1,5 +1,5 @@
-var timelineJson = timelineJson || {};
-timelineJson["TimelineItems"] = [
+var timelineItems = timelineItems || {};
+timelineItems["MrBrown"] = [
   {
     id: 1,
     createdAt: new Date(2013, 4, 13, 17, 6),
