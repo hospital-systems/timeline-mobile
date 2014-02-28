@@ -477,20 +477,20 @@ timelineWithAnimation.config([
   }]);
 
 function getMoveFrom(currentUrl) {
-  if (/\/#\/$/.test(currentUrl)) {
+  if (/#\/$/.test(currentUrl)) {
     return 'home';
   }
-  if (/\/#\/item\/[0-9]+$/.test(currentUrl)) {
+  if (/#\/item\/[0-9]+$/.test(currentUrl)) {
     return 'item';
   }
   return null;
 }
 
 function getMoveTo(nextUrl) {
-  if (/\/#\/$/.test(nextUrl)) {
+  if (/#\/$/.test(nextUrl)) {
     return 'home';
   }
-  if (/\/#\/item\/[0-9]+$/.test(nextUrl)) {
+  if (/#\/item\/[0-9]+$/.test(nextUrl)) {
     return 'item';
   }
   return null;
