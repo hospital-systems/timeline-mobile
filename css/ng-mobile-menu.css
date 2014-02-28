@@ -50,8 +50,8 @@ body {
 }
 @media (min-width: 900px) {
   #sp-nav {
-    width: 80%;
-    left: -80%;
+    width: 25%;
+    left: -25%;
   }
   #sp-nav.show {
     -webkit-transform: translateX(100%);
