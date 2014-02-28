@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="timeline-without-animation">
+<html lang="en" ng-app="timeline-with-animation">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,8 +37,10 @@
 
 
 <div id="sp-page">
-  <div>
-    <div ng-view></div>
+  <div ng-controller="AnimateFlavorCtrl"
+       class="view-animate-container"
+       ng-class="animateFlavor">
+    <div ng-view class="view-animate"></div>
   </div>
 </div>
 

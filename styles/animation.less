@@ -9,6 +9,7 @@
       display: block;
       width: 100%;
 
+      opacity: 0.5;
       position: absolute;
       top: 0;
       left: 0;
@@ -20,7 +21,10 @@
     .view-animate {
       &.ng-enter {
         left: 100%;
-        &.ng-enter-active { left: 0; }
+        &.ng-enter-active {
+          left: 0;
+          opacity: 1;
+        }
       }
       &.ng-leave.ng-leave-active { left: -100%; }
     }
@@ -29,7 +33,10 @@
     .view-animate {
       &.ng-enter {
         left: -100%;
-        &.ng-enter-active { left: 0; }
+        &.ng-enter-active {
+          left: 0;
+          opacity: 1;
+        }
       }
       &.ng-leave.ng-leave-active { left: 100%; }
     }

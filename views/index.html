@@ -1,8 +1,10 @@
 ---
-angularApplicationName: timeline-without-animation
+angularApplicationName: timeline-with-animation
 ---
 <div id="sp-page">
-  <div>
-    <div ng-view></div>
+  <div ng-controller="AnimateFlavorCtrl"
+       class="view-animate-container"
+       ng-class="animateFlavor">
+    <div ng-view class="view-animate"></div>
   </div>
 </div>

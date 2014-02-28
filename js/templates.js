@@ -1,4 +1,4 @@
-angular.module('angular-timeline-demo').run(['$templateCache', function($templateCache) {
+angular.module('timeline-with-animation').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('/ng_templates/_item.html',
@@ -24,8 +24,7 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
 
   $templateCache.put('/ng_templates/_navbar_nav.html',
     "<ul class=\"nav navbar-nav\">\n" +
-    "  <li ng-class=\"{active: animationEnabled}\"><a href=\"index2.html\">With animation</a></li>\n" +
-    "  <li ng-class=\"{active: !animationEnabled}\"><a href=\"index.html\">Without animation</a></li>\n" +
+    "  <li class=\"animationEnabled\"><a href=\"#/\">Home</a></li>\n" +
     "  <li><a href=\"#\">Profile</a></li>\n" +
     "  <li><a href=\"#\">Problem list</a></li>\n" +
     "  <li><a href=\"#\">Allergy list</a></li>\n" +
@@ -60,8 +59,6 @@ angular.module('angular-timeline-demo').run(['$templateCache', function($templat
 
   $templateCache.put('/ng_templates/menu.html',
     "<ul class=\"nav navbar-nav\">\n" +
-    "  <li class=\"active\"><a href=\"index.html\">With animation</a></li>\n" +
-    "  <li><a href=\"index2.html\">Without animation</a></li>\n" +
     "  <li><a href=\"#\">Profile</a></li>\n" +
     "  <li><a href=\"#\">Problem list</a></li>\n" +
     "  <li><a href=\"#\">Allergy list</a></li>\n" +

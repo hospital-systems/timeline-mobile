@@ -39,11 +39,11 @@ module.exports = function (grunt) {
       }
     },
     ngtemplates: {
-      app: {
+      timelineWithAnimation: {
         src: 'ng_templates/*.html',
         dest: 'js/templates.js',
         options: {
-          module: 'angular-timeline-demo',
+          module: 'timeline-with-animation',
           prefix: '/'
         }
       }
@@ -59,14 +59,13 @@ module.exports = function (grunt) {
         }]
       }
     },
-
     assemble: {
-      options: {
-        layout: ['views/layouts/index.html'],
-        flatten: true
-      },
-      pages: {
-        src: ['views/*.html'],
+      views: {
+        options: {
+          layout: ['views/layouts/index.html'],
+          flatten: true
+        },
+        src: ['views/index.html'],
         dest: './'
       }
     }
