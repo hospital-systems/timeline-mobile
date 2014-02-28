@@ -17,12 +17,23 @@
     <div class="navbar navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle pull-left" ng-click="$spMenu.toggle()">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+          <span ng-switch on="currentPage">
+            <span ng-switch-when="home">
+              <button type="button" class="navbar-toggle pull-left" ng-click="$spMenu.toggle()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </span>
+            <span ng-switch-default>
+              <button type="button" class="navbar-toggle pull-left"
+                      ng-click="go('/')">
+                <span class="sr-only">Back</span>
+                <span class="icon-bar"></span>
+              </button>
+            </span>
+          </span>
           <a class="navbar-brand" href="#">
             <span class="glyphicon glyphicon-plus emerald"></span>
             TakeCare
