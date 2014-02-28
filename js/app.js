@@ -89,19 +89,19 @@ timelineWithAnimation.controller(
   });
 
 timelineWithAnimation.controller('ListCtrl', function($scope) {
-  $scope.items = timelineItems.sort(function(a,b){
+  $scope.items = timelineJson['TimelineItems'].sort(function(a,b){
     return b.createdAt - a.createdAt;
   });
 });
 
 timelineWithAnimation.controller('ItemsCtrl', function($scope, $route, $routeParams) {
-  $scope.item = jQuery.grep(timelineItems, function(item) {
+  $scope.item = jQuery.grep(timelineJson['TimelineItems'], function(item) {
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];
 });
 
 timelineWithAnimation.controller('UnderConstructionCtrl', function() {
-  $scope.item = jQuery.grep(timelineItems, function(item) {
+  $scope.item = jQuery.grep(timelineJson['TimelineItems'], function(item) {
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];
 });
