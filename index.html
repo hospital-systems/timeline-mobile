@@ -40,7 +40,10 @@
         </div>
         <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav" style="padding-left: 25px;">
-  <li class="animationEnabled"><a href="#/">Home</a></li>
+  <li class="animationEnabled"
+      ng-class="currentPage === 'home' && 'active'">
+    <a href="#/">Home</a>
+  </li>
   <li><a href="#/profile">Profile</a></li>
   <li><a href="#/problem-list">Problem list</a></li>
   <li><a href="#/allergy-list">Allergy list</a></li>
@@ -55,7 +58,10 @@
 
     <div class="navbar navbar-inverse" id="sp-nav">
 <ul class="nav navbar-nav" style="padding-left: 25px;">
-  <li class="animationEnabled"><a href="#/">Home</a></li>
+  <li class="animationEnabled"
+      ng-class="currentPage === 'home' && 'active'">
+    <a href="#/">Home</a>
+  </li>
   <li><a href="#/profile">Profile</a></li>
   <li><a href="#/problem-list">Problem list</a></li>
   <li><a href="#/allergy-list">Allergy list</a></li>
