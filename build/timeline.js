@@ -506,22 +506,24 @@ timelineWithAnimation.controller(
       $location.path(path);
     };
 
-    $rootScope.$on('$locationChangeStart', function(_, next, current) {
-      var userMoveFrom = getMoveFrom(current);
-      var userMoveTo   = getMoveTo(next);
-      var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
+    $rootScope.$on(
+      '$locationChangeStart',
+      function(_, nextPageUrl, currentPageUrl) {
+        var userMoveFrom = getMoveFrom(currentPageUrl);
+        var userMoveTo   = getMoveTo(nextPageUrl);
+        var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
 
-      switch (navigationState.join(' ')) {
-      case 'from home to item':
-        $scope.animateFlavor = 'move-to-left';
-        break;
-      case 'from item to home':
-        $scope.animateFlavor = 'move-to-right';
-        break;
-      }
+        switch (navigationState.join(' ')) {
+        case 'from home to item':
+          $scope.animateFlavor = 'move-to-left';
+          break;
+        case 'from item to home':
+          $scope.animateFlavor = 'move-to-right';
+          break;
+        }
 
-      $scope.currentPage = userMoveTo;
-    });
+        $scope.currentPage = userMoveTo;
+      });
   });
 
 timelineWithAnimation.controller('ListCtrl', function($scope) {
