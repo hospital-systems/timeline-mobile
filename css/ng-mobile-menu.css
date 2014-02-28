@@ -1,12 +1,56 @@
+.left-nav {
+  margin-bottom: 0;
+  list-style: none;
+}
+.left-nav > li {
+  position: relative;
+  display: block;
+}
+.left-nav > li > a {
+  position: relative;
+  display: block;
+
+}
+.left-nav > li > a:hover,
+.left-nav > li > a:focus {
+  text-decoration: none;
+  background-color: #eee;
+}
+.left-nav > li.disabled > a {
+  color: #999;
+}
+.left-nav > li.disabled > a:hover,
+.left-nav > li.disabled > a:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+.left-nav .open > a,
+.left-nav .open > a:hover,
+.left-nav .open > a:focus {
+  background-color: #eee;
+  border-color: #428bca;
+}
+.left-nav .nav-divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.left-nav > li > a > img {
+  max-width: none;
+}
+
 #sp-hide-menu {
   display: none;
 }
 #sp-nav,
 #sp-nav.wide {
-  width: 40%;
+  width: 50%;
   overflow: hidden;
   position: absolute;
-  left: -40%;
+  left: -50%;
   height: 100%;
   z-index: 10;
   -webkit-transform: translateX(0);
