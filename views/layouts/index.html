@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="version" content="0.4.3">
+    <meta name="version" content="0.4.3.1">
     <title>Timeline demo</title>
 
     <!-- Bootstrap -->
@@ -29,7 +29,9 @@
             <span ng-switch-default>
               <button type="button" class="navbar-toggle pull-left"
                       ng-click="gotoUrlFor('/')" style="width: 44px; height: 34px; padding: 0;">
-                <span class="glyphicon glyphicon-arrow-left back-button"></span>
+                <span class="glyphicon back-button"
+                      ng-class="{'glyphicon-arrow-left':  currentPage === 'item',
+                                 'glyphicon-arrow-right': currentPage !== 'item'}"></span>
               </button>
             </span>
           </span>

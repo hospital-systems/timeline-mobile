@@ -7,6 +7,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('assemble');
+  grunt.loadNpmTasks('grunt-json');
 
   grunt.initConfig({
     watch: {
@@ -18,7 +19,8 @@ module.exports = function (grunt) {
           'ng_templates/**/*.html',
           'styles/**/*.less',
           'js/**/*.js',
-          'views/**/*.html'
+          'views/**/*.html',
+          'json/**/*.json'
         ],
         tasks: ['build'],
         options: {
@@ -34,7 +36,7 @@ module.exports = function (grunt) {
         dest: 'build/timeline.css'
       },
       js: {
-        src: ['js/timeline_items.js', 'js/*.js'],
+        src: ['build/json.js', 'js/*.js'],
         dest: 'build/timeline.js'
       }
     },
@@ -69,6 +71,20 @@ module.exports = function (grunt) {
         src: ['views/index.html'],
         dest: './'
       }
+    },
+    json: {
+      timelineItems: {
+        options: {
+            namespace: 'timelineItems',
+            processName: function(filename) {
+              return filename.replace (/(?:^|[-_])(\w)/g, function (_, c) {
+                return c ? c.toUpperCase () : '';
+              })
+            }
+        },
+        src: ['json/**/*.json'],
+        dest: 'build/json.js'
+      }
     }
   })
   grunt.registerTask('build', [
@@ -76,6 +92,7 @@ module.exports = function (grunt) {
     'less',
     'ngtemplates',
     'assemble',
+    'json',
     'concat:css',
     'concat:js'
   ]);
