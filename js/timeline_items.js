@@ -388,20 +388,30 @@ var timelineItems = [
     doctor_name: 'Doe, John, MD',
     clinic_name: '',
     data:
-        'ADMITTING PHYSICIAN:<br/>'+
-            'JOHN SMITH, M.D.<br/>'+
-            '<br/>'+
-            'CONSULTING PHYSICIAN:<br/>'+
-            'JOHN DOE, M.D.<br/>'+
-            '<br/>'+
-            'REASON  FOR  CONSULTATION:<br/>'+
+        '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Admitting physician:</div>'+
+            '<div class=\'col-xs-12\'>John Smith, M.D</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Consulting physician</div>'+
+            '<div class=\'col-xs-12\'>John Doe, M.D.</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Reason  for  consultation:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'The patient is  a  78-year-old  Caucasian '+
             'gentleman  whom  I  have been asked to see for a  severe  coagulopathy '+
             'ongoing in the setting of a left lung tumor that has been biopsied and '+
             'for   which  Dr.  Roe  has  seen  and  is  contemplating  surgical '+
-            'resection.<br/>'+
-            '<br/>'+
-            'HISTORY OF PRESENT ILLNESS:<br/>'+
+            'resection.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>History of present illness:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'The patient was in hospital here in early '+
             'March.   He  was  found  to  have  left  hilar  tumor.   He  underwent '+
             'bronchoscopy by Dr. Ashok Kumar.  Washings and specimens  from '+
@@ -424,34 +434,54 @@ var timelineItems = [
             'lung.   The  specimen  was reviewed by Dr. Jane Doe  at  Keck '+
             'Medical  Center, who concurred in diagnosis above.  Immunostains  were '+
             'positive  for  CK7, TTF-1.  Negative for CK20, CK5/6,  calretinin  and '+
-            'thyroglobulin.<br/>'+
-            '<br/>'+
-            'SOCIAL  HISTORY:<br/>'+
+            'thyroglobulin.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Social  history:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'He  was  born in Lancaster,  PA  in  the  so-called '+
             'Pennsylvania Dutch Country.  He came to California as a child in 1947. '+
             'He  and his wife have been married for 58 years.  They have 2 children '+
             'by  adoption,  a  son  and a daughter.  They have  grandchildren.   He '+
-            'reports his wife is "in better health than I am."<br/>'+
-            '<br/>'+
-            'PREVIOUS SURGERIES:<br/>'+
+            'reports his wife is "in better health than I am."'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Previous surgeries:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'Patient had an accident in a high-school shop and '+
             'lost   his   left  index  finger.   He  has  had  hemorrhoid  surgery, '+
             'transurethral  prostatectomy at this hospital.  The left  carotid  was '+
-            'done here.  He has had bilateral cataracts by Dr. Nguyen.<br/>'+
-            '<br/>'+
-            'CURRENT  MEDICATIONS:<br/>'+
+            'done here.  He has had bilateral cataracts by Dr. Nguyen.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Current  medications:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'Include Lovenox 1 mg/kg every 12 hours, TriCor, '+
             'atorvastatin,  glipizide, metformin, quinapril.  He is on  a  sliding-'+
-            'scale insulin.  He has Vicodin for pain.<br/>'+
-            '<br/>'+
-            'REVIEW OF SYSTEMS:<br/>'+
+            'scale insulin.  He has Vicodin for pain.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Review of systems:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'He has had cataract surgery.  He knows his hearing '+
             'is  diminished.   He is resistant to hearing aids.   Patient  gave  up '+
             'smoking  over  40 years ago.  Alcohol consumption is very  modest,  at '+
             'most  he  said  2-3 a week, and that is now down to 2 or  3  a  month. '+
-            'Patient has been diabetic for about 5 years.  No thyroid problems.<br/>'+
-            '<br/>'+
-            'LABORATORY  DATA THIS HOSPITALIZATION:<br/>'+
+            'Patient has been diabetic for about 5 years.  No thyroid problems.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Laboratory  data this hospitalization:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'WBC is 14,600.  Hemoglobin  is '+
             '11   with   an  MCV  of  81.9,  platelet  count  213,000.   LABORATORY '+
             'COAGULATION STUDIES:  D-dimer is 2946.  Prothrombin time when he  came '+
@@ -460,35 +490,42 @@ var timelineItems = [
             'The  rest of the liver panel was normal.  His total bilirubin is  0.5. '+
             'Troponin on the 24th was 0.024, normal.  BNP was 581.  Upper limit  of '+
             'normal  on  scale  is  1800.   LABORATORIES  TODAY:   WBC  is  13,500, '+
-            'hemoglobin 10.6, MCV 82.7.  BUN is 28.<br/>'+
-            '<br/>'+
-            'PHYSICAL EXAMINATION:<br/>'+
-            'VITAL  SIGNS:<br/>'+
+            'hemoglobin 10.6, MCV 82.7.  BUN is 28.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Physical examination:</div>'+
+            '<div class=\'col-xs-12\'>Vital  signs:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'His heartbeat is irregular with abnormal complexes  on '+
             'the monitor.  Temperature 99.4.  Blood pressure 146/59.  O2 saturation '+
-            'is 94.<br/>'+
-            '<br/>'+
-            'HEENT:<br/>'+
-            'Patient has no scleral icterus.  He has most of his own teeth.<br/>'+
-            '<br/>'+
-            'NECK:<br/>'+
-            'Scar over left neck from his carotid surgery.<br/>'+
-            '<br/>'+
-            'CHEST:<br/>'+
-            'No gynecomastia.<br/>'+
-            '<br/>'+
-            'LUNGS:<br/>'+
-            'Reasonably clear.<br/>'+
-            '<br/>'+
-            'ABDOMEN:<br/>'+
-            'Moderate pannus.  No palpable liver or spleen.<br/>'+
-            '<br/>'+
-            'EXTREMITIES:<br/>'+
+            'is 94.'+
+            '</div>'+
+            '<div class=\'col-xs-12\'>HEENT:</div>'+
+            '<div class=\'col-xs-12\'>Patient has no scleral icterus.  He has most of his own teeth.</div>'+
+            '<div class=\'col-xs-12\'>Neck:</div>'+
+            '<div class=\'col-xs-12\'>Scar over left neck from his carotid surgery.</div>'+
+            '<div class=\'col-xs-12\'>Chest:</div>'+
+            '<div class=\'col-xs-12\'>No gynecomastia.</div>'+
+            '<div class=\'col-xs-12\'>Lungs:</div>'+
+            '<div class=\'col-xs-12\'>Reasonably clear.</div>'+
+            '<div class=\'col-xs-12\'>Abdomen:</div>'+
+            '<div class=\'col-xs-12\'>Moderate pannus.  No palpable liver or spleen.</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Extremities:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'Patient has extensive toe-to-groin edema,  right  lower '+
             'extremity,  where he has DVT with typical erythema.  He  has  residual '+
-            'mild swelling in contralateral left leg.<br/>'+
-            '<br/>'+
-            'IMPRESSION:'+
+            'mild swelling in contralateral left leg.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Impression:</div>'+
+            '<div class=\'col-xs-12\'>' +
             '<ol>'+
             '<li>Patient has adenocarcinoma involving left lung.  He has had PET-CT '+
             'at the MRI Institute.  We do not have the report on that, and there is '+
@@ -507,7 +544,12 @@ var timelineItems = [
             '<li>Hyperlipidemia.</li>'+
             '<li>Metabolic syndrome.</li>'+
             '</ol>'+
-            'RECOMMENDATION:<br/>'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Recommendation:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'We will get tumor marker studies.  I agree  with  the '+
             'current regimen for treatment of his right lower extremity DVT.  If we '+
             'are  to proceed with surgical management of the lung, I would strongly '+
@@ -519,8 +561,12 @@ var timelineItems = [
             'Pulmonary regarding all of the above issues. '+
             '<br/>'+
             'I  appreciate  the  opportunity to be involved  in  the  care  of  the '+
-            'patient.<br/>'+
-            '<hr/>'+
-            'JOHN DOE, M.D.'
+            'patient.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12 text-right\'>JOHN DOE, M.D.</div>'+
+            '</div>'
   }
 ];
