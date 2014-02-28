@@ -54,7 +54,7 @@ function getMoveTo(nextUrl) {
 timelineWithAnimation.controller(
   'RootCtrl',
   function($scope, $rootScope, $location) {
-    $scope.go = function (path) {
+    $scope.urlFor = function (path) {
       $location.path(path);
     };
 
