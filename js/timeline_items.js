@@ -156,8 +156,10 @@ var timelineItems = [
             '</div>'+
 
             '<div class=\'row item-row\'>'+
-            '<div class=\'col-xs-12\'>Radiopharmaceuticals TC CARDIO DOSE 26.6 MCI 04/28/2013 INTRAVENOUS</div>'+
-            '<div class=\'col-xs-12\'>Radiopharmaceuticals TL 201 1 MCI 3.7 MCI 04/27/2013 INTRAVENOUS</div>'+
+            '<div class=\'col-xs-12\'>Radiopharmaceuticals</div>'+
+            '<div class=\'col-xs-12\'>TC CARDIO DOSE 26.6 MCI 04/28/2013 INTRAVENOUS</div>'+
+            '<div class=\'col-xs-12\'>Radiopharmaceuticals</div>'+
+            '<div class=\'col-xs-12\'>TL 201 1 MCI 3.7 MCI 04/27/2013 INTRAVENOUS</div>'+
             '</div>'+
 
             '<div class=\'row item-row\'>'+
@@ -307,39 +309,56 @@ var timelineItems = [
     doctor_name: 'Bloggs, Joe, MD',
     clinic_name: '',
     data:
-        'EXAMINATION:<br/>'+
-            '93306 - ECHOCARDIOGRAPHY COMPLETE<br/>'+
-            '<br/>'+
-            'INDICATIONS:<br/>'+
-            'ACUTE DVT<br/>'+
-            '<br/>'+
-            'MEASUREMENTS:<br/>'+
-            'LVDD: 5.5<br/>'+
-            'LVSD: 3.7<br/>'+
-            'PW thickness: 1.4<br/>'+
-            'Septal thickness: 1.4<br/>'+
-            'Left atrium: 4.8<br/>'+
-            'Aortic root: 3.9<br/>'+
-            'LVOT diameter: 2.2<br/>'+
-            'AV velocity: 2.4 m/s<br/>'+
-            'AVA: 1.9<br/>'+
-            '<br/>'+
-            'FINDINGS:<br/>'+
+        '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Examination:</div>'+
+            '<div class=\'col-xs-12\'>93306 - echocardiography complete</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Indications:</div>'+
+            '<div class=\'col-xs-12\'>acute dvt</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Measurements:</div>'+
+            '<div class=\'col-xs-12\'>' +
+            '<ul>' +
+            '<li>LVDD: 5.5</li>'+
+            '<li>LVSD: 3.7</li>'+
+            '<li>PW thickness: 1.4</li>'+
+            '<li>Septal thickness: 1.4</li>'+
+            '<li>Left atrium: 4.8</li>'+
+            '<li>Aortic root: 3.9</li>'+
+            '<li>LVOT diameter: 2.2</li>'+
+            '<li>AV velocity: 2.4 m/s</li>'+
+            '<li>AVA: 1.9</li>'+
+            '</ul>'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Findings:</div>'+
+            '<div class=\'col-xs-12\'>' +
             'The patient has a trileaflet aortic valve. Mitral valve does not '+
             'prolapse. Tricuspid valve is normal. Right and left heart chamber '+
             'volumes are significant for left atrial enlargement. Patient has '+
             'moderate concentric left ventricular hypertrophy. Ejection fraction '+
             'is normal at 60 percent with normal wall motion. There is no '+
             'pericardial effusion. '+
-            '<br/>'+
+            '</div>'+
+            '<div class=\'col-xs-12\'>' +
             'The patient has mild aortic insufficiency with a pressure half-time '+
             'of greater than 500 milliseconds. There is trace mitral '+
             'regurgitation. There is reduced left ventricular compliance. '+
             'Pulmonary artery pressure is estimated at 52 mmHg. Aortic valve '+
             'gradient is 19 mmHg consistent with a calculated aortic valve area of '+
-            '1.9 square cm.<br/>'+
-            '<br/>'+
-            'CONCLUSION:'+
+            '1.9 square cm.'+
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Conclusion:</div>'+
+            '<div class=\'col-xs-12\'>' +
             '<ol>'+
             '<li>Concentric left ventricular hypertrophy.</li>'+
             '<li>Left atrial enlargement.</li>'+
@@ -348,11 +367,18 @@ var timelineItems = [
             '<li>Trace mitral regurgitation.</li>'+
             '<li>Mild to moderate pulmonary hypertension.</li>'+
             '</ol>'+
-            'Dictated datetime<br/>'+
-            '04/27/13 13:15<br/>'+
-            '<br/>'+
-            'Principal interpreter<br/>'+
-            'Bloggs, Joe, MD'
+            '</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Dictated datetime:</div>'+
+            '<div class=\'col-xs-12\'>04/27/13 13:15</div>'+
+            '</div>'+
+
+            '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-12\'>Principal interpreter:</div>'+
+            '<div class=\'col-xs-12\'>Bloggs, Joe, MD</div>'+
+            '</div>'
   },
   {
     id: 7,
