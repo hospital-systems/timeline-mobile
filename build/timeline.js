@@ -501,7 +501,7 @@ function getMoveTo(nextUrl) {
 
 timelineWithAnimation.controller(
   'RootCtrl',
-  function($scope, $rootScope, $location) {
+  function($scope, $rootScope, $location, $spMenu) {
     $scope.gotoUrlFor = function (path) {
       $location.path(path);
     };
@@ -509,6 +509,10 @@ timelineWithAnimation.controller(
     $rootScope.$on(
       '$locationChangeStart',
       function(_, nextPageUrl, currentPageUrl) {
+
+        // Due to menu can not close itself.
+        $spMenu.hide();
+
         var userMoveFrom = getMoveFrom(currentPageUrl);
         var userMoveTo   = getMoveTo(nextPageUrl);
         var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
