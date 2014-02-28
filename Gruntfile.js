@@ -62,8 +62,9 @@ module.exports = function (grunt) {
     assemble: {
       views: {
         options: {
+          flatten: true,
           layout: ['views/layouts/index.html'],
-          flatten: true
+          partials: ['views/**/_*.html']
         },
         src: ['views/index.html'],
         dest: './'
