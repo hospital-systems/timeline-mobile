@@ -41,8 +41,6 @@
   transform: translateX(100%);
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
 }
 body {
   overflow-x: hidden;
