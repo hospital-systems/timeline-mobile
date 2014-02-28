@@ -54,4 +54,11 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "</ul>\n"
   );
 
+
+  $templateCache.put('/ng_templates/page_under_construction.html',
+    "<div class=\"container\">\n" +
+    "  <div class=\"alert alert-danger\" style=\"margin-top: 20px;\">Not Found</div>\n" +
+    "</div>\n"
+  );
+
 }]);

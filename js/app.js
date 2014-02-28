@@ -22,8 +22,8 @@ timelineWithAnimation.config([
       controller: 'RootCtrl'
     });
 
-    $routeProvider.when('/menu', {
-      templateUrl: '/ng_templates/menu.html',
+    $routeProvider.otherwise({
+      templateUrl: '/ng_templates/page_under_construction.html',
       controller: 'RootCtrl'
     });
   }]);
@@ -38,7 +38,7 @@ function getMoveFrom(currentUrl) {
   if (itemRegexp.test(currentUrl)) {
     return 'item';
   }
-  return null;
+  return 'unrecognized';
 }
 
 function getMoveTo(nextUrl) {
@@ -48,7 +48,7 @@ function getMoveTo(nextUrl) {
   if (itemRegexp.test(nextUrl)) {
     return 'item';
   }
-  return null;
+  return 'unrecognized';
 }
 
 timelineWithAnimation.controller(
@@ -72,6 +72,12 @@ timelineWithAnimation.controller(
         case 'from item to home':
           $scope.animateFlavor = 'move-to-right';
           break;
+        case 'from home to unrecognized':
+          $scope.animateFlavor = 'move-to-right';
+          break;
+        case 'from unrecognized to home':
+          $scope.animateFlavor = 'move-to-left';
+          break;
         }
 
         $scope.currentPage = userMoveTo;
@@ -85,6 +91,12 @@ timelineWithAnimation.controller('ListCtrl', function($scope) {
 });
 
 timelineWithAnimation.controller('ItemsCtrl', function($scope, $route, $routeParams) {
+  $scope.item = jQuery.grep(timelineItems, function(item) {
+    return item.id.toString() === $routeParams.itemId.toString();
+  })[0];
+});
+
+timelineWithAnimation.controller('UnderConstructionCtrl', function() {
   $scope.item = jQuery.grep(timelineItems, function(item) {
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];
