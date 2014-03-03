@@ -65,7 +65,6 @@ module.exports = function (grunt) {
       views: {
         options: {
           flatten: true,
-          layout: ['views/layouts/index.html'],
           partials: ['views/**/_*.html']
         },
         src: ['views/index.html'],
