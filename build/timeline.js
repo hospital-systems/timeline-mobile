@@ -610,9 +610,9 @@ timelineWithAnimation.factory('Settings', function() {
    var title  = 'TakeCare';
    var header = 'TakeCare';
    return {
-     title:     function() { return title; },
-     header:    function() { return header; },
-     setTitle:  function(newTitle)  { title  = newTitle },
+     title: function() { return title; },
+     setTitle: function(newTitle) { title = newTitle },
+     header: function() { return header; },
      setHeader: function(newHeader) { header = newHeader }
    };
 });
@@ -636,6 +636,7 @@ timelineWithAnimation.controller(
     $scope.gotoUrlFor = function (path) {
       $location.path(path);
     };
+
     $scope.Settings = Settings;
 
     $rootScope.$on(
