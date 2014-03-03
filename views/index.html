@@ -15,33 +15,31 @@
   </head>
   <body>
     <div class="navbar navbar-inverse" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <span ng-if="currentPage == 'timelineList'">
-            <button type="button" class="navbar-toggle pull-left" ng-click="$spMenu.toggle()">
+
+      <div class="navbar-header">
+        <span ng-switch on="currentPage">
+          <span ng-switch-when="timelineList">
+            <button ng-click="$spMenu.toggle()"
+                    class="navbar-toggle pull-left"
+                    type="button">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
           </span>
-          <span ng-if="currentPage == 'timelineItem'">
+          <span ng-switch-default>
             <button type="button" class="navbar-toggle pull-left"
                     ng-click="gotoUrlFor('/')" style="width: 44px; height: 34px; padding: 0;">
               <span class="back-button glyphicon glyphicon-arrow-left"></span>
             </button>
           </span>
-          <span ng-if="currentPage == 'unrecognized'">
-            <button type="button" class="navbar-toggle pull-left"
-                    ng-click="gotoUrlFor('/')" style="width: 44px; height: 34px; padding: 0;">
-              <span class="back-button glyphicon glyphicon-arrow-right"></span>
-            </button>
-          </span>
-          <a class="navbar-brand" href="#">
-            <span class="glyphicon glyphicon-plus emerald"></span>
-            \{{ Settings.header() }}
-          </a>
-        </div>
+        </span>
+        <a class="navbar-brand" href="#">
+          <span class="glyphicon glyphicon-plus emerald"></span>
+          \{{ Settings.header() }}
+        </a>
+      </div>
         <div class="collapse navbar-collapse">
           {{> _navbar_nav  }}
         </div><!--/.nav-collapse -->
