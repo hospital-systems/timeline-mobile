@@ -25,34 +25,46 @@ h1 {
   margin-top: 20px;
 }
 .timeline-list-frame,
-.timeline-item-frame {
+.timeline-item-frame,
+.problem-list-frame {
   background-color: white;
   padding: 0;
 }
 .timeline-list-frame .timeline-item-link,
-.timeline-item-frame .timeline-item-link {
+.timeline-item-frame .timeline-item-link,
+.problem-list-frame .timeline-item-link {
   display: block;
 }
 .timeline-list-frame .timeline-item-icon-container,
-.timeline-item-frame .timeline-item-icon-container {
+.timeline-item-frame .timeline-item-icon-container,
+.problem-list-frame .timeline-item-icon-container {
   min-height: 37px;
 }
 .timeline-list-frame .timeline-item-icon-container .icon,
-.timeline-item-frame .timeline-item-icon-container .icon {
+.timeline-item-frame .timeline-item-icon-container .icon,
+.problem-list-frame .timeline-item-icon-container .icon {
   margin-left: 10px;
   min-height: 37px;
   line-height: 37px;
 }
 .timeline-list-frame .timeline-item-icon-container .icon:after,
-.timeline-item-frame .timeline-item-icon-container .icon:after {
+.timeline-item-frame .timeline-item-icon-container .icon:after,
+.problem-list-frame .timeline-item-icon-container .icon:after {
+  font-size: 20px;
+}
+.timeline-list-frame .timeline-item-icon-container .fancy-icon:after,
+.timeline-item-frame .timeline-item-icon-container .fancy-icon:after,
+.problem-list-frame .timeline-item-icon-container .fancy-icon:after {
   font-size: 32px;
 }
 .timeline-list-frame .timeline-item-title,
-.timeline-item-frame .timeline-item-title {
+.timeline-item-frame .timeline-item-title,
+.problem-list-frame .timeline-item-title {
   margin: 0;
 }
 .timeline-list-frame .timeline-item-row,
-.timeline-item-frame .timeline-item-row {
+.timeline-item-frame .timeline-item-row,
+.problem-list-frame .timeline-item-row {
   margin-right: 0;
 }
 .timeline-item {

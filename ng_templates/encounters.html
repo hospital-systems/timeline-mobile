@@ -1,5 +1,11 @@
 <div class="encounters-frame container">
-  <div ng-controller="EncountersCtrl">
-    encounters
+  <div ng-controller="EncounterListCtrl">
+    <div class="row item-row" ng-repeat="item in items">
+      <div class="col-xs-12"><strong>{{item.name[0]}} | {{item.name[1]}}</strong></div>
+      <div ng-repeat="row in item.data">
+        <div class="col-xs-12">{{row[0]}}:</div>
+        <div class="col-xs-12">{{row[1]}}</div>
+      </div>
+    </div>
   </div>
 </div>

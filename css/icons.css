@@ -6,10 +6,13 @@
 
 .icon {
   color:inherit;
-  font-family: "Font Fancy";
   font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   line-height: 0
+}
+
+.fancy-icon {
+  font-family: "Font Fancy";
 }
 
 a.icon:hover{
@@ -37,4 +40,14 @@ a.icon:hover{
 
 .medapp-icon-treatment_record_timeline_item:after {
   content: 'r';
+}
+
+.medapp-icon-ch:after {
+  content: 'CH';
+  background-color: salmon;
+}
+
+.medapp-icon-ac:after {
+  content: 'AC';
+  background-color: lightblue;
 }

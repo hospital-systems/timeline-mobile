@@ -132,22 +132,25 @@ timelineWithAnimation.controller(
     Settings.setHeader('Observation');
   });
 
-timelineWithAnimation.controller('ProblemListCtrl', function(Settings) {
+timelineWithAnimation.controller('ProblemListCtrl', function($scope, Settings) {
   var title = 'Problem list';
   Settings.setTitle(title);
   Settings.setHeader(title);
+  $scope.items = patients["Problems"];
 });
 
-timelineWithAnimation.controller('AllergyListCtrl', function(Settings) {
+timelineWithAnimation.controller('AllergyListCtrl', function($scope, Settings) {
   var title = 'Allergy list';
   Settings.setTitle(title);
   Settings.setHeader(title);
+  $scope.items = patients["Allergies"];
 });
 
-timelineWithAnimation.controller('EncountersCtrl', function(Settings) {
+timelineWithAnimation.controller('EncounterListCtrl', function($scope, Settings) {
   var title = 'Encounters';
   Settings.setTitle(title);
   Settings.setHeader(title);
+  $scope.items = patients["Encounters"];
 });
 
 timelineWithAnimation.controller('ProfileCtrl', function(Settings) {

@@ -1,5 +1,20 @@
 <div class="problem-list-frame container">
   <div ng-controller="ProblemListCtrl">
-    problem list
+    <div ng-repeat="item in items" class="timeline-item">
+      <div class="row timeline-item-row">
+        <div class="timeline-item-icon-container col-xs-2 col-md-1 text-center">
+          <div class="icon" ng-class="'medapp-icon-' + item.type"></div>
+        </div>
+        <div class="col-xs-8 col-md-9 timeline-item-main">
+          <div class="timeline-item-title">{{item.diagnoses}}</div>
+          <div class="text-muted">{{item.date}} by {{item.institution}}</div>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center timeline-item-datetime">
+          <span>
+            {{item.code}}
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

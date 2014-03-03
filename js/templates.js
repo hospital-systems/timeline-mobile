@@ -4,7 +4,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/_timeline_item.html',
     "<div class=\"row timeline-item-row\">\n" +
     "  <div class=\"timeline-item-icon-container col-xs-2 col-md-1 text-center\">\n" +
-    "    <div class=\"icon\" ng-class=\"'medapp-icon-' + item.type\"></div>\n" +
+    "    <div class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + item.type\"></div>\n" +
     "  </div>\n" +
     "  <div class=\"col-xs-7 col-md-9 timeline-item-main\">\n" +
     "    <div class=\"timeline-item-title\"><strong>{{item.name}}</strong></div>\n" +
@@ -24,8 +24,11 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
   $templateCache.put('/ng_templates/allergy_list.html',
     "<div class=\"allergy-list-frame container\">\n" +
-    "  <div ng-controller=\"ProblemListCtrl\">\n" +
-    "    allergy list\n" +
+    "  <div ng-controller=\"AllergyListCtrl\">\n" +
+    "    <div class=\"row item-row\" ng-repeat=\"item in items\">\n" +
+    "      <div class=\"col-xs-8\">{{item.substance}}</div>\n" +
+    "      <div class=\"col-xs-4 text-muted text-right\">(RxNorm: {{item.RxNorm}})</div>\n" +
+    "    </div>\n" +
     "  </div>\n" +
     "</div>\n"
   );
@@ -33,8 +36,14 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
   $templateCache.put('/ng_templates/encounters.html',
     "<div class=\"encounters-frame container\">\n" +
-    "  <div ng-controller=\"EncountersCtrl\">\n" +
-    "    encounters\n" +
+    "  <div ng-controller=\"EncounterListCtrl\">\n" +
+    "    <div class=\"row item-row\" ng-repeat=\"item in items\">\n" +
+    "      <div class=\"col-xs-12\"><strong>{{item.name[0]}} | {{item.name[1]}}</strong></div>\n" +
+    "      <div ng-repeat=\"row in item.data\">\n" +
+    "        <div class=\"col-xs-12\">{{row[0]}}:</div>\n" +
+    "        <div class=\"col-xs-12\">{{row[1]}}</div>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
     "  </div>\n" +
     "</div>\n"
   );
@@ -64,7 +73,22 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/problem_list.html',
     "<div class=\"problem-list-frame container\">\n" +
     "  <div ng-controller=\"ProblemListCtrl\">\n" +
-    "    problem list\n" +
+    "    <div ng-repeat=\"item in items\" class=\"timeline-item\">\n" +
+    "      <div class=\"row timeline-item-row\">\n" +
+    "        <div class=\"timeline-item-icon-container col-xs-2 col-md-1 text-center\">\n" +
+    "          <div class=\"icon\" ng-class=\"'medapp-icon-' + item.type\"></div>\n" +
+    "        </div>\n" +
+    "        <div class=\"col-xs-8 col-md-9 timeline-item-main\">\n" +
+    "          <div class=\"timeline-item-title\">{{item.diagnoses}}</div>\n" +
+    "          <div class=\"text-muted\">{{item.date}} by {{item.institution}}</div>\n" +
+    "        </div>\n" +
+    "        <div class=\"col-xs-2 col-md-2 text-center timeline-item-datetime\">\n" +
+    "          <span>\n" +
+    "            {{item.code}}\n" +
+    "          </span>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
     "  </div>\n" +
     "</div>\n"
   );
@@ -73,7 +97,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/profile.html',
     "<div class=\"profile-frame container\">\n" +
     "  <div ng-controller=\"ProfileCtrl\">\n" +
-    "    profile\n" +
+    "    <div class=\"col-xs-12\">John, Smith  79y / male (09/27/1934)</div></div>\n" +
     "  </div>\n" +
     "</div>\n"
   );
