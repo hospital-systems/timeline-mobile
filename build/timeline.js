@@ -606,6 +606,17 @@ timelineWithAnimation.config([
     });
   }]);
 
+timelineWithAnimation.factory('Settings', function() {
+   var title  = 'TakeCare';
+   var header = 'TakeCare';
+   return {
+     title:     function() { return title; },
+     header:    function() { return header; },
+     setTitle:  function(newTitle)  { title  = newTitle },
+     setHeader: function(newHeader) { header = newHeader }
+   };
+});
+
 var timelineListRegexp = /\/(index.html)?#\/$/;
 var timelineItemRegexp = /\/(index.html)?#\/items\/[0-9]+$/;
 
@@ -619,11 +630,13 @@ function getPageType(url) {
   return 'unrecognized';
 }
 
-timelineWithAnimation
-  .controller('RootCtrl', function($scope, $rootScope, $location, $spMenu) {
+timelineWithAnimation.controller(
+  'RootCtrl',
+  function($scope, $rootScope, $location, $spMenu, Settings) {
     $scope.gotoUrlFor = function (path) {
       $location.path(path);
     };
+    $scope.Settings = Settings;
 
     $rootScope.$on(
       '$locationChangeStart',
@@ -655,18 +668,25 @@ timelineWithAnimation
       });
   });
 
-timelineWithAnimation
-  .controller('TimelineListCtrl', function($scope, $route, $routeParams) {
+timelineWithAnimation.controller(
+  'TimelineListCtrl',
+  function($scope, $route, $routeParams, Settings) {
     $scope.items = patients['MrBrown'].timelineItems.sort(function(a, b){
       return b.createdAt - a.createdAt;
     });
+    var title = 'Observations';
+    Settings.setTitle(title);
+    Settings.setHeader(title);
   });
 
-timelineWithAnimation.
-  controller('TimelineItemsCtrl', function($scope, $route, $routeParams) {
+timelineWithAnimation.controller(
+  'TimelineItemsCtrl',
+  function($scope, $route, $routeParams, Settings) {
     $scope.item = jQuery.grep(patients['MrBrown'].timelineItems, function(item) {
       return item.id.toString() === $routeParams.itemId.toString();
     })[0];
+    Settings.setTitle('Observation: ' + $scope.item.name);
+    Settings.setHeader('Observation');
   });
 
 angular.module('shoppinpal.mobile-menu', [])

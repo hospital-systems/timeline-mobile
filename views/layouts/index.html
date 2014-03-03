@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="{{angularApplicationName}}">
+<html ng-app="timeline-with-animation" ng-controller="RootCtrl" lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="version" content="0.5.1">
-    <title>Timeline demo</title>
+    <title>\{{ Settings.title() }}</title>
 
     <!-- Bootstrap -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="build/timeline.css"/>
     <link rel="stylesheet" href="css/ng-mobile-menu.css"/>
   </head>
-  <body ng-controller='RootCtrl'>
+  <body>
     <div class="navbar navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -39,20 +39,20 @@
           </span>
           <a class="navbar-brand" href="#">
             <span class="glyphicon glyphicon-plus emerald"></span>
-            TakeCare
+            \{{ Settings.header() }}
           </a>
         </div>
         <div class="collapse navbar-collapse">
-{{> _navbar_nav  }}
+          {{> _navbar_nav  }}
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
     <div class="navbar navbar-inverse" id="sp-nav">
-{{> _navbar_nav  }}
+      {{> _navbar_nav  }}
     </div><!--/.nav-collapse -->
 
-{{> body  }}
+    {{> body  }}
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.min.js"></script>
