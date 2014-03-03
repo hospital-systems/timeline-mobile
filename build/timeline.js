@@ -600,6 +600,11 @@ timelineWithAnimation.config([
       controller: 'RootCtrl'
     });
 
+    $routeProvider.when('/problem-list', {
+      templateUrl: '/ng_templates/problem_list.html',
+      controller: 'RootCtrl'
+    });
+
     $routeProvider.otherwise({
       templateUrl: '/ng_templates/page_under_construction.html',
       controller: 'RootCtrl'
@@ -690,6 +695,12 @@ timelineWithAnimation.controller(
     Settings.setHeader('Observation');
   });
 
+timelineWithAnimation.controller('ProblemListCtrl', function(Settings) {
+  var title = 'Problem list';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
+
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
   var title = 'Page under construction';
   Settings.setTitle(title);
@@ -760,10 +771,19 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/page_under_construction.html',
-    "<div class=\"container\">\n" +
-    "  <div ng-controller=\"PageUnderConstructionCtrl\"\n" +
-    "       class=\"alert alert-danger\"\n" +
-    "       style=\"margin-top: 20px;\">Not Found</div>\n" +
+    "<div class=\"container page-under-construction-frame\">\n" +
+    "  <div ng-controller=\"PageUnderConstructionCtrl\" class=\"alert alert-danger\">\n" +
+    "    Not Found\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/problem_list.html',
+    "<div class=\"problem-list-frame container\">\n" +
+    "  <div ng-controller=\"ProblemListCtrl\">\n" +
+    "    foo bar\n" +
+    "  </div>\n" +
     "</div>\n"
   );
 

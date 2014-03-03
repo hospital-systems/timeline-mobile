@@ -35,10 +35,19 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/page_under_construction.html',
-    "<div class=\"container\">\n" +
-    "  <div ng-controller=\"PageUnderConstructionCtrl\"\n" +
-    "       class=\"alert alert-danger\"\n" +
-    "       style=\"margin-top: 20px;\">Not Found</div>\n" +
+    "<div class=\"container page-under-construction-frame\">\n" +
+    "  <div ng-controller=\"PageUnderConstructionCtrl\" class=\"alert alert-danger\">\n" +
+    "    Not Found\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/problem_list.html',
+    "<div class=\"problem-list-frame container\">\n" +
+    "  <div ng-controller=\"ProblemListCtrl\">\n" +
+    "    foo bar\n" +
+    "  </div>\n" +
     "</div>\n"
   );
 

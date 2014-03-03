@@ -22,6 +22,11 @@ timelineWithAnimation.config([
       controller: 'RootCtrl'
     });
 
+    $routeProvider.when('/problem-list', {
+      templateUrl: '/ng_templates/problem_list.html',
+      controller: 'RootCtrl'
+    });
+
     $routeProvider.otherwise({
       templateUrl: '/ng_templates/page_under_construction.html',
       controller: 'RootCtrl'
@@ -111,6 +116,12 @@ timelineWithAnimation.controller(
     Settings.setTitle('Observation: ' + $scope.item.name);
     Settings.setHeader('Observation');
   });
+
+timelineWithAnimation.controller('ProblemListCtrl', function(Settings) {
+  var title = 'Problem list';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
 
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
   var title = 'Page under construction';
