@@ -22,6 +22,26 @@ timelineWithAnimation.config([
       controller: 'RootCtrl'
     });
 
+    $routeProvider.when('/problem-list', {
+      templateUrl: '/ng_templates/problem_list.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/allergy-list', {
+      templateUrl: '/ng_templates/allergy_list.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/encounters', {
+      templateUrl: '/ng_templates/encounters.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/profile', {
+      templateUrl: '/ng_templates/profile.html',
+      controller: 'RootCtrl'
+    });
+
     $routeProvider.otherwise({
       templateUrl: '/ng_templates/page_under_construction.html',
       controller: 'RootCtrl'
@@ -111,6 +131,30 @@ timelineWithAnimation.controller(
     Settings.setTitle('Observation: ' + $scope.item.name);
     Settings.setHeader('Observation');
   });
+
+timelineWithAnimation.controller('ProblemListCtrl', function(Settings) {
+  var title = 'Problem list';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
+
+timelineWithAnimation.controller('AllergyListCtrl', function(Settings) {
+  var title = 'Allergy list';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
+
+timelineWithAnimation.controller('EncountersCtrl', function(Settings) {
+  var title = 'Encounters';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
+
+timelineWithAnimation.controller('ProfileCtrl', function(Settings) {
+  var title = 'Profile';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
 
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
   var title = 'Page under construction';

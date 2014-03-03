@@ -22,6 +22,24 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   );
 
 
+  $templateCache.put('/ng_templates/allergy_list.html',
+    "<div class=\"allergy-list-frame container\">\n" +
+    "  <div ng-controller=\"ProblemListCtrl\">\n" +
+    "    allergy list\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/encounters.html',
+    "<div class=\"encounters-frame container\">\n" +
+    "  <div ng-controller=\"EncountersCtrl\">\n" +
+    "    encounters\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
   $templateCache.put('/ng_templates/menu.html',
     "<ul class=\"nav navbar-nav\">\n" +
     "  <li><a href=\"#\">Profile</a></li>\n" +
@@ -35,10 +53,28 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/page_under_construction.html',
-    "<div class=\"container\">\n" +
-    "  <div ng-controller=\"PageUnderConstructionCtrl\"\n" +
-    "       class=\"alert alert-danger\"\n" +
-    "       style=\"margin-top: 20px;\">Not Found</div>\n" +
+    "<div class=\"container page-under-construction-frame\">\n" +
+    "  <div ng-controller=\"PageUnderConstructionCtrl\" class=\"alert alert-danger\">\n" +
+    "    Not Found\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/problem_list.html',
+    "<div class=\"problem-list-frame container\">\n" +
+    "  <div ng-controller=\"ProblemListCtrl\">\n" +
+    "    problem list\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/profile.html',
+    "<div class=\"profile-frame container\">\n" +
+    "  <div ng-controller=\"ProfileCtrl\">\n" +
+    "    profile\n" +
+    "  </div>\n" +
     "</div>\n"
   );
 

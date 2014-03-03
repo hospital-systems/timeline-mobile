@@ -54,6 +54,13 @@
 h1 {
   margin-bottom: 20px;
 }
+.problem-list-frame,
+.allergy-list-frame,
+.encounters-frame,
+.profile-frame,
+.page-under-construction-frame {
+  margin-top: 20px;
+}
 .timeline-list-frame,
 .timeline-item-frame {
   background-color: white;
