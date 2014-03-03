@@ -31,6 +31,15 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   );
 
 
+  $templateCache.put('/ng_templates/encounters.html',
+    "<div class=\"encounters-frame container\">\n" +
+    "  <div ng-controller=\"EncountersCtrl\">\n" +
+    "    encounters\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
   $templateCache.put('/ng_templates/menu.html',
     "<ul class=\"nav navbar-nav\">\n" +
     "  <li><a href=\"#\">Profile</a></li>\n" +

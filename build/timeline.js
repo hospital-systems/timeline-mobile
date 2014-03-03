@@ -610,6 +610,11 @@ timelineWithAnimation.config([
       controller: 'RootCtrl'
     });
 
+    $routeProvider.when('/encounters', {
+      templateUrl: '/ng_templates/encounters.html',
+      controller: 'RootCtrl'
+    });
+
     $routeProvider.otherwise({
       templateUrl: '/ng_templates/page_under_construction.html',
       controller: 'RootCtrl'
@@ -712,6 +717,12 @@ timelineWithAnimation.controller('AllergyListCtrl', function(Settings) {
   Settings.setHeader(title);
 });
 
+timelineWithAnimation.controller('EncountersCtrl', function(Settings) {
+  var title = 'Encounters';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
+
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
   var title = 'Page under construction';
   Settings.setTitle(title);
@@ -773,6 +784,15 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"allergy-list-frame container\">\n" +
     "  <div ng-controller=\"ProblemListCtrl\">\n" +
     "    allergy list\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/encounters.html',
+    "<div class=\"encounters-frame container\">\n" +
+    "  <div ng-controller=\"EncountersCtrl\">\n" +
+    "    encounters\n" +
     "  </div>\n" +
     "</div>\n"
   );
