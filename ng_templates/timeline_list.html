@@ -1,7 +1,8 @@
 <div class="timeline-list-frame container" ng-controller="TimelineListCtrl">
   <ul class="list-unstyled">
     <li class="timeline-item" ng-repeat="item in items">
-      <a class="timeline-item-link" href="#/item/{{ item.id }}">
+      <a class="timeline-item-link"
+         href="#/patients/{{ patient.id }}/items/{{ item.id }}">
         <div ng-include="'/ng_templates/_timeline_item.html'"></div>
       </a>
     </li>

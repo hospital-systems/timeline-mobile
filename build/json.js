@@ -1,5 +1,6 @@
 var patients = patients || {};
 patients["MrBlonde"] = {
+  id: 2,
   name: 'Mr. Blonde',
   timelineItems: [
     {
@@ -19,6 +20,7 @@ patients["MrBlonde"] = {
 }
 ;
 patients["MrBrown"] = {
+  id: 1,
   name: 'Mr. Brown',
   timelineItems: [
     {
@@ -595,6 +597,7 @@ patients["MrBrown"] = {
 }
 ;
 patients["MrOrange"] = {
+  id: 3,
   name: 'Mr. Orange',
   timelineItems: [
     {

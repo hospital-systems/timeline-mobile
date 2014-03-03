@@ -41,6 +41,19 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   );
 
 
+  $templateCache.put('/ng_templates/patients_list.html',
+    "<div class=\"container\" ng-controller=\"PatientsListCtrl\">\n" +
+    "  <ul class=\"list-unstyled\">\n" +
+    "    <li ng-repeat=\"patient in patients\">\n" +
+    "      <a href=\"#/patients/{{ patient.id }}\">\n" +
+    "        {{ patient.name }}\n" +
+    "      </a>\n" +
+    "    </li>\n" +
+    "  </ul>\n" +
+    "</div>\n"
+  );
+
+
   $templateCache.put('/ng_templates/timeline_item.html',
     "<div class=\"timeline-item-frame container\" ng-controller=\"TimelineItemsCtrl\">\n" +
     "  <div ng-include=\"'/ng_templates/_timeline_item.html'\" class=\"timeline-item\"></div>\n" +
@@ -53,7 +66,8 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"timeline-list-frame container\" ng-controller=\"TimelineListCtrl\">\n" +
     "  <ul class=\"list-unstyled\">\n" +
     "    <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +
-    "      <a class=\"timeline-item-link\" href=\"#/item/{{ item.id }}\">\n" +
+    "      <a class=\"timeline-item-link\"\n" +
+    "         href=\"#/patients/{{ patient.id }}/items/{{ item.id }}\">\n" +
     "        <div ng-include=\"'/ng_templates/_timeline_item.html'\"></div>\n" +
     "      </a>\n" +
     "    </li>\n" +

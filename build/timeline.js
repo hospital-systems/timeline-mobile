@@ -1,5 +1,6 @@
 var patients = patients || {};
 patients["MrBlonde"] = {
+  id: 2,
   name: 'Mr. Blonde',
   timelineItems: [
     {
@@ -19,6 +20,7 @@ patients["MrBlonde"] = {
 }
 ;
 patients["MrBrown"] = {
+  id: 1,
   name: 'Mr. Brown',
   timelineItems: [
     {
@@ -595,6 +597,7 @@ patients["MrBrown"] = {
 }
 ;
 patients["MrOrange"] = {
+  id: 3,
   name: 'Mr. Orange',
   timelineItems: [
     {
@@ -628,11 +631,16 @@ timelineWithAnimation.config([
     'use strict';
 
     $routeProvider.when('/', {
+      templateUrl: '/ng_templates/patients_list.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/patients/:patientId', {
       templateUrl: '/ng_templates/timeline_list.html',
       controller: 'RootCtrl'
     });
 
-    $routeProvider.when('/item/:itemId', {
+    $routeProvider.when('/patients/:patientId/items/:itemId', {
       templateUrl: '/ng_templates/timeline_item.html',
       controller: 'RootCtrl'
     });
@@ -643,32 +651,25 @@ timelineWithAnimation.config([
     });
   }]);
 
-var timelineListRegexp = /\/(index.html)?#\/$/;
-var timelineItemRegexp = /\/(index.html)?#\/item\/[0-9]+$/;
+var patientsListRegexp = /\/(index.html)?#\/$/;
+var timelineListRegexp = /\/(index.html)?#\/patients\/[0-9]+$/;
+var timelineItemRegexp = /\/(index.html)?#\/patients\/[0-9]+\/items\/[0-9]+$/;
 
-function getMoveFrom(currentUrl) {
-  if (timelineListRegexp.test(currentUrl)) {
+function getPageType(url) {
+  if (patientsListRegexp.test(url)) {
+    return 'patientsList';
+  }
+  if (timelineListRegexp.test(url)) {
     return 'timelineList';
   }
-  if (timelineItemRegexp.test(currentUrl)) {
+  if (timelineItemRegexp.test(url)) {
     return 'timelineItem';
   }
   return 'unrecognized';
 }
 
-function getMoveTo(nextUrl) {
-  if (timelineListRegexp.test(nextUrl)) {
-    return 'timelineList';
-  }
-  if (timelineItemRegexp.test(nextUrl)) {
-    return 'timelineItem';
-  }
-  return 'unrecognized';
-}
-
-timelineWithAnimation.controller(
-  'RootCtrl',
-  function($scope, $rootScope, $location, $spMenu) {
+timelineWithAnimation
+  .controller('RootCtrl', function($scope, $rootScope, $location, $route, $routeParams, $spMenu) {
     $scope.gotoUrlFor = function (path) {
       $location.path(path);
     };
@@ -680,40 +681,83 @@ timelineWithAnimation.controller(
         // Due to menu can not close itself.
         $spMenu.hide();
 
-        var userMoveFrom = getMoveFrom(currentPageUrl);
-        var userMoveTo   = getMoveTo(nextPageUrl);
+        var userMoveFrom = getPageType(currentPageUrl);
+        var userMoveTo   = getPageType(nextPageUrl);
         var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
 
         switch (navigationState.join(' ')) {
+        case 'from patientsList to timelineList':
+          $scope.animateFlavor = 'move-to-left';
+          break;
         case 'from timelineList to timelineItem':
           $scope.animateFlavor = 'move-to-left';
           break;
         case 'from timelineItem to timelineList':
           $scope.animateFlavor = 'move-to-right';
           break;
+        case 'from timelineList to patientsList':
+          $scope.animateFlavor = 'move-to-right';
+          break;
         case 'from timelineList to unrecognized':
           $scope.animateFlavor = 'move-to-right';
           break;
-        case 'from unrecognized to timelineList':
+        case 'from unrecognized to patientsList':
+          $scope.animateFlavor = 'move-to-left';
+          break;
+
+        // TODO: remove me
+        case 'from timelineItem to patientsList':
+          $scope.animateFlavor = 'move-to-right';
+          break;
+
+        default:
           $scope.animateFlavor = 'move-to-left';
           break;
         }
 
         $scope.currentPage = userMoveTo;
+        // // not working:(
+        // if (typeof($routeParams.patientId) !== 'undefined') {
+        //   $scope.patient = getPatientById($routeParams.patientId);
+        // }
       });
   });
 
-timelineWithAnimation.controller('TimelineListCtrl', function($scope) {
-  $scope.items = patients['MrBrown'].timelineItems.sort(function(a,b){
-    return b.createdAt - a.createdAt;
+function patientsArrayFor(patientsObject) {
+  return $.map(patients, function(value, index) {
+    return value;
+  });
+}
+
+timelineWithAnimation.controller('PatientsListCtrl', function($scope) {
+  $scope.patients = patientsArrayFor(patients).sort(function(a, b){
+    return a.id - b.id;
   });
 });
 
-timelineWithAnimation.controller('TimelineItemsCtrl', function($scope, $route, $routeParams) {
-  $scope.item = jQuery.grep(patients['MrBrown'].timelineItems, function(item) {
-    return item.id.toString() === $routeParams.itemId.toString();
+function getPatientById(id) {
+  return jQuery.grep(patientsArrayFor(patients), function(patient) {
+    return patient.id.toString() === id.toString();
   })[0];
-});
+}
+
+timelineWithAnimation
+  .controller('TimelineListCtrl', function($scope, $route, $routeParams) {
+    $scope.patient = getPatientById($routeParams.patientId);
+
+    $scope.items = $scope.patient.timelineItems.sort(function(a, b){
+      return b.createdAt - a.createdAt;
+    });
+  });
+
+timelineWithAnimation.
+  controller('TimelineItemsCtrl', function($scope, $route, $routeParams) {
+    $scope.patient = getPatientById($routeParams.patientId);
+
+    $scope.item = jQuery.grep($scope.patient.timelineItems, function(item) {
+      return item.id.toString() === $routeParams.itemId.toString();
+    })[0];
+  });
 
 angular.module('shoppinpal.mobile-menu', [])
     .run(['$rootScope', '$spMenu', function($rootScope, $spMenu){
@@ -785,6 +829,19 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   );
 
 
+  $templateCache.put('/ng_templates/patients_list.html',
+    "<div class=\"container\" ng-controller=\"PatientsListCtrl\">\n" +
+    "  <ul class=\"list-unstyled\">\n" +
+    "    <li ng-repeat=\"patient in patients\">\n" +
+    "      <a href=\"#/patients/{{ patient.id }}\">\n" +
+    "        {{ patient.name }}\n" +
+    "      </a>\n" +
+    "    </li>\n" +
+    "  </ul>\n" +
+    "</div>\n"
+  );
+
+
   $templateCache.put('/ng_templates/timeline_item.html',
     "<div class=\"timeline-item-frame container\" ng-controller=\"TimelineItemsCtrl\">\n" +
     "  <div ng-include=\"'/ng_templates/_timeline_item.html'\" class=\"timeline-item\"></div>\n" +
@@ -797,7 +854,8 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"timeline-list-frame container\" ng-controller=\"TimelineListCtrl\">\n" +
     "  <ul class=\"list-unstyled\">\n" +
     "    <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +
-    "      <a class=\"timeline-item-link\" href=\"#/item/{{ item.id }}\">\n" +
+    "      <a class=\"timeline-item-link\"\n" +
+    "         href=\"#/patients/{{ patient.id }}/items/{{ item.id }}\">\n" +
     "        <div ng-include=\"'/ng_templates/_timeline_item.html'\"></div>\n" +
     "      </a>\n" +
     "    </li>\n" +
