@@ -13,12 +13,12 @@ timelineWithAnimation.config([
     'use strict';
 
     $routeProvider.when('/', {
-      templateUrl: '/ng_templates/list.html',
+      templateUrl: '/ng_templates/timeline_list.html',
       controller: 'RootCtrl'
     });
 
     $routeProvider.when('/item/:itemId', {
-      templateUrl: '/ng_templates/item.html',
+      templateUrl: '/ng_templates/timeline_item.html',
       controller: 'RootCtrl'
     });
 
@@ -28,25 +28,25 @@ timelineWithAnimation.config([
     });
   }]);
 
-var homeRegexp = /\/(index.html)?#\/$/;
-var itemRegexp = /\/(index.html)?#\/item\/[0-9]+$/;
+var timelineListRegexp = /\/(index.html)?#\/$/;
+var timelineItemRegexp = /\/(index.html)?#\/item\/[0-9]+$/;
 
 function getMoveFrom(currentUrl) {
-  if (homeRegexp.test(currentUrl)) {
-    return 'home';
+  if (timelineListRegexp.test(currentUrl)) {
+    return 'timelineList';
   }
-  if (itemRegexp.test(currentUrl)) {
-    return 'item';
+  if (timelineItemRegexp.test(currentUrl)) {
+    return 'timelineItem';
   }
   return 'unrecognized';
 }
 
 function getMoveTo(nextUrl) {
-  if (homeRegexp.test(nextUrl)) {
-    return 'home';
+  if (timelineListRegexp.test(nextUrl)) {
+    return 'timelineList';
   }
-  if (itemRegexp.test(nextUrl)) {
-    return 'item';
+  if (timelineItemRegexp.test(nextUrl)) {
+    return 'timelineItem';
   }
   return 'unrecognized';
 }
@@ -70,16 +70,16 @@ timelineWithAnimation.controller(
         var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
 
         switch (navigationState.join(' ')) {
-        case 'from home to item':
+        case 'from timelineList to timelineItem':
           $scope.animateFlavor = 'move-to-left';
           break;
-        case 'from item to home':
+        case 'from timelineItem to timelineList':
           $scope.animateFlavor = 'move-to-right';
           break;
-        case 'from home to unrecognized':
+        case 'from timelineList to unrecognized':
           $scope.animateFlavor = 'move-to-right';
           break;
-        case 'from unrecognized to home':
+        case 'from unrecognized to timelineList':
           $scope.animateFlavor = 'move-to-left';
           break;
         }
@@ -88,13 +88,13 @@ timelineWithAnimation.controller(
       });
   });
 
-timelineWithAnimation.controller('ListCtrl', function($scope) {
+timelineWithAnimation.controller('TimelineListCtrl', function($scope) {
   $scope.items = timelineItems['MrBrown'].sort(function(a,b){
     return b.createdAt - a.createdAt;
   });
 });
 
-timelineWithAnimation.controller('ItemsCtrl', function($scope, $route, $routeParams) {
+timelineWithAnimation.controller('TimelineItemsCtrl', function($scope, $route, $routeParams) {
   $scope.item = jQuery.grep(timelineItems['MrBrown'], function(item) {
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];

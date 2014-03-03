@@ -1,7 +1,7 @@
 angular.module('timeline-with-animation').run(['$templateCache', function($templateCache) {
   'use strict';
 
-  $templateCache.put('/ng_templates/_item.html',
+  $templateCache.put('/ng_templates/_timeline_item.html',
     "<div class=\"row timeline-item-row\">\n" +
     "  <div class=\"timeline-item-icon-container col-xs-2 col-md-1 text-center\">\n" +
     "    <div class=\"icon\" ng-class=\"'medapp-icon-' + item.type\"></div>\n" +
@@ -22,27 +22,6 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   );
 
 
-  $templateCache.put('/ng_templates/item.html',
-    "<div class=\"timeline-item-frame container\" ng-controller=\"ItemsCtrl\">\n" +
-    "  <div ng-include=\"'/ng_templates/_item.html'\" class=\"timeline-item\"></div>\n" +
-    "  <div class=\"timeline-item-data-container col-xs-12\" ng-bind-html='item.data'></div>\n" +
-    "</div>\n"
-  );
-
-
-  $templateCache.put('/ng_templates/list.html',
-    "<div class=\"timeline-list-frame container\" ng-controller=\"ListCtrl\">\n" +
-    "  <ul class=\"list-unstyled\">\n" +
-    "    <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +
-    "      <a class=\"timeline-item-link\" href=\"#/item/{{ item.id }}\">\n" +
-    "        <div ng-include=\"'/ng_templates/_item.html'\"></div>\n" +
-    "      </a>\n" +
-    "    </li>\n" +
-    "  </ul>\n" +
-    "</div>\n"
-  );
-
-
   $templateCache.put('/ng_templates/menu.html',
     "<ul class=\"nav navbar-nav\">\n" +
     "  <li><a href=\"#\">Profile</a></li>\n" +
@@ -58,6 +37,27 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/page_under_construction.html',
     "<div class=\"container\">\n" +
     "  <div class=\"alert alert-danger\" style=\"margin-top: 20px;\">Not Found</div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/timeline_item.html',
+    "<div class=\"timeline-item-frame container\" ng-controller=\"TimelineItemsCtrl\">\n" +
+    "  <div ng-include=\"'/ng_templates/_timeline_item.html'\" class=\"timeline-item\"></div>\n" +
+    "  <div class=\"timeline-item-data-container col-xs-12\" ng-bind-html='item.data'></div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/timeline_list.html',
+    "<div class=\"timeline-list-frame container\" ng-controller=\"TimelineListCtrl\">\n" +
+    "  <ul class=\"list-unstyled\">\n" +
+    "    <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +
+    "      <a class=\"timeline-item-link\" href=\"#/item/{{ item.id }}\">\n" +
+    "        <div ng-include=\"'/ng_templates/_timeline_item.html'\"></div>\n" +
+    "      </a>\n" +
+    "    </li>\n" +
+    "  </ul>\n" +
     "</div>\n"
   );
 
