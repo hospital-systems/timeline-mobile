@@ -1,24 +1,4 @@
 var patients = patients || {};
-patients["MrBlonde"] = {
-  id: 2,
-  name: 'Mr. Blonde',
-  timelineItems: [
-    {
-      id: 8,
-      createdAt: new Date(2013, 3, 28, 6, 40),
-      type: 'lab',
-      name: 'Immunochemical fecal occult blood test',
-      doctor_name: 'Doe, John, MD',
-      clinic_name: '',
-      data:
-      '<div class=\'row\'>'+
-        '<div class=\'col-xs-6\'>iFOB</div>' +
-        '<div class=\'col-xs-6 text-right\'><p>POSITIVE</p><p>NEGATIVE</p></div>' +
-        '</div>'
-    }
-  ]
-}
-;
 patients["MrBrown"] = {
   id: 1,
   name: 'Mr. Brown',
@@ -591,26 +571,6 @@ patients["MrBrown"] = {
 
       '<div class=\'row item-row\'>'+
         '<div class=\'col-xs-12 text-right\'>JOHN DOE, M.D.</div>'+
-        '</div>'
-    }
-  ]
-}
-;
-patients["MrOrange"] = {
-  id: 3,
-  name: 'Mr. Orange',
-  timelineItems: [
-    {
-      id: 9,
-      createdAt: new Date(2013, 3, 28, 6, 40),
-      type: 'lab',
-      name: 'Immunochemical fecal occult blood test',
-      doctor_name: 'Doe, John, MD',
-      clinic_name: '',
-      data:
-      '<div class=\'row\'>'+
-        '<div class=\'col-xs-6\'>iFOB</div>' +
-        '<div class=\'col-xs-6 text-right\'><p>POSITIVE</p><p>NEGATIVE</p></div>' +
         '</div>'
     }
   ]
