@@ -28,12 +28,12 @@ timelineWithAnimation.config([
     });
   }]);
 
-var homeRegexp = /\/(index.html)?#\/$/;
+var timelineRegexp = /\/(index.html)?#\/$/;
 var itemRegexp = /\/(index.html)?#\/item\/[0-9]+$/;
 
 function getMoveFrom(currentUrl) {
-  if (homeRegexp.test(currentUrl)) {
-    return 'home';
+  if (timelineRegexp.test(currentUrl)) {
+    return 'timeline';
   }
   if (itemRegexp.test(currentUrl)) {
     return 'item';
@@ -42,8 +42,8 @@ function getMoveFrom(currentUrl) {
 }
 
 function getMoveTo(nextUrl) {
-  if (homeRegexp.test(nextUrl)) {
-    return 'home';
+  if (timelineRegexp.test(nextUrl)) {
+    return 'timeline';
   }
   if (itemRegexp.test(nextUrl)) {
     return 'item';
@@ -70,16 +70,16 @@ timelineWithAnimation.controller(
         var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
 
         switch (navigationState.join(' ')) {
-        case 'from home to item':
+        case 'from timeline to item':
           $scope.animateFlavor = 'move-to-left';
           break;
-        case 'from item to home':
+        case 'from item to timeline':
           $scope.animateFlavor = 'move-to-right';
           break;
-        case 'from home to unrecognized':
+        case 'from timeline to unrecognized':
           $scope.animateFlavor = 'move-to-right';
           break;
-        case 'from unrecognized to home':
+        case 'from unrecognized to timeline':
           $scope.animateFlavor = 'move-to-left';
           break;
         }
