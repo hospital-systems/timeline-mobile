@@ -615,6 +615,11 @@ timelineWithAnimation.config([
       controller: 'RootCtrl'
     });
 
+    $routeProvider.when('/profile', {
+      templateUrl: '/ng_templates/profile.html',
+      controller: 'RootCtrl'
+    });
+
     $routeProvider.otherwise({
       templateUrl: '/ng_templates/page_under_construction.html',
       controller: 'RootCtrl'
@@ -723,6 +728,12 @@ timelineWithAnimation.controller('EncountersCtrl', function(Settings) {
   Settings.setHeader(title);
 });
 
+timelineWithAnimation.controller('ProfileCtrl', function(Settings) {
+  var title = 'Profile';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
+
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
   var title = 'Page under construction';
   Settings.setTitle(title);
@@ -823,6 +834,15 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"problem-list-frame container\">\n" +
     "  <div ng-controller=\"ProblemListCtrl\">\n" +
     "    problem list\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/profile.html',
+    "<div class=\"profile-frame container\">\n" +
+    "  <div ng-controller=\"ProfileCtrl\">\n" +
+    "    profile\n" +
     "  </div>\n" +
     "</div>\n"
   );

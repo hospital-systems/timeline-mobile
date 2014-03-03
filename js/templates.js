@@ -70,6 +70,15 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   );
 
 
+  $templateCache.put('/ng_templates/profile.html',
+    "<div class=\"profile-frame container\">\n" +
+    "  <div ng-controller=\"ProfileCtrl\">\n" +
+    "    profile\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
   $templateCache.put('/ng_templates/timeline_item.html',
     "<div class=\"timeline-item-frame container\" ng-controller=\"TimelineItemsCtrl\">\n" +
     "  <div ng-include=\"'/ng_templates/_timeline_item.html'\" class=\"timeline-item\"></div>\n" +
