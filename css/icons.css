@@ -51,3 +51,11 @@ a.icon:hover{
   content: 'AC';
   background-color: lightblue;
 }
+
+.medapp-icon-admit:after {
+  content: 'j';
+}
+
+.medapp-icon-discharge:after {
+  content: 'Q';
+}

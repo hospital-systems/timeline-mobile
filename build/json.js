@@ -10,30 +10,28 @@ patients["Encounters"] = [
     "name": ["Medical Lung Center", "Inpatient - 5SOUTH Medical Service"],
     "data": [
       ["Admitting Doctor", "Grag, Jonathan W., MD"],
-      ["Diagnoses","Malignant neoplasm of bronchus and lung, unspecified (162.9)"],
-      ["Admit", "04/24/13"],
-      ["Discharged", "05/13/13"]
-    ]
+      ["Diagnoses","Malignant neoplasm of bronchus and lung, unspecified (162.9)"]
+    ],
+    "admit": "2013-04-26",
+    "discharge": "2013-05-13"
   },
   {
     "name": ["Medical VHH Center", "Emergency - ER"],
     "data": [
       ["Attending Doctor",  "Olive, Basil J., MD"],
-      ["CC", "Passed out apparently got injured while playing football with c/o headache, dizziness and nausea."],
-      ["Diagnoses", "POSS CONCUSSION"],
-      ["Admit", "10/19/13"],
-      ["Discharged", "10/20/13"]
-    ]
+      ["Diagnoses", "POSS CONCUSSION"]
+    ],
+    "admit": "2013-10-19",
+    "discharge": "2013-10-20"
   },
   {
     "name": ["Fresno Center", "Inpatient - ICU5 Medical Service"],
     "data": [
       ["Attending Doctor", "Feijoa, Peas U., MD"],
-      ["CC", "patient was b/b paramedics c/o sob started 30 minute ago, patient is diaphoretics, 2-3 words patient has dyspnea, patient denies any pain."],
-      ["Diagnoses", "SOB"],
-      ["Admit", "10/05/12"],
-      ["Discharged", "10/17/12"]
-    ]
+      ["Diagnoses", "SOB"]
+    ],
+    "admit": "2012-05-10",
+    "discharge": "2012-10-17"
   }
 ]
 ;

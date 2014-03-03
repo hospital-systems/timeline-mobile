@@ -26,8 +26,8 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"allergy-list-frame container\">\n" +
     "  <div ng-controller=\"AllergyListCtrl\">\n" +
     "    <div class=\"row item-row\" ng-repeat=\"item in items\">\n" +
-    "      <div class=\"col-xs-8\">{{item.substance}}</div>\n" +
-    "      <div class=\"col-xs-4 text-muted text-right\">(RxNorm: {{item.RxNorm}})</div>\n" +
+    "      <div class=\"col-xs-12\">{{item.substance}}</div>\n" +
+    "      <div class=\"col-xs-12 text-muted\">(RxNorm: {{item.RxNorm}})</div>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n"
@@ -42,6 +42,12 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "      <div ng-repeat=\"row in item.data\">\n" +
     "        <div class=\"col-xs-12\">{{row[0]}}:</div>\n" +
     "        <div class=\"col-xs-12\">{{row[1]}}</div>\n" +
+    "      </div>\n" +
+    "      <div style=\"padding-left: 15px;\">\n" +
+    "        <span class=\"fancy-icon medapp-icon-admit\"></span>\n" +
+    "        {{item.admit}}\n" +
+    "        <span class=\"fancy-icon medapp-icon-discharge\"></span>\n" +
+    "        {{item.discharge}}\n" +
     "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
@@ -74,18 +80,18 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"problem-list-frame container\">\n" +
     "  <div ng-controller=\"ProblemListCtrl\">\n" +
     "    <div ng-repeat=\"item in items\" class=\"timeline-item\">\n" +
-    "      <div class=\"row timeline-item-row\">\n" +
-    "        <div class=\"timeline-item-icon-container col-xs-2 col-md-1 text-center\">\n" +
-    "          <div class=\"icon\" ng-class=\"'medapp-icon-' + item.type\"></div>\n" +
-    "        </div>\n" +
-    "        <div class=\"col-xs-8 col-md-9 timeline-item-main\">\n" +
+    "      <div class=\"row timeline-item-row\"  style=\"padding-left: 10px\">\n" +
+    "        <div class=\"col-xs-10\">\n" +
     "          <div class=\"timeline-item-title\">{{item.diagnoses}}</div>\n" +
     "          <div class=\"text-muted\">{{item.date}} by {{item.institution}}</div>\n" +
     "        </div>\n" +
-    "        <div class=\"col-xs-2 col-md-2 text-center timeline-item-datetime\">\n" +
-    "          <span>\n" +
+    "        <div class=\"col-xs-2 text-center timeline-item-datetime\">\n" +
+    "          <div>\n" +
     "            {{item.code}}\n" +
-    "          </span>\n" +
+    "          </div>\n" +
+    "          <div class=\"text-muted\">\n" +
+    "            ICD-9\n" +
+    "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
