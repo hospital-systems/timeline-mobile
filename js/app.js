@@ -111,3 +111,9 @@ timelineWithAnimation.controller(
     Settings.setTitle('Observation: ' + $scope.item.name);
     Settings.setHeader('Observation');
   });
+
+timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
+  var title = 'Page under construction';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});

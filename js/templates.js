@@ -36,7 +36,9 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
   $templateCache.put('/ng_templates/page_under_construction.html',
     "<div class=\"container\">\n" +
-    "  <div class=\"alert alert-danger\" style=\"margin-top: 20px;\">Not Found</div>\n" +
+    "  <div ng-controller=\"PageUnderConstructionCtrl\"\n" +
+    "       class=\"alert alert-danger\"\n" +
+    "       style=\"margin-top: 20px;\">Not Found</div>\n" +
     "</div>\n"
   );
 

@@ -690,6 +690,12 @@ timelineWithAnimation.controller(
     Settings.setHeader('Observation');
   });
 
+timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
+  var title = 'Page under construction';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
+
 angular.module('shoppinpal.mobile-menu', [])
     .run(['$rootScope', '$spMenu', function($rootScope, $spMenu){
         $rootScope.$spMenu = $spMenu;
@@ -755,7 +761,9 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
   $templateCache.put('/ng_templates/page_under_construction.html',
     "<div class=\"container\">\n" +
-    "  <div class=\"alert alert-danger\" style=\"margin-top: 20px;\">Not Found</div>\n" +
+    "  <div ng-controller=\"PageUnderConstructionCtrl\"\n" +
+    "       class=\"alert alert-danger\"\n" +
+    "       style=\"margin-top: 20px;\">Not Found</div>\n" +
     "</div>\n"
   );
 
