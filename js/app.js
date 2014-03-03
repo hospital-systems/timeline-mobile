@@ -99,9 +99,3 @@ timelineWithAnimation.controller('ItemsCtrl', function($scope, $route, $routePar
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];
 });
-
-timelineWithAnimation.controller('UnderConstructionCtrl', function() {
-  $scope.item = jQuery.grep(timelineItems['MrBrown'], function(item) {
-    return item.id.toString() === $routeParams.itemId.toString();
-  })[0];
-});

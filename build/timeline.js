@@ -674,12 +674,6 @@ timelineWithAnimation.controller('ItemsCtrl', function($scope, $route, $routePar
   })[0];
 });
 
-timelineWithAnimation.controller('UnderConstructionCtrl', function() {
-  $scope.item = jQuery.grep(timelineItems['MrBrown'], function(item) {
-    return item.id.toString() === $routeParams.itemId.toString();
-  })[0];
-});
-
 angular.module('shoppinpal.mobile-menu', [])
     .run(['$rootScope', '$spMenu', function($rootScope, $spMenu){
         $rootScope.$spMenu = $spMenu;
