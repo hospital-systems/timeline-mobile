@@ -1,5 +1,5 @@
 var patients = patients || {};
-patients["Allergy"] = [
+patients["Allergies"] = [
   {"substance": "Horse serum proteins extract", "RxNorm": 465981},
   {"substance": "Acetamine / Aspirin", "RxNorm": 1007240},
   {"substance": "Ambroxol / Amoxicillin", "RxNorm": 1008081}
@@ -613,4 +613,42 @@ patients["MrBrown"] = {
     }
   ]
 }
+;
+patients["Problems"] = [
+  {
+    "type": "CH",
+    "code": 162.9,
+    "diagnoses": "Malignant neoplasm of bronchus and lung (unspecified)",
+    "date": "12/12/95",
+    "institution": "Lung Medical Center"
+  },
+  {
+    "type": "CH",
+    "code": 250.40,
+    "diagnoses": "Diabetes with renal manifestations (type II), not stated as uncontrolled",
+    "date": "04/15/76",
+    "institution": "Camry Hospital"
+  },
+  {
+    "type": "AC",
+    "code": 486,
+    "diagnoses": "Pneumonia, organism unspecified",
+    "date": "03/15/73",
+    "institution": "Fresno Hospital"
+  },
+  {
+    "type": "AC",
+    "code": 348.31,
+    "diagnoses": "Metabolic encephalopathy",
+    "date": "04/15/76",
+    "institution": "Camry Hospital"
+  },
+  {
+    "type": "AC",
+    "code": 486,
+    "diagnoses": "Pneumonia, organism unspecified",
+    "date": "03/15/73",
+    "institution": "Fresno Hospital"
+  }
+]
 ;
