@@ -1,4 +1,10 @@
 var patients = patients || {};
+patients["Allergy"] = [
+  {"substance": "Horse serum proteins extract", "RxNorm": 465981},
+  {"substance": "Acetamine / Aspirin", "RxNorm": 1007240},
+  {"substance": "Ambroxol / Amoxicillin", "RxNorm": 1008081}
+]
+;
 patients["Encounters"] = [
   {
     "name": ["Medical Lung Center", "Inpatient - 5SOUTH Medical Service"],
