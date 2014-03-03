@@ -75,7 +75,7 @@ module.exports = function (grunt) {
     json: {
       timelineItems: {
         options: {
-            namespace: 'timelineItems',
+            namespace: 'patients',
             processName: function(filename) {
               return filename.replace (/(?:^|[-_])(\w)/g, function (_, c) {
                 return c ? c.toUpperCase () : '';

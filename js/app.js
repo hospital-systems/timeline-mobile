@@ -89,13 +89,13 @@ timelineWithAnimation.controller(
   });
 
 timelineWithAnimation.controller('TimelineListCtrl', function($scope) {
-  $scope.items = timelineItems['MrBrown'].sort(function(a,b){
+  $scope.items = patients['MrBrown'].timelineItems.sort(function(a,b){
     return b.createdAt - a.createdAt;
   });
 });
 
 timelineWithAnimation.controller('TimelineItemsCtrl', function($scope, $route, $routeParams) {
-  $scope.item = jQuery.grep(timelineItems['MrBrown'], function(item) {
+  $scope.item = jQuery.grep(patients['MrBrown'].timelineItems, function(item) {
     return item.id.toString() === $routeParams.itemId.toString();
   })[0];
 });
