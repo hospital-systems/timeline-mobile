@@ -605,6 +605,11 @@ timelineWithAnimation.config([
       controller: 'RootCtrl'
     });
 
+    $routeProvider.when('/allergy-list', {
+      templateUrl: '/ng_templates/allergy_list.html',
+      controller: 'RootCtrl'
+    });
+
     $routeProvider.otherwise({
       templateUrl: '/ng_templates/page_under_construction.html',
       controller: 'RootCtrl'
@@ -701,6 +706,12 @@ timelineWithAnimation.controller('ProblemListCtrl', function(Settings) {
   Settings.setHeader(title);
 });
 
+timelineWithAnimation.controller('AllergyListCtrl', function(Settings) {
+  var title = 'Allergy list';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
+
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
   var title = 'Page under construction';
   Settings.setTitle(title);
@@ -758,6 +769,15 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   );
 
 
+  $templateCache.put('/ng_templates/allergy_list.html',
+    "<div class=\"allergy-list-frame container\">\n" +
+    "  <div ng-controller=\"ProblemListCtrl\">\n" +
+    "    allergy list\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
   $templateCache.put('/ng_templates/menu.html',
     "<ul class=\"nav navbar-nav\">\n" +
     "  <li><a href=\"#\">Profile</a></li>\n" +
@@ -782,7 +802,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/problem_list.html',
     "<div class=\"problem-list-frame container\">\n" +
     "  <div ng-controller=\"ProblemListCtrl\">\n" +
-    "    foo bar\n" +
+    "    problem list\n" +
     "  </div>\n" +
     "</div>\n"
   );

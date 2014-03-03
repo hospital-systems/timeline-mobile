@@ -27,6 +27,11 @@ timelineWithAnimation.config([
       controller: 'RootCtrl'
     });
 
+    $routeProvider.when('/allergy-list', {
+      templateUrl: '/ng_templates/allergy_list.html',
+      controller: 'RootCtrl'
+    });
+
     $routeProvider.otherwise({
       templateUrl: '/ng_templates/page_under_construction.html',
       controller: 'RootCtrl'
@@ -119,6 +124,12 @@ timelineWithAnimation.controller(
 
 timelineWithAnimation.controller('ProblemListCtrl', function(Settings) {
   var title = 'Problem list';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+});
+
+timelineWithAnimation.controller('AllergyListCtrl', function(Settings) {
+  var title = 'Allergy list';
   Settings.setTitle(title);
   Settings.setHeader(title);
 });
