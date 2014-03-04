@@ -1,10 +1,17 @@
 <ul class="nav navbar-nav" style="padding-left: 25px;">
-  <li class="animationEnabled"
-      ng-class="{active: currentPage === 'timelineList'}">
+  <li ng-class="{active: currentPage === 'timelineList'}">
     <a href="#/">Observations</a>
   </li>
-  <li><a href="#/problem-list">Problem list</a></li>
-  <li><a href="#/allergy-list">Allergy list</a></li>
-  <li><a href="#/encounters">Encounters</a></li>
-  <li><a href="#/profile">Profile</a></li>
+  <li ng-class="{active: currentPage === 'problemList'}">
+    <a href="#/problem-list">Problem list</a>
+  </li>
+  <li ng-class="{active: currentPage === 'allergyList'}">
+    <a href="#/allergy-list">Allergy list</a>
+  </li>
+  <li ng-class="{active: currentPage === 'encounterList'}">
+    <a href="#/encounters">Encounters</a>
+  </li>
+  <li ng-class="{active: currentPage === 'profile'}">
+    <a href="#/profile">Profile</a>
+  </li>
 </ul>

@@ -59,8 +59,12 @@ timelineWithAnimation.factory('Settings', function() {
    };
 });
 
-var timelineListRegexp = /\/(index.html)?#\/$/;
-var timelineItemRegexp = /\/(index.html)?#\/items\/[0-9]+$/;
+var timelineListRegexp  = /\/(index.html)?#\/$/;
+var timelineItemRegexp  = /\/(index.html)?#\/items\/[0-9]+$/;
+var problemListRegexp   = /\/(index.html)?#\/problem-list$/;
+var allergyListRegexp   = /\/(index.html)?#\/allergy-list$/;
+var encounterListRegexp = /\/(index.html)?#\/encounters$/;
+var profileRegexp       = /\/(index.html)?#\/profile$/;
 
 function getPageType(url) {
   if (timelineListRegexp.test(url)) {
@@ -68,6 +72,18 @@ function getPageType(url) {
   }
   if (timelineItemRegexp.test(url)) {
     return 'timelineItem';
+  }
+  if (problemListRegexp.test(url)) {
+    return 'problemList';
+  }
+  if (allergyListRegexp.test(url)) {
+    return 'allergyList';
+  }
+  if (encounterListRegexp.test(url)) {
+    return 'encounterList';
+  }
+  if (profileRegexp.test(url)) {
+    return 'profile';
   }
   return 'unrecognized';
 }
@@ -93,9 +109,6 @@ timelineWithAnimation.controller(
         var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
 
         switch (navigationState.join(' ')) {
-        case 'from timelineList to timelineItem':
-          $scope.animateFlavor = 'move-to-left';
-          break;
         case 'from timelineItem to timelineList':
           $scope.animateFlavor = 'move-to-right';
           break;
