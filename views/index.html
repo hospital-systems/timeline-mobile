@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="version" content="0.5.1">
-    <title>\{{ Settings.title() }}</title>
+    <title ng-bind="Settings.title()"></title>
 
     <!-- Bootstrap -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -33,9 +33,7 @@
               </button>
             </span>
           </span>
-          <a class="navbar-brand" href="#/">
-            \{{ Settings.header() }}
-          </a>
+          <a class="navbar-brand" href="#/" ng-bind="Settings.header()"></a>
         </div>
         <div class="collapse navbar-collapse">
           {{> _navbar_nav  }}
