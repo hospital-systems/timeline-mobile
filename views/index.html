@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="version" content="0.5.1">
-    <title ng-bind="Settings.title()"></title>
+    <title ng-bind="Settings.title()">Observations</title>
 
     <!-- Bootstrap -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
       <div class="container">
         <div class="navbar-header">
           <span ng-switch on="currentPage">
-            <span ng-switch-when="timelineItem">
+            <span ng-cloak ng-switch-when="timelineItem">
                <button type="button" class="navbar-toggle pull-left"
                        ng-click="gotoUrlFor('/')" style="width: 44px; height: 34px; padding: 0;">
                  <span class="back-button glyphicon glyphicon-arrow-left"></span>
@@ -33,7 +33,9 @@
               </button>
             </span>
           </span>
-          <a class="navbar-brand" href="#/" ng-bind="Settings.header()"></a>
+          <a class="navbar-brand" href="#/" ng-bind="Settings.header()">
+            Observations
+          </a>
         </div>
         <div class="collapse navbar-collapse">
           {{> _navbar_nav  }}
