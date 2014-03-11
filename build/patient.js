@@ -720,9 +720,18 @@ function getPageType(url) {
   return 'unrecognized';
 }
 
+function getPatientById(id) {
+  if (typeof(id) === 'undefined') {
+    return null;
+  }
+  return jQuery.grep(patientsArrayFor(patients), function(patient) {
+    return patient.id.toString() === id.toString();
+  })[0];
+}
+
 timelineWithAnimation.controller(
   'RootCtrl',
-  function($scope, $rootScope, $location, $spMenu, Settings) {
+  function($scope, $rootScope, $location, $spMenu, Settings, $route, $routeParams) {
     $scope.gotoUrlFor = function (path) {
       $location.path(path);
     };
@@ -730,6 +739,8 @@ timelineWithAnimation.controller(
     $scope.$back = function() {
       window.history.back();
     };
+
+    $scope.patient = getPatientById($routeParams.patientId);
 
     $scope.Settings = Settings;
 
@@ -768,15 +779,6 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope) {
     return a.id - b.id;
   });
 });
-
-function getPatientById(id) {
-  if (typeof(id) === 'undefined') {
-    return null;
-  }
-  return jQuery.grep(patientsArrayFor(patients), function(patient) {
-    return patient.id.toString() === id.toString();
-  })[0];
-}
 
 timelineWithAnimation.controller(
   'TimelineListCtrl',

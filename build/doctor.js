@@ -736,9 +736,9 @@ timelineWithAnimation.controller(
       $location.path(path);
     };
 
-  $scope.$back = function() {
-    window.history.back();
-  };
+    $scope.$back = function() {
+      window.history.back();
+    };
 
     $scope.patient = getPatientById($routeParams.patientId);
 
