@@ -9,6 +9,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('grunt-json');
 
+  function convertJsonName(filename) {
+    return filename.replace (/(?:^|[-_])(\w)/g, function (_, c) {
+      return c ? c.toUpperCase () : '';
+    })
+  }
+
   grunt.initConfig({
     watch: {
       options: {
@@ -20,7 +26,8 @@ module.exports = function (grunt) {
           'styles/**/*.less',
           'js/**/*.js',
           'views/**/*.html',
-          'json/**/*.json'
+          'json/**/*.json',
+          'json_for_mr_brown/**/*.json'
         ],
         tasks: ['build'],
         options: {
@@ -35,9 +42,38 @@ module.exports = function (grunt) {
         src: ['build/*.css'],
         dest: 'build/timeline.css'
       },
-      js: {
-        src: ['build/json.js', 'js/*.js'],
-        dest: 'build/timeline.js'
+      // js: {
+      //   src: [
+      //     'build/json.js',
+      //     'build/patients.js',
+      //     'build/mrBrownData.js',
+      //     'js/app.js',
+      //     'js/templates.js',
+      //     'js/ng-mobile-menu.js',
+      //   ],
+      //   dest: 'build/timeline.js'
+      // }
+      jsForDoctor: {
+        src: [
+          'build/patients.js',
+          'build/mrBrownData.js',
+          // 'js/common.js',
+          'js/doctor.js',
+          'js/templates.js',
+          'js/ng-mobile-menu.js'
+        ],
+        dest: 'build/doctor.js'
+      },
+      jsForPatient: {
+        src: [
+          'build/patients.js',
+          'build/mrBrownData.js',
+          // 'js/common.js',
+          'js/patient.js',
+          'js/templates.js',
+          'js/ng-mobile-menu.js'
+        ],
+        dest: 'build/patient.js'
       }
     },
     ngtemplates: {
@@ -62,27 +98,41 @@ module.exports = function (grunt) {
       }
     },
     assemble: {
-      views: {
+      doctor: {
         options: {
           flatten: true,
+          layout: ['views/layouts/index.html'],
           partials: ['views/**/_*.html']
         },
-        src: ['views/index.html'],
+        src: ['views/doctor.html'],
+        dest: './'
+      },
+      patient: {
+        options: {
+          flatten: true,
+          layout: ['views/layouts/index.html'],
+          partials: ['views/**/_*.html']
+        },
+        src: ['views/patient.html'],
         dest: './'
       }
     },
     json: {
-      timelineItems: {
+      patients: {
         options: {
             namespace: 'patients',
-            processName: function(filename) {
-              return filename.replace (/(?:^|[-_])(\w)/g, function (_, c) {
-                return c ? c.toUpperCase () : '';
-              })
-            }
+            processName: convertJsonName
         },
         src: ['json/**/*.json'],
-        dest: 'build/json.js'
+        dest: 'build/patients.js'
+      },
+      mrBrownData: {
+        options: {
+            namespace: 'mrBrownData',
+            processName: convertJsonName
+        },
+        src: ['json_for_mr_brown/**/*.json'],
+        dest: 'build/mrBrownData.js'
       }
     }
   })
@@ -92,7 +142,6 @@ module.exports = function (grunt) {
     'ngtemplates',
     'assemble',
     'json',
-    'concat:css',
-    'concat:js'
+    'concat'
   ]);
 };

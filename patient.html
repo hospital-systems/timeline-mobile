@@ -14,57 +14,32 @@
     <link rel="stylesheet" href="css/ng-mobile-menu.css"/>
   </head>
   <body>
-    <div class="navbar navbar-inverse" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <span ng-switch on="currentPage">
-            <span ng-cloak ng-switch-when="timelineItem">
-               <button type="button" class="navbar-toggle pull-left"
-                       ng-click="gotoUrlFor('/')" style="width: 44px; height: 34px; padding: 0;">
-                 <span class="back-button glyphicon glyphicon-arrow-left"></span>
-               </button>
-            </span>
-            <span ng-switch-default>
-              <button type="button" class="navbar-toggle pull-left" ng-click="$spMenu.toggle()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-            </span>
-          </span>
-          <a class="navbar-brand" href="#/" ng-bind="Settings.header()">
-            Observations
-          </a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav" style="padding-left: 25px;">
-  <li ng-class="{active: currentPage === 'timelineList'}">
-    <a href="#/">Observations</a>
-  </li>
-  <li ng-class="{active: currentPage === 'problemList'}">
-    <a href="#/problem-list">Problem list</a>
-  </li>
-  <li ng-class="{active: currentPage === 'allergyList'}">
-    <a href="#/allergy-list">Allergy list</a>
-  </li>
-  <li ng-class="{active: currentPage === 'encounterList'}">
-    <a href="#/encounters">Encounters</a>
-  </li>
-  <li ng-class="{active: currentPage === 'profile'}">
-    <a href="#/profile">Profile</a>
-  </li>
 
-  <li ng-class="{active: currentPage === 'chat'}">
-    <a href="#/chat">Chat</a>
-  </li>
-</ul>
-
-        </div><!--/.nav-collapse -->
-      </div>
+    
+<div class="navbar navbar-inverse" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <span ng-switch on="currentPage">
+        <span ng-cloak ng-switch-when="timelineItem">
+          <button type="button" class="navbar-toggle pull-left"
+                  ng-click="gotoUrlFor('/')" style="width: 44px; height: 34px; padding: 0;">
+            <span class="back-button glyphicon glyphicon-arrow-left"></span>
+          </button>
+        </span>
+        <span ng-switch-default>
+          <button type="button" class="navbar-toggle pull-left" ng-click="$spMenu.toggle()">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </span>
+      </span>
+      <a class="navbar-brand" href="#/" ng-bind="Settings.header()">
+        Observations
+      </a>
     </div>
-
-    <div class="navbar navbar-inverse" id="sp-nav">
+    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav" style="padding-left: 25px;">
   <li ng-class="{active: currentPage === 'timelineList'}">
     <a href="#/">Observations</a>
@@ -88,6 +63,34 @@
 </ul>
 
     </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+<div class="navbar navbar-inverse" id="sp-nav">
+  <ul class="nav navbar-nav" style="padding-left: 25px;">
+  <li ng-class="{active: currentPage === 'timelineList'}">
+    <a href="#/">Observations</a>
+  </li>
+  <li ng-class="{active: currentPage === 'problemList'}">
+    <a href="#/problem-list">Problem list</a>
+  </li>
+  <li ng-class="{active: currentPage === 'allergyList'}">
+    <a href="#/allergy-list">Allergy list</a>
+  </li>
+  <li ng-class="{active: currentPage === 'encounterList'}">
+    <a href="#/encounters">Encounters</a>
+  </li>
+  <li ng-class="{active: currentPage === 'profile'}">
+    <a href="#/profile">Profile</a>
+  </li>
+
+  <li ng-class="{active: currentPage === 'chat'}">
+    <a href="#/chat">Chat</a>
+  </li>
+</ul>
+
+</div><!--/.nav-collapse -->
+
 
     <div id="sp-page">
       <div class="view-animate-container" ng-class="animateFlavor">
@@ -111,6 +114,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-    <script src="build/timeline.js"></script>
+    <script src="build/patient.js"></script>
+    <!-- <script src="build/timeline.js"></script> -->
   </body>
 </html>
