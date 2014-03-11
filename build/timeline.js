@@ -655,7 +655,8 @@ var timelineWithAnimation = angular.module(
     'ngRoute',
     'ngSanitize',
     'ngAnimate',
-    'shoppinpal.mobile-menu'
+    'shoppinpal.mobile-menu',
+    'firebase'
   ]
 );
 
@@ -693,6 +694,11 @@ timelineWithAnimation.config([
       templateUrl: '/ng_templates/profile.html',
       controller: 'RootCtrl'
     });
+
+    $routeProvider.when('/chat', {
+      templateUrl: '/ng_templates/chat.html',
+      controller: 'RootCtrl'
+    })
 
     $routeProvider.otherwise({
       templateUrl: '/ng_templates/page_under_construction.html',
@@ -824,6 +830,20 @@ timelineWithAnimation.controller('ProfileCtrl', function(Settings) {
   Settings.setHeader(title);
 });
 
+timelineWithAnimation.controller('ChatCtrl', function($scope, $firebase, Settings) {
+  var title = 'Chat';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+  var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
+  $scope.messages = $firebase(messagesRef);
+
+  $scope.addMessage = function() {
+    console.log('add');
+    $scope.messages.$add($scope.newMessage);
+    $scope.newMessage = {};
+  }
+})
+
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
   var title = 'Page under construction';
   Settings.setTitle(title);
@@ -893,6 +913,32 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   );
 
 
+  $templateCache.put('/ng_templates/chat.html',
+    "<div class=\"chat container\">\n" +
+    "  <div ng-controller=\"ChatCtrl\">\n" +
+    "\n" +
+    "    <div class=\"chat-input\">\n" +
+    "      <form role=\"form\" class=\"form-inline\">\n" +
+    "        <div class=\"form-group\">\n" +
+    "          <label for=\"sender\">Sender</label>\n" +
+    "          <input type=\"text\" class=\"form-control\" id=\"sender\" placeholder=\"Sender\" ng-model=\"newMessage.sender\">\n" +
+    "        </div>\n" +
+    "        <div class=\"form-group\">\n" +
+    "          <label for=\"message\">Message</label>\n" +
+    "          <input type=\"text\" class=\"form-control\" id=\"message\" placeholder=\"Message\" ng-model=\"newMessage.body\">\n" +
+    "        </div>\n" +
+    "        <button type=\"submit\" class=\"btn btn-default\" ng-click=\"addMessage()\">Send</button>\n" +
+    "      </form>\n" +
+    "    </div>\n" +
+    "    <div class=\"row item-row\" ng-repeat=\"message in messages\">\n" +
+    "      <div class=\"col-xs-12\"><strong>{{message.sender}}:</strong></div>\n" +
+    "      <div class=\"col-xs-12 text-right\">{{message.body}}</div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
   $templateCache.put('/ng_templates/encounters.html',
     "<div class=\"encounters-frame container\">\n" +
     "  <div ng-controller=\"EncounterListCtrl\">\n" +
@@ -922,6 +968,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "  <li><a href=\"#\">Observations</a></li>\n" +
     "  <li><a href=\"#\">Clinical Documents</a></li>\n" +
     "  <li><a href=\"#\">Encounters</a></li>\n" +
+    "  <li><a href=\"#\">Chat</a></li>\n" +
     "</ul>\n"
   );
 

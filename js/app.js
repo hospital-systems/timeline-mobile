@@ -3,7 +3,8 @@ var timelineWithAnimation = angular.module(
     'ngRoute',
     'ngSanitize',
     'ngAnimate',
-    'shoppinpal.mobile-menu'
+    'shoppinpal.mobile-menu',
+    'firebase'
   ]
 );
 
@@ -41,6 +42,11 @@ timelineWithAnimation.config([
       templateUrl: '/ng_templates/profile.html',
       controller: 'RootCtrl'
     });
+
+    $routeProvider.when('/chat', {
+      templateUrl: '/ng_templates/chat.html',
+      controller: 'RootCtrl'
+    })
 
     $routeProvider.otherwise({
       templateUrl: '/ng_templates/page_under_construction.html',
@@ -171,6 +177,20 @@ timelineWithAnimation.controller('ProfileCtrl', function(Settings) {
   Settings.setTitle(title);
   Settings.setHeader(title);
 });
+
+timelineWithAnimation.controller('ChatCtrl', function($scope, $firebase, Settings) {
+  var title = 'Chat';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
+  var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
+  $scope.messages = $firebase(messagesRef);
+
+  $scope.addMessage = function() {
+    console.log('add');
+    $scope.messages.$add($scope.newMessage);
+    $scope.newMessage = {};
+  }
+})
 
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
   var title = 'Page under construction';
