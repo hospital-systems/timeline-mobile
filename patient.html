@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="build/timeline.css"/>
     <link rel="stylesheet" href="css/ng-mobile-menu.css"/>
   </head>
-  <body>
+  <body ng-controller="PatientCtrl">
 
     
 <div class="navbar navbar-inverse" role="navigation">
@@ -46,7 +46,7 @@
     <a href="#/">Observations</a>
   </li>
   <li ng-class="{active: currentPage === 'problemList'}">
-    <a href="#/problem-list">Problem list</a>
+    <a href="#{{ Settings.patientId() && '/patients/' + Settings.patientId() }}/problem-list">Problem list</a>
   </li>
   <li ng-class="{active: currentPage === 'allergyList'}">
     <a href="#/allergy-list">Allergy list</a>
@@ -73,7 +73,7 @@
     <a href="#/">Observations</a>
   </li>
   <li ng-class="{active: currentPage === 'problemList'}">
-    <a href="#/problem-list">Problem list</a>
+    <a href="#{{ Settings.patientId() && '/patients/' + Settings.patientId() }}/problem-list">Problem list</a>
   </li>
   <li ng-class="{active: currentPage === 'allergyList'}">
     <a href="#/allergy-list">Allergy list</a>

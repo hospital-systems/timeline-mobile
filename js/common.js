@@ -9,13 +9,16 @@ var timelineWithAnimation = angular.module(
 );
 
 timelineWithAnimation.factory('Settings', function() {
-   var title  = 'TakeCare';
-   var header = 'TakeCare';
+   var title     = 'TakeCare';
+   var header    = 'TakeCare';
+   var patientId = null;
    return {
      title: function() { return title; },
      setTitle: function(newTitle) { title = newTitle },
      header: function() { return header; },
-     setHeader: function(newHeader) { header = newHeader }
+     setHeader: function(newHeader) { header = newHeader },
+     patientId: function() { return patientId; },
+     setPatientId: function(newPatientId) { patientId = newPatientId }
    };
 });
 
@@ -137,6 +140,7 @@ timelineWithAnimation.controller(
     })[0];
     Settings.setTitle('Observation: ' + $scope.item.name);
     Settings.setHeader('Observation');
+    Settings.setPatientId($scope.patient.id);
   });
 
 timelineWithAnimation.controller('ProblemListCtrl', function($scope, Settings) {
@@ -178,6 +182,11 @@ timelineWithAnimation.controller('ChatCtrl', function($scope, $firebase, Setting
     $scope.newMessage = {};
   }
 })
+
+timelineWithAnimation
+  .controller('PatientCtrl', function($scope, $route, $routeParams) {
+  $scope.patient = getPatientById($routeParams.patientId);
+});
 
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
   var title = 'Page under construction';

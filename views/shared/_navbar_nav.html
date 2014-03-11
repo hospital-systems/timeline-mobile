@@ -3,7 +3,7 @@
     <a href="#/">Observations</a>
   </li>
   <li ng-class="{active: currentPage === 'problemList'}">
-    <a href="#/problem-list">Problem list</a>
+    <a href="#\{{ Settings.patientId() && '/patients/' + Settings.patientId() }}/problem-list">Problem list</a>
   </li>
   <li ng-class="{active: currentPage === 'allergyList'}">
     <a href="#/allergy-list">Allergy list</a>
