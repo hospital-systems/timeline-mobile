@@ -765,7 +765,6 @@ console.log(userMoveTo);
           $scope.animateFlavor = 'move-to-right';
           break;
         default:
-// console.log('animation-disabled');
           $scope.animateFlavor = 'animation-disabled';
           break;
         }
@@ -796,7 +795,6 @@ timelineWithAnimation.controller(
   'TimelineListCtrl',
   function($scope, $route, $routeParams, Settings) {
     $scope.patient = getPatientById($routeParams.patientId);
-    // $scope.items = $scope.patient.timelineItems.sort(function(a, b) {
     $scope.items = mrBrownData['TimelineItems'].sort(function(a, b) {
       return b.createdAt - a.createdAt;
     });
@@ -809,7 +807,6 @@ timelineWithAnimation.controller(
   'TimelineItemsCtrl',
   function($scope, $route, $routeParams, Settings) {
     $scope.patient = getPatientById($routeParams.patientId);
-    // $scope.item = jQuery.grep($scope.patient.timelineItems, function(item) {
     $scope.item = jQuery.grep(mrBrownData['TimelineItems'], function(item) {
       return item.id.toString() === $routeParams.itemId.toString();
     })[0];
@@ -914,6 +911,7 @@ timelineWithAnimation.config([
       controller: 'RootCtrl'
     });
   }]);
+
 
 angular.module('timeline-with-animation').run(['$templateCache', function($templateCache) {
   'use strict';

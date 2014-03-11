@@ -101,7 +101,6 @@ console.log(userMoveTo);
           $scope.animateFlavor = 'move-to-right';
           break;
         default:
-// console.log('animation-disabled');
           $scope.animateFlavor = 'animation-disabled';
           break;
         }
@@ -132,7 +131,6 @@ timelineWithAnimation.controller(
   'TimelineListCtrl',
   function($scope, $route, $routeParams, Settings) {
     $scope.patient = getPatientById($routeParams.patientId);
-    // $scope.items = $scope.patient.timelineItems.sort(function(a, b) {
     $scope.items = mrBrownData['TimelineItems'].sort(function(a, b) {
       return b.createdAt - a.createdAt;
     });
@@ -145,7 +143,6 @@ timelineWithAnimation.controller(
   'TimelineItemsCtrl',
   function($scope, $route, $routeParams, Settings) {
     $scope.patient = getPatientById($routeParams.patientId);
-    // $scope.item = jQuery.grep($scope.patient.timelineItems, function(item) {
     $scope.item = jQuery.grep(mrBrownData['TimelineItems'], function(item) {
       return item.id.toString() === $routeParams.itemId.toString();
     })[0];
@@ -199,3 +196,54 @@ timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings)
   Settings.setTitle(title);
   Settings.setHeader(title);
 });
+
+timelineWithAnimation.config([
+  '$routeProvider',
+  function($routeProvider) {
+    'use strict';
+
+    $routeProvider.when('/', {
+      templateUrl: '/ng_templates/patients_list.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/patients/:patientId', {
+      templateUrl: '/ng_templates/timeline_list.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/patients/:patientId/items/:itemId', {
+      templateUrl: '/ng_templates/timeline_item.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/patients/:patientId//problem-list', {
+      templateUrl: '/ng_templates/problem_list.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/patients/:patientId/allergy-list', {
+      templateUrl: '/ng_templates/allergy_list.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/patients/:patientId/encounters', {
+      templateUrl: '/ng_templates/encounters.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/patients/:patientId/profile', {
+      templateUrl: '/ng_templates/profile.html',
+      controller: 'RootCtrl'
+    });
+
+    $routeProvider.when('/patients/:patientId/chat', {
+      templateUrl: '/ng_templates/chat.html',
+      controller: 'RootCtrl'
+    })
+
+    $routeProvider.otherwise({
+      templateUrl: '/ng_templates/page_under_construction.html',
+      controller: 'RootCtrl'
+    });
+  }]);
