@@ -22,7 +22,8 @@
       <span ng-switch on="currentPage">
         <span ng-cloak ng-switch-when="timelineItem">
           <button type="button" class="navbar-toggle pull-left"
-                  ng-click="gotoUrlFor('/')" style="width: 44px; height: 34px; padding: 0;">
+                  ng-click="$back();"
+                  style="width: 44px; height: 34px; padding: 0;">
             <span class="back-button glyphicon glyphicon-arrow-left"></span>
           </button>
         </span>

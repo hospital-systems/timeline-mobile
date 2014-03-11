@@ -19,6 +19,7 @@ timelineWithAnimation.factory('Settings', function() {
    };
 });
 
+var patientsListRegexp  = /\/doctor.html#\/$/;
 var timelineListRegexp  = /\/((doctor|patient).html)?#\/(patients\/[0-9]+)?$/;
 var timelineItemRegexp  = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?items\/[0-9]+$/;
 var problemListRegexp   = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?problem-list$/;
@@ -26,9 +27,11 @@ var allergyListRegexp   = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?all
 var encounterListRegexp = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?encounters$/;
 var profileRegexp       = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?profile$/;
 var chatRegexp          = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?chat$/;
-var patientsListRegexp  = /\/((doctor|patient).html)?#\/$/;
 
 function getPageType(url) {
+  if (patientsListRegexp.test(url)) {
+    return 'patientsList';
+  }
   if (timelineListRegexp.test(url)) {
     return 'timelineList';
   }
@@ -50,18 +53,30 @@ function getPageType(url) {
   if (chatRegexp.test(url)) {
     return 'chat';
   }
-  if (patientsListRegexp.test(url)) {
-    return 'patientsList';
-  }
   return 'unrecognized';
+}
+
+function getPatientById(id) {
+  if (typeof(id) === 'undefined') {
+    return null;
+  }
+  return jQuery.grep(patientsArrayFor(patients), function(patient) {
+    return patient.id.toString() === id.toString();
+  })[0];
 }
 
 timelineWithAnimation.controller(
   'RootCtrl',
-  function($scope, $rootScope, $location, $spMenu, Settings) {
+  function($scope, $rootScope, $location, $spMenu, Settings, $route, $routeParams) {
     $scope.gotoUrlFor = function (path) {
       $location.path(path);
     };
+
+  $scope.$back = function() {
+    window.history.back();
+  };
+
+    $scope.patient = getPatientById($routeParams.patientId);
 
     $scope.Settings = Settings;
 
@@ -79,36 +94,10 @@ timelineWithAnimation.controller(
 console.log(userMoveFrom);
 console.log(userMoveTo);
 
-        switch (navigationState.join(' ')) {
-        case 'from patientsList to timelineList':
-        case 'from patientsList to problemList':
-        case 'from patientsList to allergyList':
-        case 'from patientsList to encounterList':
-        case 'from patientsList to profile':
-        case 'from patientsList to chat':
-          $scope.animateFlavor = 'move-to-left';
-          break;
-        case 'from timelineList to timelineItem':
-        case 'from timelineList to problemList':
-        case 'from timelineList to allergyList':
-        case 'from timelineList to encounterList':
-        case 'from timelineList to profile':
-        case 'from timelineList to chat':
-          $scope.animateFlavor = 'move-to-left';
-          break;
-        case 'from timelineItem to timelineList':
+        if (userMoveTo === 'timelineList' && userMoveFrom !== 'patientsList') {
           $scope.animateFlavor = 'move-to-right';
-          break;
-        case 'from problemList to timelineList':
-        case 'from allergyList to timelineList':
-        case 'from encounterList to timelineList':
-        case 'from profile to timelineList':
-        case 'from chat to timelineList':
-          $scope.animateFlavor = 'move-to-right';
-          break;
-        default:
-          $scope.animateFlavor = 'animation-disabled';
-          break;
+        } else {
+          $scope.animateFlavor = 'move-to-left';
         }
 
         $scope.currentPage = userMoveTo;
@@ -126,15 +115,6 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope) {
     return a.id - b.id;
   });
 });
-
-function getPatientById(id) {
-  if (typeof(id) === 'undefined') {
-    return null;
-  }
-  return jQuery.grep(patientsArrayFor(patients), function(patient) {
-    return patient.id.toString() === id.toString();
-  })[0];
-}
 
 timelineWithAnimation.controller(
   'TimelineListCtrl',

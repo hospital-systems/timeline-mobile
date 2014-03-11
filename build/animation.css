@@ -1,8 +1,8 @@
-.view-animate-container:not(.animation-disabled) {
+.view-animate-container {
   position: relative;
 }
-.view-animate-container:not(.animation-disabled) .view-animate.ng-enter,
-.view-animate-container:not(.animation-disabled) .view-animate.ng-leave {
+.view-animate-container .view-animate.ng-enter,
+.view-animate-container .view-animate.ng-leave {
   -webkit-transition: all cubic-bezier(0.19, 1, 0.22, 1) 775ms;
   transition: all cubic-bezier(0.19, 1, 0.22, 1) 775ms;
   display: block;
@@ -14,23 +14,23 @@
   right: 0;
   bottom: 0;
 }
-.view-animate-container:not(.animation-disabled).move-to-left .view-animate.ng-enter {
+.view-animate-container.move-to-left .view-animate.ng-enter {
   left: 100%;
 }
-.view-animate-container:not(.animation-disabled).move-to-left .view-animate.ng-enter.ng-enter-active {
+.view-animate-container.move-to-left .view-animate.ng-enter.ng-enter-active {
   left: 0;
   opacity: 1;
 }
-.view-animate-container:not(.animation-disabled).move-to-left .view-animate.ng-leave.ng-leave-active {
+.view-animate-container.move-to-left .view-animate.ng-leave.ng-leave-active {
   left: -100%;
 }
-.view-animate-container:not(.animation-disabled).move-to-right .view-animate.ng-enter {
+.view-animate-container.move-to-right .view-animate.ng-enter {
   left: -100%;
 }
-.view-animate-container:not(.animation-disabled).move-to-right .view-animate.ng-enter.ng-enter-active {
+.view-animate-container.move-to-right .view-animate.ng-enter.ng-enter-active {
   left: 0;
   opacity: 1;
 }
-.view-animate-container:not(.animation-disabled).move-to-right .view-animate.ng-leave.ng-leave-active {
+.view-animate-container.move-to-right .view-animate.ng-leave.ng-leave-active {
   left: 100%;
 }
