@@ -19,13 +19,13 @@ timelineWithAnimation.factory('Settings', function() {
    };
 });
 
-var patientsListRegexp  = /\/(index.html)?#\/$/;
-var timelineListRegexp  = /\/(index.html)?#\/patients\/[0-9]+$/;
-var timelineItemRegexp  = /\/(index.html)?#\/patients\/[0-9]+\/items\/[0-9]+$/;
-var problemListRegexp   = /\/(index.html)?#\/patients\/[0-9]+\/problem-list$/;
-var allergyListRegexp   = /\/(index.html)?#\/patients\/[0-9]+\/allergy-list$/;
-var encounterListRegexp = /\/(index.html)?#\/patients\/[0-9]+\/encounters$/;
-var profileRegexp       = /\/(index.html)?#\/patients\/[0-9]+\/profile$/;
+var patientsListRegexp  = /\/((doctor|patient).html)?#\/$/;
+var timelineListRegexp  = /\/((doctor|patient).html)?#\/patients\/[0-9]+$/;
+var timelineItemRegexp  = /\/((doctor|patient).html)?#\/patients\/[0-9]+\/items\/[0-9]+$/;
+var problemListRegexp   = /\/((doctor|patient).html)?#\/patients\/[0-9]+\/problem-list$/;
+var allergyListRegexp   = /\/((doctor|patient).html)?#\/patients\/[0-9]+\/allergy-list$/;
+var encounterListRegexp = /\/((doctor|patient).html)?#\/patients\/[0-9]+\/encounters$/;
+var profileRegexp       = /\/((doctor|patient).html)?#\/patients\/[0-9]+\/profile$/;
 
 function getPageType(url) {
   if (patientsListRegexp.test(url)) {
