@@ -42,22 +42,11 @@ module.exports = function (grunt) {
         src: ['build/*.css'],
         dest: 'build/timeline.css'
       },
-      // js: {
-      //   src: [
-      //     'build/json.js',
-      //     'build/patients.js',
-      //     'build/mrBrownData.js',
-      //     'js/app.js',
-      //     'js/templates.js',
-      //     'js/ng-mobile-menu.js',
-      //   ],
-      //   dest: 'build/timeline.js'
-      // }
       jsForDoctor: {
         src: [
           'build/patients.js',
           'build/mrBrownData.js',
-          // 'js/common.js',
+          'js/common.js',
           'js/doctor.js',
           'js/templates.js',
           'js/ng-mobile-menu.js'
@@ -68,7 +57,7 @@ module.exports = function (grunt) {
         src: [
           'build/patients.js',
           'build/mrBrownData.js',
-          // 'js/common.js',
+          'js/common.js',
           'js/patient.js',
           'js/templates.js',
           'js/ng-mobile-menu.js'
