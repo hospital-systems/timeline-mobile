@@ -19,18 +19,16 @@ timelineWithAnimation.factory('Settings', function() {
    };
 });
 
+var timelineListRegexp  = /\/((doctor|patient).html)?#\/(patients\/[0-9]+)?$/;
+var timelineItemRegexp  = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?items\/[0-9]+$/;
+var problemListRegexp   = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?problem-list$/;
+var allergyListRegexp   = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?allergy-list$/;
+var encounterListRegexp = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?encounters$/;
+var profileRegexp       = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?profile$/;
+var chatRegexp          = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?chat$/;
 var patientsListRegexp  = /\/((doctor|patient).html)?#\/$/;
-var timelineListRegexp  = /\/((doctor|patient).html)?#\/patients\/[0-9]+$/;
-var timelineItemRegexp  = /\/((doctor|patient).html)?#\/patients\/[0-9]+\/items\/[0-9]+$/;
-var problemListRegexp   = /\/((doctor|patient).html)?#\/patients\/[0-9]+\/problem-list$/;
-var allergyListRegexp   = /\/((doctor|patient).html)?#\/patients\/[0-9]+\/allergy-list$/;
-var encounterListRegexp = /\/((doctor|patient).html)?#\/patients\/[0-9]+\/encounters$/;
-var profileRegexp       = /\/((doctor|patient).html)?#\/patients\/[0-9]+\/profile$/;
 
 function getPageType(url) {
-  if (patientsListRegexp.test(url)) {
-    return 'patientsList';
-  }
   if (timelineListRegexp.test(url)) {
     return 'timelineList';
   }
@@ -48,6 +46,12 @@ function getPageType(url) {
   }
   if (profileRegexp.test(url)) {
     return 'profile';
+  }
+  if (chatRegexp.test(url)) {
+    return 'chat';
+  }
+  if (patientsListRegexp.test(url)) {
+    return 'patientsList';
   }
   return 'unrecognized';
 }
@@ -81,6 +85,7 @@ console.log(userMoveTo);
         case 'from patientsList to allergyList':
         case 'from patientsList to encounterList':
         case 'from patientsList to profile':
+        case 'from patientsList to chat':
           $scope.animateFlavor = 'move-to-left';
           break;
         case 'from timelineList to timelineItem':
@@ -88,16 +93,17 @@ console.log(userMoveTo);
         case 'from timelineList to allergyList':
         case 'from timelineList to encounterList':
         case 'from timelineList to profile':
+        case 'from timelineList to chat':
           $scope.animateFlavor = 'move-to-left';
           break;
         case 'from timelineItem to timelineList':
           $scope.animateFlavor = 'move-to-right';
           break;
-        case 'from timelineList to patientsList':
-        case 'from problemList to patientsList':
-        case 'from allergyList to patientsList':
-        case 'from encounterList to patientsList':
-        case 'from profile to patientsList':
+        case 'from problemList to timelineList':
+        case 'from allergyList to timelineList':
+        case 'from encounterList to timelineList':
+        case 'from profile to timelineList':
+        case 'from chat to timelineList':
           $scope.animateFlavor = 'move-to-right';
           break;
         default:
@@ -122,6 +128,9 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope) {
 });
 
 function getPatientById(id) {
+  if (typeof(id) === 'undefined') {
+    return null;
+  }
   return jQuery.grep(patientsArrayFor(patients), function(patient) {
     return patient.id.toString() === id.toString();
   })[0];
@@ -185,7 +194,6 @@ timelineWithAnimation.controller('ChatCtrl', function($scope, $firebase, Setting
   $scope.messages = $firebase(messagesRef);
 
   $scope.addMessage = function() {
-    console.log('add');
     $scope.messages.$add($scope.newMessage);
     $scope.newMessage = {};
   }
@@ -196,54 +204,3 @@ timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings)
   Settings.setTitle(title);
   Settings.setHeader(title);
 });
-
-timelineWithAnimation.config([
-  '$routeProvider',
-  function($routeProvider) {
-    'use strict';
-
-    $routeProvider.when('/', {
-      templateUrl: '/ng_templates/patients_list.html',
-      controller: 'RootCtrl'
-    });
-
-    $routeProvider.when('/patients/:patientId', {
-      templateUrl: '/ng_templates/timeline_list.html',
-      controller: 'RootCtrl'
-    });
-
-    $routeProvider.when('/patients/:patientId/items/:itemId', {
-      templateUrl: '/ng_templates/timeline_item.html',
-      controller: 'RootCtrl'
-    });
-
-    $routeProvider.when('/patients/:patientId//problem-list', {
-      templateUrl: '/ng_templates/problem_list.html',
-      controller: 'RootCtrl'
-    });
-
-    $routeProvider.when('/patients/:patientId/allergy-list', {
-      templateUrl: '/ng_templates/allergy_list.html',
-      controller: 'RootCtrl'
-    });
-
-    $routeProvider.when('/patients/:patientId/encounters', {
-      templateUrl: '/ng_templates/encounters.html',
-      controller: 'RootCtrl'
-    });
-
-    $routeProvider.when('/patients/:patientId/profile', {
-      templateUrl: '/ng_templates/profile.html',
-      controller: 'RootCtrl'
-    });
-
-    $routeProvider.when('/patients/:patientId/chat', {
-      templateUrl: '/ng_templates/chat.html',
-      controller: 'RootCtrl'
-    })
-
-    $routeProvider.otherwise({
-      templateUrl: '/ng_templates/page_under_construction.html',
-      controller: 'RootCtrl'
-    });
-  }]);

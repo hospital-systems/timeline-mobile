@@ -162,7 +162,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "  <ul class=\"list-unstyled\">\n" +
     "    <li class=\"timeline-item\" ng-repeat=\"item in items\">\n" +
     "      <a class=\"timeline-item-link\"\n" +
-    "         href=\"#/patients/{{ patient.id }}/items/{{ item.id }}\">\n" +
+    "         href=\"#{{ patient && '/patients/' + patient.id }}/items/{{ item.id }}\">\n" +
     "        <div ng-include=\"'/ng_templates/_timeline_item.html'\"></div>\n" +
     "      </a>\n" +
     "    </li>\n" +
