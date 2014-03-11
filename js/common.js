@@ -65,7 +65,7 @@ timelineWithAnimation.controller(
 
     $scope.Settings = Settings;
 
-    $rootScope.$on(
+    $scope.$on(
       '$locationChangeStart',
       function(_, nextPageUrl, currentPageUrl) {
 
