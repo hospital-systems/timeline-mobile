@@ -36,7 +36,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    clean: ['*.html', 'build/**/*'],
+    clean: ['doctor.html', 'patient.html', 'build/**/*'],
     concat: {
       css: {
         src: ['build/*.css'],
