@@ -17,8 +17,13 @@ timelineWithAnimation.factory('Settings', function() {
      setTitle: function(newTitle) { title = newTitle },
      header: function() { return header; },
      setHeader: function(newHeader) { header = newHeader },
-     patientId: function() { return patientId; },
-     setPatientId: function(newPatientId) { patientId = newPatientId }
+     getPatientId: function() { return patientId; },
+     setPatientId: function(patient) {
+       if (!patient) {
+         return false;
+       }
+       patientId = patient.id;
+     }
    };
 });
 
@@ -59,18 +64,9 @@ function getPageType(url) {
   return 'unrecognized';
 }
 
-function getPatientById(id) {
-  if (typeof(id) === 'undefined') {
-    return null;
-  }
-  return jQuery.grep(patientsArrayFor(patients), function(patient) {
-    return patient.id.toString() === id.toString();
-  })[0];
-}
-
 timelineWithAnimation.controller(
   'RootCtrl',
-  function($scope, $rootScope, $location, $spMenu, Settings, $route, $routeParams) {
+  function($scope, $rootScope, $location, $spMenu, Settings) {
     $scope.gotoUrlFor = function (path) {
       $location.path(path);
     };
@@ -78,8 +74,6 @@ timelineWithAnimation.controller(
     $scope.$back = function() {
       window.history.back();
     };
-
-    $scope.patient = getPatientById($routeParams.patientId);
 
     $scope.Settings = Settings;
 
@@ -93,9 +87,6 @@ timelineWithAnimation.controller(
         var userMoveFrom = getPageType(currentPageUrl);
         var userMoveTo   = getPageType(nextPageUrl);
         var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
-
-console.log(userMoveFrom);
-console.log(userMoveTo);
 
         if (userMoveTo === 'timelineList' && userMoveFrom !== 'patientsList') {
           $scope.animateFlavor = 'move-to-right';
@@ -119,10 +110,20 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope) {
   });
 });
 
+function getPatientById(id) {
+  if (typeof(id) === 'undefined') {
+    return null;
+  }
+  return jQuery.grep(patientsArrayFor(patients), function(patient) {
+    return patient.id.toString() === id.toString();
+  })[0];
+}
+
 timelineWithAnimation.controller(
   'TimelineListCtrl',
   function($scope, $route, $routeParams, Settings) {
     $scope.patient = getPatientById($routeParams.patientId);
+    Settings.setPatientId($scope.patient);
     $scope.items = mrBrownData['TimelineItems'].sort(function(a, b) {
       return b.createdAt - a.createdAt;
     });
@@ -135,58 +136,73 @@ timelineWithAnimation.controller(
   'TimelineItemsCtrl',
   function($scope, $route, $routeParams, Settings) {
     $scope.patient = getPatientById($routeParams.patientId);
+    Settings.setPatientId($scope.patient);
     $scope.item = jQuery.grep(mrBrownData['TimelineItems'], function(item) {
       return item.id.toString() === $routeParams.itemId.toString();
     })[0];
     Settings.setTitle('Observation: ' + $scope.item.name);
     Settings.setHeader('Observation');
-    Settings.setPatientId($scope.patient.id);
   });
 
-timelineWithAnimation.controller('ProblemListCtrl', function($scope, Settings) {
-  var title = 'Problem list';
-  Settings.setTitle(title);
-  Settings.setHeader(title);
-  $scope.items = mrBrownData['Problems'];
-});
+timelineWithAnimation.controller(
+  'ProblemListCtrl',
+  function($scope, Settings, $route, $routeParams) {
+    $scope.patient = getPatientById($routeParams.patientId);
+    Settings.setPatientId($scope.patient);
+    var title = 'Problem list';
+    Settings.setTitle(title);
+    Settings.setHeader(title);
+    $scope.items = mrBrownData['Problems'];
+  });
 
-timelineWithAnimation.controller('AllergyListCtrl', function($scope, Settings) {
-  var title = 'Allergy list';
-  Settings.setTitle(title);
-  Settings.setHeader(title);
-  $scope.items = mrBrownData['Allergies'];
-});
+timelineWithAnimation.controller(
+  'AllergyListCtrl',
+  function($scope, Settings, $route, $routeParams) {
+    $scope.patient = getPatientById($routeParams.patientId);
+    Settings.setPatientId($scope.patient);
+    var title = 'Allergy list';
+    Settings.setTitle(title);
+    Settings.setHeader(title);
+    $scope.items = mrBrownData['Allergies'];
+  });
 
-timelineWithAnimation.controller('EncounterListCtrl', function($scope, Settings) {
-  var title = 'Encounters';
-  Settings.setTitle(title);
-  Settings.setHeader(title);
-  $scope.items = mrBrownData['Encounters'];
-});
+timelineWithAnimation.controller(
+  'EncounterListCtrl',
+  function($scope, Settings, $route, $routeParams) {
+    $scope.patient = getPatientById($routeParams.patientId);
+    Settings.setPatientId($scope.patient);
+    var title = 'Encounters';
+    Settings.setTitle(title);
+    Settings.setHeader(title);
+    $scope.items = mrBrownData['Encounters'];
+  });
 
-timelineWithAnimation.controller('ProfileCtrl', function(Settings) {
-  var title = 'Profile';
-  Settings.setTitle(title);
-  Settings.setHeader(title);
-});
+timelineWithAnimation.controller(
+  'ProfileCtrl',
+  function($scope, Settings, $route, $routeParams) {
+    var patient = getPatientById($routeParams.patientId);
+    Settings.setPatientId(patient);
+    var title = 'Profile';
+    Settings.setTitle(title);
+    Settings.setHeader(title);
+  });
 
-timelineWithAnimation.controller('ChatCtrl', function($scope, $firebase, Settings) {
-  var title = 'Chat';
-  Settings.setTitle(title);
-  Settings.setHeader(title);
-  var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
-  $scope.messages = $firebase(messagesRef);
+timelineWithAnimation.controller(
+  'ChatCtrl',
+  function($scope, $firebase, Settings, $route, $routeParams) {
+    $scope.patient = getPatientById($routeParams.patientId);
+    Settings.setPatientId($scope.patient);
+    var title = 'Chat';
+    Settings.setTitle(title);
+    Settings.setHeader(title);
+    var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
+    $scope.messages = $firebase(messagesRef);
 
-  $scope.addMessage = function() {
-    $scope.messages.$add($scope.newMessage);
-    $scope.newMessage = {};
-  }
-})
-
-timelineWithAnimation
-  .controller('PatientCtrl', function($scope, $route, $routeParams) {
-  $scope.patient = getPatientById($routeParams.patientId);
-});
+    $scope.addMessage = function() {
+      $scope.messages.$add($scope.newMessage);
+      $scope.newMessage = {};
+    }
+  })
 
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
   var title = 'Page under construction';

@@ -1,21 +1,21 @@
 <ul class="nav navbar-nav" style="padding-left: 25px;">
   <li ng-class="{active: currentPage === 'timelineList'}">
-    <a href="#/">Observations</a>
+    <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/">Observations</a>
   </li>
   <li ng-class="{active: currentPage === 'problemList'}">
-    <a href="#\{{ Settings.patientId() && '/patients/' + Settings.patientId() }}/problem-list">Problem list</a>
+    <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/problem-list">Problem list</a>
   </li>
   <li ng-class="{active: currentPage === 'allergyList'}">
-    <a href="#/allergy-list">Allergy list</a>
+    <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/allergy-list">Allergy list</a>
   </li>
   <li ng-class="{active: currentPage === 'encounterList'}">
-    <a href="#/encounters">Encounters</a>
+    <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/encounters">Encounters</a>
   </li>
   <li ng-class="{active: currentPage === 'profile'}">
-    <a href="#/profile">Profile</a>
+    <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/profile">Profile</a>
   </li>
 
   <li ng-class="{active: currentPage === 'chat'}">
-    <a href="#/chat">Chat</a>
+    <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/chat">Chat</a>
   </li>
 </ul>
