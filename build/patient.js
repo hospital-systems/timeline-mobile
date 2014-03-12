@@ -786,6 +786,9 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope, Settings) 
   $scope.patients = patientsArrayFor(patients).sort(function(a, b){
     return a.id - b.id;
   });
+  var title = 'Patients';
+  Settings.setTitle(title);
+  Settings.setHeader(title);
 });
 
 timelineWithAnimation.controller(
