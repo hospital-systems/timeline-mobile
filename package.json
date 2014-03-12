@@ -15,7 +15,9 @@
     "grunt-angular-templates": "~0.5.1",
     "grunt-contrib-less": "~0.9.0",
     "assemble": "*",
-    "grunt-json": "*"
+    "grunt-json": "*",
+    "bower": "latest",
+    "grunt-bower-task": "latest"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
