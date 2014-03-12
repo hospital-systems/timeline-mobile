@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="build/timeline.css"/>
     <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="css/ng-mobile-menu.css"/>
+    <link rel="stylesheet" href="bower_components/fullcalendar/fullcalendar.css"/>
   </head>
   <body>
 
@@ -57,6 +58,9 @@
   <li ng-class="{active: currentPage === 'chat'}">
     <a href="#{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/chat">Chat</a>
   </li>
+  <li ng-class="{active: currentPage === 'calendar'}">
+    <a href="#{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/calendar">Calendar</a>
+  </li>
   <li ng-if="Settings.getPatientId()"><a href="#/">Patients list</a></li>
 </ul>
 
@@ -84,6 +88,9 @@
   <li ng-class="{active: currentPage === 'chat'}">
     <a href="#{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/chat">Chat</a>
   </li>
+  <li ng-class="{active: currentPage === 'calendar'}">
+    <a href="#{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/calendar">Calendar</a>
+  </li>
   <li ng-if="Settings.getPatientId()"><a href="#/">Patients list</a></li>
 </ul>
 
@@ -105,5 +112,6 @@
     <script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/0.7.0/angularfire.min.js"></script>
 
     <script type="text/javascript" src="js/patient.js"></script>
+    <script type="text/javascript" src="build/calendar_stuff.js"></script>
   </body>
 </html>

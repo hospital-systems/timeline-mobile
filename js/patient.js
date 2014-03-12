@@ -38,6 +38,11 @@ timelineWithAnimation.config([
       controller: 'RootCtrl'
     })
 
+    $routeProvider.when('/calendar', {
+      templateUrl: '/ng_templates/calendar.html',
+      controller: 'RootCtrl'
+    })
+
     $routeProvider.otherwise({
       templateUrl: '/ng_templates/page_under_construction.html',
       controller: 'RootCtrl'

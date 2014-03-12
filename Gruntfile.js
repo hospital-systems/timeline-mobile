@@ -44,19 +44,19 @@ module.exports = function (grunt) {
     concat: {
       css: {
         src: [
-          'bower_components/bootstrap/dist/css/bootstrap.min.css',
+          'bower_components/bootstrap/dist/css/bootstrap.css',
           'build/*.css'
         ],
         dest: 'build/timeline.css'
       },
       commonStuff: {
         src: [
-          'bower_components/jquery/dist/jquery.min.js',
-          'bower_components/bootstrap/dist/js/bootstrap.min.js',
-          'bower_components/angular/angular.min.js',
-          'bower_components/angular-animate/angular-animate.min.js',
-          'bower_components/angular-route/angular-route.min.js',
-          'bower_components/angular-sanitize/angular-sanitize.min.js',
+          'bower_components/jquery/dist/jquery.js',
+          'bower_components/bootstrap/dist/js/bootstrap.js',
+          'bower_components/angular/angular.js',
+          'bower_components/angular-animate/angular-animate.js',
+          'bower_components/angular-route/angular-route.js',
+          'bower_components/angular-sanitize/angular-sanitize.js',
           'build/patients.js',
           'build/mrBrownData.js',
           'js/common.js',
@@ -69,8 +69,9 @@ module.exports = function (grunt) {
         src: [
           'bower_components/jquery-ui/ui/jquery-ui.js',
           'bower_components/angular-ui-calendar/src/calendar.js',
+          'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
           'bower_components/fullcalendar/fullcalendar.js',
-          'bower_components/fullcalendar/gcal.js'
+          'bower_components/fullcalendar/gcal.js',
         ],
         dest: 'build/calendar_stuff.js'
       }
