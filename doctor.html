@@ -27,7 +27,7 @@
             <span class="back-button glyphicon glyphicon-arrow-left"></span>
           </button>
         </span>
-        <span ng-switch-default>
+        <span ng-switch-default ng-class="{invisible: Settings.getPatientId() === null}">
           <button type="button" class="navbar-toggle pull-left" ng-click="$spMenu.toggle()">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>

@@ -114,7 +114,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/patients_list.html',
     "<div class=\"container\" ng-controller=\"PatientsListCtrl\">\n" +
     "  <ul class=\"list-unstyled\">\n" +
-    "    <li ng-repeat=\"patient in patients\">\n" +
+    "    <li class=\"patient-item\" ng-repeat=\"patient in patients\">\n" +
     "      <a href=\"#/patients/{{ patient.id }}\">\n" +
     "        {{ patient.name }}\n" +
     "      </a>\n" +

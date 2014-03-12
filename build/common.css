@@ -72,7 +72,8 @@ h1 {
 .problem-list-frame .timeline-item-row {
   margin-right: 0;
 }
-.timeline-item {
+.timeline-item,
+.patient-item {
   border-bottom: 1px solid #EEEEEE;
   margin: 0 0px;
   padding: 10px 0;

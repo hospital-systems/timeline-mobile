@@ -1,6 +1,6 @@
 <div class="container" ng-controller="PatientsListCtrl">
   <ul class="list-unstyled">
-    <li ng-repeat="patient in patients">
+    <li class="patient-item" ng-repeat="patient in patients">
       <a href="#/patients/{{ patient.id }}">
         {{ patient.name }}
       </a>
