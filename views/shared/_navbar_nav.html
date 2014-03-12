@@ -1,4 +1,7 @@
 <ul class="nav navbar-nav" style="padding-left: 25px;">
+  <li ng-if="Settings.getPatientId()">
+      <a href="#/">My patients</a>
+  </li>
   <li ng-class="{active: currentPage === 'timelineList'}">
     <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/">Observations</a>
   </li>
