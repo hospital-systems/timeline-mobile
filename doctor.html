@@ -65,7 +65,6 @@
   <li ng-class="{active: currentPage === 'calendar'}">
     <a href="#{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/calendar">Calendar</a>
   </li>
-  <li ng-if="Settings.getPatientId()"><a href="#/">Patients list</a></li>
 </ul>
 
     </div><!--/.nav-collapse -->
@@ -98,7 +97,6 @@
   <li ng-class="{active: currentPage === 'calendar'}">
     <a href="#{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/calendar">Calendar</a>
   </li>
-  <li ng-if="Settings.getPatientId()"><a href="#/">Patients list</a></li>
 </ul>
 
 </div><!--/.nav-collapse -->
