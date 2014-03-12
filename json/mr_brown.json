@@ -1,4 +1,10 @@
 {
-  id: 1,
-  name: 'Mr. Brown'
+    id: 1,
+    name: 'Mr. Smith',
+    fullname: 'Smith, John',
+    gender: 'male',
+    date_of_birth: new Date(1934, 9, 27),
+    address: '9764 Jeopardy Lane, Chicago IL',
+    phone: '555-0101',
+    email: 'john_smith@yahoo.com'
 }

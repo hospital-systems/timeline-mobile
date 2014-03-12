@@ -1,4 +1,10 @@
 {
-  id: 2,
-  name: 'Mr. Blonde'
+    id: 2,
+    name: 'Mrs. Johnson',
+    fullname: 'Johnson, Jane',
+    gender: 'female',
+    date_of_birth: new Date(1948, 6, 12),
+    address: '518 Crestview Drive, Beverly Hills, CA',
+    phone: '555-0150',
+    email: 'jane-johnson@outlook.com'
 }
