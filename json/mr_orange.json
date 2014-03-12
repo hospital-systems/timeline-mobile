@@ -1,4 +1,10 @@
 {
-  id: 3,
-  name: 'Mr. Orange'
+    id: 3,
+    name: 'Mrs. Major',
+    fullname: 'Major, Mary',
+    gender: 'female',
+    date_of_birth: new Date(1956, 7, 9),
+    address: '31 Spooner Street, Quahog, RI',
+    phone: '555-0199',
+    email: 'mary.major@gmail.com'
 }
