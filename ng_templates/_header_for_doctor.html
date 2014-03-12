@@ -1,2 +1,4 @@
 <div>{{ Settings.header() }}</div>
-<div>{{ getPatient(Settings.getPatientId()).name }}</div>
+<div ng-if="getPatient(Settings.getPatientId())">
+  <small>{{ getPatient(Settings.getPatientId()).name }}</small>
+</div>

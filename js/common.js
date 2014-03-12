@@ -11,7 +11,7 @@ var timelineWithAnimation = angular.module(
 timelineWithAnimation.factory('Settings', function() {
    var title     = 'TakeCare';
    var header    = 'TakeCare';
-   var patientId = undefined;
+   var patientId = null;
    return {
      title: function() { return title; },
      setTitle: function(newTitle) { title = newTitle },
@@ -20,9 +20,10 @@ timelineWithAnimation.factory('Settings', function() {
      getPatientId: function() { return patientId; },
      setPatientId: function(patient) {
        if (!patient) {
-         return false;
+         patientId = null;
+       } else {
+         patientId = patient.id;
        }
-       patientId = patient.id;
      }
    };
 });
@@ -65,7 +66,7 @@ function getPageType(url) {
 }
 
 function getPatientById(id) {
-  if (typeof(id) === 'undefined') {
+  if (!id) {
     return null;
   }
   return jQuery.grep(patientsArrayFor(patients), function(patient) {
@@ -116,7 +117,8 @@ function patientsArrayFor(patientsObject) {
   });
 }
 
-timelineWithAnimation.controller('PatientsListCtrl', function($scope) {
+timelineWithAnimation.controller('PatientsListCtrl', function($scope, Settings) {
+  Settings.setPatientId(null);
   $scope.patients = patientsArrayFor(patients).sort(function(a, b){
     return a.id - b.id;
   });

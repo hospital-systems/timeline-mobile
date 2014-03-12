@@ -3,7 +3,9 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
   $templateCache.put('/ng_templates/_header_for_doctor.html',
     "<div>{{ Settings.header() }}</div>\n" +
-    "<div>{{ getPatient(Settings.getPatientId()).name }}</div>\n"
+    "<div ng-if=\"getPatient(Settings.getPatientId())\">\n" +
+    "  <small>{{ getPatient(Settings.getPatientId()).name }}</small>\n" +
+    "</div>\n"
   );
 
 
