@@ -1,6 +1,12 @@
 angular.module('timeline-with-animation').run(['$templateCache', function($templateCache) {
   'use strict';
 
+  $templateCache.put('/ng_templates/_header_for_doctor.html',
+    "<div>{{ Settings.header() }}</div>\n" +
+    "<div>{{ getPatient(Settings.getPatientId()).name }}</div>\n"
+  );
+
+
   $templateCache.put('/ng_templates/_timeline_item.html',
     "<div class=\"row timeline-item-row\">\n" +
     "  <div class=\"timeline-item-icon-container col-xs-2 col-md-1 text-center\">\n" +

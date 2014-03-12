@@ -6,6 +6,9 @@
   background-image: url('../images/choice_58x50.png');
   background-repeat: no-repeat;
 }
+.top-header {
+  display: inline-block;
+}
 .back-button {
   color: #fff;
 }

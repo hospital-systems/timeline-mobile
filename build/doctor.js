@@ -675,7 +675,7 @@ var timelineWithAnimation = angular.module(
 timelineWithAnimation.factory('Settings', function() {
    var title     = 'TakeCare';
    var header    = 'TakeCare';
-   var patientId = null;
+   var patientId = undefined;
    return {
      title: function() { return title; },
      setTitle: function(newTitle) { title = newTitle },
@@ -728,15 +728,26 @@ function getPageType(url) {
   return 'unrecognized';
 }
 
+function getPatientById(id) {
+  if (typeof(id) === 'undefined') {
+    return null;
+  }
+  return jQuery.grep(patientsArrayFor(patients), function(patient) {
+    return patient.id.toString() === id.toString();
+  })[0];
+}
+
 timelineWithAnimation.controller(
   'RootCtrl',
   function($scope, $rootScope, $location, $spMenu, Settings) {
     $scope.gotoUrlFor = function (path) {
       $location.path(path);
     };
-
     $scope.$back = function() {
       window.history.back();
+    };
+    $scope.getPatient = function(id) {
+      return getPatientById(id);
     };
 
     $scope.Settings = Settings;
@@ -774,15 +785,6 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope) {
     return a.id - b.id;
   });
 });
-
-function getPatientById(id) {
-  if (typeof(id) === 'undefined') {
-    return null;
-  }
-  return jQuery.grep(patientsArrayFor(patients), function(patient) {
-    return patient.id.toString() === id.toString();
-  })[0];
-}
 
 timelineWithAnimation.controller(
   'TimelineListCtrl',
@@ -928,6 +930,12 @@ timelineWithAnimation.config([
 
 angular.module('timeline-with-animation').run(['$templateCache', function($templateCache) {
   'use strict';
+
+  $templateCache.put('/ng_templates/_header_for_doctor.html',
+    "<div>{{ Settings.header() }}</div>\n" +
+    "<div>{{ getPatient(Settings.getPatientId()).name }}</div>\n"
+  );
+
 
   $templateCache.put('/ng_templates/_timeline_item.html',
     "<div class=\"row timeline-item-row\">\n" +
