@@ -36156,8 +36156,12 @@ timelineWithAnimation.controller(
 timelineWithAnimation.controller(
   'ProfileCtrl',
   function($scope, Settings, $route, $routeParams) {
-    var patient = getPatientById($routeParams.patientId);
-    Settings.setPatientId(patient);
+    if ($routeParams.patientId) {
+      $scope.patient = getPatientById($routeParams.patientId);
+      Settings.setPatientId($scope.patient);
+    } else {
+      $scope.patient = patients["MrBrown"];
+    }
     var title = 'Profile';
     Settings.setTitle(title);
     Settings.setHeader(title);
@@ -36474,7 +36478,30 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/profile.html',
     "<div class=\"profile-frame container\">\n" +
     "  <div ng-controller=\"ProfileCtrl\">\n" +
-    "    <div class=\"col-xs-12\">John, Smith  79y / male (09/27/1934)</div></div>\n" +
+    "    <div class=\"row item-row\">\n" +
+    "        <div class=\"col-xs-6\">Name</div>\n" +
+    "        <div class=\"col-xs-6 text-right\">{{patient.fullname}}</div>\n" +
+    "    </div>\n" +
+    "      <div class=\"row item-row\">\n" +
+    "          <div class=\"col-xs-6\">Gender</div>\n" +
+    "          <div class=\"col-xs-6 text-right\">{{patient.gender}}</div>\n" +
+    "      </div>\n" +
+    "      <div class=\"row item-row\">\n" +
+    "          <div class=\"col-xs-6\">Date of birth</div>\n" +
+    "          <div class=\"col-xs-6 text-right\">{{patient.date_of_birth}}</div>\n" +
+    "      </div>\n" +
+    "      <div class=\"row item-row\">\n" +
+    "          <div class=\"col-xs-6\">Address</div>\n" +
+    "          <div class=\"col-xs-6 text-right\">{{patient.address}}</div>\n" +
+    "      </div>\n" +
+    "      <div class=\"row item-row\">\n" +
+    "          <div class=\"col-xs-6\">Phone</div>\n" +
+    "          <div class=\"col-xs-6 text-right\">{{patient.phone}}</div>\n" +
+    "      </div>\n" +
+    "      <div class=\"row item-row\">\n" +
+    "          <div class=\"col-xs-6\">Email</div>\n" +
+    "          <div class=\"col-xs-6 text-right\">{{patient.email}}</div>\n" +
+    "      </div>\n" +
     "  </div>\n" +
     "</div>\n"
   );

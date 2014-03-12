@@ -194,8 +194,12 @@ timelineWithAnimation.controller(
 timelineWithAnimation.controller(
   'ProfileCtrl',
   function($scope, Settings, $route, $routeParams) {
-    var patient = getPatientById($routeParams.patientId);
-    Settings.setPatientId(patient);
+    if ($routeParams.patientId) {
+      $scope.patient = getPatientById($routeParams.patientId);
+      Settings.setPatientId($scope.patient);
+    } else {
+      $scope.patient = patients["MrBrown"];
+    }
     var title = 'Profile';
     Settings.setTitle(title);
     Settings.setHeader(title);
