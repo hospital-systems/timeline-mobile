@@ -750,9 +750,10 @@ timelineWithAnimation.controller(
 
         var userMoveFrom = getPageType(currentPageUrl);
         var userMoveTo   = getPageType(nextPageUrl);
-        var navigationState = ['from', userMoveFrom, 'to', userMoveTo]
 
-        if (userMoveTo === 'timelineList' && userMoveFrom !== 'patientsList') {
+        if ((userMoveTo === 'patientsList')
+            || (userMoveTo === 'timelineList' &&
+                userMoveFrom !== 'patientsList')) {
           $scope.animateFlavor = 'move-to-right';
         } else {
           $scope.animateFlavor = 'move-to-left';

@@ -14,8 +14,8 @@
   <li ng-class="{active: currentPage === 'profile'}">
     <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/profile">Profile</a>
   </li>
-
   <li ng-class="{active: currentPage === 'chat'}">
     <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/chat">Chat</a>
   </li>
+  <li ng-if="Settings.getPatientId()"><a href="#/">Patients list</a></li>
 </ul>
