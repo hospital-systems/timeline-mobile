@@ -161,7 +161,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "      </div>\n" +
     "      <div class=\"row item-row\">\n" +
     "          <div class=\"col-xs-6\">Date of birth</div>\n" +
-    "          <div class=\"col-xs-6 text-right\">{{patient.date_of_birth}}</div>\n" +
+    "          <div class=\"col-xs-6 text-right\">{{patient.date_of_birth | date: 'longDate'}}</div>\n" +
     "      </div>\n" +
     "      <div class=\"row item-row\">\n" +
     "          <div class=\"col-xs-6\">Address</div>\n" +

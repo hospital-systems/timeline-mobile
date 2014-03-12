@@ -42,6 +42,9 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav" style="padding-left: 25px;">
+  <li ng-if="Settings.getPatientId()">
+      <a href="#/">My patients</a>
+  </li>
   <li ng-class="{active: currentPage === 'timelineList'}">
     <a href="#{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/">Observations</a>
   </li>
@@ -60,7 +63,6 @@
   <li ng-class="{active: currentPage === 'chat'}">
     <a href="#{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/chat">Chat</a>
   </li>
-  <li ng-if="Settings.getPatientId()"><a href="#/">Patients list</a></li>
 </ul>
 
     </div><!--/.nav-collapse -->
@@ -69,6 +71,9 @@
 
 <div class="navbar navbar-inverse" id="sp-nav">
   <ul class="nav navbar-nav" style="padding-left: 25px;">
+  <li ng-if="Settings.getPatientId()">
+      <a href="#/">My patients</a>
+  </li>
   <li ng-class="{active: currentPage === 'timelineList'}">
     <a href="#{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/">Observations</a>
   </li>
@@ -87,7 +92,6 @@
   <li ng-class="{active: currentPage === 'chat'}">
     <a href="#{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/chat">Chat</a>
   </li>
-  <li ng-if="Settings.getPatientId()"><a href="#/">Patients list</a></li>
 </ul>
 
 </div><!--/.nav-collapse -->
