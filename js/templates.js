@@ -42,6 +42,14 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   );
 
 
+  $templateCache.put('/ng_templates/calendar.html',
+    "<div class=\"container\" ng-controller=\"CalendarCtrl\">\n" +
+    "  <div ui-calendar=\"uiConfig.calendar\" ng-model=\"eventSources\"\n" +
+    "       class=\"span8 calendar\"></div>\n" +
+    "</div>\n"
+  );
+
+
   $templateCache.put('/ng_templates/chat.html',
     "<div class=\"chat container\">\n" +
     "  <div ng-controller=\"ChatCtrl\">\n" +

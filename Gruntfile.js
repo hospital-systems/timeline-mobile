@@ -8,6 +8,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('grunt-json');
+  grunt.loadNpmTasks('grunt-bower-task');
 
   function convertJsonName(filename) {
     return filename.replace (/(?:^|[-_])(\w)/g, function (_, c) {
@@ -36,33 +37,43 @@ module.exports = function (grunt) {
         }
       }
     },
-    clean: ['doctor.html', 'patient.html', 'build/**/*'],
+    clean: {
+      bower: ['bower_components'],
+      build: ['doctor.html', 'patient.html', 'build/**/*']
+    },
     concat: {
       css: {
-        src: ['build/*.css'],
+        src: [
+          'bower_components/bootstrap/dist/css/bootstrap.css',
+          'build/*.css'
+        ],
         dest: 'build/timeline.css'
       },
-      jsForDoctor: {
+      commonStuff: {
         src: [
+          'bower_components/jquery/dist/jquery.js',
+          'bower_components/bootstrap/dist/js/bootstrap.js',
+          'bower_components/angular/angular.js',
+          'bower_components/angular-animate/angular-animate.js',
+          'bower_components/angular-route/angular-route.js',
+          'bower_components/angular-sanitize/angular-sanitize.js',
           'build/patients.js',
           'build/mrBrownData.js',
           'js/common.js',
-          'js/doctor.js',
           'js/templates.js',
           'js/ng-mobile-menu.js'
         ],
-        dest: 'build/doctor.js'
+        dest: 'build/common_stuff.js'
       },
-      jsForPatient: {
+      calendarStuff: {
         src: [
-          'build/patients.js',
-          'build/mrBrownData.js',
-          'js/common.js',
-          'js/patient.js',
-          'js/templates.js',
-          'js/ng-mobile-menu.js'
+          'bower_components/jquery-ui/ui/jquery-ui.js',
+          'bower_components/angular-ui-calendar/src/calendar.js',
+          'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+          'bower_components/fullcalendar/fullcalendar.js',
+          'bower_components/fullcalendar/gcal.js',
         ],
-        dest: 'build/patient.js'
+        dest: 'build/calendar_stuff.js'
       }
     },
     ngtemplates: {
@@ -118,14 +129,21 @@ module.exports = function (grunt) {
         src: ['json_for_mr_brown/**/*.json'],
         dest: 'build/mrBrownData.js'
       }
-    }
+    },
+    bower: { install: { options: { copy: false, verbose: true } } }
   })
+  grunt.registerTask('bowerInstall', [
+    'clean:bower', 'bower'
+  ]);
   grunt.registerTask('build', [
-    'clean',
+    'clean:build',
     'less',
     'ngtemplates',
     'assemble',
     'json',
     'concat'
+  ]);
+  grunt.registerTask('all', [
+    'bowerInstall', 'build'
   ]);
 };
