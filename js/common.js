@@ -343,23 +343,6 @@ var date = new Date();
     /* event sources array*/
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
     $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
-
-
-
-    // $scope.uiConfig = {
-    //   calendar:{
-    //     height: 450,
-    //     editable: true,
-    //     header:{
-    //       left: 'month basicWeek basicDay agendaWeek agendaDay',
-    //       center: 'title',
-    //       right: 'today prev,next'
-    //     },
-    //     dayClick: $scope.alertEventOnClick,
-    //     eventDrop: $scope.alertOnDrop,
-    //     eventResize: $scope.alertOnResize
-    //   }
-    // };
   })
 
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
