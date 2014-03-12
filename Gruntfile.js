@@ -87,21 +87,16 @@ module.exports = function (grunt) {
       }
     },
     assemble: {
+      options: {
+        flatten: true,
+        layout: ['views/layouts/index.html'],
+        partials: ['views/**/_*.html']
+      },
       doctor: {
-        options: {
-          flatten: true,
-          layout: ['views/layouts/index.html'],
-          partials: ['views/**/_*.html']
-        },
         src: ['views/doctor.html'],
         dest: './'
       },
       patient: {
-        options: {
-          flatten: true,
-          layout: ['views/layouts/index.html'],
-          partials: ['views/**/_*.html']
-        },
         src: ['views/patient.html'],
         dest: './'
       }
