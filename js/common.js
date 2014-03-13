@@ -203,6 +203,28 @@ timelineWithAnimation.controller(
     var title = 'Profile';
     Settings.setTitle(title);
     Settings.setHeader(title);
+
+    $scope.age = function() {
+        var now  = new Date();
+
+        var ynew = now.getFullYear();
+        var mnew = now.getMonth();
+        var dnew = now.getDate();
+
+        var yold = $scope.patient.date_of_birth.getFullYear();
+        var mold = $scope.patient.date_of_birth.getMonth();
+        var dold = $scope.patient.date_of_birth.getDate();
+
+        var diff = ynew - yold;
+
+        if (mold > mnew) diff--;
+        else {
+            if (mold == mnew) {
+                if (dold > dnew) diff--;
+            }
+        }
+        return diff;
+    }
   });
 
 timelineWithAnimation.controller(

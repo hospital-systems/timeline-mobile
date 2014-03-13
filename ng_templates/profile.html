@@ -1,28 +1,71 @@
 <div class="profile-frame container">
   <div ng-controller="ProfileCtrl">
     <div class="row item-row">
-        <div class="col-xs-6">Name</div>
-        <div class="col-xs-6 text-right">{{patient.fullname}}</div>
+      <div class="col-xs-5"><img class="img-responsive" ng-src="images/photos/{{patient.id}}.png"/></div>
+      <div class="col-xs-7">
+        <p>
+          {{patient.fullname}} <span class="icon fancy-icon" ng-class="'medapp-icon-' + patient.gender"></span>
+        </p>
+        <p>
+          {{patient.date_of_birth | date: 'shortDate'}} ({{age()}} y/o)
+        </p>
+      </div>
     </div>
-      <div class="row item-row">
-          <div class="col-xs-6">Gender</div>
-          <div class="col-xs-6 text-right">{{patient.gender}}</div>
+    <div class="row item-row">
+      <div class="col-xs-5">
+        <div>
+          Address:
+        </div>
+        <div>
+          {{patient.address}}
+        </div>
       </div>
-      <div class="row item-row">
-          <div class="col-xs-6">Date of birth</div>
-          <div class="col-xs-6 text-right">{{patient.date_of_birth | date: 'longDate'}}</div>
+      <div class="col-xs-7">
+        <div>
+          Phone:
+        </div>
+        <div>
+          {{patient.phone}}
+        </div>
+        <div>
+          Email:
+        </div>
+        <div>
+          {{patient.email}}
+        </div>
       </div>
-      <div class="row item-row">
-          <div class="col-xs-6">Address</div>
-          <div class="col-xs-6 text-right">{{patient.address}}</div>
+    </div>
+    <div class="row item-row">
+      <div class="col-xs-5">
+        <div>
+          Physician:
+        </div>
+        <div>
+            {{patient.physician}}
+        </div>
       </div>
-      <div class="row item-row">
-          <div class="col-xs-6">Phone</div>
-          <div class="col-xs-6 text-right">{{patient.phone}}</div>
+      <div class="col-xs-7">
+          <div>
+              Nurse:
+          </div>
+          <div>
+              {{patient.nurse}}
+          </div>
       </div>
-      <div class="row item-row">
-          <div class="col-xs-6">Email</div>
-          <div class="col-xs-6 text-right">{{patient.email}}</div>
-      </div>
+    </div>
+    <div class="row item-row">
+        <div class="col-xs-12">
+            <div>
+                Insurance Company:
+            </div>
+            <div>
+                <ul>
+                    <li> name:  {{patient.insurance_company.name }}</li>
+                    <li> phone: {{patient.insurance_company.phone}}</li>
+                    <li> code:  {{patient.insurance_company.code }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
   </div>
 </div>
