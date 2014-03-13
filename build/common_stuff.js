@@ -36245,7 +36245,6 @@ timelineWithAnimation.controller(
     var y = date.getFullYear();
 
     $scope.events = [];
-    $scope.newEvent = {start: new Date()};
 
     var eventsRefConnection = new Firebase("https://blazing-fire-8127.firebaseio.com/events");
     $scope.eventsRef = $firebase(eventsRefConnection);
@@ -36255,38 +36254,45 @@ timelineWithAnimation.controller(
       event.start = new Date(event.start);
       $scope.events.push(event);
     });
-    $scope.addEvent = function() {
-      $scope.eventsRef.$add($scope.newEvent);
-      $scope.newEvent = {start: new Date()};
-    }
 
-    $scope.uiConfig = {
-      calendar:{
+    var fullCalendarConfig = {
+      calendar: {
         height: 450,
         editable: false,
+        selectable: true,
         header:{
           left: 'title',
           center: '',
           right: 'today prev,next'
-        },
-        eventClick: function(calEvent, jsEvent, view) { //<http://stackoverflow.com/questions/4395786/how-to-edit-fullcalender-event-content#4406361>
-          var title = prompt('Event Title:', calEvent.title, {
-            buttons: { Ok: true, Cancel: false}
-          });
-          if (title){
-            calEvent.title = title;
-            var event = {};
-            event[calEvent.id] = {
-              start: calEvent.start,
-              title: title
-            };
-            $scope.eventsRef.$update(event);
-            $scope.medCalendar.fullCalendar('updateEvent',calEvent);
-          }
         }
       }
     };
+    if ($scope.patient) {
+      fullCalendarConfig.calendar['select'] = function(start) {
+        var title = prompt('event title:');
+        if (title) {
+          $scope.eventsRef.$add({ title: title, start: start });
+        }
+        $scope.medCalendar.fullCalendar('unselect');
+      };
+      fullCalendarConfig.calendar['eventClick'] = function(fullCalendarEvent) { //<http://stackoverflow.com/questions/4395786/how-to-edit-fullcalender-event-content#4406361>.
+        var title = prompt('event title:', fullCalendarEvent.title, {
+          buttons: { Ok: true, Cancel: false }
+        });
+        if (title) {
+          fullCalendarEvent.title = title;
+          var event = {};
+          event[fullCalendarEvent.id] = {
+            start: fullCalendarEvent.start,
+            title: title
+          };
+          $scope.eventsRef.$update(event);
+          $scope.medCalendar.fullCalendar('updateEvent', fullCalendarEvent);
+        }
+      };
+    }
 
+    $scope.fullCalendarConfig = fullCalendarConfig;
     $scope.eventSources = [$scope.events];
   })
 
@@ -36370,31 +36376,9 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/calendar.html',
-    "<div ng-cloak class=\"container\" ng-controller=\"CalendarCtrl\">\n" +
-    "  <div ng-if=\"Settings.getPatientId()\" class=\"chat-input\">\n" +
-    "    <form role=\"form\" class=\"form-inline\">\n" +
-    "      <div class=\"form-group\">\n" +
-    "        <input type=\"text\"\n" +
-    "               class=\"form-control\"\n" +
-    "               id=\"title\"\n" +
-    "               placeholder=\"Title\"\n" +
-    "               ng-model=\"newEvent.title\">\n" +
-    "      </div>\n" +
-    "      <div class=\"form-group\">\n" +
-    "        <input type=\"text\"\n" +
-    "               class=\"form-control\"\n" +
-    "               id=\"date\"\n" +
-    "               placeholder=\"Date\"\n" +
-    "               ng-model=\"newEvent.start\">\n" +
-    "      </div>\n" +
-    "      <button type=\"submit\"\n" +
-    "              class=\"btn btn-default\"\n" +
-    "              ng-click=\"addEvent()\">Add</button>\n" +
-    "    </form>\n" +
-    "  </div>\n" +
-    "\n" +
-    "  <div ui-calendar=\"uiConfig.calendar\" ng-model=\"eventSources\"\n" +
-    "       class=\"span8 calendar\" calendar=\"medCalendar\"></div>\n" +
+    "<div class=\"container\" ng-controller=\"CalendarCtrl\">\n" +
+    "  <div ui-calendar=\"fullCalendarConfig.calendar\" calendar=\"medCalendar\"\n" +
+    "       ng-model=\"eventSources\" class=\"span8 calendar\"></div>\n" +
     "</div>\n"
   );
 

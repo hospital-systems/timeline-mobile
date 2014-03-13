@@ -72,31 +72,9 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/calendar.html',
-    "<div ng-cloak class=\"container\" ng-controller=\"CalendarCtrl\">\n" +
-    "  <div ng-if=\"Settings.getPatientId()\" class=\"chat-input\">\n" +
-    "    <form role=\"form\" class=\"form-inline\">\n" +
-    "      <div class=\"form-group\">\n" +
-    "        <input type=\"text\"\n" +
-    "               class=\"form-control\"\n" +
-    "               id=\"title\"\n" +
-    "               placeholder=\"Title\"\n" +
-    "               ng-model=\"newEvent.title\">\n" +
-    "      </div>\n" +
-    "      <div class=\"form-group\">\n" +
-    "        <input type=\"text\"\n" +
-    "               class=\"form-control\"\n" +
-    "               id=\"date\"\n" +
-    "               placeholder=\"Date\"\n" +
-    "               ng-model=\"newEvent.start\">\n" +
-    "      </div>\n" +
-    "      <button type=\"submit\"\n" +
-    "              class=\"btn btn-default\"\n" +
-    "              ng-click=\"addEvent()\">Add</button>\n" +
-    "    </form>\n" +
-    "  </div>\n" +
-    "\n" +
-    "  <div ui-calendar=\"uiConfig.calendar\" ng-model=\"eventSources\"\n" +
-    "       class=\"span8 calendar\" calendar=\"medCalendar\"></div>\n" +
+    "<div class=\"container\" ng-controller=\"CalendarCtrl\">\n" +
+    "  <div ui-calendar=\"fullCalendarConfig.calendar\" calendar=\"medCalendar\"\n" +
+    "       ng-model=\"eventSources\" class=\"span8 calendar\"></div>\n" +
     "</div>\n"
   );
 
