@@ -290,9 +290,7 @@ timelineWithAnimation.controller(
         $scope.medCalendar.fullCalendar('unselect');
       };
       fullCalendarConfig.calendar['eventClick'] = function(fullCalendarEvent) { //<http://stackoverflow.com/questions/4395786/how-to-edit-fullcalender-event-content#4406361>.
-        var title = prompt('event title:', fullCalendarEvent.title, {
-          buttons: { Ok: true, Cancel: false }
-        });
+        var title = prompt('event title:', fullCalendarEvent.title);
         if (title) {
           fullCalendarEvent.title = title;
           var event = {};
