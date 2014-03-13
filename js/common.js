@@ -243,7 +243,7 @@ timelineWithAnimation.controller(
     $scope.eventsRef = $firebase(eventsRefConnection);
     eventsRefConnection.on('child_added', function(snapshot) {
       var event = snapshot.val();
-      event.id = snapshot.name();
+      event.id = snapshot.name(); //name function return firebase id
       event.start = new Date(event.start);
       $scope.events.push(event);
     });
