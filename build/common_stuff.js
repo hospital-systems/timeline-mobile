@@ -35973,8 +35973,8 @@ var timelineWithAnimation = angular.module(
 );
 
 timelineWithAnimation.factory('Settings', function() {
-   var title     = 'TakeCare';
-   var header    = 'TakeCare';
+   var title     = 'Wellpath';
+   var header    = 'Wellpath';
    var patientId = null;
    return {
      title: function() { return title; },
@@ -36251,9 +36251,38 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   'use strict';
 
   $templateCache.put('/ng_templates/_header_for_doctor.html',
-    "<div>{{ Settings.header() }}</div>\n" +
-    "<div ng-if=\"getPatient(Settings.getPatientId())\">\n" +
-    "  <small>{{ getPatient(Settings.getPatientId()).name }}</small>\n" +
+    "<div ng-include=\"'/ng_templates/_patient_badge.html'\" onload=\"patient=getPatient(Settings.getPatientId());\" class=\"container patient-badge\"></div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/_patient.html',
+    "<div class=\"row item-row\">\n" +
+    "    <div class=\"col-xs-3\">\n" +
+    "        <img class=\"img-responsive\" ng-src=\"../images/photos/{{patient.id}}.png\"/>\n" +
+    "    </div>\n" +
+    "    <div class=\"col-xs-9\">\n" +
+    "        <div>{{patient.name}}</div>\n" +
+    "        <div>{{patient.date_of_birth | date: 'longDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span></div>\n" +
+    "    </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/_patient_badge.html',
+    "<div class=\"container-fluid\" ng-switch on=\"getPatient(Settings.getPatientId())\">\n" +
+    "  <div ng-switch-when=\"null\">\n" +
+    "    <span class=\"navbar-brand\" ng-bind=\"Settings.header()\"></span>\n" +
+    "  </div>\n" +
+    "  <div ng-switch-default>\n" +
+    "    <div class=\"pull-left\">\n" +
+    "      <div>{{ Settings.header() }}</div>\n" +
+    "      <div>{{ getPatient(Settings.getPatientId()).name}}</div>\n" +
+    "      <div>{{ getPatient(Settings.getPatientId()).date_of_birth | date: 'longDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + getPatient(Settings.getPatientId()).gender\"></span></div>\n" +
+    "    </div>\n" +
+    "    <div class=\"pull-right\">\n" +
+    "        <img class=\"img-badge\" ng-src=\"../images/photos/{{getPatient(Settings.getPatientId()).id}}.png\"/>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
     "</div>\n"
   );
 
@@ -36395,7 +36424,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "  <ul class=\"list-unstyled\">\n" +
     "    <li class=\"patient-item\" ng-repeat=\"patient in patients\">\n" +
     "      <a href=\"#/patients/{{ patient.id }}\">\n" +
-    "        {{ patient.name }}\n" +
+    "        <div ng-include=\"'/ng_templates/_patient.html'\"></div>\n" +
     "      </a>\n" +
     "    </li>\n" +
     "  </ul>\n" +

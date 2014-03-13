@@ -21,11 +21,8 @@ kind: doctor
           </button>
         </span>
       </span>
-      <a class="navbar-brand top-header" href="#/"
-         ng-include="'/ng_templates/_header_for_doctor.html'">
-        Observations
-      </a>
-      <div class="pull-right" ng-class="{'img-brand': currentPage === 'patientsList'}"></div>
+      <span class="navbar-brand navbar-brand-img top-header">&nbsp;</span>
+      <span ng-include="'/ng_templates/_patient_badge.html'" class="navbar-right patient-badge"></span>
     </div>
     <div class="collapse navbar-collapse">
       {{> _navbar_nav  }}

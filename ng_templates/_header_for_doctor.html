@@ -1,4 +1,1 @@
-<div>{{ Settings.header() }}</div>
-<div ng-if="getPatient(Settings.getPatientId())">
-  <small>{{ getPatient(Settings.getPatientId()).name }}</small>
-</div>
+<div ng-include="'/ng_templates/_patient_badge.html'" onload="patient=getPatient(Settings.getPatientId());" class="container patient-badge"></div>

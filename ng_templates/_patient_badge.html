@@ -1,0 +1,15 @@
+<div class="container-fluid" ng-switch on="getPatient(Settings.getPatientId())">
+  <div ng-switch-when="null">
+    <span class="navbar-brand" ng-bind="Settings.header()"></span>
+  </div>
+  <div ng-switch-default>
+    <div class="pull-left">
+      <div>{{ Settings.header() }}</div>
+      <div>{{ getPatient(Settings.getPatientId()).name}}</div>
+      <div>{{ getPatient(Settings.getPatientId()).date_of_birth | date: 'longDate'}} <span class="icon fancy-icon" ng-class="'medapp-icon-' + getPatient(Settings.getPatientId()).gender"></span></div>
+    </div>
+    <div class="pull-right">
+        <img class="img-badge" ng-src="../images/photos/{{getPatient(Settings.getPatientId()).id}}.png"/>
+    </div>
+  </div>
+</div>
