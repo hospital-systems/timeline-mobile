@@ -8,7 +8,7 @@
 .img-brand {
   padding: 15px 25px;
   background-repeat: no-repeat;
-  background-image: url('../images/choice_58x50.png');
+  background-image: url('../images/covidien.gif');
 }
 .img-brand:after {
   content: '_';

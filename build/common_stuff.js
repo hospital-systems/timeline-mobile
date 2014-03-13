@@ -35973,8 +35973,8 @@ var timelineWithAnimation = angular.module(
 );
 
 timelineWithAnimation.factory('Settings', function() {
-   var title     = 'TakeCare';
-   var header    = 'TakeCare';
+   var title     = 'Wellpath';
+   var header    = 'Wellpath';
    var patientId = null;
    return {
      title: function() { return title; },
