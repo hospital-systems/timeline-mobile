@@ -211,28 +211,72 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"profile-frame container\">\n" +
     "  <div ng-controller=\"ProfileCtrl\">\n" +
     "    <div class=\"row item-row\">\n" +
-    "        <div class=\"col-xs-5\"><img class=\"img-responsive\" ng-src=\"../images/photos/{{patient.id}}.png\"/></div>\n" +
-    "        <div class=\"col-xs-7\">\n" +
-    "            <p>\n" +
-    "                {{patient.fullname}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span>\n" +
-    "            </p>\n" +
-    "            <p>\n" +
-    "                {{patient.date_of_birth | date: 'shortDate'}} ({{age()}} y/o)\n" +
-    "            </p>\n" +
+    "      <div class=\"col-xs-5\"><img class=\"img-responsive\" ng-src=\"../images/photos/{{patient.id}}.png\"/></div>\n" +
+    "      <div class=\"col-xs-7\">\n" +
+    "        <p>\n" +
+    "          {{patient.fullname}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span>\n" +
+    "        </p>\n" +
+    "        <p>\n" +
+    "          {{patient.date_of_birth | date: 'shortDate'}} ({{age()}} y/o)\n" +
+    "        </p>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row item-row\">\n" +
+    "      <div class=\"col-xs-5\">\n" +
+    "        <div>\n" +
+    "          Address:\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          {{patient.address}}\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"col-xs-7\">\n" +
+    "        <div>\n" +
+    "          Phone:\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          {{patient.phone}}\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          Email:\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          {{patient.email}}\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row item-row\">\n" +
+    "      <div class=\"col-xs-5\">\n" +
+    "        <div>\n" +
+    "          Physician:\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "            {{patient.physician}}\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"col-xs-7\">\n" +
+    "          <div>\n" +
+    "              Nurse:\n" +
+    "          </div>\n" +
+    "          <div>\n" +
+    "              {{patient.nurse}}\n" +
+    "          </div>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row item-row\">\n" +
+    "        <div class=\"col-xs-12\">\n" +
+    "            <div>\n" +
+    "                Insurance Company:\n" +
+    "            </div>\n" +
+    "            <div>\n" +
+    "                <ul>\n" +
+    "                    <li> name:  {{patient.insurance_company.name }}</li>\n" +
+    "                    <li> phone: {{patient.insurance_company.phone}}</li>\n" +
+    "                    <li> code:  {{patient.insurance_company.code }}</li>\n" +
+    "                </ul>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "      <div class=\"row item-row\">\n" +
-    "          <div class=\"col-xs-6\">Address</div>\n" +
-    "          <div class=\"col-xs-6 text-right\">{{patient.address}}</div>\n" +
-    "      </div>\n" +
-    "      <div class=\"row item-row\">\n" +
-    "          <div class=\"col-xs-6\">Phone</div>\n" +
-    "          <div class=\"col-xs-6 text-right\">{{patient.phone}}</div>\n" +
-    "      </div>\n" +
-    "      <div class=\"row item-row\">\n" +
-    "          <div class=\"col-xs-6\">Email</div>\n" +
-    "          <div class=\"col-xs-6 text-right\">{{patient.email}}</div>\n" +
-    "      </div>\n" +
     "  </div>\n" +
     "</div>\n"
   );
