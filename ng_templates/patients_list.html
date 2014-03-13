@@ -2,7 +2,7 @@
   <ul class="list-unstyled">
     <li class="patient-item" ng-repeat="patient in patients">
       <a href="#/patients/{{ patient.id }}">
-        {{ patient.name }}
+        <div ng-include="'/ng_templates/_patient.html'"></div>
       </a>
     </li>
   </ul>

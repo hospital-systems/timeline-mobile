@@ -59,3 +59,11 @@ a.icon:hover{
 .medapp-icon-discharge:after {
   content: 'Q';
 }
+
+.medapp-icon-female:after {
+    content: 'F';
+}
+
+.medapp-icon-male:after {
+    content: 'W';
+}

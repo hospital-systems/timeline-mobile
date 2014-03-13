@@ -1,0 +1,9 @@
+<div class="row item-row">
+    <div class="col-xs-3">
+        <img class="img-responsive" ng-src="../images/photos/{{patient.id}}.png"/>
+    </div>
+    <div class="col-xs-9">
+        <div>{{patient.name}}</div>
+        <div>{{patient.date_of_birth | date: 'longDate'}} <span class="icon fancy-icon" ng-class="'medapp-icon-' + patient.gender"></span></div>
+    </div>
+</div>
