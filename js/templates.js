@@ -96,7 +96,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "  </div>\n" +
     "\n" +
     "  <div ui-calendar=\"uiConfig.calendar\" ng-model=\"eventSources\"\n" +
-    "       class=\"span8 calendar\"></div>\n" +
+    "       class=\"span8 calendar\" calendar=\"medCalendar\"></div>\n" +
     "</div>\n"
   );
 

@@ -36184,18 +36184,6 @@ timelineWithAnimation.controller(
     }
   })
 
-// <http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript#105074>.
-function generateS4() {
-  return Math.floor((1 + Math.random()) * 0x10000)
-    .toString(16)
-    .substring(1);
-};
-function generateGuid() {
-  return generateS4() + generateS4() + '-' + generateS4() + '-' +
-    generateS4() + '-' + generateS4() + '-' +
-    generateS4() + generateS4() + generateS4();
-}
-
 timelineWithAnimation.controller(
   'CalendarCtrl',
   function($scope, Settings, $route, $routeParams, $firebase) {
@@ -36213,15 +36201,15 @@ timelineWithAnimation.controller(
     $scope.events = [];
     $scope.newEvent = {start: new Date()};
 
-    var eventsRef = new Firebase("https://blazing-fire-8127.firebaseio.com/events");
-    $scope.eventsRef = $firebase(eventsRef);
-    eventsRef.on('child_added', function(snapshot) {
+    var eventsRefConnection = new Firebase("https://blazing-fire-8127.firebaseio.com/events");
+    $scope.eventsRef = $firebase(eventsRefConnection);
+    eventsRefConnection.on('child_added', function(snapshot) {
       var event = snapshot.val();
+      event.id = snapshot.name(); //name function return firebase id
       event.start = new Date(event.start);
       $scope.events.push(event);
     });
     $scope.addEvent = function() {
-      $scope.newEvent.id = generateGuid();
       $scope.eventsRef.$add($scope.newEvent);
       $scope.newEvent = {start: new Date()};
     }
@@ -36234,6 +36222,21 @@ timelineWithAnimation.controller(
           left: 'title',
           center: '',
           right: 'today prev,next'
+        },
+        eventClick: function(calEvent, jsEvent, view) { //<http://stackoverflow.com/questions/4395786/how-to-edit-fullcalender-event-content#4406361>
+          var title = prompt('Event Title:', calEvent.title, {
+            buttons: { Ok: true, Cancel: false}
+          });
+          if (title){
+            calEvent.title = title;
+            var event = {};
+            event[calEvent.id] = {
+              start: calEvent.start,
+              title: title
+            };
+            $scope.eventsRef.$update(event);
+            $scope.medCalendar.fullCalendar('updateEvent',calEvent);
+          }
         }
       }
     };
@@ -36345,7 +36348,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "  </div>\n" +
     "\n" +
     "  <div ui-calendar=\"uiConfig.calendar\" ng-model=\"eventSources\"\n" +
-    "       class=\"span8 calendar\"></div>\n" +
+    "       class=\"span8 calendar\" calendar=\"medCalendar\"></div>\n" +
     "</div>\n"
   );
 
