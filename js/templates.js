@@ -9,7 +9,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/_patient.html',
     "<div class=\"row item-row\">\n" +
     "    <div class=\"col-xs-3\">\n" +
-    "        <img class=\"img-responsive\" ng-src=\"../images/photos/{{patient.id}}.png\"/>\n" +
+    "        <img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.png\"/>\n" +
     "    </div>\n" +
     "    <div class=\"col-xs-9\">\n" +
     "        <div>{{patient.name}}</div>\n" +
@@ -31,7 +31,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "      <div>{{ getPatient(Settings.getPatientId()).date_of_birth | date: 'shortDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + getPatient(Settings.getPatientId()).gender\"></span></div>\n" +
     "    </div>\n" +
     "    <div class=\"pull-right\">\n" +
-    "        <img class=\"img-badge\" ng-src=\"../images/photos/{{getPatient(Settings.getPatientId()).id}}.png\"/>\n" +
+    "        <img class=\"img-badge\" ng-src=\"images/photos/{{getPatient(Settings.getPatientId()).id}}.png\"/>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n"
@@ -211,7 +211,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"profile-frame container\">\n" +
     "  <div ng-controller=\"ProfileCtrl\">\n" +
     "    <div class=\"row item-row\">\n" +
-    "      <div class=\"col-xs-5\"><img class=\"img-responsive\" ng-src=\"../images/photos/{{patient.id}}.png\"/></div>\n" +
+    "      <div class=\"col-xs-5\"><img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.png\"/></div>\n" +
     "      <div class=\"col-xs-7\">\n" +
     "        <p>\n" +
     "          {{patient.fullname}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span>\n" +
