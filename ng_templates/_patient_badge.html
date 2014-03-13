@@ -1,0 +1,10 @@
+<div class="navbar-right">
+  <div class="pull-left">
+    <div>{{ Settings.header() }}</div>
+    <div>{{patient.name}}</div>
+    <div>{{ patient.date_of_birth | date: 'longDate'}} <span class="icon fancy-icon" ng-class="'medapp-icon-' + patient.gender"></span></div>
+  </div>
+  <div class="pull-right">
+      <img class="img-badge" ng-src="../images/photos/{{patient.id}}.png"/>
+  </div>
+</div>

@@ -2,9 +2,8 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   'use strict';
 
   $templateCache.put('/ng_templates/_header_for_doctor.html',
-    "<div>{{ Settings.header() }}</div>\n" +
     "<div ng-if=\"getPatient(Settings.getPatientId())\">\n" +
-    "  <small>{{ getPatient(Settings.getPatientId()).name }}</small>\n" +
+    "  <div ng-include=\"'/ng_templates/_patient_badge.html'\" onload=\"patient=getPatient(Settings.getPatientId());\" class=\"container patient-badge\"></div>\n" +
     "</div>\n"
   );
 
@@ -18,6 +17,20 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "        <div>{{patient.name}}</div>\n" +
     "        <div>{{patient.date_of_birth | date: 'longDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span></div>\n" +
     "    </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/ng_templates/_patient_badge.html',
+    "<div class=\"navbar-right\">\n" +
+    "  <div class=\"pull-left\">\n" +
+    "    <div>{{ Settings.header() }}</div>\n" +
+    "    <div>{{patient.name}}</div>\n" +
+    "    <div>{{ patient.date_of_birth | date: 'longDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span></div>\n" +
+    "  </div>\n" +
+    "  <div class=\"pull-right\">\n" +
+    "      <img class=\"img-badge\" ng-src=\"../images/photos/{{patient.id}}.png\"/>\n" +
+    "  </div>\n" +
     "</div>\n"
   );
 
