@@ -36339,14 +36339,19 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/_patient_badge.html',
-    "<div class=\"container-fluid\">\n" +
-    "  <div class=\"pull-left\">\n" +
-    "    <div>{{ Settings.header() }}</div>\n" +
-    "    <div>{{ getPatient(Settings.getPatientId()).name}}</div>\n" +
-    "    <div>{{ getPatient(Settings.getPatientId()).date_of_birth | date: 'longDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + getPatient(Settings.getPatientId()).gender\"></span></div>\n" +
+    "<div class=\"container-fluid\" ng-switch on=\"getPatient(Settings.getPatientId())\">\n" +
+    "  <div ng-switch-when=\"null\">\n" +
+    "    <span class=\"navbar-brand\" ng-bind=\"Settings.header()\"></span>\n" +
     "  </div>\n" +
-    "  <div class=\"pull-right\">\n" +
-    "      <img class=\"img-badge\" ng-src=\"../images/photos/{{getPatient(Settings.getPatientId()).id}}.png\"/>\n" +
+    "  <div ng-switch-default>\n" +
+    "    <div class=\"pull-left\">\n" +
+    "      <div>{{ Settings.header() }}</div>\n" +
+    "      <div>{{ getPatient(Settings.getPatientId()).name}}</div>\n" +
+    "      <div>{{ getPatient(Settings.getPatientId()).date_of_birth | date: 'longDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + getPatient(Settings.getPatientId()).gender\"></span></div>\n" +
+    "    </div>\n" +
+    "    <div class=\"pull-right\">\n" +
+    "        <img class=\"img-badge\" ng-src=\"../images/photos/{{getPatient(Settings.getPatientId()).id}}.png\"/>\n" +
+    "    </div>\n" +
     "  </div>\n" +
     "</div>\n"
   );
