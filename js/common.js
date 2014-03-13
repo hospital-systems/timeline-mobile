@@ -232,7 +232,7 @@ timelineWithAnimation.controller(
     Settings.setHeader(title);
 
 
-var date = new Date();
+    var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
@@ -240,25 +240,41 @@ var date = new Date();
     $scope.changeTo = 'Hungarian';
     /* event source that pulls from google.com */
     $scope.eventSource = {
-            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-            className: 'gcal-event',           // an option!
-            currentTimezone: 'America/Chicago' // an option!
+      url: "https://www.google.com/calendar/feeds/medapp.waveaccess%40gmail.com/public/basic",
+      // className: 'gcal-event',           // an option!
+      // currentTimezone: 'America/Chicago' // an option!
     };
+
+    // {
+    //   "web":
+    //   {
+    //     "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+    //     "client_secret":"jqEFy2s4XghH0hOnnWScDuM3",
+    //     "token_uri":"https://accounts.google.com/o/oauth2/token",
+    //     "client_email":"49865619640@developer.gserviceaccount.com",
+    //     "client_x509_cert_url":"https://www.googleapis.com/robot/v1/metadata/x509/49865619640@developer.gserviceaccount.com",
+    //     "client_id":"49865619640.apps.googleusercontent.com",
+    //     "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs"
+    //   }
+    // }
+
     /* event source that contains custom events on the scope */
     $scope.events = [
-      {title: 'All Day Event',start: new Date(y, m, 1)},
-      {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-      {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-      {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
+      // {title: 'All Day Event',start: new Date(y, m, 1)},
+      // {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
+      // {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
+      // {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
+      // {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
+      // {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
     ];
     /* event source that calls a function on every view switch */
     $scope.eventsF = function (start, end, callback) {
       var s = new Date(start).getTime() / 1000;
       var e = new Date(end).getTime() / 1000;
       var m = new Date(start).getMonth();
-      var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
+      var events = [
+        // {title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}
+      ];
       callback(events);
     };
 
@@ -266,9 +282,9 @@ var date = new Date();
        color: '#f00',
        textColor: 'yellow',
        events: [
-          {type:'party',title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-          {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-          {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
+          // {type:'party',title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
+          // {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
+          // {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
         ]
     };
     /* alert on eventClick */
