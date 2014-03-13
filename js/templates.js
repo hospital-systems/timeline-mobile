@@ -13,7 +13,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "    </div>\n" +
     "    <div class=\"col-xs-9\">\n" +
     "        <div>{{patient.name}}</div>\n" +
-    "        <div>{{patient.date_of_birth | date: 'longDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span></div>\n" +
+    "        <div>{{patient.date_of_birth | date: 'shortDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span></div>\n" +
     "    </div>\n" +
     "</div>\n"
   );
@@ -28,7 +28,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "    <div class=\"pull-left\">\n" +
     "      <div>{{ Settings.header() }}</div>\n" +
     "      <div>{{ getPatient(Settings.getPatientId()).name}}</div>\n" +
-    "      <div>{{ getPatient(Settings.getPatientId()).date_of_birth | date: 'longDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + getPatient(Settings.getPatientId()).gender\"></span></div>\n" +
+    "      <div>{{ getPatient(Settings.getPatientId()).date_of_birth | date: 'shortDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + getPatient(Settings.getPatientId()).gender\"></span></div>\n" +
     "    </div>\n" +
     "    <div class=\"pull-right\">\n" +
     "        <img class=\"img-badge\" ng-src=\"../images/photos/{{getPatient(Settings.getPatientId()).id}}.png\"/>\n" +
@@ -189,17 +189,16 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"profile-frame container\">\n" +
     "  <div ng-controller=\"ProfileCtrl\">\n" +
     "    <div class=\"row item-row\">\n" +
-    "        <div class=\"col-xs-6\">Name</div>\n" +
-    "        <div class=\"col-xs-6 text-right\">{{patient.fullname}}</div>\n" +
+    "        <div class=\"col-xs-5\"><img class=\"img-responsive\" ng-src=\"../images/photos/{{patient.id}}.png\"/></div>\n" +
+    "        <div class=\"col-xs-7\">\n" +
+    "            <p>\n" +
+    "                {{patient.fullname}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span>\n" +
+    "            </p>\n" +
+    "            <p>\n" +
+    "                {{patient.date_of_birth | date: 'shortDate'}} ({{age()}} y/o)\n" +
+    "            </p>\n" +
+    "        </div>\n" +
     "    </div>\n" +
-    "      <div class=\"row item-row\">\n" +
-    "          <div class=\"col-xs-6\">Gender</div>\n" +
-    "          <div class=\"col-xs-6 text-right\">{{patient.gender}}</div>\n" +
-    "      </div>\n" +
-    "      <div class=\"row item-row\">\n" +
-    "          <div class=\"col-xs-6\">Date of birth</div>\n" +
-    "          <div class=\"col-xs-6 text-right\">{{patient.date_of_birth | date: 'longDate'}}</div>\n" +
-    "      </div>\n" +
     "      <div class=\"row item-row\">\n" +
     "          <div class=\"col-xs-6\">Address</div>\n" +
     "          <div class=\"col-xs-6 text-right\">{{patient.address}}</div>\n" +

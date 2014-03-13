@@ -1,17 +1,16 @@
 <div class="profile-frame container">
   <div ng-controller="ProfileCtrl">
     <div class="row item-row">
-        <div class="col-xs-6">Name</div>
-        <div class="col-xs-6 text-right">{{patient.fullname}}</div>
+        <div class="col-xs-5"><img class="img-responsive" ng-src="../images/photos/{{patient.id}}.png"/></div>
+        <div class="col-xs-7">
+            <p>
+                {{patient.fullname}} <span class="icon fancy-icon" ng-class="'medapp-icon-' + patient.gender"></span>
+            </p>
+            <p>
+                {{patient.date_of_birth | date: 'shortDate'}} ({{age()}} y/o)
+            </p>
+        </div>
     </div>
-      <div class="row item-row">
-          <div class="col-xs-6">Gender</div>
-          <div class="col-xs-6 text-right">{{patient.gender}}</div>
-      </div>
-      <div class="row item-row">
-          <div class="col-xs-6">Date of birth</div>
-          <div class="col-xs-6 text-right">{{patient.date_of_birth | date: 'longDate'}}</div>
-      </div>
       <div class="row item-row">
           <div class="col-xs-6">Address</div>
           <div class="col-xs-6 text-right">{{patient.address}}</div>
