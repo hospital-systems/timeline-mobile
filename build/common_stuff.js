@@ -36321,8 +36321,8 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/calendar.html',
-    "<div class=\"container\" ng-controller=\"CalendarCtrl\">\n" +
-    "  <div class=\"chat-input\">\n" +
+    "<div ng-cloak class=\"container\" ng-controller=\"CalendarCtrl\">\n" +
+    "  <div ng-if=\"Settings.getPatientId()\" class=\"chat-input\">\n" +
     "    <form role=\"form\" class=\"form-inline\">\n" +
     "      <div class=\"form-group\">\n" +
     "        <input type=\"text\"\n" +
