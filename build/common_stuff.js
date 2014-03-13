@@ -36259,7 +36259,6 @@ timelineWithAnimation.controller(
       calendar: {
         height: 450,
         editable: false,
-        selectable: true,
         header:{
           left: 'title',
           center: '',
@@ -36268,6 +36267,7 @@ timelineWithAnimation.controller(
       }
     };
     if ($scope.patient) {
+      fullCalendarConfig.calendar['selectable'] = true;
       fullCalendarConfig.calendar['select'] = function(start) {
         var title = prompt('event title:');
         if (title) {
