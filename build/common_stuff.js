@@ -36294,6 +36294,7 @@ timelineWithAnimation.controller(
       calendar: {
         height: 450,
         editable: false,
+        // defaultView: 'basicWeek',
         header:{
           left: 'title',
           center: '',
@@ -36319,7 +36320,7 @@ timelineWithAnimation.controller(
             $scope.events.$update(updatedEvent);
           }
         });
-        var element = $('<span class="fc-event-remove">x</span>');
+        var element = $('<span class="fc-event-remove glyphicon glyphicon-remove"></span>');
         element.click(function() {
           var alertMessage = 'Destroy ' + fcEvent.title + '?';
           if (confirm(alertMessage)) { $scope.events.$remove(fcEvent.id); }

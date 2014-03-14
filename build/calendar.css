@@ -7,10 +7,13 @@
 }
 .calendar-frame .fc-event .fc-event-remove {
   float: right;
-  padding: 0 2px;
+  padding: 0.1em 0.1em 0 0;
 }
 .calendar-frame .fc-header .fc-button {
   margin-bottom: 0;
+}
+.calendar-frame .fc-header .fc-header-left .fc-header-title h2 {
+  font-size: 24px;
 }
 .calendar-frame .fc-header .fc-header-right {
   vertical-align: bottom;
