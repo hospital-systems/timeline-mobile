@@ -26,17 +26,19 @@
           </button>
         </span>
         <span ng-switch-default>
-          <button type="button" class="navbar-toggle pull-left" ng-click="$spMenu.toggle()">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+          <button type="button" class="navbar-toggle pull-left navbar-toggle-extended" ng-click="$spMenu.toggle()">
+            <div class="pull-left" style="padding-top: 5px;">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </div>
+            <div ng-bind="Settings.header()" class="pull-left navbar-brand-extended">
+              Observations
+            </div>
           </button>
         </span>
       </span>
-      <a class="navbar-brand" ng-bind="Settings.header()" ng-click="$spMenu.toggle()">
-        Observations
-      </a>
       <span class="navbar-brand navbar-brand-img pull-right top-header"></span>
     </div>
   </div>
