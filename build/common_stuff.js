@@ -36322,10 +36322,7 @@ timelineWithAnimation.controller(
         var element = $('<span class="fc-event-remove">x</span>');
         element.click(function() {
           var alertMessage = 'Destroy ' + fcEvent.title + '?';
-          if (confirm(alertMessage)) {
-            $scope.events.$remove(fcEvent.id);
-            $scope.medCalendar.fullCalendar('removeEvents', fcEvent.id);
-          }
+          if (confirm(alertMessage)) { $scope.events.$remove(fcEvent.id); }
         });
         fcElement.find('.fc-event-inner').append(element);
       };
