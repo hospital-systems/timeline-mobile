@@ -140,21 +140,25 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/chat.html',
-    "<div class=\"chat container\">\n" +
-    "  <div ng-controller=\"ChatCtrl\">\n" +
-    "    <pre ng-bind=\"senderName | json\"></pre>\n" +
+    "<div class=\"chat container\" ng-controller=\"ChatCtrl\">\n" +
+    "  <div class=\"chat-input\">\n" +
+    "    <form ng-submit='addMessage()'>\n" +
+    "      <input type=\"text\" class=\"form-control\" id=\"message\"\n" +
+    "             placeholder=\"Type your message here\" ng-model=\"messageBody\">\n" +
+    "      <input type=\"submit\" value=\"Send\" class=\"btn btn-primary\" />\n" +
+    "    </form>\n" +
+    "  </div>\n" +
     "\n" +
-    "    <div class=\"messages\">\n" +
-    "      <div class=\"row item-row\" ng-repeat=\"message in messages\">\n" +
-    "        <div class=\"col-xs-12\"><strong>{{message.sender}}:</strong></div>\n" +
-    "        <div class=\"col-xs-12 text-right\">{{message.body}}</div>\n" +
+    "  <div class=\"messages clearfix\">\n" +
+    "    <div class=\"message\" ng-repeat=\"message in messages | reverse\" ng-class=\"{ mine: ( message.sender == senderName )}\">\n" +
+    "      <div class=\"body\">\n" +
+    "        <span class=\"triangle\"></span>\n" +
+    "        {{ message.body }}\n" +
     "      </div>\n" +
-    "    </div>\n" +
-    "    <div class=\"chat-input\">\n" +
-    "      <form ng-submit='addMessage()'>\n" +
-    "        <input type=\"text\" class=\"form-control\" id=\"message\"\n" +
-    "               placeholder=\"Message\" ng-model=\"messageBody\">\n" +
-    "      </form>\n" +
+    "\n" +
+    "      <div class=\"meta\">\n" +
+    "        <span class=\"author\">{{message.sender}}</span>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n"
@@ -244,71 +248,123 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/profile.html',
     "<div class=\"profile-frame container\">\n" +
     "  <div ng-controller=\"ProfileCtrl\">\n" +
-    "    <div class=\"row item-row\">\n" +
-    "      <div class=\"col-xs-5\"><img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.png\"/></div>\n" +
-    "      <div class=\"col-xs-7\">\n" +
-    "        <p>\n" +
-    "          {{patient.fullname}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span>\n" +
-    "        </p>\n" +
-    "        <p>\n" +
+    "    <div class=\"row item-row profile-photo-row\">\n" +
+    "      <div class=\"col-xs-4 no-padding-right\"><img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.large.png\"/></div>\n" +
+    "      <div class=\"col-xs-8\">\n" +
+    "        <div class=\"profile-header\">\n" +
+    "          {{patient.fullname}}\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Sex:\n" +
+    "          </span>\n" +
+    "          {{patient.gender}}\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            DoB:\n" +
+    "          </span>\n" +
     "          {{patient.date_of_birth | date: 'shortDate'}} ({{patient_age()}} y/o)\n" +
-    "        </p>\n" +
-    "      </div>\n" +
-    "    </div>\n" +
-    "    <div class=\"row item-row\">\n" +
-    "      <div class=\"col-xs-5\">\n" +
-    "        <div>\n" +
-    "          Address:\n" +
     "        </div>\n" +
     "        <div>\n" +
-    "          {{patient.address}}\n" +
-    "        </div>\n" +
-    "      </div>\n" +
-    "      <div class=\"col-xs-7\">\n" +
-    "        <div>\n" +
-    "          Phone:\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Race:\n" +
+    "          </span>\n" +
+    "          {{patient.race}}\n" +
     "        </div>\n" +
     "        <div>\n" +
-    "          {{patient.phone}}\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Ethnicity:\n" +
+    "          </span>\n" +
+    "          {{patient.ethnicity}}\n" +
     "        </div>\n" +
     "        <div>\n" +
-    "          Email:\n" +
-    "        </div>\n" +
-    "        <div>\n" +
-    "          {{patient.email}}\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Language:\n" +
+    "          </span>\n" +
+    "          {{patient.language}}\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row item-row\">\n" +
-    "      <div class=\"col-xs-5\">\n" +
-    "        <div>\n" +
-    "          Physician:\n" +
+    "      <div class=\"col-xs-12\">\n" +
+    "        <div class=\"profile-header\">\n" +
+    "          Contacts\n" +
     "        </div>\n" +
-    "        <div>\n" +
-    "            {{patient.physician}}\n" +
+    "        <div class=\"profile-ident\">\n" +
+    "          <div>\n" +
+    "            <span class=\"text-muted\">\n" +
+    "              Address:\n" +
+    "            </span>\n" +
+    "            {{patient.address}}\n" +
+    "          </div>\n" +
+    "          <div>\n" +
+    "            <span class=\"text-muted\">\n" +
+    "              Phone No.:\n" +
+    "            </span>\n" +
+    "            {{patient.phone}}\n" +
+    "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
-    "      <div class=\"col-xs-7\">\n" +
+    "    </div>\n" +
+    "    <div class=\"row item-row\">\n" +
+    "      <div class=\"col-xs-12\">\n" +
+    "        <div class=\"profile-header\">\n" +
+    "          Care Providers\n" +
+    "        </div>\n" +
+    "        <div class=\"profile-ident\">\n" +
     "          <div>\n" +
-    "              Nurse:\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            PMD:\n" +
+    "          </span>\n" +
+    "          {{patient.physician}}\n" +
     "          </div>\n" +
     "          <div>\n" +
-    "              {{patient.nurse}}\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Phone No.:\n" +
+    "          </span>\n" +
+    "          {{patient.physician_phone}}\n" +
     "          </div>\n" +
+    "          <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Nurse Navigator:\n" +
+    "          </span>\n" +
+    "          {{patient.nurse}}\n" +
+    "          </div>\n" +
+    "          <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Phone No.:\n" +
+    "          </span>\n" +
+    "          {{patient.nurse_phone}}\n" +
+    "          </div>\n" +
+    "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row item-row\">\n" +
     "        <div class=\"col-xs-12\">\n" +
+    "          <div class=\"profile-header\">\n" +
+    "            Insurance Company\n" +
+    "          </div>\n" +
+    "          <div class=\"profile-ident\">\n" +
     "            <div>\n" +
-    "                Insurance Company:\n" +
+    "              <span class=\"text-muted\">\n" +
+    "                Name:\n" +
+    "              </span>\n" +
+    "              {{patient.insurance_company.name }}\n" +
     "            </div>\n" +
     "            <div>\n" +
-    "                <ul>\n" +
-    "                    <li> name:  {{patient.insurance_company.name }}</li>\n" +
-    "                    <li> phone: {{patient.insurance_company.phone}}</li>\n" +
-    "                    <li> code:  {{patient.insurance_company.code }}</li>\n" +
-    "                </ul>\n" +
+    "              <span class=\"text-muted\">\n" +
+    "                phone:\n" +
+    "              </span>\n" +
+    "              {{patient.insurance_company.phone}}\n" +
     "            </div>\n" +
+    "            <div>\n" +
+    "              <span class=\"text-muted\">\n" +
+    "                code:\n" +
+    "              </span>\n" +
+    "              {{patient.insurance_company.code }}\n" +
+    "            </div>\n" +
+    "          </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
