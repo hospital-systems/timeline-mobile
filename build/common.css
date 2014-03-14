@@ -140,3 +140,9 @@ a:hover {
 .navbar-toggle-extended .icon-bar {
   width: 15px;
 }
+.no-padding-right {
+  padding-right: 0px !important;
+}
+.no-padding-left {
+  padding-left: 0px !important;
+}

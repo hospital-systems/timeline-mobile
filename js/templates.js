@@ -245,9 +245,9 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"profile-frame container\">\n" +
     "  <div ng-controller=\"ProfileCtrl\">\n" +
     "    <div class=\"row item-row\">\n" +
-    "      <div class=\"col-xs-4\"><img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.large.png\"/></div>\n" +
+    "      <div class=\"col-xs-4 no-padding-right\"><img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.large.png\"/></div>\n" +
     "      <div class=\"col-xs-8\">\n" +
-    "        <h3>\n" +
+    "        <h3 style=\"margin-top: 0px;\">\n" +
     "          <strong>\n" +
     "            {{patient.fullname}}\n" +
     "          </strong>\n" +
