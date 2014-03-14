@@ -239,16 +239,31 @@ timelineWithAnimation.controller(
   'ChatCtrl',
   function($scope, $firebase, Settings, $route, $routeParams) {
     $scope.patient = getPatientById($routeParams.patientId);
+    $scope.messageBody = '';
+
+    if ($routeParams.patientId) {
+      $scope.senderName = 'Grape, Broccoli, MD';
+    } else {
+      $scope.senderName = 'Snow, Dan A.';
+    }
+
     Settings.setPatientId($scope.patient);
     var title = 'Chat';
+
     Settings.setTitle(title);
     Settings.setHeader(title);
+
     var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
     $scope.messages = $firebase(messagesRef);
 
     $scope.addMessage = function() {
-      $scope.messages.$add($scope.newMessage);
-      $scope.newMessage = {};
+      var message = {
+        sender: $scope.senderName,
+        body: $scope.messageBody
+      };
+
+      $scope.messages.$add(message);
+      $scope.messageBody = '';
     }
   })
 

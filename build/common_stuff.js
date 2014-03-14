@@ -36240,16 +36240,31 @@ timelineWithAnimation.controller(
   'ChatCtrl',
   function($scope, $firebase, Settings, $route, $routeParams) {
     $scope.patient = getPatientById($routeParams.patientId);
+    $scope.messageBody = '';
+
+    if ($routeParams.patientId) {
+      $scope.senderName = 'Grape, Broccoli, MD';
+    } else {
+      $scope.senderName = 'Snow, Dan A.';
+    }
+
     Settings.setPatientId($scope.patient);
     var title = 'Chat';
+
     Settings.setTitle(title);
     Settings.setHeader(title);
+
     var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
     $scope.messages = $firebase(messagesRef);
 
     $scope.addMessage = function() {
-      $scope.messages.$add($scope.newMessage);
-      $scope.newMessage = {};
+      var message = {
+        sender: $scope.senderName,
+        body: $scope.messageBody
+      };
+
+      $scope.messages.$add(message);
+      $scope.messageBody = '';
     }
   })
 
@@ -36489,23 +36504,19 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/chat.html',
     "<div class=\"chat container\">\n" +
     "  <div ng-controller=\"ChatCtrl\">\n" +
+    "    <pre ng-bind=\"senderName | json\"></pre>\n" +
     "\n" +
-    "    <div class=\"chat-input\">\n" +
-    "      <form role=\"form\" class=\"form-inline\">\n" +
-    "        <div class=\"form-group\">\n" +
-    "          <label for=\"sender\">Sender</label>\n" +
-    "          <input type=\"text\" class=\"form-control\" id=\"sender\" placeholder=\"Sender\" ng-model=\"newMessage.sender\">\n" +
-    "        </div>\n" +
-    "        <div class=\"form-group\">\n" +
-    "          <label for=\"message\">Message</label>\n" +
-    "          <input type=\"text\" class=\"form-control\" id=\"message\" placeholder=\"Message\" ng-model=\"newMessage.body\">\n" +
-    "        </div>\n" +
-    "        <button type=\"submit\" class=\"btn btn-default\" ng-click=\"addMessage()\">Send</button>\n" +
-    "      </form>\n" +
+    "    <div class=\"messages\">\n" +
+    "      <div class=\"row item-row\" ng-repeat=\"message in messages\">\n" +
+    "        <div class=\"col-xs-12\"><strong>{{message.sender}}:</strong></div>\n" +
+    "        <div class=\"col-xs-12 text-right\">{{message.body}}</div>\n" +
+    "      </div>\n" +
     "    </div>\n" +
-    "    <div class=\"row item-row\" ng-repeat=\"message in messages\">\n" +
-    "      <div class=\"col-xs-12\"><strong>{{message.sender}}:</strong></div>\n" +
-    "      <div class=\"col-xs-12 text-right\">{{message.body}}</div>\n" +
+    "    <div class=\"chat-input\">\n" +
+    "      <form ng-submit='addMessage()'>\n" +
+    "        <input type=\"text\" class=\"form-control\" id=\"message\"\n" +
+    "               placeholder=\"Message\" ng-model=\"messageBody\">\n" +
+    "      </form>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n"

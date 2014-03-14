@@ -1,22 +1,18 @@
 <div class="chat container">
   <div ng-controller="ChatCtrl">
+    <pre ng-bind="senderName | json"></pre>
 
-    <div class="chat-input">
-      <form role="form" class="form-inline">
-        <div class="form-group">
-          <label for="sender">Sender</label>
-          <input type="text" class="form-control" id="sender" placeholder="Sender" ng-model="newMessage.sender">
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <input type="text" class="form-control" id="message" placeholder="Message" ng-model="newMessage.body">
-        </div>
-        <button type="submit" class="btn btn-default" ng-click="addMessage()">Send</button>
-      </form>
+    <div class="messages">
+      <div class="row item-row" ng-repeat="message in messages">
+        <div class="col-xs-12"><strong>{{message.sender}}:</strong></div>
+        <div class="col-xs-12 text-right">{{message.body}}</div>
+      </div>
     </div>
-    <div class="row item-row" ng-repeat="message in messages">
-      <div class="col-xs-12"><strong>{{message.sender}}:</strong></div>
-      <div class="col-xs-12 text-right">{{message.body}}</div>
+    <div class="chat-input">
+      <form ng-submit='addMessage()'>
+        <input type="text" class="form-control" id="message"
+               placeholder="Message" ng-model="messageBody">
+      </form>
     </div>
   </div>
 </div>
