@@ -19,10 +19,14 @@
     <div class="navbar-header">
       <span ng-switch on="currentPage">
         <span ng-cloak ng-switch-when="timelineItem">
-          <button type="button" class="navbar-toggle pull-left"
-                  ng-click="gotoUrlFor('/')"
-                  style="width: 44px; height: 34px; padding: 0;">
-            <span class="back-button glyphicon glyphicon-arrow-left"></span>
+          <button type="button" class="navbar-toggle pull-left navbar-toggle-extended"
+                  ng-click="$back();">
+            <div class="pull-left" style="padding-top: 2px;">
+              <span class="back-button glyphicon glyphicon-arrow-left"></span>
+            </div>
+            <div ng-bind="Settings.header()" class="pull-left navbar-brand-extended">
+              Observations
+            </div>
           </button>
         </span>
         <span ng-switch-default>

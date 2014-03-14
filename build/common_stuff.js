@@ -36110,6 +36110,10 @@ timelineWithAnimation.controller(
       return getPatientById(id);
     };
 
+    $scope.age = function(patient) {
+        return age(patient.date_of_birth);
+    }
+
     $scope.Settings = Settings;
 
     $scope.$on(
@@ -36145,9 +36149,6 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope, Settings) 
   $scope.patients = patientsArrayFor(patients).sort(function(a, b){
     return a.id - b.id;
   });
-  $scope.age = function(patient) {
-    return age(patient.date_of_birth);
-  }
   var title = 'My patients';
   Settings.setTitle(title);
   Settings.setHeader(title);
@@ -36224,7 +36225,7 @@ timelineWithAnimation.controller(
     Settings.setTitle(title);
     Settings.setHeader(title);
 
-    $scope.age = function() {
+    $scope.patient_age = function() {
         return age($scope.patient.date_of_birth);
     }
   });
@@ -36342,7 +36343,53 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   'use strict';
 
   $templateCache.put('/ng_templates/_header_for_doctor.html',
-    "<div ng-include=\"'/ng_templates/_patient_badge.html'\" onload=\"patient=getPatient(Settings.getPatientId());\" class=\"container patient-badge\"></div>\n"
+    "<div class=\"\" ng-switch on=\"getPatient(Settings.getPatientId())\">\n" +
+    "  <div ng-switch-when=\"null\">\n" +
+    "    <span>\n" +
+    "      <button type=\"button\" class=\"navbar-toggle pull-left navbar-toggle-extended\" ng-click=\"$spMenu.toggle()\">\n" +
+    "        <div class=\"pull-left\" style=\"padding-top: 5px;\">\n" +
+    "          <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "        </div>\n" +
+    "        <div ng-bind=\"Settings.header()\" class=\"pull-left navbar-brand-extended\">\n" +
+    "          Observations\n" +
+    "        </div>\n" +
+    "      </button>\n" +
+    "    </span>\n" +
+    "    <span class=\"navbar-brand navbar-brand-img pull-right top-header\"></span>\n" +
+    "  </div>\n" +
+    "  <div ng-switch-default>\n" +
+    "    <span ng-switch on=\"currentPage\">\n" +
+    "      <span ng-cloak ng-switch-when=\"timelineItem\">\n" +
+    "        <button type=\"button\" class=\"navbar-toggle pull-left navbar-toggle-extended\"\n" +
+    "                ng-click=\"$back();\">\n" +
+    "          <div class=\"pull-left\" style=\"padding-top: 2px;\">\n" +
+    "            <span class=\"back-button glyphicon glyphicon-arrow-left\"></span>\n" +
+    "          </div>\n" +
+    "          <div ng-bind=\"Settings.header()\" class=\"pull-left navbar-brand-extended\">\n" +
+    "            Observations\n" +
+    "          </div>\n" +
+    "        </button>\n" +
+    "      </span>\n" +
+    "      <span ng-switch-default>\n" +
+    "        <button type=\"button\" class=\"navbar-toggle pull-left navbar-toggle-extended\" ng-click=\"$spMenu.toggle()\">\n" +
+    "            <div class=\"pull-left\" style=\"padding-top: 5px;\">\n" +
+    "                <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "            </div>\n" +
+    "            <div ng-bind=\"Settings.header()\" class=\"pull-left navbar-brand-extended\">\n" +
+    "                Observations\n" +
+    "            </div>\n" +
+    "        </button>\n" +
+    "      </span>\n" +
+    "    </span>\n" +
+    "    <span ng-include=\"'/ng_templates/_patient_badge.html'\" class=\"navbar-right patient-badge\"  onload=\"patient=getPatient(Settings.getPatientId());\"></span>\n" +
+    "  </div>\n" +
+    "</div>\n"
   );
 
 
@@ -36364,22 +36411,24 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/_patient_badge.html',
-    "<div class=\"\" ng-switch on=\"getPatient(Settings.getPatientId())\">\n" +
-    "  <div ng-switch-when=\"null\">\n" +
-    "    <span class=\"navbar-brand\" ng-bind=\"Settings.header()\"  ng-click=\"$spMenu.toggle()\"></span>\n" +
-    "    <span class=\"navbar-brand navbar-brand-img pull-right top-header\"></span>\n" +
+    "<div>\n" +
+    "  <div class=\"pull-right\">\n" +
+    "    <img class=\"img-badge\" ng-src=\"images/photos/{{patient.id}}.png\"/>\n" +
     "  </div>\n" +
-    "  <div ng-switch-default>\n" +
-    "    <div class=\"pull-left\">\n" +
-    "      <div>{{ Settings.header() }}</div>\n" +
-    "      <div>{{ getPatient(Settings.getPatientId()).name}}</div>\n" +
-    "      <div>{{ getPatient(Settings.getPatientId()).date_of_birth | date: 'shortDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + getPatient(Settings.getPatientId()).gender\"></span></div>\n" +
+    "  <div class=\"pull-right\">\n" +
+    "    <div style=\"padding-top: 3px;\">\n" +
+    "      <strong>\n" +
+    "        {{ patient.name}}\n" +
+    "      </strong>\n" +
     "    </div>\n" +
-    "    <div class=\"pull-right\">\n" +
-    "        <img class=\"img-badge\" ng-src=\"images/photos/{{getPatient(Settings.getPatientId()).id}}.png\"/>\n" +
+    "    <div>\n" +
+    "\n" +
+    "        {{patient.gender}}, {{age(patient)}} y\n" +
+    "\n" +
     "    </div>\n" +
     "  </div>\n" +
-    "</div>\n"
+    "</div>\n" +
+    "\n"
   );
 
 
@@ -36547,7 +36596,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "          {{patient.fullname}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span>\n" +
     "        </p>\n" +
     "        <p>\n" +
-    "          {{patient.date_of_birth | date: 'shortDate'}} ({{age()}} y/o)\n" +
+    "          {{patient.date_of_birth | date: 'shortDate'}} ({{patient_age()}} y/o)\n" +
     "        </p>\n" +
     "      </div>\n" +
     "    </div>\n" +

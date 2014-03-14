@@ -95,15 +95,15 @@ a:hover {
   padding-left: 0px;
 }
 .patient-badge {
-  margin-top: -15px;
-  font-size: 12px;
-  line-height: 16px;
   color: #999;
+}
+.patient-badge div {
+  padding-left: 10px;
 }
 .img-badge {
   height: 44px;
   width: 44px;
-  margin: 3px 15px 0 0;
+  margin: 2px 15px 0 0;
 }
 .doctor-navbar-nav + .doctor-navbar-nav {
   border-top: 1px solid #666666;
@@ -120,7 +120,7 @@ a:hover {
 }
 .navbar-brand-extended {
   float: left;
-  padding: 0 15px;
+  padding: 0 0 0 5px;
   font-size: 18px;
 }
 .navbar-inverse .navbar-brand-extended {
@@ -133,4 +133,10 @@ a:hover {
 }
 .navbar-toggle-extended {
   border: none;
+  margin-right: 0px;
+  margin-top: 3px;
+  margin-bottom: 0px;
+}
+.navbar-toggle-extended .icon-bar {
+  width: 15px;
 }

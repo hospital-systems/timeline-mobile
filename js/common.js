@@ -115,6 +115,10 @@ timelineWithAnimation.controller(
       return getPatientById(id);
     };
 
+    $scope.age = function(patient) {
+        return age(patient.date_of_birth);
+    }
+
     $scope.Settings = Settings;
 
     $scope.$on(
@@ -150,9 +154,6 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope, Settings) 
   $scope.patients = patientsArrayFor(patients).sort(function(a, b){
     return a.id - b.id;
   });
-  $scope.age = function(patient) {
-    return age(patient.date_of_birth);
-  }
   var title = 'My patients';
   Settings.setTitle(title);
   Settings.setHeader(title);
@@ -229,7 +230,7 @@ timelineWithAnimation.controller(
     Settings.setTitle(title);
     Settings.setHeader(title);
 
-    $scope.age = function() {
+    $scope.patient_age = function() {
         return age($scope.patient.date_of_birth);
     }
   });
