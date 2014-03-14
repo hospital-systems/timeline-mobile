@@ -244,6 +244,13 @@ timelineWithAnimation.controller(
     }
   })
 
+function assignSnapshotToFcEvent(snapshot, callback) {
+  var event = snapshot.val();
+  event.id = snapshot.name(); //name function return firebase id
+  event.start = new Date(event.start);
+  callback.call(undefined, event)
+}
+
 timelineWithAnimation.controller(
   'CalendarCtrl',
   function($scope, Settings, $route, $routeParams, $firebase) {
@@ -253,34 +260,26 @@ timelineWithAnimation.controller(
     Settings.setTitle(title);
     Settings.setHeader(title);
 
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-
     $scope.fcEvents = [];
 
     var eventsConnection = new Firebase("https://blazing-fire-8127.firebaseio.com/events");
     $scope.events = $firebase(eventsConnection);
 
     eventsConnection.on('child_added', function(snapshot) {
-      var newEvent = snapshot.val();
-      newEvent.id = snapshot.name(); //name function return firebase id
-      newEvent.start = new Date(newEvent.start);
-      $scope.fcEvents.push(newEvent);
+      assignSnapshotToFcEvent(snapshot, function(newEvent) {
+        $scope.fcEvents.push(newEvent);
+      });
     });
     eventsConnection.on('child_changed', function(snapshot) {
-      var updatedEvent = snapshot.val();
-      updatedEvent.id = snapshot.name(); //name function return firebase id
-      updatedEvent.start = new Date(updatedEvent.start);
-
-      var id = updatedEvent.id;
-      for (var index in $scope.fcEvents) {
-        if ($scope.fcEvents[index].id.toString() === id.toString()) {
-          $scope.fcEvents[index] = updatedEvent;
-          break;
+      assignSnapshotToFcEvent(snapshot, function(updatedEvent) {
+        var id = updatedEvent.id;
+        for (var index in $scope.fcEvents) {
+          if ($scope.fcEvents[index].id.toString() === id.toString()) {
+            $scope.fcEvents[index] = updatedEvent;
+            break;
+          }
         }
-      }
+      });
     });
 
     var fcConfig = {
