@@ -249,56 +249,93 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"profile-frame container\">\n" +
     "  <div ng-controller=\"ProfileCtrl\">\n" +
     "    <div class=\"row item-row\">\n" +
-    "      <div class=\"col-xs-5\"><img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.png\"/></div>\n" +
-    "      <div class=\"col-xs-7\">\n" +
-    "        <p>\n" +
-    "          {{patient.fullname}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span>\n" +
-    "        </p>\n" +
-    "        <p>\n" +
+    "      <div class=\"col-xs-4\"><img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.large.png\"/></div>\n" +
+    "      <div class=\"col-xs-8\">\n" +
+    "        <h3>\n" +
+    "          <strong>\n" +
+    "            {{patient.fullname}}\n" +
+    "          </strong>\n" +
+    "        </h3>\n" +
+    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Sex:\n" +
+    "          </span>\n" +
+    "          {{patient.gender}}\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            DoB:\n" +
+    "          </span>\n" +
     "          {{patient.date_of_birth | date: 'shortDate'}} ({{patient_age()}} y/o)\n" +
-    "        </p>\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Race:\n" +
+    "          </span>\n" +
+    "          {{patient.race}}\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Ethnicity:\n" +
+    "          </span>\n" +
+    "          {{patient.ethnicity}}\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Language:\n" +
+    "          </span>\n" +
+    "          {{patient.language}}\n" +
+    "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row item-row\">\n" +
-    "      <div class=\"col-xs-5\">\n" +
+    "      <div class=\"col-xs-12\">\n" +
+    "        <h3>\n" +
+    "          Contacts\n" +
+    "        </h3>\n" +
     "        <div>\n" +
-    "          Address:\n" +
-    "        </div>\n" +
-    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Address:\n" +
+    "          </span>\n" +
     "          {{patient.address}}\n" +
     "        </div>\n" +
-    "      </div>\n" +
-    "      <div class=\"col-xs-7\">\n" +
     "        <div>\n" +
-    "          Phone:\n" +
-    "        </div>\n" +
-    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Phone No.:\n" +
+    "          </span>\n" +
     "          {{patient.phone}}\n" +
-    "        </div>\n" +
-    "        <div>\n" +
-    "          Email:\n" +
-    "        </div>\n" +
-    "        <div>\n" +
-    "          {{patient.email}}\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row item-row\">\n" +
-    "      <div class=\"col-xs-5\">\n" +
+    "      <div class=\"col-xs-12\">\n" +
+    "        <h3>\n" +
+    "          Care Providers\n" +
+    "        </h3>\n" +
     "        <div>\n" +
-    "          Physician:\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            PMD:\n" +
+    "          </span>\n" +
+    "          {{patient.physician}}\n" +
     "        </div>\n" +
     "        <div>\n" +
-    "            {{patient.physician}}\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Phone No.:\n" +
+    "          </span>\n" +
+    "          {{patient.physician_phone}}\n" +
     "        </div>\n" +
-    "      </div>\n" +
-    "      <div class=\"col-xs-7\">\n" +
-    "          <div>\n" +
-    "              Nurse:\n" +
-    "          </div>\n" +
-    "          <div>\n" +
-    "              {{patient.nurse}}\n" +
-    "          </div>\n" +
+    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Nurse Navigator:\n" +
+    "          </span>\n" +
+    "          {{patient.nurse}}\n" +
+    "        </div>\n" +
+    "        <div>\n" +
+    "          <span class=\"text-muted\">\n" +
+    "            Phone No.:\n" +
+    "          </span>\n" +
+    "          {{patient.nurse_phone}}\n" +
+    "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row item-row\">\n" +

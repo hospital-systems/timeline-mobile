@@ -12,7 +12,9 @@ patients["MrBlonde"] = {
     phone: '555-0150',
     email: 'jane-johnson@outlook.com',
     physician: 'Grape, Broccoli W., MD',
+    physician_phone: '555-0183',
     nurse: 'Olive, Potatoes N., RN',
+    nurse_phone: '555-0184',
     insurance_company:
         {
             name:  'BLUE CROSS PRIMARY',
@@ -34,7 +36,9 @@ patients["MrBrown"] = {
     phone: '555-0101',
     email: 'dan_snow@yahooo.com',
     physician: 'Grape, Broccoli W., MD',
+    physician_phone: '555-0183',
     nurse: 'Olive, Potatoes N., RN',
+    nurse_phone: '555-0184',
     insurance_company:
         {
             name:  'MEDICARE IP',
@@ -56,7 +60,9 @@ patients["MrOrange"] = {
     phone: '555-0199',
     email: 'mary.major@gmail.com',
     physician: 'Grape, Broccoli W., MD',
+    physician_phone: '555-0183',
     nurse: 'Olive, Potatoes N., RN',
+    nurse_phone: '555-0184',
     insurance_company:
         {
             name:  'MEDICARE IP',
