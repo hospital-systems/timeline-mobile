@@ -36246,9 +36246,21 @@ timelineWithAnimation.controller(
     }
   })
 
+// <http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript#105074>.
+function generateS4() {
+  return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+};
+function generateGuid() {
+  return generateS4() + generateS4() + '-' + generateS4() + '-' +
+    generateS4() + '-' + generateS4() + '-' +
+    generateS4() + generateS4() + generateS4();
+}
+
 function getFcEvent(snapshot) {
   var event = snapshot.val();
-  event.id = snapshot.name(); //name function return firebase id
+  // event.id = snapshot.name(); //name function return firebase id
   event.start = new Date(event.start);
   return event;
 }
@@ -36264,14 +36276,16 @@ timelineWithAnimation.controller(
 
     $scope.fcEvents = [];
 
-    var eventsConnection = new Firebase("https://blazing-fire-8127.firebaseio.com/events");
-    $scope.events = $firebase(eventsConnection);
+    var eventsRepository = new Firebase('https://blazing-fire-8127.firebaseio.com/events');
+    $scope.events = $firebase(eventsRepository);
+    var patientEventAssociationRepository = new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociation');
+    $scope.patientEventAssociations = $firebase(patientEventAssociationRepository);
 
-    eventsConnection.on('child_added', function(snapshot) {
+    eventsRepository.on('child_added', function(snapshot) {
       var newEvent = getFcEvent(snapshot);
       $scope.fcEvents.push(newEvent);
     });
-    eventsConnection.on('child_changed', function(snapshot) {
+    eventsRepository.on('child_changed', function(snapshot) {
       var updatedEvent = getFcEvent(snapshot);
       for (var index in $scope.fcEvents) {
         if ($scope.fcEvents[index].id.toString() === updatedEvent.id.toString()) {
@@ -36280,7 +36294,7 @@ timelineWithAnimation.controller(
         }
       }
     });
-    eventsConnection.on('child_removed', function(snapshot) {
+    eventsRepository.on('child_removed', function(snapshot) {
       var removedEvent = getFcEvent(snapshot);
       for (var index in $scope.fcEvents) {
         if ($scope.fcEvents[index].id.toString() === removedEvent.id.toString()) {
@@ -36307,7 +36321,20 @@ timelineWithAnimation.controller(
       fcConfig.calendar['select'] = function(start) {
         var title = prompt('event title:');
         if (title) {
-          $scope.events.$add({ title: title, start: start });
+          var eventId = generateGuid();
+          $scope.events.$child(eventId)
+            .$set({
+              id: eventId,
+              title: title,
+              start: start
+            });
+          var patientEventAssociationId = generateGuid();
+          $scope.patientEventAssociations.$child(patientEventAssociationId)
+            .$set({
+              id: patientEventAssociationId,
+              eventId: eventId,
+              readed: false
+            });
         }
         $scope.medCalendar.fullCalendar('unselect');
       };
@@ -36316,14 +36343,28 @@ timelineWithAnimation.controller(
           var title = prompt('event title:', fcEvent.title);
           if (title) {
             var updatedEvent = {};
-            updatedEvent[fcEvent.id] = { title: title, start: fcEvent.start };
+            updatedEvent[fcEvent.id] = {
+              id: fcEvent.id,
+              title: title,
+              start: fcEvent.start
+            };
             $scope.events.$update(updatedEvent);
           }
         });
         var element = $('<span class="fc-event-remove glyphicon glyphicon-remove"></span>');
         element.click(function() {
           var alertMessage = 'Destroy ' + fcEvent.title + '?';
-          if (confirm(alertMessage)) { $scope.events.$remove(fcEvent.id); }
+          if (confirm(alertMessage)) {
+            $scope.patientEventAssociations.$getIndex()
+              .forEach(function(associationId) {
+                if (fcEvent.id.toString() ===
+                    $scope.patientEventAssociations[associationId]
+                    .eventId.toString()) {
+                  $scope.patientEventAssociations.$remove(associationId);
+                }
+              });
+            $scope.events.$remove(fcEvent.id);
+          }
         });
         fcElement.find('.fc-event-inner').append(element);
       };
