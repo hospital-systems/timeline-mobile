@@ -278,6 +278,15 @@ timelineWithAnimation.controller(
         }
       }
     });
+    eventsConnection.on('child_removed', function(snapshot) {
+      var removedEvent = getFcEvent(snapshot);
+      for (var index in $scope.fcEvents) {
+        if ($scope.fcEvents[index].id.toString() === removedEvent.id.toString()) {
+          $scope.fcEvents.splice(index, 1);
+          break;
+        }
+      }
+    });
 
     var fcConfig = {
       calendar: {
