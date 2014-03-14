@@ -20,9 +20,10 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/_patient_badge.html',
-    "<div class=\"container-fluid\" ng-switch on=\"getPatient(Settings.getPatientId())\">\n" +
+    "<div class=\"\" ng-switch on=\"getPatient(Settings.getPatientId())\">\n" +
     "  <div ng-switch-when=\"null\">\n" +
     "    <span class=\"navbar-brand\" ng-bind=\"Settings.header()\"></span>\n" +
+    "    <span class=\"navbar-brand navbar-brand-img pull-right top-header\"></span>\n" +
     "  </div>\n" +
     "  <div ng-switch-default>\n" +
     "    <div class=\"pull-left\">\n" +

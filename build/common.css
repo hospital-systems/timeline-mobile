@@ -97,10 +97,11 @@ a:hover {
 .patient-badge {
   margin-top: -15px;
   font-size: 12px;
-  line-height: 17px;
+  line-height: 16px;
   color: #999;
 }
 .img-badge {
   height: 50px;
-  widht: 50px;
+  widht: 60px;
+  padding-right: 10px;
 }
