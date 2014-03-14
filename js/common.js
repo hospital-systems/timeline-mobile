@@ -259,7 +259,8 @@ timelineWithAnimation.controller(
     $scope.addMessage = function() {
       var message = {
         sender: $scope.senderName,
-        body: $scope.messageBody
+        body: $scope.messageBody,
+        createdAt: new Date()
       };
 
       $scope.messages.$add(message);

@@ -1,17 +1,23 @@
 <div class="chat container">
   <div ng-controller="ChatCtrl">
-    <pre ng-bind="senderName | json"></pre>
+    <div class="messages clearfix">
+      <div class="message" ng-repeat="message in messages" ng-class="{ mine: ( message.sender == senderName )}">
+        <div class="body">
+          <span class="triangle"></span>
+          {{ message.body }}
+        </div>
 
-    <div class="messages">
-      <div class="row item-row" ng-repeat="message in messages">
-        <div class="col-xs-12"><strong>{{message.sender}}:</strong></div>
-        <div class="col-xs-12 text-right">{{message.body}}</div>
+        <div class="meta">
+          <span class="author">{{message.sender}}</span>
+        </div>
       </div>
     </div>
+
     <div class="chat-input">
       <form ng-submit='addMessage()'>
         <input type="text" class="form-control" id="message"
-               placeholder="Message" ng-model="messageBody">
+               placeholder="Type your message here" ng-model="messageBody">
+        <input type="submit" value="Send" class="btn btn-primary" />
       </form>
     </div>
   </div>

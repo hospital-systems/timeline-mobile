@@ -5830,12 +5830,69 @@ button.close {
   padding: 0 2px;
 }
 
+.chat .messages {
+  margin-top: 20px;
+}
+.chat .messages .message {
+  margin-bottom: 20px;
+  width: 60%;
+  float: right;
+  position: relative;
+}
+.chat .messages .message .triangle {
+  display: block;
+  height: 10px;
+  width: 10px;
+  -webkit-transform: rotate(45deg);
+  background-color: #e9f9f0;
+  position: absolute;
+  bottom: 22px;
+  right: 10px;
+}
+.chat .messages .message.mine {
+  float: left;
+}
+.chat .messages .message.mine .meta {
+  text-align: left;
+}
+.chat .messages .message.mine .body,
+.chat .messages .message.mine .triangle {
+  background-color: #eaf4fb;
+}
+.chat .messages .message.mine .triangle {
+  right: 0;
+  left: 10px;
+}
+.chat .messages .message:last-child {
+  margin-bottom: 0;
+}
+.chat .messages .message .body {
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #e9f9f0;
+}
+.chat .messages .message .meta {
+  margin-top: 10px;
+  font-size: 12px;
+  text-align: right;
+}
+.chat .messages .message .meta .author {
+  font-weight: bold;
+}
 .chat-input {
   margin: 10px 0;
   padding: 10px 0;
 }
-.chat .row:nth-child(even) {
-  background: #e0e0e0;
+.chat-input form {
+  display: -webkit-flex;
+}
+.chat-input form input[type='submit'] {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.chat-input form input[type='text'] {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .navbar {
