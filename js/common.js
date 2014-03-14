@@ -15,6 +15,7 @@ timelineWithAnimation.factory('Settings', function($firebase) {
   var header    = 'Wellpath';
   var patientId = null;
   var patientUnreadEventsCount = 0;
+  var patientViewMode = false;
 
   return {
     title: function() { return title; },
@@ -31,15 +32,19 @@ timelineWithAnimation.factory('Settings', function($firebase) {
     },
     getPatientUnreadEventsCount: function() { return patientUnreadEventsCount; },
     setPatientUnreadEventsCount: function() {
-      var patientEventAssociationRepository = new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociation');
-      var patientEventAssociations = $firebase(patientEventAssociationRepository);
+      var patientEventAssociationsRepository =
+        new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociations');
       var count = 0;
-      patientEventAssociations.$getIndex().forEach(function(associationId) {
-        if (!patientEventAssociations.$child(associationId).readed) {
-          count++;
-        }
-      });
+      patientEventAssociationsRepository
+        .once('value', function(allAssociationsSnapshot) {
+          allAssociationsSnapshot.forEach(function(associationSnapshot) {
+            if (!associationSnapshot.val().readed) { count++; }
+          });
+        });
       patientUnreadEventsCount = count;
+    },
+    isPatientViewMode: function() {
+      if (patientId) { return false; } else { return true; }
     }
   };
 });
@@ -339,14 +344,32 @@ timelineWithAnimation.controller(
 
     $scope.fcEvents = [];
 
-    var eventsRepository = new Firebase('https://blazing-fire-8127.firebaseio.com/events');
+    var eventsRepository =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/events');
     $scope.events = $firebase(eventsRepository);
-    var patientEventAssociationRepository = new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociation');
-    $scope.patientEventAssociations = $firebase(patientEventAssociationRepository);
+
+    var patientEventAssociationsRepository =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociations');
+    $scope.patientEventAssociations = $firebase(patientEventAssociationsRepository);
 
     eventsRepository.on('child_added', function(snapshot) {
-      var newEvent = getFcEvent(snapshot);
-      $scope.fcEvents.push(newEvent);
+      var event = getFcEvent(snapshot);
+      if (Settings.isPatientViewMode()) {
+        patientEventAssociationsRepository
+          .once('value', function(allAssociationsSnapshot) {
+            allAssociationsSnapshot.forEach(function(associationSnapshot) {
+              if (event.id.toString() ===
+                  associationSnapshot.val().eventId.toString()) {
+                var association = {};
+                association[associationSnapshot.val().id] =
+                  associationSnapshot.val()
+                association[associationSnapshot.val().id].readed = true;
+                $scope.patientEventAssociations.$update(association);
+              }
+            });
+          });
+      }
+      $scope.fcEvents.push(event);
     });
     eventsRepository.on('child_changed', function(snapshot) {
       var updatedEvent = getFcEvent(snapshot);
@@ -418,13 +441,15 @@ timelineWithAnimation.controller(
         element.click(function() {
           var alertMessage = 'Destroy ' + fcEvent.title + '?';
           if (confirm(alertMessage)) {
-            $scope.patientEventAssociations.$getIndex()
-              .forEach(function(associationId) {
-                if (fcEvent.id.toString() ===
-                    $scope.patientEventAssociations[associationId]
-                    .eventId.toString()) {
-                  $scope.patientEventAssociations.$remove(associationId);
-                }
+            patientEventAssociationsRepository
+              .once('value', function(allAssociationsSnapshot) {
+                allAssociationsSnapshot.forEach(function(associationSnapshot) {
+                  if (fcEvent.id.toString() ===
+                      associationSnapshot.val().eventId.toString()) {
+                    $scope.patientEventAssociations
+                      .$remove(associationSnapshot.val().id);
+                  }
+                });
               });
             $scope.events.$remove(fcEvent.id);
           }
