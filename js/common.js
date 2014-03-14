@@ -258,15 +258,29 @@ timelineWithAnimation.controller(
     var m = date.getMonth();
     var y = date.getFullYear();
 
-    $scope.events = [];
+    $scope.fcEvents = [];
 
-    var eventsRefConnection = new Firebase("https://blazing-fire-8127.firebaseio.com/events");
-    $scope.eventsRef = $firebase(eventsRefConnection);
-    eventsRefConnection.on('child_added', function(snapshot) {
-      var event = snapshot.val();
-      event.id = snapshot.name(); //name function return firebase id
-      event.start = new Date(event.start);
-      $scope.events.push(event);
+    var eventsConnection = new Firebase("https://blazing-fire-8127.firebaseio.com/events");
+    $scope.events = $firebase(eventsConnection);
+
+    eventsConnection.on('child_added', function(snapshot) {
+      var newEvent = snapshot.val();
+      newEvent.id = snapshot.name(); //name function return firebase id
+      newEvent.start = new Date(newEvent.start);
+      $scope.fcEvents.push(newEvent);
+    });
+    eventsConnection.on('child_changed', function(snapshot) {
+      var updatedEvent = snapshot.val();
+      updatedEvent.id = snapshot.name(); //name function return firebase id
+      updatedEvent.start = new Date(updatedEvent.start);
+
+      var id = updatedEvent.id;
+      for (var index in $scope.fcEvents) {
+        if ($scope.fcEvents[index].id.toString() === id.toString()) {
+          $scope.fcEvents[index] = updatedEvent;
+          break;
+        }
+      }
     });
 
     var fcConfig = {
@@ -285,7 +299,7 @@ timelineWithAnimation.controller(
       fcConfig.calendar['select'] = function(start) {
         var title = prompt('event title:');
         if (title) {
-          $scope.eventsRef.$add({ title: title, start: start });
+          $scope.events.$add({ title: title, start: start });
         }
         $scope.medCalendar.fullCalendar('unselect');
       };
@@ -293,18 +307,16 @@ timelineWithAnimation.controller(
         fcElement.find('.fc-event-title').click(function() {
           var title = prompt('event title:', fcEvent.title);
           if (title) {
-            fcEvent.title = title;
             var updatedEvent = {};
             updatedEvent[fcEvent.id] = { title: title, start: fcEvent.start };
-            $scope.eventsRef.$update(updatedEvent);
-            $scope.medCalendar.fullCalendar('updateEvent', fcEvent);
+            $scope.events.$update(updatedEvent);
           }
         });
         var element = $('<span class="fc-event-remove">x</span>');
         element.click(function() {
           var alertMessage = 'Destroy ' + fcEvent.title + '?';
           if (confirm(alertMessage)) {
-            $scope.eventsRef.$remove(fcEvent.id);
+            $scope.events.$remove(fcEvent.id);
             $scope.medCalendar.fullCalendar('removeEvents', fcEvent.id);
           }
         });
@@ -313,7 +325,7 @@ timelineWithAnimation.controller(
     }
 
     $scope.fcConfig = fcConfig;
-    $scope.eventSources = [$scope.events];
+    $scope.eventSources = [$scope.fcEvents];
   })
 
 timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings) {
