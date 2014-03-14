@@ -146,3 +146,10 @@ a:hover {
 .no-padding-left {
   padding-left: 0px !important;
 }
+.profile-header {
+  font-size: 16px;
+  font-weight: bold;
+}
+.profile-ident {
+  padding-left: 15px;
+}

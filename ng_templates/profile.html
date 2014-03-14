@@ -3,11 +3,9 @@
     <div class="row item-row">
       <div class="col-xs-4 no-padding-right"><img class="img-responsive" ng-src="images/photos/{{patient.id}}.large.png"/></div>
       <div class="col-xs-8">
-        <h3 style="margin-top: 0px;">
-          <strong>
-            {{patient.fullname}}
-          </strong>
-        </h3>
+        <div class="profile-header">
+          {{patient.fullname}}
+        </div>
         <div>
           <span class="text-muted">
             Sex:
@@ -42,66 +40,83 @@
     </div>
     <div class="row item-row">
       <div class="col-xs-12">
-        <h3>
+        <div class="profile-header">
           Contacts
-        </h3>
-        <div>
-          <span class="text-muted">
-            Address:
-          </span>
-          {{patient.address}}
         </div>
-        <div>
-          <span class="text-muted">
-            Phone No.:
-          </span>
-          {{patient.phone}}
+        <div class="profile-ident">
+          <div>
+            <span class="text-muted">
+              Address:
+            </span>
+            {{patient.address}}
+          </div>
+          <div>
+            <span class="text-muted">
+              Phone No.:
+            </span>
+            {{patient.phone}}
+          </div>
         </div>
       </div>
     </div>
     <div class="row item-row">
       <div class="col-xs-12">
-        <h3>
+        <div class="profile-header">
           Care Providers
-        </h3>
-        <div>
+        </div>
+        <div class="profile-ident">
+          <div>
           <span class="text-muted">
             PMD:
           </span>
           {{patient.physician}}
-        </div>
-        <div>
+          </div>
+          <div>
           <span class="text-muted">
             Phone No.:
           </span>
           {{patient.physician_phone}}
-        </div>
-        <div>
+          </div>
+          <div>
           <span class="text-muted">
             Nurse Navigator:
           </span>
           {{patient.nurse}}
-        </div>
-        <div>
+          </div>
+          <div>
           <span class="text-muted">
             Phone No.:
           </span>
           {{patient.nurse_phone}}
+          </div>
         </div>
       </div>
     </div>
     <div class="row item-row">
         <div class="col-xs-12">
+          <div class="profile-header">
+            Insurance Company
+          </div>
+          <div class="profile-ident">
             <div>
-                Insurance Company:
+              <span class="text-muted">
+                Name:
+              </span>
+              {{patient.insurance_company.name }}
             </div>
             <div>
-                <ul>
-                    <li> name:  {{patient.insurance_company.name }}</li>
-                    <li> phone: {{patient.insurance_company.phone}}</li>
-                    <li> code:  {{patient.insurance_company.code }}</li>
-                </ul>
+              <span class="text-muted">
+                phone:
+              </span>
+              {{patient.insurance_company.phone}}
             </div>
+            <div>
+              <span class="text-muted">
+                code:
+              </span>
+              {{patient.insurance_company.code }}
+            </div>
+          </div>
         </div>
     </div>
   </div>

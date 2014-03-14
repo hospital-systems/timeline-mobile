@@ -247,11 +247,9 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "    <div class=\"row item-row\">\n" +
     "      <div class=\"col-xs-4 no-padding-right\"><img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.large.png\"/></div>\n" +
     "      <div class=\"col-xs-8\">\n" +
-    "        <h3 style=\"margin-top: 0px;\">\n" +
-    "          <strong>\n" +
-    "            {{patient.fullname}}\n" +
-    "          </strong>\n" +
-    "        </h3>\n" +
+    "        <div class=\"profile-header\">\n" +
+    "          {{patient.fullname}}\n" +
+    "        </div>\n" +
     "        <div>\n" +
     "          <span class=\"text-muted\">\n" +
     "            Sex:\n" +
@@ -286,66 +284,83 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "    </div>\n" +
     "    <div class=\"row item-row\">\n" +
     "      <div class=\"col-xs-12\">\n" +
-    "        <h3>\n" +
+    "        <div class=\"profile-header\">\n" +
     "          Contacts\n" +
-    "        </h3>\n" +
-    "        <div>\n" +
-    "          <span class=\"text-muted\">\n" +
-    "            Address:\n" +
-    "          </span>\n" +
-    "          {{patient.address}}\n" +
     "        </div>\n" +
-    "        <div>\n" +
-    "          <span class=\"text-muted\">\n" +
-    "            Phone No.:\n" +
-    "          </span>\n" +
-    "          {{patient.phone}}\n" +
+    "        <div class=\"profile-ident\">\n" +
+    "          <div>\n" +
+    "            <span class=\"text-muted\">\n" +
+    "              Address:\n" +
+    "            </span>\n" +
+    "            {{patient.address}}\n" +
+    "          </div>\n" +
+    "          <div>\n" +
+    "            <span class=\"text-muted\">\n" +
+    "              Phone No.:\n" +
+    "            </span>\n" +
+    "            {{patient.phone}}\n" +
+    "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row item-row\">\n" +
     "      <div class=\"col-xs-12\">\n" +
-    "        <h3>\n" +
+    "        <div class=\"profile-header\">\n" +
     "          Care Providers\n" +
-    "        </h3>\n" +
-    "        <div>\n" +
+    "        </div>\n" +
+    "        <div class=\"profile-ident\">\n" +
+    "          <div>\n" +
     "          <span class=\"text-muted\">\n" +
     "            PMD:\n" +
     "          </span>\n" +
     "          {{patient.physician}}\n" +
-    "        </div>\n" +
-    "        <div>\n" +
+    "          </div>\n" +
+    "          <div>\n" +
     "          <span class=\"text-muted\">\n" +
     "            Phone No.:\n" +
     "          </span>\n" +
     "          {{patient.physician_phone}}\n" +
-    "        </div>\n" +
-    "        <div>\n" +
+    "          </div>\n" +
+    "          <div>\n" +
     "          <span class=\"text-muted\">\n" +
     "            Nurse Navigator:\n" +
     "          </span>\n" +
     "          {{patient.nurse}}\n" +
-    "        </div>\n" +
-    "        <div>\n" +
+    "          </div>\n" +
+    "          <div>\n" +
     "          <span class=\"text-muted\">\n" +
     "            Phone No.:\n" +
     "          </span>\n" +
     "          {{patient.nurse_phone}}\n" +
+    "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row item-row\">\n" +
     "        <div class=\"col-xs-12\">\n" +
+    "          <div class=\"profile-header\">\n" +
+    "            Insurance Company\n" +
+    "          </div>\n" +
+    "          <div class=\"profile-ident\">\n" +
     "            <div>\n" +
-    "                Insurance Company:\n" +
+    "              <span class=\"text-muted\">\n" +
+    "                Name:\n" +
+    "              </span>\n" +
+    "              {{patient.insurance_company.name }}\n" +
     "            </div>\n" +
     "            <div>\n" +
-    "                <ul>\n" +
-    "                    <li> name:  {{patient.insurance_company.name }}</li>\n" +
-    "                    <li> phone: {{patient.insurance_company.phone}}</li>\n" +
-    "                    <li> code:  {{patient.insurance_company.code }}</li>\n" +
-    "                </ul>\n" +
+    "              <span class=\"text-muted\">\n" +
+    "                phone:\n" +
+    "              </span>\n" +
+    "              {{patient.insurance_company.phone}}\n" +
     "            </div>\n" +
+    "            <div>\n" +
+    "              <span class=\"text-muted\">\n" +
+    "                code:\n" +
+    "              </span>\n" +
+    "              {{patient.insurance_company.code }}\n" +
+    "            </div>\n" +
+    "          </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
