@@ -1,1 +1,47 @@
-<div ng-include="'/ng_templates/_patient_badge.html'" onload="patient=getPatient(Settings.getPatientId());" class="container patient-badge"></div>
+<div class="" ng-switch on="getPatient(Settings.getPatientId())">
+  <div ng-switch-when="null">
+    <span>
+      <button type="button" class="navbar-toggle pull-left navbar-toggle-extended" ng-click="$spMenu.toggle()">
+        <div class="pull-left" style="padding-top: 5px;">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </div>
+        <div ng-bind="Settings.header()" class="pull-left navbar-brand-extended">
+          Observations
+        </div>
+      </button>
+    </span>
+    <span class="navbar-brand navbar-brand-img pull-right top-header"></span>
+  </div>
+  <div ng-switch-default>
+    <span ng-switch on="currentPage">
+      <span ng-cloak ng-switch-when="timelineItem">
+        <button type="button" class="navbar-toggle pull-left navbar-toggle-extended"
+                ng-click="$back();">
+          <div class="pull-left" style="padding-top: 2px;">
+            <span class="back-button glyphicon glyphicon-arrow-left"></span>
+          </div>
+          <div ng-bind="Settings.header()" class="pull-left navbar-brand-extended">
+            Observations
+          </div>
+        </button>
+      </span>
+      <span ng-switch-default>
+        <button type="button" class="navbar-toggle pull-left navbar-toggle-extended" ng-click="$spMenu.toggle()">
+            <div class="pull-left" style="padding-top: 5px;">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </div>
+            <div ng-bind="Settings.header()" class="pull-left navbar-brand-extended">
+                Observations
+            </div>
+        </button>
+      </span>
+    </span>
+    <span ng-include="'/ng_templates/_patient_badge.html'" class="navbar-right patient-badge"  onload="patient=getPatient(Settings.getPatientId());"></span>
+  </div>
+</div>

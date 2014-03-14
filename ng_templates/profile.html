@@ -7,7 +7,7 @@
           {{patient.fullname}} <span class="icon fancy-icon" ng-class="'medapp-icon-' + patient.gender"></span>
         </p>
         <p>
-          {{patient.date_of_birth | date: 'shortDate'}} ({{age()}} y/o)
+          {{patient.date_of_birth | date: 'shortDate'}} ({{patient_age()}} y/o)
         </p>
       </div>
     </div>

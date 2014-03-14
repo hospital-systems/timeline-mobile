@@ -86,16 +86,17 @@ a, a:hover {
 }
 
 .patient-badge {
-  margin-top: -15px;
-  font-size: 12px;
-  line-height: 16px;
   color: #999;
+
+  div {
+    padding-left: 10px;
+  }
 }
 
 .img-badge {
-  height: 50px;
-  widht:  60px;
-  padding-right: 10px;
+  height: 44px;
+  width:  44px;
+  margin: 2px 15px 0 0;
 }
 
 .doctor-navbar-nav + .doctor-navbar-nav{
@@ -113,4 +114,30 @@ a, a:hover {
 
 .col-patient h4{
   font-weight: bold;
+}
+
+.navbar-brand-extended {
+  float: left;
+  padding: 0 0 0 5px;
+  font-size: 18px;
+}
+
+.navbar-inverse .navbar-brand-extended {
+  color: #999;
+}
+.navbar-inverse .navbar-brand-extended:hover,
+.navbar-inverse .navbar-brand-extended:focus {
+  color: #fff;
+  background-color: transparent;
+}
+
+.navbar-toggle-extended {
+  border: none;
+  margin-right: 0px;
+  margin-top: 3px;
+  margin-bottom: 0px;
+
+  .icon-bar {
+    width: 15px;
+  }
 }

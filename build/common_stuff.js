@@ -36110,6 +36110,10 @@ timelineWithAnimation.controller(
       return getPatientById(id);
     };
 
+    $scope.age = function(patient) {
+        return age(patient.date_of_birth);
+    }
+
     $scope.Settings = Settings;
 
     $scope.$on(
@@ -36145,9 +36149,6 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope, Settings) 
   $scope.patients = patientsArrayFor(patients).sort(function(a, b){
     return a.id - b.id;
   });
-  $scope.age = function(patient) {
-    return age(patient.date_of_birth);
-  }
   var title = 'My patients';
   Settings.setTitle(title);
   Settings.setHeader(title);
@@ -36224,7 +36225,7 @@ timelineWithAnimation.controller(
     Settings.setTitle(title);
     Settings.setHeader(title);
 
-    $scope.age = function() {
+    $scope.patient_age = function() {
         return age($scope.patient.date_of_birth);
     }
   });
@@ -36233,16 +36234,31 @@ timelineWithAnimation.controller(
   'ChatCtrl',
   function($scope, $firebase, Settings, $route, $routeParams) {
     $scope.patient = getPatientById($routeParams.patientId);
+    $scope.messageBody = '';
+
+    if ($routeParams.patientId) {
+      $scope.senderName = 'Grape, Broccoli, MD';
+    } else {
+      $scope.senderName = 'Snow, Dan A.';
+    }
+
     Settings.setPatientId($scope.patient);
     var title = 'Chat';
+
     Settings.setTitle(title);
     Settings.setHeader(title);
+
     var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
     $scope.messages = $firebase(messagesRef);
 
     $scope.addMessage = function() {
-      $scope.messages.$add($scope.newMessage);
-      $scope.newMessage = {};
+      var message = {
+        sender: $scope.senderName,
+        body: $scope.messageBody
+      };
+
+      $scope.messages.$add(message);
+      $scope.messageBody = '';
     }
   })
 
@@ -36384,7 +36400,53 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   'use strict';
 
   $templateCache.put('/ng_templates/_header_for_doctor.html',
-    "<div ng-include=\"'/ng_templates/_patient_badge.html'\" onload=\"patient=getPatient(Settings.getPatientId());\" class=\"container patient-badge\"></div>\n"
+    "<div class=\"\" ng-switch on=\"getPatient(Settings.getPatientId())\">\n" +
+    "  <div ng-switch-when=\"null\">\n" +
+    "    <span>\n" +
+    "      <button type=\"button\" class=\"navbar-toggle pull-left navbar-toggle-extended\" ng-click=\"$spMenu.toggle()\">\n" +
+    "        <div class=\"pull-left\" style=\"padding-top: 5px;\">\n" +
+    "          <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "          <span class=\"icon-bar\"></span>\n" +
+    "        </div>\n" +
+    "        <div ng-bind=\"Settings.header()\" class=\"pull-left navbar-brand-extended\">\n" +
+    "          Observations\n" +
+    "        </div>\n" +
+    "      </button>\n" +
+    "    </span>\n" +
+    "    <span class=\"navbar-brand navbar-brand-img pull-right top-header\"></span>\n" +
+    "  </div>\n" +
+    "  <div ng-switch-default>\n" +
+    "    <span ng-switch on=\"currentPage\">\n" +
+    "      <span ng-cloak ng-switch-when=\"timelineItem\">\n" +
+    "        <button type=\"button\" class=\"navbar-toggle pull-left navbar-toggle-extended\"\n" +
+    "                ng-click=\"$back();\">\n" +
+    "          <div class=\"pull-left\" style=\"padding-top: 2px;\">\n" +
+    "            <span class=\"back-button glyphicon glyphicon-arrow-left\"></span>\n" +
+    "          </div>\n" +
+    "          <div ng-bind=\"Settings.header()\" class=\"pull-left navbar-brand-extended\">\n" +
+    "            Observations\n" +
+    "          </div>\n" +
+    "        </button>\n" +
+    "      </span>\n" +
+    "      <span ng-switch-default>\n" +
+    "        <button type=\"button\" class=\"navbar-toggle pull-left navbar-toggle-extended\" ng-click=\"$spMenu.toggle()\">\n" +
+    "            <div class=\"pull-left\" style=\"padding-top: 5px;\">\n" +
+    "                <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "                <span class=\"icon-bar\"></span>\n" +
+    "            </div>\n" +
+    "            <div ng-bind=\"Settings.header()\" class=\"pull-left navbar-brand-extended\">\n" +
+    "                Observations\n" +
+    "            </div>\n" +
+    "        </button>\n" +
+    "      </span>\n" +
+    "    </span>\n" +
+    "    <span ng-include=\"'/ng_templates/_patient_badge.html'\" class=\"navbar-right patient-badge\"  onload=\"patient=getPatient(Settings.getPatientId());\"></span>\n" +
+    "  </div>\n" +
+    "</div>\n"
   );
 
 
@@ -36406,22 +36468,24 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/_patient_badge.html',
-    "<div class=\"\" ng-switch on=\"getPatient(Settings.getPatientId())\">\n" +
-    "  <div ng-switch-when=\"null\">\n" +
-    "    <span class=\"navbar-brand\" ng-bind=\"Settings.header()\"  ng-click=\"$spMenu.toggle()\"></span>\n" +
-    "    <span class=\"navbar-brand navbar-brand-img pull-right top-header\"></span>\n" +
+    "<div>\n" +
+    "  <div class=\"pull-right\">\n" +
+    "    <img class=\"img-badge\" ng-src=\"images/photos/{{patient.id}}.png\"/>\n" +
     "  </div>\n" +
-    "  <div ng-switch-default>\n" +
-    "    <div class=\"pull-left\">\n" +
-    "      <div>{{ Settings.header() }}</div>\n" +
-    "      <div>{{ getPatient(Settings.getPatientId()).name}}</div>\n" +
-    "      <div>{{ getPatient(Settings.getPatientId()).date_of_birth | date: 'shortDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + getPatient(Settings.getPatientId()).gender\"></span></div>\n" +
+    "  <div class=\"pull-right\">\n" +
+    "    <div style=\"padding-top: 3px;\">\n" +
+    "      <strong>\n" +
+    "        {{ patient.name}}\n" +
+    "      </strong>\n" +
     "    </div>\n" +
-    "    <div class=\"pull-right\">\n" +
-    "        <img class=\"img-badge\" ng-src=\"images/photos/{{getPatient(Settings.getPatientId()).id}}.png\"/>\n" +
+    "    <div>\n" +
+    "\n" +
+    "        {{patient.gender}}, {{age(patient)}} y\n" +
+    "\n" +
     "    </div>\n" +
     "  </div>\n" +
-    "</div>\n"
+    "</div>\n" +
+    "\n"
   );
 
 
@@ -36434,7 +36498,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "    <div class=\"timeline-item-title\"><strong>{{item.name}}</strong></div>\n" +
     "    <div class=\"text-muted\">{{item.doctor_name}}</div>\n" +
     "  </div>\n" +
-    "  <div class=\"col-xs-3 col-md-2 text-center timeline-item-datetime\">\n" +
+    "  <div class=\"col-xs-3 col-md-2 text-right timeline-item-datetime\">\n" +
     "    <span>\n" +
     "      {{item.createdAt | date: 'MMM, dd'}}\n" +
     "    </span>\n" +
@@ -36450,8 +36514,15 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"allergy-list-frame container\">\n" +
     "  <div ng-controller=\"AllergyListCtrl\">\n" +
     "    <div class=\"row item-row\" ng-repeat=\"item in items\">\n" +
-    "      <div class=\"col-xs-12\">{{item.substance}}</div>\n" +
-    "      <div class=\"col-xs-12 text-muted\">(RxNorm: {{item.RxNorm}})</div>\n" +
+    "      <div class=\"col-xs-9\">{{item.substance}}</div>\n" +
+    "      <div class=\"col-xs-3 text-right\">\n" +
+    "        <span>\n" +
+    "          {{item.RxNorm}}\n" +
+    "        </span>\n" +
+    "        <span class=\"text-muted\">\n" +
+    "          RxNorm\n" +
+    "        </span>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n"
@@ -36469,23 +36540,19 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/chat.html',
     "<div class=\"chat container\">\n" +
     "  <div ng-controller=\"ChatCtrl\">\n" +
+    "    <pre ng-bind=\"senderName | json\"></pre>\n" +
     "\n" +
-    "    <div class=\"chat-input\">\n" +
-    "      <form role=\"form\" class=\"form-inline\">\n" +
-    "        <div class=\"form-group\">\n" +
-    "          <label for=\"sender\">Sender</label>\n" +
-    "          <input type=\"text\" class=\"form-control\" id=\"sender\" placeholder=\"Sender\" ng-model=\"newMessage.sender\">\n" +
-    "        </div>\n" +
-    "        <div class=\"form-group\">\n" +
-    "          <label for=\"message\">Message</label>\n" +
-    "          <input type=\"text\" class=\"form-control\" id=\"message\" placeholder=\"Message\" ng-model=\"newMessage.body\">\n" +
-    "        </div>\n" +
-    "        <button type=\"submit\" class=\"btn btn-default\" ng-click=\"addMessage()\">Send</button>\n" +
-    "      </form>\n" +
+    "    <div class=\"messages\">\n" +
+    "      <div class=\"row item-row\" ng-repeat=\"message in messages\">\n" +
+    "        <div class=\"col-xs-12\"><strong>{{message.sender}}:</strong></div>\n" +
+    "        <div class=\"col-xs-12 text-right\">{{message.body}}</div>\n" +
+    "      </div>\n" +
     "    </div>\n" +
-    "    <div class=\"row item-row\" ng-repeat=\"message in messages\">\n" +
-    "      <div class=\"col-xs-12\"><strong>{{message.sender}}:</strong></div>\n" +
-    "      <div class=\"col-xs-12 text-right\">{{message.body}}</div>\n" +
+    "    <div class=\"chat-input\">\n" +
+    "      <form ng-submit='addMessage()'>\n" +
+    "        <input type=\"text\" class=\"form-control\" id=\"message\"\n" +
+    "               placeholder=\"Message\" ng-model=\"messageBody\">\n" +
+    "      </form>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n"
@@ -36557,7 +36624,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "          <div class=\"timeline-item-title\">{{item.diagnoses}}</div>\n" +
     "          <div class=\"text-muted\">{{item.date}} by {{item.institution}}</div>\n" +
     "        </div>\n" +
-    "        <div class=\"col-xs-2 text-center timeline-item-datetime\">\n" +
+    "        <div class=\"col-xs-2 text-right timeline-item-datetime\">\n" +
     "          <div>\n" +
     "            {{item.code}}\n" +
     "          </div>\n" +
@@ -36582,7 +36649,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "          {{patient.fullname}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span>\n" +
     "        </p>\n" +
     "        <p>\n" +
-    "          {{patient.date_of_birth | date: 'shortDate'}} ({{age()}} y/o)\n" +
+    "          {{patient.date_of_birth | date: 'shortDate'}} ({{patient_age()}} y/o)\n" +
     "        </p>\n" +
     "      </div>\n" +
     "    </div>\n" +

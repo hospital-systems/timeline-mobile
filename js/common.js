@@ -115,6 +115,10 @@ timelineWithAnimation.controller(
       return getPatientById(id);
     };
 
+    $scope.age = function(patient) {
+        return age(patient.date_of_birth);
+    }
+
     $scope.Settings = Settings;
 
     $scope.$on(
@@ -150,9 +154,6 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope, Settings) 
   $scope.patients = patientsArrayFor(patients).sort(function(a, b){
     return a.id - b.id;
   });
-  $scope.age = function(patient) {
-    return age(patient.date_of_birth);
-  }
   var title = 'My patients';
   Settings.setTitle(title);
   Settings.setHeader(title);
@@ -229,7 +230,7 @@ timelineWithAnimation.controller(
     Settings.setTitle(title);
     Settings.setHeader(title);
 
-    $scope.age = function() {
+    $scope.patient_age = function() {
         return age($scope.patient.date_of_birth);
     }
   });
@@ -238,16 +239,31 @@ timelineWithAnimation.controller(
   'ChatCtrl',
   function($scope, $firebase, Settings, $route, $routeParams) {
     $scope.patient = getPatientById($routeParams.patientId);
+    $scope.messageBody = '';
+
+    if ($routeParams.patientId) {
+      $scope.senderName = 'Grape, Broccoli, MD';
+    } else {
+      $scope.senderName = 'Snow, Dan A.';
+    }
+
     Settings.setPatientId($scope.patient);
     var title = 'Chat';
+
     Settings.setTitle(title);
     Settings.setHeader(title);
+
     var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
     $scope.messages = $firebase(messagesRef);
 
     $scope.addMessage = function() {
-      $scope.messages.$add($scope.newMessage);
-      $scope.newMessage = {};
+      var message = {
+        sender: $scope.senderName,
+        body: $scope.messageBody
+      };
+
+      $scope.messages.$add(message);
+      $scope.messageBody = '';
     }
   })
 
