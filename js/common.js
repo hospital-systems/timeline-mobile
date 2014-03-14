@@ -244,18 +244,6 @@ timelineWithAnimation.controller(
     }
   })
 
-function generateS4() {
-  return Math.floor((1 + Math.random()) * 0x10000)
-    .toString(16)
-    .substring(1);
-};
-
-function generateGuid() {
-  return generateS4() + generateS4() + '-' + generateS4() + '-' +
-    generateS4() + '-' + generateS4() + '-' +
-    generateS4() + generateS4() + generateS4();
-}
-
 timelineWithAnimation.controller(
   'CalendarCtrl',
   function($scope, Settings, $route, $routeParams, $firebase) {
@@ -271,23 +259,18 @@ timelineWithAnimation.controller(
     var y = date.getFullYear();
 
     $scope.events = [];
-    $scope.newEvent = {start: new Date()};
 
-    var eventsRef = new Firebase("https://blazing-fire-8127.firebaseio.com/events");
-    $scope.eventsRef = $firebase(eventsRef);
-    eventsRef.on('child_added', function(snapshot) {
+    var eventsRefConnection = new Firebase("https://blazing-fire-8127.firebaseio.com/events");
+    $scope.eventsRef = $firebase(eventsRefConnection);
+    eventsRefConnection.on('child_added', function(snapshot) {
       var event = snapshot.val();
+      event.id = snapshot.name(); //name function return firebase id
       event.start = new Date(event.start);
       $scope.events.push(event);
     });
-    $scope.addEvent = function() {
-      $scope.newEvent.id = generateGuid();
-      $scope.eventsRef.$add($scope.newEvent);
-      $scope.newEvent = {start: new Date()};
-    }
 
-    $scope.uiConfig = {
-      calendar:{
+    var fcConfig = {
+      calendar: {
         height: 450,
         editable: false,
         header:{
@@ -297,7 +280,39 @@ timelineWithAnimation.controller(
         }
       }
     };
+    if ($scope.patient) {
+      fcConfig.calendar['selectable'] = true;
+      fcConfig.calendar['select'] = function(start) {
+        var title = prompt('event title:');
+        if (title) {
+          $scope.eventsRef.$add({ title: title, start: start });
+        }
+        $scope.medCalendar.fullCalendar('unselect');
+      };
+      fcConfig.calendar['eventRender'] = function(fcEvent, fcElement) { //<http://stackoverflow.com/questions/4395786/how-to-edit-fullcalender-event-content#4406361>
+        fcElement.find('.fc-event-title').click(function() {
+          var title = prompt('event title:', fcEvent.title);
+          if (title) {
+            fcEvent.title = title;
+            var updatedEvent = {};
+            updatedEvent[fcEvent.id] = { title: title, start: fcEvent.start };
+            $scope.eventsRef.$update(updatedEvent);
+            $scope.medCalendar.fullCalendar('updateEvent', fcEvent);
+          }
+        });
+        var element = $('<span class="fc-event-remove">x</span>');
+        element.click(function() {
+          var alertMessage = 'Destroy ' + fcEvent.title + '?';
+          if (confirm(alertMessage)) {
+            $scope.eventsRef.$remove(fcEvent.id);
+            $scope.medCalendar.fullCalendar('removeEvents', fcEvent.id);
+          }
+        });
+        fcElement.find('.fc-event-inner').append(element);
+      };
+    }
 
+    $scope.fcConfig = fcConfig;
     $scope.eventSources = [$scope.events];
   })
 

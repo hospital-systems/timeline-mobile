@@ -1,0 +1,8 @@
+.fc-event .fc-event-title,
+.fc-event .fc-event-remove {
+  cursor: pointer;
+}
+.fc-event .fc-event-remove {
+  float: right;
+  padding: 0 2px;
+}
