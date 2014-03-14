@@ -36255,7 +36255,7 @@ timelineWithAnimation.controller(
       $scope.events.push(event);
     });
 
-    var fullCalendarConfig = {
+    var fcConfig = {
       calendar: {
         height: 450,
         editable: false,
@@ -36267,30 +36267,38 @@ timelineWithAnimation.controller(
       }
     };
     if ($scope.patient) {
-      fullCalendarConfig.calendar['selectable'] = true;
-      fullCalendarConfig.calendar['select'] = function(start) {
+      fcConfig.calendar['selectable'] = true;
+      fcConfig.calendar['select'] = function(start) {
         var title = prompt('event title:');
         if (title) {
           $scope.eventsRef.$add({ title: title, start: start });
         }
         $scope.medCalendar.fullCalendar('unselect');
       };
-      fullCalendarConfig.calendar['eventClick'] = function(fullCalendarEvent) { //<http://stackoverflow.com/questions/4395786/how-to-edit-fullcalender-event-content#4406361>.
-        var title = prompt('event title:', fullCalendarEvent.title);
-        if (title) {
-          fullCalendarEvent.title = title;
-          var event = {};
-          event[fullCalendarEvent.id] = {
-            start: fullCalendarEvent.start,
-            title: title
-          };
-          $scope.eventsRef.$update(event);
-          $scope.medCalendar.fullCalendar('updateEvent', fullCalendarEvent);
-        }
+      fcConfig.calendar['eventRender'] = function(fcEvent, fcElement) { //<http://stackoverflow.com/questions/4395786/how-to-edit-fullcalender-event-content#4406361>
+        fcElement.find('.fc-event-title').click(function() {
+          var title = prompt('event title:', fcEvent.title);
+          if (title) {
+            fcEvent.title = title;
+            var updatedEvent = {};
+            updatedEvent[fcEvent.id] = { title: title, start: fcEvent.start };
+            $scope.eventsRef.$update(updatedEvent);
+            $scope.medCalendar.fullCalendar('updateEvent', fcEvent);
+          }
+        });
+        var element = $('<span class="fc-event-remove">x</span>');
+        element.click(function() {
+          var alertMessage = 'Destroy ' + fcEvent.title + '?';
+          if (confirm(alertMessage)) {
+            $scope.eventsRef.$remove(fcEvent.id);
+            $scope.medCalendar.fullCalendar('removeEvents', fcEvent.id);
+          }
+        });
+        fcElement.find('.fc-event-inner').append(element);
       };
     }
 
-    $scope.fullCalendarConfig = fullCalendarConfig;
+    $scope.fcConfig = fcConfig;
     $scope.eventSources = [$scope.events];
   })
 
@@ -36375,7 +36383,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
   $templateCache.put('/ng_templates/calendar.html',
     "<div class=\"container\" ng-controller=\"CalendarCtrl\">\n" +
-    "  <div ui-calendar=\"fullCalendarConfig.calendar\" calendar=\"medCalendar\"\n" +
+    "  <div ui-calendar=\"fcConfig.calendar\" calendar=\"medCalendar\"\n" +
     "       ng-model=\"eventSources\" class=\"span8 calendar\"></div>\n" +
     "</div>\n"
   );

@@ -5821,6 +5821,15 @@ button.close {
   left: 100%;
 }
 
+.fc-event .fc-event-title,
+.fc-event .fc-event-remove {
+  cursor: pointer;
+}
+.fc-event .fc-event-remove {
+  float: right;
+  padding: 0 2px;
+}
+
 .chat-input {
   margin: 10px 0;
   padding: 10px 0;
