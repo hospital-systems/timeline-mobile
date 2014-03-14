@@ -142,18 +142,24 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/chat.html',
     "<div class=\"chat container\">\n" +
     "  <div ng-controller=\"ChatCtrl\">\n" +
-    "    <pre ng-bind=\"senderName | json\"></pre>\n" +
+    "    <div class=\"messages clearfix\">\n" +
+    "      <div class=\"message\" ng-repeat=\"message in messages\" ng-class=\"{ mine: ( message.sender == senderName )}\">\n" +
+    "        <div class=\"body\">\n" +
+    "          <span class=\"triangle\"></span>\n" +
+    "          {{ message.body }}\n" +
+    "        </div>\n" +
     "\n" +
-    "    <div class=\"messages\">\n" +
-    "      <div class=\"row item-row\" ng-repeat=\"message in messages\">\n" +
-    "        <div class=\"col-xs-12\"><strong>{{message.sender}}:</strong></div>\n" +
-    "        <div class=\"col-xs-12 text-right\">{{message.body}}</div>\n" +
+    "        <div class=\"meta\">\n" +
+    "          <span class=\"author\">{{message.sender}}</span>\n" +
+    "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
+    "\n" +
     "    <div class=\"chat-input\">\n" +
     "      <form ng-submit='addMessage()'>\n" +
     "        <input type=\"text\" class=\"form-control\" id=\"message\"\n" +
-    "               placeholder=\"Message\" ng-model=\"messageBody\">\n" +
+    "               placeholder=\"Type your message here\" ng-model=\"messageBody\">\n" +
+    "        <input type=\"submit\" value=\"Send\" class=\"btn btn-primary\" />\n" +
     "      </form>\n" +
     "    </div>\n" +
     "  </div>\n" +
