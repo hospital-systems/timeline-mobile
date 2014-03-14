@@ -1,8 +1,18 @@
-.fc-event .fc-event-title,
-.fc-event .fc-event-remove {
+.calendar-frame {
+  margin-top: 10px;
+}
+.calendar-frame .fc-event .fc-event-title,
+.calendar-frame .fc-event .fc-event-remove {
   cursor: pointer;
 }
-.fc-event .fc-event-remove {
+.calendar-frame .fc-event .fc-event-remove {
   float: right;
   padding: 0 2px;
+}
+.calendar-frame .fc-header .fc-button {
+  margin-bottom: 0;
+}
+.calendar-frame .fc-header .fc-header-right {
+  vertical-align: bottom;
+  padding-bottom: 1em;
 }

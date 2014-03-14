@@ -77,7 +77,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/calendar.html',
-    "<div class=\"container\" ng-controller=\"CalendarCtrl\">\n" +
+    "<div class=\"calendar-frame container\" ng-controller=\"CalendarCtrl\">\n" +
     "  <div ui-calendar=\"fcConfig.calendar\" calendar=\"medCalendar\"\n" +
     "       ng-model=\"eventSources\" class=\"span8 calendar\"></div>\n" +
     "</div>\n"
