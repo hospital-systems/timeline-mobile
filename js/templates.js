@@ -244,7 +244,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
   $templateCache.put('/ng_templates/profile.html',
     "<div class=\"profile-frame container\">\n" +
     "  <div ng-controller=\"ProfileCtrl\">\n" +
-    "    <div class=\"row item-row\">\n" +
+    "    <div class=\"row item-row profile-photo-row\">\n" +
     "      <div class=\"col-xs-4 no-padding-right\"><img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.large.png\"/></div>\n" +
     "      <div class=\"col-xs-8\">\n" +
     "        <div class=\"profile-header\">\n" +
