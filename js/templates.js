@@ -140,27 +140,25 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/chat.html',
-    "<div class=\"chat container\">\n" +
-    "  <div ng-controller=\"ChatCtrl\">\n" +
-    "    <div class=\"messages clearfix\">\n" +
-    "      <div class=\"message\" ng-repeat=\"message in messages\" ng-class=\"{ mine: ( message.sender == senderName )}\">\n" +
-    "        <div class=\"body\">\n" +
-    "          <span class=\"triangle\"></span>\n" +
-    "          {{ message.body }}\n" +
-    "        </div>\n" +
+    "<div class=\"chat container\" ng-controller=\"ChatCtrl\">\n" +
+    "  <div class=\"chat-input\">\n" +
+    "    <form ng-submit='addMessage()'>\n" +
+    "      <input type=\"text\" class=\"form-control\" id=\"message\"\n" +
+    "             placeholder=\"Type your message here\" ng-model=\"messageBody\">\n" +
+    "      <input type=\"submit\" value=\"Send\" class=\"btn btn-primary\" />\n" +
+    "    </form>\n" +
+    "  </div>\n" +
     "\n" +
-    "        <div class=\"meta\">\n" +
-    "          <span class=\"author\">{{message.sender}}</span>\n" +
-    "        </div>\n" +
+    "  <div class=\"messages clearfix\">\n" +
+    "    <div class=\"message\" ng-repeat=\"message in messages | reverse\" ng-class=\"{ mine: ( message.sender == senderName )}\">\n" +
+    "      <div class=\"body\">\n" +
+    "        <span class=\"triangle\"></span>\n" +
+    "        {{ message.body }}\n" +
     "      </div>\n" +
-    "    </div>\n" +
     "\n" +
-    "    <div class=\"chat-input\">\n" +
-    "      <form ng-submit='addMessage()'>\n" +
-    "        <input type=\"text\" class=\"form-control\" id=\"message\"\n" +
-    "               placeholder=\"Type your message here\" ng-model=\"messageBody\">\n" +
-    "        <input type=\"submit\" value=\"Send\" class=\"btn btn-primary\" />\n" +
-    "      </form>\n" +
+    "      <div class=\"meta\">\n" +
+    "        <span class=\"author\">{{message.sender}}</span>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n"

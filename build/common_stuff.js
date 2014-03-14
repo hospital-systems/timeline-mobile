@@ -36031,6 +36031,28 @@ timelineWithAnimation.factory('Settings', function() {
    };
 });
 
+timelineWithAnimation.filter('reverse', function() {
+  function toArray(list) {
+    var k, out = [];
+
+    if( list ) {
+      if( angular.isArray(list) ) {
+        out = list;
+      }
+      else if( typeof(list) === 'object' ) {
+        for (k in list) {
+          if (list.hasOwnProperty(k) && k.match(/^-/)) { out.push(list[k]); }
+        }
+      }
+    }
+    return out;
+  }
+
+  return function(items) {
+    return toArray(items).reverse();
+  };
+});
+
 var patientsListRegexp  = /\/doctor.html#\/$/;
 var timelineListRegexp  = /\/((doctor|patient).html)?#\/(patients\/[0-9]+)?$/;
 var timelineItemRegexp  = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?items\/[0-9]+$/;
@@ -36254,7 +36276,7 @@ timelineWithAnimation.controller(
     Settings.setTitle(title);
     Settings.setHeader(title);
 
-    var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
+    var messagesRef = new Firebase("https://brilliant-fire-3098.firebaseio.com/messages");
     $scope.messages = $firebase(messagesRef);
 
     $scope.addMessage = function() {
@@ -36503,27 +36525,25 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
 
   $templateCache.put('/ng_templates/chat.html',
-    "<div class=\"chat container\">\n" +
-    "  <div ng-controller=\"ChatCtrl\">\n" +
-    "    <div class=\"messages clearfix\">\n" +
-    "      <div class=\"message\" ng-repeat=\"message in messages\" ng-class=\"{ mine: ( message.sender == senderName )}\">\n" +
-    "        <div class=\"body\">\n" +
-    "          <span class=\"triangle\"></span>\n" +
-    "          {{ message.body }}\n" +
-    "        </div>\n" +
+    "<div class=\"chat container\" ng-controller=\"ChatCtrl\">\n" +
+    "  <div class=\"chat-input\">\n" +
+    "    <form ng-submit='addMessage()'>\n" +
+    "      <input type=\"text\" class=\"form-control\" id=\"message\"\n" +
+    "             placeholder=\"Type your message here\" ng-model=\"messageBody\">\n" +
+    "      <input type=\"submit\" value=\"Send\" class=\"btn btn-primary\" />\n" +
+    "    </form>\n" +
+    "  </div>\n" +
     "\n" +
-    "        <div class=\"meta\">\n" +
-    "          <span class=\"author\">{{message.sender}}</span>\n" +
-    "        </div>\n" +
+    "  <div class=\"messages clearfix\">\n" +
+    "    <div class=\"message\" ng-repeat=\"message in messages | reverse\" ng-class=\"{ mine: ( message.sender == senderName )}\">\n" +
+    "      <div class=\"body\">\n" +
+    "        <span class=\"triangle\"></span>\n" +
+    "        {{ message.body }}\n" +
     "      </div>\n" +
-    "    </div>\n" +
     "\n" +
-    "    <div class=\"chat-input\">\n" +
-    "      <form ng-submit='addMessage()'>\n" +
-    "        <input type=\"text\" class=\"form-control\" id=\"message\"\n" +
-    "               placeholder=\"Type your message here\" ng-model=\"messageBody\">\n" +
-    "        <input type=\"submit\" value=\"Send\" class=\"btn btn-primary\" />\n" +
-    "      </form>\n" +
+    "      <div class=\"meta\">\n" +
+    "        <span class=\"author\">{{message.sender}}</span>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n"

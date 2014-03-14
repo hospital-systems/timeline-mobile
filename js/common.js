@@ -30,6 +30,28 @@ timelineWithAnimation.factory('Settings', function() {
    };
 });
 
+timelineWithAnimation.filter('reverse', function() {
+  function toArray(list) {
+    var k, out = [];
+
+    if( list ) {
+      if( angular.isArray(list) ) {
+        out = list;
+      }
+      else if( typeof(list) === 'object' ) {
+        for (k in list) {
+          if (list.hasOwnProperty(k) && k.match(/^-/)) { out.push(list[k]); }
+        }
+      }
+    }
+    return out;
+  }
+
+  return function(items) {
+    return toArray(items).reverse();
+  };
+});
+
 var patientsListRegexp  = /\/doctor.html#\/$/;
 var timelineListRegexp  = /\/((doctor|patient).html)?#\/(patients\/[0-9]+)?$/;
 var timelineItemRegexp  = /\/((doctor|patient).html)?#\/(patients\/[0-9]+\/)?items\/[0-9]+$/;
@@ -253,7 +275,7 @@ timelineWithAnimation.controller(
     Settings.setTitle(title);
     Settings.setHeader(title);
 
-    var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
+    var messagesRef = new Firebase("https://brilliant-fire-3098.firebaseio.com/messages");
     $scope.messages = $firebase(messagesRef);
 
     $scope.addMessage = function() {

@@ -1,24 +1,22 @@
-<div class="chat container">
-  <div ng-controller="ChatCtrl">
-    <div class="messages clearfix">
-      <div class="message" ng-repeat="message in messages" ng-class="{ mine: ( message.sender == senderName )}">
-        <div class="body">
-          <span class="triangle"></span>
-          {{ message.body }}
-        </div>
+<div class="chat container" ng-controller="ChatCtrl">
+  <div class="chat-input">
+    <form ng-submit='addMessage()'>
+      <input type="text" class="form-control" id="message"
+             placeholder="Type your message here" ng-model="messageBody">
+      <input type="submit" value="Send" class="btn btn-primary" />
+    </form>
+  </div>
 
-        <div class="meta">
-          <span class="author">{{message.sender}}</span>
-        </div>
+  <div class="messages clearfix">
+    <div class="message" ng-repeat="message in messages | reverse" ng-class="{ mine: ( message.sender == senderName )}">
+      <div class="body">
+        <span class="triangle"></span>
+        {{ message.body }}
       </div>
-    </div>
 
-    <div class="chat-input">
-      <form ng-submit='addMessage()'>
-        <input type="text" class="form-control" id="message"
-               placeholder="Type your message here" ng-model="messageBody">
-        <input type="submit" value="Send" class="btn btn-primary" />
-      </form>
+      <div class="meta">
+        <span class="author">{{message.sender}}</span>
+      </div>
     </div>
   </div>
 </div>

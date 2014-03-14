@@ -5895,6 +5895,10 @@ button.close {
   border-bottom-right-radius: 0;
 }
 
+html,
+body {
+  height: 100%;
+}
 .navbar {
   margin-bottom: 0px;
 }
