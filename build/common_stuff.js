@@ -36230,11 +36230,11 @@ timelineWithAnimation.controller(
     }
   })
 
-function assignSnapshotToFcEvent(snapshot, callback) {
+function getFcEvent(snapshot) {
   var event = snapshot.val();
   event.id = snapshot.name(); //name function return firebase id
   event.start = new Date(event.start);
-  callback.call(undefined, event)
+  return event;
 }
 
 timelineWithAnimation.controller(
@@ -36252,20 +36252,17 @@ timelineWithAnimation.controller(
     $scope.events = $firebase(eventsConnection);
 
     eventsConnection.on('child_added', function(snapshot) {
-      assignSnapshotToFcEvent(snapshot, function(newEvent) {
-        $scope.fcEvents.push(newEvent);
-      });
+      var newEvent = getFcEvent(snapshot);
+      $scope.fcEvents.push(newEvent);
     });
     eventsConnection.on('child_changed', function(snapshot) {
-      assignSnapshotToFcEvent(snapshot, function(updatedEvent) {
-        var id = updatedEvent.id;
-        for (var index in $scope.fcEvents) {
-          if ($scope.fcEvents[index].id.toString() === id.toString()) {
-            $scope.fcEvents[index] = updatedEvent;
-            break;
-          }
+      var updatedEvent = getFcEvent(snapshot);
+      for (var index in $scope.fcEvents) {
+        if ($scope.fcEvents[index].id.toString() === updatedEvent.id.toString()) {
+          $scope.fcEvents[index] = updatedEvent;
+          break;
         }
-      });
+      }
     });
 
     var fcConfig = {
