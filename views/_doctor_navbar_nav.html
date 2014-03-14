@@ -1,0 +1,28 @@
+<ul class="nav navbar-nav doctor-navbar-nav" style="padding-left: 25px;">
+    <li ng-class="{active: currentPage === 'patientsList'}">
+        <a href="#/">My patients</a>
+    </li>
+</ul>
+<ul class="nav navbar-nav doctor-navbar-nav" style="padding-left: 25px;"  ng-if="Settings.getPatientId()">
+    <li ng-class="{active: currentPage === 'timelineList'}">
+        <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/">Observations</a>
+    </li>
+    <li ng-class="{active: currentPage === 'problemList'}">
+        <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/problem-list">Problem list</a>
+    </li>
+    <li ng-class="{active: currentPage === 'allergyList'}">
+        <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/allergy-list">Allergy list</a>
+    </li>
+    <li ng-class="{active: currentPage === 'encounterList'}">
+        <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/encounters">Encounters</a>
+    </li>
+    <li ng-class="{active: currentPage === 'profile'}">
+        <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/profile">Profile</a>
+    </li>
+    <li ng-class="{active: currentPage === 'chat'}">
+        <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/chat">Chat</a>
+    </li>
+    <li ng-class="{active: currentPage === 'calendar'}">
+        <a href="#\{{ Settings.getPatientId() && '/patients/' + Settings.getPatientId() }}/calendar">Calendar</a>
+    </li>
+</ul>

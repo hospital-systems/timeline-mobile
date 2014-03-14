@@ -1,6 +1,7 @@
-<div class="container-fluid" ng-switch on="getPatient(Settings.getPatientId())">
+<div class="" ng-switch on="getPatient(Settings.getPatientId())">
   <div ng-switch-when="null">
-    <span class="navbar-brand" ng-bind="Settings.header()"></span>
+    <span class="navbar-brand" ng-bind="Settings.header()"  ng-click="$spMenu.toggle()"></span>
+    <span class="navbar-brand navbar-brand-img pull-right top-header"></span>
   </div>
   <div ng-switch-default>
     <div class="pull-left">
