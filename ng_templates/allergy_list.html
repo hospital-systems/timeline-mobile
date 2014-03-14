@@ -1,8 +1,15 @@
 <div class="allergy-list-frame container">
   <div ng-controller="AllergyListCtrl">
     <div class="row item-row" ng-repeat="item in items">
-      <div class="col-xs-12">{{item.substance}}</div>
-      <div class="col-xs-12 text-muted">(RxNorm: {{item.RxNorm}})</div>
+      <div class="col-xs-9">{{item.substance}}</div>
+      <div class="col-xs-3 text-right">
+        <span>
+          {{item.RxNorm}}
+        </span>
+        <span class="text-muted">
+          RxNorm
+        </span>
+      </div>
     </div>
   </div>
 </div>

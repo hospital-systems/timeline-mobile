@@ -36395,7 +36395,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "    <div class=\"timeline-item-title\"><strong>{{item.name}}</strong></div>\n" +
     "    <div class=\"text-muted\">{{item.doctor_name}}</div>\n" +
     "  </div>\n" +
-    "  <div class=\"col-xs-3 col-md-2 text-center timeline-item-datetime\">\n" +
+    "  <div class=\"col-xs-3 col-md-2 text-right timeline-item-datetime\">\n" +
     "    <span>\n" +
     "      {{item.createdAt | date: 'MMM, dd'}}\n" +
     "    </span>\n" +
@@ -36411,8 +36411,15 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "<div class=\"allergy-list-frame container\">\n" +
     "  <div ng-controller=\"AllergyListCtrl\">\n" +
     "    <div class=\"row item-row\" ng-repeat=\"item in items\">\n" +
-    "      <div class=\"col-xs-12\">{{item.substance}}</div>\n" +
-    "      <div class=\"col-xs-12 text-muted\">(RxNorm: {{item.RxNorm}})</div>\n" +
+    "      <div class=\"col-xs-9\">{{item.substance}}</div>\n" +
+    "      <div class=\"col-xs-3 text-right\">\n" +
+    "        <span>\n" +
+    "          {{item.RxNorm}}\n" +
+    "        </span>\n" +
+    "        <span class=\"text-muted\">\n" +
+    "          RxNorm\n" +
+    "        </span>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n"
@@ -36518,7 +36525,7 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
     "          <div class=\"timeline-item-title\">{{item.diagnoses}}</div>\n" +
     "          <div class=\"text-muted\">{{item.date}} by {{item.institution}}</div>\n" +
     "        </div>\n" +
-    "        <div class=\"col-xs-2 text-center timeline-item-datetime\">\n" +
+    "        <div class=\"col-xs-2 text-right timeline-item-datetime\">\n" +
     "          <div>\n" +
     "            {{item.code}}\n" +
     "          </div>\n" +
