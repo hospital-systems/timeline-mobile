@@ -36066,6 +36066,28 @@ function getPageType(url) {
   return 'unrecognized';
 }
 
+function age(start_date) {
+    var now  = new Date();
+
+    var ynew = now.getFullYear();
+    var mnew = now.getMonth();
+    var dnew = now.getDate();
+
+    var yold = start_date.getFullYear();
+    var mold = start_date.getMonth();
+    var dold = start_date.getDate();
+
+    var diff = ynew - yold;
+
+    if (mold > mnew) diff--;
+    else {
+        if (mold == mnew) {
+            if (dold > dnew) diff--;
+        }
+    }
+    return diff;
+}
+
 function getPatientById(id) {
   if (!id) {
     return null;
@@ -36123,6 +36145,9 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope, Settings) 
   $scope.patients = patientsArrayFor(patients).sort(function(a, b){
     return a.id - b.id;
   });
+  $scope.age = function(patient) {
+    return age(patient.date_of_birth);
+  }
   var title = 'My patients';
   Settings.setTitle(title);
   Settings.setHeader(title);
@@ -36200,25 +36225,7 @@ timelineWithAnimation.controller(
     Settings.setHeader(title);
 
     $scope.age = function() {
-        var now  = new Date();
-
-        var ynew = now.getFullYear();
-        var mnew = now.getMonth();
-        var dnew = now.getDate();
-
-        var yold = $scope.patient.date_of_birth.getFullYear();
-        var mold = $scope.patient.date_of_birth.getMonth();
-        var dold = $scope.patient.date_of_birth.getDate();
-
-        var diff = ynew - yold;
-
-        if (mold > mnew) diff--;
-        else {
-            if (mold == mnew) {
-                if (dold > dnew) diff--;
-            }
-        }
-        return diff;
+        return age($scope.patient.date_of_birth);
     }
   });
 
@@ -36327,12 +36334,16 @@ angular.module('timeline-with-animation').run(['$templateCache', function($templ
 
   $templateCache.put('/ng_templates/_patient.html',
     "<div class=\"row item-row\">\n" +
-    "    <div class=\"col-xs-3\">\n" +
+    "    <div class=\"col-xs-2 col-patient\">\n" +
     "        <img class=\"img-responsive\" ng-src=\"images/photos/{{patient.id}}.png\"/>\n" +
     "    </div>\n" +
-    "    <div class=\"col-xs-9\">\n" +
-    "        <div>{{patient.name}}</div>\n" +
-    "        <div>{{patient.date_of_birth | date: 'shortDate'}} <span class=\"icon fancy-icon\" ng-class=\"'medapp-icon-' + patient.gender\"></span></div>\n" +
+    "    <div class=\"col-xs-10 col-patient\">\n" +
+    "        <h4>\n" +
+    "          {{patient.name}}\n" +
+    "          <small>\n" +
+    "              {{ patient.gender }}, {{age(patient)}} y</span>\n" +
+    "          </small>\n" +
+    "        </h4>\n" +
     "    </div>\n" +
     "</div>\n"
   );

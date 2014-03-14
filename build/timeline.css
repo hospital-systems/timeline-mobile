@@ -5949,3 +5949,12 @@ a:hover {
   border-top: 1px solid #666666;
   padding: 5px 0;
 }
+.col-patient {
+  padding-right: 0px;
+}
+.col-patient + .col-patient {
+  padding-left: 10px;
+}
+.col-patient h4 {
+  font-weight: bold;
+}
