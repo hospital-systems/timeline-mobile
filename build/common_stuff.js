@@ -36005,24 +36005,38 @@ var timelineWithAnimation = angular.module(
   ]
 );
 
-timelineWithAnimation.factory('Settings', function() {
-   var title     = 'Wellpath';
-   var header    = 'Wellpath';
-   var patientId = null;
-   return {
-     title: function() { return title; },
-     setTitle: function(newTitle) { title = newTitle },
-     header: function() { return header; },
-     setHeader: function(newHeader) { header = newHeader },
-     getPatientId: function() { return patientId; },
-     setPatientId: function(patient) {
-       if (!patient) {
-         patientId = null;
-       } else {
-         patientId = patient.id;
-       }
-     }
-   };
+timelineWithAnimation.factory('Settings', function($firebase) {
+  var title     = 'Wellpath';
+  var header    = 'Wellpath';
+  var patientId = null;
+  var patientUnreadEventsCount = 0;
+
+  return {
+    title: function() { return title; },
+    setTitle: function(newTitle) { title = newTitle },
+    header: function() { return header; },
+    setHeader: function(newHeader) { header = newHeader },
+    getPatientId: function() { return patientId; },
+    setPatientId: function(patient) {
+      if (!patient) {
+        patientId = null;
+      } else {
+        patientId = patient.id;
+      }
+    },
+    getPatientUnreadEventsCount: function() { return patientUnreadEventsCount; },
+    setPatientUnreadEventsCount: function() {
+      var patientEventAssociationRepository = new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociation');
+      var patientEventAssociations = $firebase(patientEventAssociationRepository);
+      var count = 0;
+      patientEventAssociations.$getIndex().forEach(function(associationId) {
+        if (!patientEventAssociations.$child(associationId).readed) {
+          count++;
+        }
+      });
+      patientUnreadEventsCount = count;
+    }
+  };
 });
 
 var patientsListRegexp  = /\/doctor.html#\/$/;
@@ -36113,6 +36127,11 @@ timelineWithAnimation.controller(
     $scope.age = function(patient) {
         return age(patient.date_of_birth);
     }
+
+    // Check our counters.
+    window.setInterval(function () {
+      Settings.setPatientUnreadEventsCount();
+    }, 3000); //repeat forever, polling every 3 seconds
 
     $scope.Settings = Settings;
 

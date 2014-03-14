@@ -37,7 +37,8 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </div>
-            <div ng-bind="Settings.header()" class="pull-left navbar-brand-extended">
+            <div ng-bind="Settings.header() + ' ' + Settings.getPatientUnreadEventsCount()"
+                 class="pull-left navbar-brand-extended">
               Observations
             </div>
           </button>
