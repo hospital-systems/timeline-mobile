@@ -36015,7 +36015,6 @@ timelineWithAnimation.factory('Settings', function($firebase) {
   var title     = 'Wellpath';
   var header    = 'Wellpath';
   var patientId = null;
-  var patientUnreadEventsCount = 0;
   var patientViewMode = false;
 
   return {
@@ -36030,19 +36029,6 @@ timelineWithAnimation.factory('Settings', function($firebase) {
       } else {
         patientId = patient.id;
       }
-    },
-    getPatientUnreadEventsCount: function() { return patientUnreadEventsCount; },
-    setPatientUnreadEventsCount: function() {
-      var patientEventAssociationsRepository =
-        new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociations');
-      var count = 0;
-      patientEventAssociationsRepository
-        .once('value', function(allAssociationsSnapshot) {
-          allAssociationsSnapshot.forEach(function(associationSnapshot) {
-            if (!associationSnapshot.val().readed) { count++; }
-          });
-        });
-      patientUnreadEventsCount = count;
     },
     isPatientViewMode: function() {
       if (patientId) { return false; } else { return true; }
@@ -36146,7 +36132,7 @@ function getPatientById(id) {
 
 timelineWithAnimation.controller(
   'RootCtrl',
-  function($scope, $rootScope, $location, $spMenu, Settings) {
+  function($scope, $rootScope, $location, $spMenu, Settings, $firebase) {
     $scope.gotoUrlFor = function (path) {
       $location.path(path);
     };
@@ -36161,10 +36147,22 @@ timelineWithAnimation.controller(
         return age(patient.date_of_birth);
     }
 
-    // Check our counters.
-    window.setInterval(function () {
-      Settings.setPatientUnreadEventsCount();
-    }, 3000); //repeat forever, polling every 3 seconds
+    $scope.patientUnreadEventsCount = 0;
+    var patientEventAssociationsRepository =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociations');
+    patientEventAssociationsRepository.on('child_added', function(snapshot) {
+      if (!snapshot.val().readed) { $scope.patientUnreadEventsCount++; }
+    });
+    patientEventAssociationsRepository.on('child_changed', function(snapshot) {
+      if (snapshot.val().readed) {
+        $scope.patientUnreadEventsCount--;
+      } else {
+        $scope.patientUnreadEventsCount++;
+      }
+    });
+    patientEventAssociationsRepository.on('child_removed', function(snapshot) {
+      if (!snapshot.val().readed) { $scope.patientUnreadEventsCount--; }
+    });
 
     $scope.Settings = Settings;
 
