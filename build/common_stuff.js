@@ -36328,8 +36328,7 @@ function generateGuid() {
 }
 
 function getFcEvent(snapshot) {
-  var event = snapshot.val();
-  // event.id = snapshot.name(); //name function return firebase id
+  var event = snapshot.snapshot.value;
   event.start = new Date(event.start);
   return event;
 }
@@ -36353,7 +36352,7 @@ timelineWithAnimation.controller(
       new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociations');
     $scope.patientEventAssociations = $firebase(patientEventAssociationsRepository);
 
-    eventsRepository.on('child_added', function(snapshot) {
+    $scope.events.$on('child_added', function(snapshot) {
       var event = getFcEvent(snapshot);
       if (Settings.isPatientViewMode()) {
         patientEventAssociationsRepository
@@ -36372,7 +36371,7 @@ timelineWithAnimation.controller(
       }
       $scope.fcEvents.push(event);
     });
-    eventsRepository.on('child_changed', function(snapshot) {
+    $scope.events.$on('child_changed', function(snapshot) {
       var updatedEvent = getFcEvent(snapshot);
       for (var index in $scope.fcEvents) {
         if ($scope.fcEvents[index].id.toString() === updatedEvent.id.toString()) {
@@ -36381,7 +36380,7 @@ timelineWithAnimation.controller(
         }
       }
     });
-    eventsRepository.on('child_removed', function(snapshot) {
+    $scope.events.$on('child_removed', function(snapshot) {
       var removedEvent = getFcEvent(snapshot);
       for (var index in $scope.fcEvents) {
         if ($scope.fcEvents[index].id.toString() === removedEvent.id.toString()) {
