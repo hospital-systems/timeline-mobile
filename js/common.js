@@ -53,7 +53,15 @@ timelineWithAnimation.filter('reverse', function() {
   }
 
   return function(items) {
-    return toArray(items).reverse();
+    return toArray(items).sort(function(a, b) {
+      if (a.createdAt < b.createdAt) {
+        return -1;
+      }
+      if (a.createdAt > b.createdAt) {
+        return 1;
+      }
+      return 0;
+    }).reverse();
   };
 });
 
