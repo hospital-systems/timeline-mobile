@@ -173,25 +173,6 @@ timelineWithAnimation.controller(
       if (!snapshot.snapshot.value.readed) { $scope.patientUnreadMessagesCount--; }
     });
 
-    $scope.patientUnreadEventsCount = 0;
-    var patientEventAssociationsRepository =
-      new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociations');
-    $scope.patientEventAssociations =
-      $firebase(patientEventAssociationsRepository);
-    $scope.patientEventAssociations.$on('child_added', function(snapshot) {
-      if (!snapshot.snapshot.value.readed) { $scope.patientUnreadEventsCount++; }
-    });
-    $scope.patientEventAssociations.$on('child_changed', function(snapshot) {
-      if (snapshot.snapshot.value.readed) {
-        $scope.patientUnreadEventsCount--;
-      } else {
-        $scope.patientUnreadEventsCount++;
-      }
-    });
-    $scope.patientEventAssociations.$on('child_removed', function(snapshot) {
-      if (!snapshot.snapshot.value.readed) { $scope.patientUnreadEventsCount--; }
-    });
-
     $scope.Settings = Settings;
 
     $scope.$on(
@@ -414,21 +395,6 @@ timelineWithAnimation.controller(
 
     $scope.events.$on('child_added', function(snapshot) {
       var event = getFcEvent(snapshot);
-      if (Settings.isPatientViewMode()) {
-        patientEventAssociationsRepository
-          .once('value', function(allAssociationsSnapshot) {
-            allAssociationsSnapshot.forEach(function(associationSnapshot) {
-              if (event.id.toString() ===
-                  associationSnapshot.val().eventId.toString()) {
-                var association = {};
-                association[associationSnapshot.val().id] =
-                  associationSnapshot.val()
-                association[associationSnapshot.val().id].readed = true;
-                $scope.patientEventAssociations.$update(association);
-              }
-            });
-          });
-      }
       $scope.fcEvents.push(event);
     });
     $scope.events.$on('child_changed', function(snapshot) {
@@ -474,13 +440,6 @@ timelineWithAnimation.controller(
               title: title,
               start: start
             });
-          var patientEventAssociationId = generateGuid();
-          $scope.patientEventAssociations.$child(patientEventAssociationId)
-            .$set({
-              id: patientEventAssociationId,
-              eventId: eventId,
-              readed: false
-            });
         }
         $scope.medCalendar.fullCalendar('unselect');
       };
@@ -501,16 +460,6 @@ timelineWithAnimation.controller(
         element.click(function() {
           var alertMessage = 'Destroy ' + fcEvent.title + '?';
           if (confirm(alertMessage)) {
-            patientEventAssociationsRepository
-              .once('value', function(allAssociationsSnapshot) {
-                allAssociationsSnapshot.forEach(function(associationSnapshot) {
-                  if (fcEvent.id.toString() ===
-                      associationSnapshot.val().eventId.toString()) {
-                    $scope.patientEventAssociations
-                      .$remove(associationSnapshot.val().id);
-                  }
-                });
-              });
             $scope.events.$remove(fcEvent.id);
           }
         });
