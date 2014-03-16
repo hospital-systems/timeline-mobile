@@ -146,6 +146,25 @@ timelineWithAnimation.controller(
         return age(patient.date_of_birth);
     }
 
+    $scope.patientUnreadMessagesCount = 0;
+    var patientMessageAssociationsRepository =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/patientMessageAssociations');
+    $scope.patientMessageAssociations =
+      $firebase(patientMessageAssociationsRepository);
+    $scope.patientMessageAssociations.$on('child_added', function(snapshot) {
+      if (!snapshot.snapshot.value.readed) { $scope.patientUnreadMessagesCount++; }
+    });
+    $scope.patientMessageAssociations.$on('child_changed', function(snapshot) {
+      if (snapshot.snapshot.value.readed) {
+        $scope.patientUnreadMessagesCount--;
+      } else {
+        $scope.patientUnreadMessagesCount++;
+      }
+    });
+    $scope.patientMessageAssociations.$on('child_removed', function(snapshot) {
+      if (!snapshot.snapshot.value.readed) { $scope.patientUnreadMessagesCount--; }
+    });
+
     $scope.patientUnreadEventsCount = 0;
     var patientEventAssociationsRepository =
       new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociations');
@@ -299,18 +318,52 @@ timelineWithAnimation.controller(
     Settings.setTitle(title);
     Settings.setHeader(title);
 
-    var messagesRef = new Firebase("https://brilliant-fire-3098.firebaseio.com/messages");
+    var messagesRef =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/messages');
     $scope.messages = $firebase(messagesRef);
 
-    $scope.addMessage = function() {
-      var message = {
-        sender: $scope.senderName,
-        body: $scope.messageBody,
-        createdAt: new Date()
-      };
+    var patientMessageAssociationsRepository =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/patientMessageAssociations');
+    $scope.patientMessageAssociations =
+      $firebase(patientMessageAssociationsRepository);
 
-      $scope.messages.$add(message);
+    $scope.addMessage = function() {
+      var messageId = '-' + generateGuid();
+      $scope.messages.$child(messageId)
+        .$set({
+          body:      $scope.messageBody,
+          createdAt: new Date(),
+          id:        messageId,
+          sender:    $scope.senderName,
+        });
+
       $scope.messageBody = '';
+
+      var patientMessageAssociationId = generateGuid();
+      $scope.patientMessageAssociations.$child(patientMessageAssociationId)
+        .$set({
+          id: patientMessageAssociationId,
+          messageId: messageId,
+          readed: false
+        });
+    }
+
+    if (Settings.isPatientViewMode()) {
+      $scope.messages.$on('child_added', function(snapshot) {
+        patientMessageAssociationsRepository
+          .once('value', function(allAssociationsSnapshot) {
+            allAssociationsSnapshot.forEach(function(associationSnapshot) {
+              if (snapshot.snapshot.value.id.toString() ===
+                  associationSnapshot.val().messageId.toString()) {
+                var association = {};
+                association[associationSnapshot.val().id] =
+                  associationSnapshot.val()
+                association[associationSnapshot.val().id].readed = true;
+                $scope.patientMessageAssociations.$update(association);
+              }
+            });
+          });
+      });
     }
   })
 
