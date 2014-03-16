@@ -36150,18 +36150,20 @@ timelineWithAnimation.controller(
     $scope.patientUnreadEventsCount = 0;
     var patientEventAssociationsRepository =
       new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociations');
-    patientEventAssociationsRepository.on('child_added', function(snapshot) {
-      if (!snapshot.val().readed) { $scope.patientUnreadEventsCount++; }
+    $scope.patientEventAssociations =
+      $firebase(patientEventAssociationsRepository);
+    $scope.patientEventAssociations.$on('child_added', function(snapshot) {
+      if (!snapshot.snapshot.value.readed) { $scope.patientUnreadEventsCount++; }
     });
-    patientEventAssociationsRepository.on('child_changed', function(snapshot) {
-      if (snapshot.val().readed) {
+    $scope.patientEventAssociations.$on('child_changed', function(snapshot) {
+      if (snapshot.snapshot.value.readed) {
         $scope.patientUnreadEventsCount--;
       } else {
         $scope.patientUnreadEventsCount++;
       }
     });
-    patientEventAssociationsRepository.on('child_removed', function(snapshot) {
-      if (!snapshot.val().readed) { $scope.patientUnreadEventsCount--; }
+    $scope.patientEventAssociations.$on('child_removed', function(snapshot) {
+      if (!snapshot.snapshot.value.readed) { $scope.patientUnreadEventsCount--; }
     });
 
     $scope.Settings = Settings;
