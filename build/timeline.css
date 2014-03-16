@@ -6070,3 +6070,9 @@ a:hover {
 .profile-photo-row {
   padding-bottom: 10px;
 }
+.badge.badge-warning {
+  background-color: red;
+}
+.badge a {
+  text-decoration: none;
+}
