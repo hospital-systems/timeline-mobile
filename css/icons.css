@@ -67,3 +67,7 @@ a.icon:hover{
 .medapp-icon-male:after {
     content: 'W';
 }
+
+.medapp-icon-vitals:after {
+    content: 'V';
+}

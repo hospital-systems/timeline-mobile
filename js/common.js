@@ -215,27 +215,31 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope, Settings) 
 
 timelineWithAnimation.controller(
   'TimelineListCtrl',
-  function($scope, $route, $routeParams, Settings) {
+  function($scope, $route, $routeParams, Settings, Fitbit) {
     $scope.patient = getPatientById($routeParams.patientId);
     Settings.setPatientId($scope.patient);
-    $scope.items = mrBrownData['TimelineItems'].sort(function(a, b) {
-      return b.createdAt - a.createdAt;
-    });
-    var title = 'Observations';
-    Settings.setTitle(title);
-    Settings.setHeader(title);
+    Fitbit.bodyMeasurements().then(function(data) {
+      $scope.items = mrBrownData['TimelineItems'].concat(data).sort(function(a, b) {
+        return b.createdAt - a.createdAt;
+      });
+      var title = 'Observations';
+      Settings.setTitle(title);
+      Settings.setHeader(title);
+    })
   });
 
 timelineWithAnimation.controller(
   'TimelineItemsCtrl',
-  function($scope, $route, $routeParams, Settings) {
+  function($scope, $route, $routeParams, Settings, Fitbit) {
     $scope.patient = getPatientById($routeParams.patientId);
     Settings.setPatientId($scope.patient);
-    $scope.item = jQuery.grep(mrBrownData['TimelineItems'], function(item) {
-      return item.id.toString() === $routeParams.itemId.toString();
-    })[0];
-    Settings.setTitle('Observation: ' + $scope.item.name);
-    Settings.setHeader('Observation');
+    Fitbit.bodyMeasurements().then(function(data) {
+      $scope.item = jQuery.grep(mrBrownData['TimelineItems'].concat(data), function(item) {
+        return item.id.toString() === $routeParams.itemId.toString();
+      })[0];
+      Settings.setTitle('Observation: ' + $scope.item.name);
+      Settings.setHeader('Observation');
+    })
   });
 
 timelineWithAnimation.controller(
@@ -476,3 +480,29 @@ timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings)
   Settings.setTitle(title);
   Settings.setHeader(title);
 });
+
+timelineWithAnimation.factory('Fitbit', function($http) {
+  return {
+    bodyMeasurements: function() {
+      return $http.get('http://vpn2.waveaccess.kiev.ua:17406/body_measurements').then(function(data) {
+        var body = data.data.body
+        var measurements = ""
+        for (var m in body) {
+          measurements += '<div class=\'row item-row\'>'+
+              '<div class=\'col-xs-6\'>' + m.toUpperCase() + '</div>'+
+              '<div class=\'col-xs-6 text-right\'>' + body[m] + '</div>'+
+            '</div>'
+        }
+        return [{
+            id: 102,
+            createdAt: new Date(2013, 3, 28, 6),
+            type: 'vitals',
+            name: 'Fitbit Vitals',
+            doctor_name: 'Kumar, Ashok , MD!!',
+            clinic_name: '',
+            data: measurements
+          }]
+      })
+    }
+  }
+})
