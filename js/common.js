@@ -218,13 +218,17 @@ timelineWithAnimation.controller(
   function($scope, $route, $routeParams, Settings, Fitbit) {
     $scope.patient = getPatientById($routeParams.patientId);
     Settings.setPatientId($scope.patient);
-    Fitbit.bodyMeasurements().then(function(data) {
-      $scope.items = mrBrownData['TimelineItems'].concat(data).sort(function(a, b) {
-        return b.createdAt - a.createdAt;
+    Fitbit.bodyWeight().then(function(wdata) {
+      Fitbit.bodyFat().then(function(fdata) {
+        Fitbit.steps().then(function(sdata) {
+          $scope.items = mrBrownData['TimelineItems'].concat(wdata, fdata, sdata).sort(function(a, b) {
+            return b.createdAt - a.createdAt;
+          });
+          var title = 'Observations';
+          Settings.setTitle(title);
+          Settings.setHeader(title);
+        });
       });
-      var title = 'Observations';
-      Settings.setTitle(title);
-      Settings.setHeader(title);
     })
   });
 
@@ -233,12 +237,16 @@ timelineWithAnimation.controller(
   function($scope, $route, $routeParams, Settings, Fitbit) {
     $scope.patient = getPatientById($routeParams.patientId);
     Settings.setPatientId($scope.patient);
-    Fitbit.bodyMeasurements().then(function(data) {
-      $scope.item = jQuery.grep(mrBrownData['TimelineItems'].concat(data), function(item) {
-        return item.id.toString() === $routeParams.itemId.toString();
-      })[0];
-      Settings.setTitle('Observation: ' + $scope.item.name);
-      Settings.setHeader('Observation');
+    Fitbit.bodyWeight().then(function(wdata) {
+      Fitbit.bodyFat().then(function(fdata) {
+        Fitbit.steps().then(function(sdata) {
+          $scope.item = jQuery.grep(mrBrownData['TimelineItems'].concat(wdata, fdata, sdata), function(item) {
+            return item.id.toString() === $routeParams.itemId.toString();
+          })[0];
+          Settings.setTitle('Observation: ' + $scope.item.name);
+          Settings.setHeader('Observation');
+        });
+      });
     })
   });
 
@@ -498,10 +506,79 @@ timelineWithAnimation.factory('Fitbit', function($http) {
             createdAt: new Date(2013, 3, 28, 6),
             type: 'vitals',
             name: 'Fitbit Vitals',
-            doctor_name: 'Kumar, Ashok , MD!!',
+            doctor_name: 'Kumar, Ashok , MD',
             clinic_name: '',
             data: measurements
           }]
+      })
+    },
+    bodyWeight: function() {
+      return $http.get('http://vpn2.waveaccess.kiev.ua:17406/body/weight').then(function(data) {
+        var body = data.data.weight
+        var weights = []
+        for (var m in body) {
+          var measurement = '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-6\'>Body Weight</div>'+
+            '<div class=\'col-xs-6 text-right\'>' + body[m].weight + '</div>'+
+            '</div>'
+          weights.push({
+            id: body[m].logId + "_weight",
+            createdAt: new Date(body[m].date),
+            type: 'measure',
+            name: 'Body Weight',
+            doctor_name: 'Kumar, Ashok , MD',
+            clinic_name: '',
+            data: measurement
+          })
+        }
+        return weights;
+      })
+    },
+    bodyFat: function() {
+      return $http.get('http://vpn2.waveaccess.kiev.ua:17406/body/fat').then(function(data) {
+        console.log(data)
+        var body = data.data.fat
+        var weights = []
+        for (var m in body) {
+          var measurement = '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-6\'>Body Fat</div>'+
+            '<div class=\'col-xs-6 text-right\'>' + body[m].fat + '</div>'+
+            '</div>'
+          weights.push({
+            id: body[m].logId + "_fat",
+            createdAt: new Date(body[m].date),
+            type: 'measure',
+            name: 'Body Fat',
+            doctor_name: 'Kumar, Ashok , MD',
+            clinic_name: '',
+            data: measurement
+          })
+        }
+        return weights;
+      })
+    },
+    steps: function() {
+      return $http.get('http://vpn2.waveaccess.kiev.ua:17406/steps').then(function(data) {
+        console.log(data)
+        var body = data.data['activities-steps']
+        var weights = []
+        for (var m in body) {
+          if (body[m].value == 0) continue;
+          var measurement = '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-6\'>Steps</div>'+
+            '<div class=\'col-xs-6 text-right\'>' + body[m].value + '</div>'+
+            '</div>'
+          weights.push({
+            id: body[m].dateTime + "_steps",
+            createdAt: new Date(body[m].dateTime),
+            type: 'intake_output',
+            name: 'Steps',
+            doctor_name: 'Kumar, Ashok , MD',
+            clinic_name: '',
+            data: measurement
+          })
+        }
+        return weights;
       })
     }
   }
