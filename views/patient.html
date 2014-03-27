@@ -24,8 +24,11 @@ kind: patient
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </div>
-            <div ng-bind="Settings.header()" class="pull-left navbar-brand-extended">
-              Observations
+            <div class="pull-left navbar-brand-extended">
+              <span ng-bind="Settings.header()">Observations</span>
+              <span class="badge" ng-class="{'badge-warning': patientUnreadMessagesCount > 0}">
+                <a ng-bind="patientUnreadMessagesCount" href="#chat">0</a>
+              </span>
             </div>
           </button>
         </span>

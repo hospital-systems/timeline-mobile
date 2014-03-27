@@ -5821,13 +5821,26 @@ button.close {
   left: 100%;
 }
 
-.fc-event .fc-event-title,
-.fc-event .fc-event-remove {
+.calendar-frame {
+  margin-top: 10px;
+}
+.calendar-frame .fc-event .fc-event-title,
+.calendar-frame .fc-event .fc-event-remove {
   cursor: pointer;
 }
-.fc-event .fc-event-remove {
+.calendar-frame .fc-event .fc-event-remove {
   float: right;
-  padding: 0 2px;
+  padding: 0.1em 0.1em 0 0;
+}
+.calendar-frame .fc-header .fc-button {
+  margin-bottom: 0;
+}
+.calendar-frame .fc-header .fc-header-left .fc-header-title h2 {
+  font-size: 24px;
+}
+.calendar-frame .fc-header .fc-header-right {
+  vertical-align: bottom;
+  padding-bottom: 1em;
 }
 
 .chat .messages {
@@ -5895,6 +5908,10 @@ button.close {
   border-bottom-right-radius: 0;
 }
 
+html,
+body {
+  height: 100%;
+}
 .navbar {
   margin-bottom: 0px;
 }
@@ -6052,4 +6069,10 @@ a:hover {
 }
 .profile-photo-row {
   padding-bottom: 10px;
+}
+.badge.badge-warning {
+  background-color: red;
+}
+.badge a {
+  text-decoration: none;
 }

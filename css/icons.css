@@ -67,3 +67,18 @@ a.icon:hover{
 .medapp-icon-male:after {
     content: 'W';
 }
+
+.medapp-icon-vitals:after {
+    content: 'V';
+}
+
+.medapp-icon-intake_output:after {
+  content: 'j';
+  color: #445569;
+}
+
+.medapp-icon-measure:after {
+  content: '\eb';
+  color: #8F9194;
+}
+

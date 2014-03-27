@@ -10,24 +10,59 @@ var timelineWithAnimation = angular.module(
   ]
 );
 
-timelineWithAnimation.factory('Settings', function() {
-   var title     = 'Wellpath';
-   var header    = 'Wellpath';
-   var patientId = null;
-   return {
-     title: function() { return title; },
-     setTitle: function(newTitle) { title = newTitle },
-     header: function() { return header; },
-     setHeader: function(newHeader) { header = newHeader },
-     getPatientId: function() { return patientId; },
-     setPatientId: function(patient) {
-       if (!patient) {
-         patientId = null;
-       } else {
-         patientId = patient.id;
-       }
-     }
-   };
+timelineWithAnimation.factory('Settings', function($firebase) {
+  var title     = 'Wellpath';
+  var header    = 'Wellpath';
+  var patientId = null;
+  var patientViewMode = false;
+
+  return {
+    title: function() { return title; },
+    setTitle: function(newTitle) { title = newTitle },
+    header: function() { return header; },
+    setHeader: function(newHeader) { header = newHeader },
+    getPatientId: function() { return patientId; },
+    setPatientId: function(patient) {
+      if (!patient) {
+        patientId = null;
+      } else {
+        patientId = patient.id;
+      }
+    },
+    isPatientViewMode: function() {
+      if (patientId) { return false; } else { return true; }
+    }
+  };
+});
+
+timelineWithAnimation.filter('reverse', function() {
+  function toArray(list) {
+    var k, out = [];
+
+    if( list ) {
+      if( angular.isArray(list) ) {
+        out = list;
+      }
+      else if( typeof(list) === 'object' ) {
+        for (k in list) {
+          if (list.hasOwnProperty(k) && k.match(/^-/)) { out.push(list[k]); }
+        }
+      }
+    }
+    return out;
+  }
+
+  return function(items) {
+    return toArray(items).sort(function(a, b) {
+      if (a.createdAt < b.createdAt) {
+        return -1;
+      }
+      if (a.createdAt > b.createdAt) {
+        return 1;
+      }
+      return 0;
+    }).reverse();
+  };
 });
 
 var patientsListRegexp  = /\/doctor.html#\/$/;
@@ -104,7 +139,7 @@ function getPatientById(id) {
 
 timelineWithAnimation.controller(
   'RootCtrl',
-  function($scope, $rootScope, $location, $spMenu, Settings) {
+  function($scope, $rootScope, $location, $spMenu, Settings, $firebase) {
     $scope.gotoUrlFor = function (path) {
       $location.path(path);
     };
@@ -118,6 +153,25 @@ timelineWithAnimation.controller(
     $scope.age = function(patient) {
         return age(patient.date_of_birth);
     }
+
+    $scope.patientUnreadMessagesCount = 0;
+    var patientMessageAssociationsRepository =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/patientMessageAssociations');
+    $scope.patientMessageAssociations =
+      $firebase(patientMessageAssociationsRepository);
+    $scope.patientMessageAssociations.$on('child_added', function(snapshot) {
+      if (!snapshot.snapshot.value.readed) { $scope.patientUnreadMessagesCount++; }
+    });
+    $scope.patientMessageAssociations.$on('child_changed', function(snapshot) {
+      if (snapshot.snapshot.value.readed) {
+        $scope.patientUnreadMessagesCount--;
+      } else {
+        $scope.patientUnreadMessagesCount++;
+      }
+    });
+    $scope.patientMessageAssociations.$on('child_removed', function(snapshot) {
+      if (!snapshot.snapshot.value.readed) { $scope.patientUnreadMessagesCount--; }
+    });
 
     $scope.Settings = Settings;
 
@@ -161,27 +215,39 @@ timelineWithAnimation.controller('PatientsListCtrl', function($scope, Settings) 
 
 timelineWithAnimation.controller(
   'TimelineListCtrl',
-  function($scope, $route, $routeParams, Settings) {
+  function($scope, $route, $routeParams, Settings, Fitbit) {
     $scope.patient = getPatientById($routeParams.patientId);
     Settings.setPatientId($scope.patient);
-    $scope.items = mrBrownData['TimelineItems'].sort(function(a, b) {
-      return b.createdAt - a.createdAt;
-    });
-    var title = 'Observations';
-    Settings.setTitle(title);
-    Settings.setHeader(title);
+    Fitbit.bodyWeight().then(function(wdata) {
+      Fitbit.bodyFat().then(function(fdata) {
+        Fitbit.steps().then(function(sdata) {
+          $scope.items = mrBrownData['TimelineItems'].concat(wdata, fdata, sdata).sort(function(a, b) {
+            return b.createdAt - a.createdAt;
+          });
+          var title = 'Observations';
+          Settings.setTitle(title);
+          Settings.setHeader(title);
+        });
+      });
+    })
   });
 
 timelineWithAnimation.controller(
   'TimelineItemsCtrl',
-  function($scope, $route, $routeParams, Settings) {
+  function($scope, $route, $routeParams, Settings, Fitbit) {
     $scope.patient = getPatientById($routeParams.patientId);
     Settings.setPatientId($scope.patient);
-    $scope.item = jQuery.grep(mrBrownData['TimelineItems'], function(item) {
-      return item.id.toString() === $routeParams.itemId.toString();
-    })[0];
-    Settings.setTitle('Observation: ' + $scope.item.name);
-    Settings.setHeader('Observation');
+    Fitbit.bodyWeight().then(function(wdata) {
+      Fitbit.bodyFat().then(function(fdata) {
+        Fitbit.steps().then(function(sdata) {
+          $scope.item = jQuery.grep(mrBrownData['TimelineItems'].concat(wdata, fdata, sdata), function(item) {
+            return item.id.toString() === $routeParams.itemId.toString();
+          })[0];
+          Settings.setTitle('Observation: ' + $scope.item.name);
+          Settings.setHeader('Observation');
+        });
+      });
+    })
   });
 
 timelineWithAnimation.controller(
@@ -253,24 +319,69 @@ timelineWithAnimation.controller(
     Settings.setTitle(title);
     Settings.setHeader(title);
 
-    var messagesRef = new Firebase("https://resplendent-fire-4689.firebaseio.com/messages");
+    var messagesRef =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/messages');
     $scope.messages = $firebase(messagesRef);
 
-    $scope.addMessage = function() {
-      var message = {
-        sender: $scope.senderName,
-        body: $scope.messageBody,
-        createdAt: new Date()
-      };
+    var patientMessageAssociationsRepository =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/patientMessageAssociations');
+    $scope.patientMessageAssociations =
+      $firebase(patientMessageAssociationsRepository);
 
-      $scope.messages.$add(message);
+    $scope.addMessage = function() {
+      var messageId = '-' + generateGuid();
+      $scope.messages.$child(messageId)
+        .$set({
+          body:      $scope.messageBody,
+          createdAt: new Date(),
+          id:        messageId,
+          sender:    $scope.senderName,
+        });
+
       $scope.messageBody = '';
+
+      var patientMessageAssociationId = generateGuid();
+      $scope.patientMessageAssociations.$child(patientMessageAssociationId)
+        .$set({
+          id: patientMessageAssociationId,
+          messageId: messageId,
+          readed: false
+        });
+    }
+
+    if (Settings.isPatientViewMode()) {
+      $scope.messages.$on('child_added', function(snapshot) {
+        patientMessageAssociationsRepository
+          .once('value', function(allAssociationsSnapshot) {
+            allAssociationsSnapshot.forEach(function(associationSnapshot) {
+              if (snapshot.snapshot.value.id.toString() ===
+                  associationSnapshot.val().messageId.toString()) {
+                var association = {};
+                association[associationSnapshot.val().id] =
+                  associationSnapshot.val()
+                association[associationSnapshot.val().id].readed = true;
+                $scope.patientMessageAssociations.$update(association);
+              }
+            });
+          });
+      });
     }
   })
 
+// <http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript#105074>.
+function generateS4() {
+  return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+};
+function generateGuid() {
+  return generateS4() + generateS4() + '-' + generateS4() + '-' +
+    generateS4() + '-' + generateS4() + '-' +
+    generateS4() + generateS4() + generateS4();
+}
+
 function getFcEvent(snapshot) {
-  var event = snapshot.val();
-  event.id = snapshot.name(); //name function return firebase id
+  var event = snapshot.snapshot.value;
   event.start = new Date(event.start);
   return event;
 }
@@ -286,14 +397,19 @@ timelineWithAnimation.controller(
 
     $scope.fcEvents = [];
 
-    var eventsConnection = new Firebase("https://blazing-fire-8127.firebaseio.com/events");
-    $scope.events = $firebase(eventsConnection);
+    var eventsRepository =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/events');
+    $scope.events = $firebase(eventsRepository);
 
-    eventsConnection.on('child_added', function(snapshot) {
-      var newEvent = getFcEvent(snapshot);
-      $scope.fcEvents.push(newEvent);
+    var patientEventAssociationsRepository =
+      new Firebase('https://blazing-fire-8127.firebaseio.com/patientEventAssociations');
+    $scope.patientEventAssociations = $firebase(patientEventAssociationsRepository);
+
+    $scope.events.$on('child_added', function(snapshot) {
+      var event = getFcEvent(snapshot);
+      $scope.fcEvents.push(event);
     });
-    eventsConnection.on('child_changed', function(snapshot) {
+    $scope.events.$on('child_changed', function(snapshot) {
       var updatedEvent = getFcEvent(snapshot);
       for (var index in $scope.fcEvents) {
         if ($scope.fcEvents[index].id.toString() === updatedEvent.id.toString()) {
@@ -302,7 +418,7 @@ timelineWithAnimation.controller(
         }
       }
     });
-    eventsConnection.on('child_removed', function(snapshot) {
+    $scope.events.$on('child_removed', function(snapshot) {
       var removedEvent = getFcEvent(snapshot);
       for (var index in $scope.fcEvents) {
         if ($scope.fcEvents[index].id.toString() === removedEvent.id.toString()) {
@@ -316,6 +432,7 @@ timelineWithAnimation.controller(
       calendar: {
         height: 450,
         editable: false,
+        // defaultView: 'basicWeek',
         header:{
           left: 'title',
           center: '',
@@ -328,7 +445,13 @@ timelineWithAnimation.controller(
       fcConfig.calendar['select'] = function(start) {
         var title = prompt('event title:');
         if (title) {
-          $scope.events.$add({ title: title, start: start });
+          var eventId = generateGuid();
+          $scope.events.$child(eventId)
+            .$set({
+              id: eventId,
+              title: title,
+              start: start
+            });
         }
         $scope.medCalendar.fullCalendar('unselect');
       };
@@ -337,14 +460,20 @@ timelineWithAnimation.controller(
           var title = prompt('event title:', fcEvent.title);
           if (title) {
             var updatedEvent = {};
-            updatedEvent[fcEvent.id] = { title: title, start: fcEvent.start };
+            updatedEvent[fcEvent.id] = {
+              id: fcEvent.id,
+              title: title,
+              start: fcEvent.start
+            };
             $scope.events.$update(updatedEvent);
           }
         });
-        var element = $('<span class="fc-event-remove">x</span>');
+        var element = $('<span class="fc-event-remove glyphicon glyphicon-remove"></span>');
         element.click(function() {
           var alertMessage = 'Destroy ' + fcEvent.title + '?';
-          if (confirm(alertMessage)) { $scope.events.$remove(fcEvent.id); }
+          if (confirm(alertMessage)) {
+            $scope.events.$remove(fcEvent.id);
+          }
         });
         fcElement.find('.fc-event-inner').append(element);
       };
@@ -359,3 +488,98 @@ timelineWithAnimation.controller('PageUnderConstructionCtrl', function(Settings)
   Settings.setTitle(title);
   Settings.setHeader(title);
 });
+
+timelineWithAnimation.factory('Fitbit', function($http) {
+  return {
+    bodyMeasurements: function() {
+      return $http.get('http://vpn2.waveaccess.kiev.ua:17406/body_measurements').then(function(data) {
+        var body = data.data.body
+        var measurements = ""
+        for (var m in body) {
+          measurements += '<div class=\'row item-row\'>'+
+              '<div class=\'col-xs-6\'>' + m.toUpperCase() + '</div>'+
+              '<div class=\'col-xs-6 text-right\'>' + body[m] + '</div>'+
+            '</div>'
+        }
+        return [{
+            id: 102,
+            createdAt: new Date(2013, 3, 28, 6),
+            type: 'vitals',
+            name: 'Fitbit Vitals',
+            doctor_name: 'Kumar, Ashok , MD',
+            clinic_name: '',
+            data: measurements
+          }]
+      })
+    },
+    bodyWeight: function() {
+      return $http.get('http://vpn2.waveaccess.kiev.ua:17406/body/weight').then(function(data) {
+        var body = data.data.weight
+        var weights = []
+        for (var m in body) {
+          var measurement = '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-6\'>Body Weight</div>'+
+            '<div class=\'col-xs-6 text-right\'>' + body[m].weight + '</div>'+
+            '</div>'
+          weights.push({
+            id: body[m].logId + "_weight",
+            createdAt: new Date(body[m].date),
+            type: 'measure',
+            name: 'Body Weight',
+            doctor_name: 'Kumar, Ashok , MD',
+            clinic_name: '',
+            data: measurement
+          })
+        }
+        return weights;
+      })
+    },
+    bodyFat: function() {
+      return $http.get('http://vpn2.waveaccess.kiev.ua:17406/body/fat').then(function(data) {
+        console.log(data)
+        var body = data.data.fat
+        var weights = []
+        for (var m in body) {
+          var measurement = '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-6\'>Body Fat</div>'+
+            '<div class=\'col-xs-6 text-right\'>' + body[m].fat + '</div>'+
+            '</div>'
+          weights.push({
+            id: body[m].logId + "_fat",
+            createdAt: new Date(body[m].date),
+            type: 'measure',
+            name: 'Body Fat',
+            doctor_name: 'Kumar, Ashok , MD',
+            clinic_name: '',
+            data: measurement
+          })
+        }
+        return weights;
+      })
+    },
+    steps: function() {
+      return $http.get('http://vpn2.waveaccess.kiev.ua:17406/steps').then(function(data) {
+        console.log(data)
+        var body = data.data['activities-steps']
+        var weights = []
+        for (var m in body) {
+          if (body[m].value == 0) continue;
+          var measurement = '<div class=\'row item-row\'>'+
+            '<div class=\'col-xs-6\'>Steps</div>'+
+            '<div class=\'col-xs-6 text-right\'>' + body[m].value + '</div>'+
+            '</div>'
+          weights.push({
+            id: body[m].dateTime + "_steps",
+            createdAt: new Date(body[m].dateTime),
+            type: 'intake_output',
+            name: 'Steps',
+            doctor_name: 'Kumar, Ashok , MD',
+            clinic_name: '',
+            data: measurement
+          })
+        }
+        return weights;
+      })
+    }
+  }
+})
